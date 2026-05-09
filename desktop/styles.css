@@ -236,6 +236,11 @@ code {
 
 #message {
   min-height: 24px;
+  margin: -2px 0 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(33, 215, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(33, 215, 255, 0.08);
   color: var(--muted);
 }
 

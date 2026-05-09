@@ -533,7 +533,7 @@ function handleCommand(message) {
 
   if (lower === "!skip" || lower === "!next") return skipSong();
   if (lower === "!remove") return removeSong(arg);
-  if (lower === "!clearqueue") return clearQueue();
+  if (lower === "!clear") return clearQueue();
   if (lower === "!song") return say(currentSongSummary());
 }
 

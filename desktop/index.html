@@ -16,13 +16,6 @@
         <strong id="run-status" class="status">Stopped</strong>
       </header>
 
-      <section class="actions">
-        <button id="start-button" type="button">Start Bot</button>
-        <button id="stop-button" type="button" class="danger">Stop Bot</button>
-      </section>
-
-      <p id="message" role="status"></p>
-
       <section class="panel">
         <h2>Bot Settings</h2>
         <div class="grid">
@@ -53,6 +46,13 @@
             <input id="max-queue" type="number" min="1" max="500">
           </label>
         </div>
+      </section>
+
+      <p id="message" role="status"></p>
+
+      <section class="actions primary-actions">
+        <button id="start-button" type="button">Start Bot</button>
+        <button id="stop-button" type="button" class="danger">Stop Bot</button>
       </section>
 
       <div id="own-account-section" hidden>

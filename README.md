@@ -68,7 +68,7 @@ The installer output goes into `dist/`.
 - `!leave`: remove your own request.
 - `!skip` or `!next`: mark the first request as played. Broadcaster/mod only.
 - `!remove <number>`: remove a queue item. Broadcaster/mod only.
-- `!clearqueue`: clear the full queue. Broadcaster/mod only.
+- `!clear`: clear the full queue. Broadcaster/mod only.
 - `!song`: show the last played song. Broadcaster/mod only.
 
 ## Local Dashboard

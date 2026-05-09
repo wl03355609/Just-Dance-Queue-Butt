@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "5.0.0",
+  "version": "0.5.0",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
