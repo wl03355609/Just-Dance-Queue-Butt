@@ -2,11 +2,13 @@
   "name": "just-dance-requests-twitch",
   "version": "1.0.0",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
-  "main": "src/index.js",
+  "main": "desktop/main.js",
   "type": "commonjs",
   "scripts": {
     "start": "node src/index.js",
-    "check": "node --check src/index.js"
+    "desktop": "electron .",
+    "check": "node --check src/index.js && node --check desktop/main.js && node --check desktop/preload.js && node --check desktop/renderer.js",
+    "build:win": "electron-builder --win nsis"
   },
   "engines": {
     "node": ">=18"
@@ -17,5 +19,27 @@
     "song-requests",
     "obs"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.justdancerequests.twitch",
+    "productName": "Just Dance Requests",
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      "public/**/*",
+      "data/songs.json",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
 }

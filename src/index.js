@@ -11,30 +11,98 @@ const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
 
-const config = {
-  username: env("TWITCH_USERNAME", ""),
-  oauth: env("TWITCH_OAUTH", ""),
-  channel: env("TWITCH_CHANNEL", ""),
-  port: numberEnv("PORT", 3000),
-  maxQueueSize: numberEnv("MAX_QUEUE_SIZE", 50),
-  enabledGames: listEnv("ENABLED_GAMES", ["2023", "2024", "2025", "2026", "plus"]),
-  modUsers: listEnv("MOD_USERS", [])
-};
-
-const songs = loadSongs();
-const state = loadQueue();
-const clients = new Set();
+let config = createConfig();
+let songs = [];
+let state = { queue: [], history: [] };
+let clients = new Set();
+let httpServer = null;
 let twitch = null;
 let reconnectTimer = null;
 let twitchBuffer = Buffer.alloc(0);
 let twitchReady = false;
 
-startHttpServer();
+if (require.main === module) {
+  startRuntime();
+}
 
-if (config.username && config.oauth && config.channel) {
-  connectTwitch();
-} else {
-  console.log("Twitch chat is not connected yet. Copy .env.example to .env and fill in your Twitch values.");
+module.exports = {
+  startRuntime,
+  stopRuntime,
+  publicState,
+  normalizeOAuth
+};
+
+function startRuntime(overrides = {}) {
+  if (httpServer) return runtimeController();
+
+  config = createConfig(overrides);
+  songs = loadSongs();
+  state = loadQueue();
+  clients = new Set();
+  startHttpServer();
+
+  if (config.username && config.oauth && config.channel) {
+    connectTwitch();
+  } else {
+    console.log("Twitch chat is not connected yet. Fill in Twitch values before starting chat.");
+  }
+
+  return runtimeController();
+}
+
+function stopRuntime() {
+  clearTimeout(reconnectTimer);
+  reconnectTimer = null;
+  twitchReady = false;
+
+  if (twitch) {
+    twitch.removeAllListeners();
+    twitch.end();
+    twitch.destroy();
+    twitch = null;
+  }
+
+  for (const client of clients) client.end();
+  clients.clear();
+
+  if (httpServer) {
+    httpServer.close();
+    httpServer = null;
+  }
+}
+
+function runtimeController() {
+  return {
+    config,
+    getState: publicState,
+    stop: stopRuntime,
+    urls: {
+      overlay: `http://localhost:${config.port}`,
+      dashboard: `http://localhost:${config.port}/dashboard`,
+      songs: `http://localhost:${config.port}/api/songs`
+    }
+  };
+}
+
+function createConfig(overrides = {}) {
+  const enabledGames = Array.isArray(overrides.enabledGames)
+    ? overrides.enabledGames
+    : listValue(overrides.enabledGames || process.env.ENABLED_GAMES, ["2023", "2024", "2025", "2026", "plus"]);
+
+  const modUsers = Array.isArray(overrides.modUsers)
+    ? overrides.modUsers
+    : listValue(overrides.modUsers || process.env.MOD_USERS, []);
+
+  return {
+    username: overrides.username ?? env("TWITCH_USERNAME", ""),
+    oauth: normalizeOAuth(overrides.oauth ?? env("TWITCH_OAUTH", "")),
+    channel: overrides.channel ?? env("TWITCH_CHANNEL", ""),
+    port: numberValue(overrides.port ?? process.env.PORT, 3000),
+    maxQueueSize: numberValue(overrides.maxQueueSize ?? process.env.MAX_QUEUE_SIZE, 50),
+    enabledGames,
+    modUsers,
+    queuePath: overrides.queuePath || QUEUE_PATH
+  };
 }
 
 function loadEnv() {
@@ -59,14 +127,28 @@ function env(key, fallback) {
 }
 
 function numberEnv(key, fallback) {
-  const parsed = Number.parseInt(process.env[key], 10);
+  return numberValue(process.env[key], fallback);
+}
+
+function numberValue(value, fallback) {
+  const parsed = Number.parseInt(value, 10);
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
 function listEnv(key, fallback) {
-  const value = process.env[key];
+  return listValue(process.env[key], fallback);
+}
+
+function listValue(value, fallback) {
   if (!value) return fallback;
+  if (Array.isArray(value)) return value;
   return value.split(",").map((item) => item.trim()).filter(Boolean);
+}
+
+function normalizeOAuth(value) {
+  const token = String(value || "").trim();
+  if (!token) return "";
+  return token.startsWith("oauth:") ? token : `oauth:${token}`;
 }
 
 function loadSongs() {
@@ -84,19 +166,20 @@ function loadSongs() {
 
 function loadQueue() {
   try {
-    return JSON.parse(fs.readFileSync(QUEUE_PATH, "utf8"));
+    return JSON.parse(fs.readFileSync(config.queuePath, "utf8"));
   } catch {
     return { queue: [], history: [] };
   }
 }
 
 function saveQueue() {
-  fs.writeFileSync(QUEUE_PATH, JSON.stringify(state, null, 2));
+  fs.mkdirSync(path.dirname(config.queuePath), { recursive: true });
+  fs.writeFileSync(config.queuePath, JSON.stringify(state, null, 2));
   broadcast();
 }
 
 function startHttpServer() {
-  const server = http.createServer((request, response) => {
+  httpServer = http.createServer((request, response) => {
     const url = new URL(request.url, `http://${request.headers.host}`);
 
     if (url.pathname === "/api/queue") return sendJson(response, publicState());
@@ -118,13 +201,13 @@ function startHttpServer() {
     });
   });
 
-  server.on("error", (error) => {
+  httpServer.on("error", (error) => {
     console.error(`Could not start local queue server on port ${config.port}: ${error.message}`);
     console.error("Try changing PORT in .env, for example PORT=3001.");
     process.exitCode = 1;
   });
 
-  server.listen(config.port, "127.0.0.1", () => {
+  httpServer.listen(config.port, "127.0.0.1", () => {
     console.log(`Queue overlay: http://localhost:${config.port}`);
     console.log(`Dashboard:     http://localhost:${config.port}/dashboard`);
     console.log(`Song API:      http://localhost:${config.port}/api/songs`);

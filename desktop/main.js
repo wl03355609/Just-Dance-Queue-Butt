@@ -1,0 +1,274 @@
+const fs = require("node:fs");
+const path = require("node:path");
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { startRuntime, stopRuntime } = require("../src/index");
+
+const DEFAULT_PORT = 3000;
+const DEFAULT_GAMES = ["2023", "2024", "2025", "2026", "plus"];
+const CHAT_SCOPES = ["chat:read", "chat:edit"];
+
+// Fill in your Twitch Developer App Client ID here before building.
+// Register at https://dev.twitch.tv/console/apps — use Device Code Grant, no redirect URI needed.
+// When non-empty, the Client ID field is hidden from users; they just click "Log in with Twitch".
+const BUNDLED_CLIENT_ID = "rpfj350muhxl4ei1kl9glmbkbmea7w";
+
+let mainWindow = null;
+let runtime = null;
+let authPollTimer = null;
+
+function getConfigPath() {
+  return path.join(app.getPath("userData"), "config.json");
+}
+
+function getQueuePath() {
+  return path.join(app.getPath("userData"), "queue.json");
+}
+
+function readConfig() {
+  try {
+    return JSON.parse(fs.readFileSync(getConfigPath(), "utf8"));
+  } catch {
+    return {
+      clientId: "",
+      username: "",
+      channel: "",
+      accessToken: "",
+      refreshToken: "",
+      expiresAt: 0,
+      port: DEFAULT_PORT,
+      enabledGames: DEFAULT_GAMES,
+      maxQueueSize: 50
+    };
+  }
+}
+
+function writeConfig(config) {
+  fs.mkdirSync(path.dirname(getConfigPath()), { recursive: true });
+  fs.writeFileSync(getConfigPath(), JSON.stringify(config, null, 2));
+}
+
+function publicConfig(config = readConfig()) {
+  const port = config.port || DEFAULT_PORT;
+  return {
+    clientId: config.clientId || BUNDLED_CLIENT_ID || "",
+    hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
+    username: config.username || "",
+    channel: config.channel || "",
+    loggedIn: Boolean(config.accessToken),
+    port,
+    enabledGames: config.enabledGames || DEFAULT_GAMES,
+    maxQueueSize: config.maxQueueSize || 50,
+    overlayUrl: `http://localhost:${port}`,
+    dashboardUrl: `http://localhost:${port}/dashboard`,
+    running: Boolean(runtime)
+  };
+}
+
+function createWindow() {
+  mainWindow = new BrowserWindow({
+    width: 960,
+    height: 720,
+    minWidth: 760,
+    minHeight: 560,
+    backgroundColor: "#080b10",
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js")
+    }
+  });
+
+  mainWindow.loadFile(path.join(__dirname, "index.html"));
+}
+
+app.whenReady().then(() => {
+  registerIpc();
+  createWindow();
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
+
+app.on("before-quit", () => {
+  clearTimeout(authPollTimer);
+  stopRuntime();
+});
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
+});
+
+function registerIpc() {
+  ipcMain.handle("config:get", () => publicConfig());
+
+  ipcMain.handle("config:save", (_event, patch) => {
+    const current = readConfig();
+    const next = {
+      ...current,
+      clientId: String(patch.clientId || current.clientId || "").trim(),
+      channel: String(patch.channel || current.channel || "").trim().replace(/^#/, "").toLowerCase(),
+      port: Number.parseInt(patch.port, 10) || current.port || DEFAULT_PORT,
+      maxQueueSize: Number.parseInt(patch.maxQueueSize, 10) || current.maxQueueSize || 50,
+      enabledGames: Array.isArray(patch.enabledGames) && patch.enabledGames.length ? patch.enabledGames : current.enabledGames || DEFAULT_GAMES
+    };
+    writeConfig(next);
+    return publicConfig(next);
+  });
+
+  ipcMain.handle("auth:start", async (_event, clientId) => {
+    const cleanClientId = String(clientId || readConfig().clientId || BUNDLED_CLIENT_ID || "").trim();
+    if (!cleanClientId) throw new Error("Enter your Twitch app Client ID first.");
+
+    const config = readConfig();
+    config.clientId = cleanClientId;
+    writeConfig(config);
+
+    return startDeviceLogin(cleanClientId);
+  });
+
+  ipcMain.handle("runtime:start", async (_event, patch = {}) => {
+    const saved = readConfig();
+    const config = { ...saved, ...patch };
+    writeConfig(config);
+
+    const readyConfig = await ensureFreshToken(config);
+    const channel = String(readyConfig.channel || readyConfig.username || "").trim().replace(/^#/, "").toLowerCase();
+    if (!readyConfig.accessToken) throw new Error("Log in with Twitch before starting the bot.");
+    if (!channel) throw new Error("Enter the Twitch channel to join.");
+
+    stopRuntime();
+    runtime = startRuntime({
+      username: readyConfig.username,
+      oauth: readyConfig.accessToken,
+      channel,
+      port: readyConfig.port || DEFAULT_PORT,
+      maxQueueSize: readyConfig.maxQueueSize || 50,
+      enabledGames: readyConfig.enabledGames || DEFAULT_GAMES,
+      modUsers: [channel, readyConfig.username].filter(Boolean),
+      queuePath: getQueuePath()
+    });
+
+    const next = { ...readyConfig, channel };
+    writeConfig(next);
+    return publicConfig(next);
+  });
+
+  ipcMain.handle("runtime:stop", () => {
+    stopRuntime();
+    runtime = null;
+    return publicConfig();
+  });
+
+  ipcMain.handle("open:url", (_event, url) => {
+    shell.openExternal(url);
+  });
+}
+
+async function startDeviceLogin(clientId) {
+  clearTimeout(authPollTimer);
+
+  const payload = new URLSearchParams({
+    client_id: clientId,
+    scopes: CHAT_SCOPES.join(" ")
+  });
+
+  const response = await fetch("https://id.twitch.tv/oauth2/device", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: payload
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Could not start Twitch login.");
+
+  shell.openExternal(data.verification_uri);
+  pollDeviceToken(clientId, data.device_code, data.interval || 5);
+
+  return {
+    verificationUri: data.verification_uri,
+    userCode: data.user_code,
+    expiresIn: data.expires_in
+  };
+}
+
+async function pollDeviceToken(clientId, deviceCode, intervalSeconds) {
+  clearTimeout(authPollTimer);
+
+  authPollTimer = setTimeout(async () => {
+    try {
+      const payload = new URLSearchParams({
+        client_id: clientId,
+        device_code: deviceCode,
+        grant_type: "urn:ietf:params:oauth:grant-type:device_code"
+      });
+
+      const response = await fetch("https://id.twitch.tv/oauth2/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: payload
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.message && data.message.includes("authorization_pending")) {
+          return pollDeviceToken(clientId, deviceCode, intervalSeconds);
+        }
+        if (data.message && data.message.includes("slow_down")) {
+          return pollDeviceToken(clientId, deviceCode, intervalSeconds + 5);
+        }
+        throw new Error(data.message || "Twitch login failed.");
+      }
+
+      const identity = await validateToken(data.access_token);
+      const config = {
+        ...readConfig(),
+        clientId,
+        username: identity.login,
+        channel: readConfig().channel || identity.login,
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token || "",
+        expiresAt: Date.now() + (data.expires_in || 0) * 1000
+      };
+      writeConfig(config);
+      mainWindow?.webContents.send("auth:complete", publicConfig(config));
+    } catch (error) {
+      mainWindow?.webContents.send("auth:error", error.message);
+    }
+  }, intervalSeconds * 1000);
+}
+
+async function ensureFreshToken(config) {
+  if (!config.accessToken) return config;
+  if (!config.refreshToken || Date.now() < (config.expiresAt || 0) - 60_000) return config;
+
+  const payload = new URLSearchParams({
+    client_id: config.clientId,
+    grant_type: "refresh_token",
+    refresh_token: config.refreshToken
+  });
+
+  const response = await fetch("https://id.twitch.tv/oauth2/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: payload
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Could not refresh Twitch login.");
+
+  const next = {
+    ...config,
+    accessToken: data.access_token,
+    refreshToken: data.refresh_token || config.refreshToken,
+    expiresAt: Date.now() + (data.expires_in || 0) * 1000
+  };
+  writeConfig(next);
+  return next;
+}
+
+async function validateToken(accessToken) {
+  const response = await fetch("https://id.twitch.tv/oauth2/validate", {
+    headers: { Authorization: `OAuth ${accessToken}` }
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Could not validate Twitch login.");
+  return data;
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Just Dance Requests</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header>
+        <div>
+          <p class="eyebrow">Twitch Song Requests</p>
+          <h1>Just Dance Requests</h1>
+        </div>
+        <strong id="run-status" class="status">Stopped</strong>
+      </header>
+
+      <section class="panel">
+        <h2>Twitch Login</h2>
+        <div id="client-id-section">
+          <label>
+            Twitch app Client ID
+            <input id="client-id" autocomplete="off" spellcheck="false">
+          </label>
+        </div>
+        <div id="logged-in-badge" class="logged-in-badge" hidden>
+          <span>Logged in as</span>
+          <strong id="logged-in-user"></strong>
+        </div>
+        <button id="login-button" type="button">Log in with Twitch</button>
+        <div id="auth-code" class="auth-code" hidden>
+          <span>Enter this code on Twitch</span>
+          <strong id="user-code"></strong>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Bot Settings</h2>
+        <div class="grid">
+          <label>
+            Logged in as
+            <input id="username" disabled>
+          </label>
+          <label>
+            Channel
+            <input id="channel" autocomplete="off" spellcheck="false">
+          </label>
+          <label>
+            Local port
+            <input id="port" type="number" min="1024" max="65535">
+          </label>
+          <label>
+            Max queue size
+            <input id="max-queue" type="number" min="1" max="500">
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Local Links</h2>
+        <div class="links">
+          <div>
+            <span>OBS / Streamlabs Browser Source</span>
+            <button id="overlay-link" type="button">Open</button>
+            <button id="copy-overlay" type="button">Copy URL</button>
+            <code id="overlay-url"></code>
+          </div>
+          <div>
+            <span>Streamer controls</span>
+            <button id="dashboard-link" type="button">Open</button>
+            <button id="copy-dashboard" type="button">Copy URL</button>
+            <code id="dashboard-url"></code>
+          </div>
+        </div>
+      </section>
+
+      <section class="actions">
+        <button id="save-button" type="button">Save Settings</button>
+        <button id="start-button" type="button">Start Bot</button>
+        <button id="stop-button" type="button" class="danger">Stop Bot</button>
+      </section>
+
+      <p id="message" role="status"></p>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

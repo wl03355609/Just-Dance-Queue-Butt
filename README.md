@@ -23,6 +23,44 @@ Open `http://localhost:3000` as a browser source in OBS.
 
 Open `http://localhost:3000/dashboard` in your browser for local streamer controls.
 
+## Desktop App
+
+The project can also run as a desktop app. The desktop app starts the local bot/server for you and shows the OBS and dashboard links.
+
+```bash
+npm install
+npm run desktop
+```
+
+In the app:
+
+1. Enter your Twitch app Client ID.
+2. Click **Log in with Twitch**.
+3. Authorize the app on Twitch using the code shown in the desktop window.
+4. Set the channel name.
+5. Click **Start Bot**.
+6. Add the overlay URL as a Browser Source in OBS or Streamlabs.
+
+The desktop app stores its login/config locally in your user app data folder. The `.exe` must stay open while you stream.
+
+### Twitch App Client ID
+
+For a distributable app, create a Twitch Developer application and use its Client ID:
+
+- Twitch developer console: <https://dev.twitch.tv/console/apps>
+- OAuth flow used by the desktop app: Twitch Device Code Grant
+- Scopes requested: `chat:read chat:edit`
+
+## Build Windows EXE
+
+After installing dependencies, build a Windows installer with:
+
+```bash
+npm run build:win
+```
+
+The installer output goes into `dist/`.
+
 ## Chat Commands
 
 - `!sr <song name>`: add a song request.
