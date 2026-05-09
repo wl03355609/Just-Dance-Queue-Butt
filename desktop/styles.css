@@ -129,6 +129,14 @@ input:disabled {
   color: var(--muted);
 }
 
+.field-hint {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 button {
   padding: 0 16px;
   font-weight: 900;

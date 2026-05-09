@@ -43,6 +43,7 @@ function render(config) {
   currentConfig = config;
   clientIdInput.value = config.clientId || "";
   usernameInput.value = config.username || "";
+  usernameInput.placeholder = config.username ? "" : (config.defaultSpeaker || "not logged in");
   renderChannelSelect(config.channel, config.defaultChannel || "qutebutt");
   portInput.value = config.port || 3000;
   maxQueueInput.value = config.maxQueueSize || 50;
@@ -50,6 +51,7 @@ function render(config) {
   dashboardUrlCode.textContent = config.dashboardUrl;
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
+  document.querySelector("#next-button").disabled = !config.running;
 
   if (config.hasBundledClientId) {
     clientIdSection.hidden = true;
@@ -119,6 +121,18 @@ document.querySelector("#start-button").addEventListener("click", async () => {
   try {
     render(await window.jdApp.startRuntime(formConfig()));
     show("Bot is running. Copy the OBS URL below and add it as a Browser Source in OBS or Streamlabs.");
+  } catch (error) {
+    show(error.message);
+  }
+});
+
+document.querySelector("#next-button").addEventListener("click", async () => {
+  try {
+    const data = await window.jdApp.nextSong();
+    const song = data.entry?.song;
+    show(song
+      ? `Marked as played: ${song.title} — ${song.artist}`
+      : data.message || "Moved to next song.");
   } catch (error) {
     show(error.message);
   }

@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld("jdApp", {
   startAuth: (clientId) => ipcRenderer.invoke("auth:start", clientId),
   startRuntime: (config) => ipcRenderer.invoke("runtime:start", config),
   stopRuntime: () => ipcRenderer.invoke("runtime:stop"),
+  nextSong: () => ipcRenderer.invoke("runtime:next"),
   openUrl: (url) => ipcRenderer.invoke("open:url", url),
   onAuthComplete: (callback) => ipcRenderer.on("auth:complete", (_event, config) => callback(config)),
   onAuthError: (callback) => ipcRenderer.on("auth:error", (_event, message) => callback(message))
