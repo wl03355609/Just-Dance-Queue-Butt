@@ -43,7 +43,6 @@ function render(config) {
   currentConfig = config;
   clientIdInput.value = config.clientId || "";
   usernameInput.value = config.username || "";
-  usernameInput.placeholder = config.username ? "" : (config.defaultSpeaker || "not logged in");
   renderChannelSelect(config.channel, config.defaultChannel || "qutebutt");
   portInput.value = config.port || 3000;
   maxQueueInput.value = config.maxQueueSize || 50;

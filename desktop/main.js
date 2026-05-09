@@ -12,10 +12,8 @@ const CHAT_SCOPES = ["chat:read", "chat:edit"];
 // When non-empty, the Client ID field is hidden from users; they just click "Log in with Twitch".
 const BUNDLED_CLIENT_ID = "rpfj350muhxl4ei1kl9glmbkbmea7w";
 
-// Default Twitch account used as the bot speaker (shown before login as a hint).
-const DEFAULT_SPEAKER = "qutebutt";
-
 // Default channel shown in the channel dropdown.
+// Users change this to their own channel after logging in with their own Twitch account.
 const DEFAULT_CHANNEL = "qutebutt";
 
 let mainWindow = null;
@@ -59,7 +57,6 @@ function publicConfig(config = readConfig()) {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
     hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
     username: config.username || "",
-    defaultSpeaker: DEFAULT_SPEAKER,
     channel: config.channel || DEFAULT_CHANNEL,
     defaultChannel: DEFAULT_CHANNEL,
     loggedIn: Boolean(config.accessToken),
