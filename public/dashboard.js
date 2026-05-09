@@ -15,8 +15,12 @@ const requestSongInput = document.querySelector("#request-song");
 const songList = document.querySelector("#song-list");
 const skipButton = document.querySelector("#skip-button");
 const clearButton = document.querySelector("#clear-button");
+const gameFiltersElement = document.querySelector("#game-filters");
+const filterCountElement = document.querySelector("#filter-count");
+const applyFiltersButton = document.querySelector("#apply-filters");
 
 let allSongs = [];
+let gameOptions = [];
 
 function render(state) {
   channelElement.textContent = state.channel ? `#${state.channel}` : "-";
@@ -31,6 +35,31 @@ function render(state) {
   historyElement.replaceChildren(...state.history.map(renderHistoryEntry));
   queueEmptyElement.hidden = state.queue.length > 0;
   historyEmptyElement.hidden = state.history.length > 0;
+  renderGameFilters(state);
+}
+
+function renderGameFilters(state) {
+  if (!state.availableGames) return;
+
+  gameOptions = state.availableGames;
+  const enabled = new Set(state.enabledGames || []);
+  filterCountElement.textContent = `${enabled.size} active`;
+
+  gameFiltersElement.replaceChildren(...gameOptions.map((game) => {
+    const label = document.createElement("label");
+    label.className = "filter-option";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.value = game.key;
+    input.checked = enabled.has(game.key);
+
+    const text = document.createElement("span");
+    text.textContent = `${game.label} (${game.count})`;
+
+    label.append(input, text);
+    return label;
+  }));
 }
 
 function renderQueueEntry(entry, index) {
@@ -101,6 +130,12 @@ async function addRequest(event) {
   requestSongInput.value = "";
 }
 
+async function refreshSongs() {
+  const response = await fetch("/api/songs");
+  allSongs = (await response.json()).songs;
+  updateSongSuggestions();
+}
+
 async function removeEntry(id) {
   await postJson("/api/remove", { id });
 }
@@ -155,6 +190,18 @@ skipButton.addEventListener("click", () => postJson("/api/skip").catch((error) =
 clearButton.addEventListener("click", () => {
   if (!window.confirm("Clear the entire queue?")) return;
   postJson("/api/clear").catch((error) => showMessage(error.message));
+});
+
+applyFiltersButton.addEventListener("click", async () => {
+  const enabledGames = [...gameFiltersElement.querySelectorAll("input:checked")]
+    .map((input) => input.value);
+
+  try {
+    await postJson("/api/filters", { enabledGames });
+    await refreshSongs();
+  } catch (error) {
+    showMessage(error.message);
+  }
 });
 
 boot().catch((error) => showMessage(error.message));

@@ -79,6 +79,7 @@ The dashboard gives you buttons for:
 - skipping to the next request
 - removing a specific queue item
 - clearing the queue
+- filtering requestable games between Just Dance 2023, 2024, 2025, 2026, and Just Dance+
 - checking whether the bot is connected
 
 Use these URLs while the app is running:
@@ -111,7 +112,9 @@ I refreshed the yearly tracklists from Wikipedia and imported the Just Dance+ cl
 
 ## Filtering Games
 
-Use `ENABLED_GAMES` in `.env` to limit what viewers can request:
+Use the **Filtering Games** panel on the dashboard to change what viewers can request while the bot is running.
+
+You can also set the startup default with `ENABLED_GAMES` in `.env`:
 
 ```env
 ENABLED_GAMES=2025,2026,plus

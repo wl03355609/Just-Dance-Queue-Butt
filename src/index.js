@@ -10,6 +10,14 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
+const DEFAULT_ENABLED_GAMES = ["2023", "2024", "2025", "2026", "plus"];
+const GAME_LABELS = {
+  "2023": "Just Dance 2023 Edition",
+  "2024": "Just Dance 2024 Edition",
+  "2025": "Just Dance 2025 Edition",
+  "2026": "Just Dance 2026 Edition",
+  plus: "Just Dance+"
+};
 
 let config = createConfig();
 let songs = [];
@@ -87,7 +95,7 @@ function runtimeController() {
 function createConfig(overrides = {}) {
   const enabledGames = Array.isArray(overrides.enabledGames)
     ? overrides.enabledGames
-    : listValue(overrides.enabledGames || process.env.ENABLED_GAMES, ["2023", "2024", "2025", "2026", "plus"]);
+    : listValue(overrides.enabledGames || process.env.ENABLED_GAMES, DEFAULT_ENABLED_GAMES);
 
   const modUsers = Array.isArray(overrides.modUsers)
     ? overrides.modUsers
@@ -99,7 +107,7 @@ function createConfig(overrides = {}) {
     channel: overrides.channel ?? env("TWITCH_CHANNEL", ""),
     port: numberValue(overrides.port ?? process.env.PORT, 3000),
     maxQueueSize: numberValue(overrides.maxQueueSize ?? process.env.MAX_QUEUE_SIZE, 50),
-    enabledGames,
+    enabledGames: sanitizeEnabledGames(enabledGames),
     modUsers,
     queuePath: overrides.queuePath || QUEUE_PATH
   };
@@ -164,6 +172,27 @@ function loadSongs() {
     }));
 }
 
+function gameOptions() {
+  const counts = new Map(DEFAULT_ENABLED_GAMES.map((key) => [key, 0]));
+
+  for (const song of JSON.parse(fs.readFileSync(SONGS_PATH, "utf8"))) {
+    const key = gameKey(song.game);
+    if (counts.has(key)) counts.set(key, counts.get(key) + 1);
+  }
+
+  return DEFAULT_ENABLED_GAMES.map((key) => ({
+    key,
+    label: GAME_LABELS[key] || key,
+    count: counts.get(key) || 0
+  }));
+}
+
+function sanitizeEnabledGames(value) {
+  const allowed = new Set(DEFAULT_ENABLED_GAMES);
+  return [...new Set(listValue(value, DEFAULT_ENABLED_GAMES).map(gameKey))]
+    .filter((key) => allowed.has(key));
+}
+
 function loadQueue() {
   try {
     return JSON.parse(fs.readFileSync(config.queuePath, "utf8"));
@@ -192,6 +221,7 @@ function startHttpServer() {
       if (url.pathname === "/api/skip") return apiSkipSong(response);
       if (url.pathname === "/api/remove") return apiRemoveSong(request, response);
       if (url.pathname === "/api/clear") return apiClearQueue(response);
+      if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
     }
     if (url.pathname === "/events") return streamEvents(request, response);
 
@@ -256,6 +286,7 @@ function publicState() {
     history: state.history.slice(0, 10),
     totalSongs: songs.length,
     enabledGames: config.enabledGames,
+    availableGames: gameOptions(),
     maxQueueSize: config.maxQueueSize,
     channel: config.channel,
     botConnected: twitchReady
@@ -338,6 +369,26 @@ function apiClearQueue(response) {
   const result = clearQueue({ announce: true });
   if (!result.ok) return sendError(response, result.status || 400, result.message);
   sendJson(response, { ok: true, ...result, state: publicState() });
+}
+
+async function apiUpdateFilters(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const nextEnabledGames = sanitizeEnabledGames(body.enabledGames);
+    if (!nextEnabledGames.length) return sendError(response, 400, "Choose at least one game catalog.");
+
+    config.enabledGames = nextEnabledGames;
+    songs = loadSongs();
+    broadcast();
+
+    sendJson(response, {
+      ok: true,
+      message: `Filters updated. ${songs.length} songs are requestable.`,
+      state: publicState()
+    });
+  } catch (error) {
+    sendError(response, 400, error.message);
+  }
 }
 
 function notFound(response) {

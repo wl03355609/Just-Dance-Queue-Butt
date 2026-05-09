@@ -12,6 +12,7 @@
 .status-bar,
 .control-strip,
 .add-panel,
+.filter-panel,
 .tool-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -106,6 +107,46 @@ button.danger,
   gap: 10px;
   padding: 12px;
   margin-bottom: 14px;
+}
+
+.filter-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  text-transform: none;
+}
+
+.filter-option input {
+  width: 18px;
+  min-height: 18px;
+  padding: 0;
+  accent-color: var(--cyan);
+}
+
+.filter-option span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .add-panel {
@@ -225,6 +266,7 @@ input {
 @media (max-width: 820px) {
   .status-bar,
   .dashboard-grid,
+  .filter-grid,
   .add-panel form {
     grid-template-columns: 1fr;
   }
