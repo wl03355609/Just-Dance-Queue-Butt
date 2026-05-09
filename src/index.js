@@ -185,10 +185,14 @@ function startHttpServer() {
     if (url.pathname === "/api/queue") return sendJson(response, publicState());
     if (url.pathname === "/api/songs") return sendJson(response, { songs });
     if (url.pathname === "/api/search") return searchSongs(url, response);
-    if (request.method === "POST" && url.pathname === "/api/request") return apiRequestSong(request, response);
-    if (request.method === "POST" && url.pathname === "/api/skip") return apiSkipSong(response);
-    if (request.method === "POST" && url.pathname === "/api/remove") return apiRemoveSong(request, response);
-    if (request.method === "POST" && url.pathname === "/api/clear") return apiClearQueue(response);
+    if (request.method === "POST") {
+      const ct = request.headers["content-type"] || "";
+      if (!ct.startsWith("application/json")) return sendError(response, 415, "Content-Type must be application/json.");
+      if (url.pathname === "/api/request") return apiRequestSong(request, response);
+      if (url.pathname === "/api/skip") return apiSkipSong(response);
+      if (url.pathname === "/api/remove") return apiRemoveSong(request, response);
+      if (url.pathname === "/api/clear") return apiClearQueue(response);
+    }
     if (url.pathname === "/events") return streamEvents(request, response);
 
     const filePath = safePublicPath(routePath(url.pathname));
@@ -223,7 +227,11 @@ function routePath(urlPath) {
 function safePublicPath(urlPath) {
   const decoded = decodeURIComponent(urlPath);
   const resolved = path.resolve(PUBLIC_DIR, `.${decoded}`);
-  return resolved.startsWith(PUBLIC_DIR) ? resolved : null;
+  // startsWith(PUBLIC_DIR) alone is insufficient — a sibling directory whose
+  // name starts with "public" (e.g. "public-evil") would pass that check.
+  // Require a trailing separator so only true children are allowed.
+  const safe = resolved === PUBLIC_DIR || resolved.startsWith(PUBLIC_DIR + path.sep);
+  return safe ? resolved : null;
 }
 
 function streamEvents(_request, response) {
@@ -348,6 +356,12 @@ function connectTwitch() {
   clearTimeout(reconnectTimer);
   twitchBuffer = Buffer.alloc(0);
   twitchReady = false;
+
+  if (twitch) {
+    twitch.removeAllListeners();
+    twitch.destroy();
+    twitch = null;
+  }
 
   twitch = tls.connect({
     host: "irc-ws.chat.twitch.tv",
