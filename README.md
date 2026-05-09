@@ -1,6 +1,6 @@
 # Just Dance Requests for Twitch
 
-A local Twitch chat plugin for Just Dance streamers. Viewers request songs with `!sr song name`, the bot matches the request against Just Dance 2023-2026 and Just Dance+ catalogs, and the queue appears live in a browser/OBS overlay.
+A local Twitch chat plugin for Just Dance streamers. Viewers request songs with `!sr song name`, the bot matches the request against Just Dance 2017-2026, Just Dance Unlimited, and Just Dance+ catalogs, and the queue appears live in a browser/OBS overlay.
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
 
@@ -79,7 +79,7 @@ The dashboard gives you buttons for:
 - skipping to the next request
 - removing a specific queue item
 - clearing the queue
-- filtering requestable games between Just Dance 2023, 2024, 2025, 2026, and Just Dance+
+- filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, and Just Dance+
 - checking whether the bot is connected
 
 Use these URLs while the app is running:
@@ -94,20 +94,34 @@ The catalog lives in `data/songs.json`, so you can add alternates, regional song
 
 Current included catalogs:
 
+- Just Dance 2017
+- Just Dance 2018
+- Just Dance 2019
+- Just Dance 2020
+- Just Dance 2021
+- Just Dance 2022
 - Just Dance 2023 Edition
 - Just Dance 2024 Edition
 - Just Dance 2025 Edition
 - Just Dance 2026 Edition
+- Just Dance Unlimited classic routines
 - Just Dance+ classic routines
 
-The local catalog currently has 614 requestable entries: 163 yearly-edition songs and 451 Just Dance+ classic routines.
+The local catalog currently has 1,372 requestable entries.
 
-I refreshed the yearly tracklists from Wikipedia and imported the Just Dance+ classic-routines table from Just Dance Wiki/Fandom on May 10, 2026. The Just Dance+ page states the table is current as of April 28, 2026 and excludes removed songs.
+I refreshed the yearly tracklists from Wikipedia and imported the Just Dance Wiki/Fandom tables for Just Dance 2017-2022, Just Dance Unlimited, and Just Dance+ on May 10, 2026. The Just Dance+ page states the table is current as of April 28, 2026 and excludes removed songs.
 
+- <https://justdance.fandom.com/wiki/Just_Dance_2017>
+- <https://justdance.fandom.com/wiki/Just_Dance_2018>
+- <https://justdance.fandom.com/wiki/Just_Dance_2019>
+- <https://justdance.fandom.com/wiki/Just_Dance_2020>
+- <https://justdance.fandom.com/wiki/Just_Dance_2021>
+- <https://justdance.fandom.com/wiki/Just_Dance_2022>
 - <https://en.wikipedia.org/wiki/Just_Dance_2023_Edition>
 - <https://en.wikipedia.org/wiki/Just_Dance_2024_Edition>
 - <https://en.wikipedia.org/wiki/Just_Dance_2025_Edition>
 - <https://en.wikipedia.org/wiki/Just_Dance_2026_Edition>
+- <https://justdance.fandom.com/wiki/Just_Dance_Unlimited>
 - <https://justdance.fandom.com/wiki/Just_Dance%2B>
 
 ## Filtering Games
@@ -117,7 +131,7 @@ Use the **Filtering Games** panel on the dashboard to change what viewers can re
 You can also set the startup default with `ENABLED_GAMES` in `.env`:
 
 ```env
-ENABLED_GAMES=2025,2026,plus
+ENABLED_GAMES=2018,2022,jdu,plus
 ```
 
 ## Notes

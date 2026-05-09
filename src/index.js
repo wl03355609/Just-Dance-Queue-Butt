@@ -10,12 +10,19 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
-const DEFAULT_ENABLED_GAMES = ["2023", "2024", "2025", "2026", "plus"];
+const DEFAULT_ENABLED_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const GAME_LABELS = {
+  "2017": "Just Dance 2017",
+  "2018": "Just Dance 2018",
+  "2019": "Just Dance 2019",
+  "2020": "Just Dance 2020",
+  "2021": "Just Dance 2021",
+  "2022": "Just Dance 2022",
   "2023": "Just Dance 2023 Edition",
   "2024": "Just Dance 2024 Edition",
   "2025": "Just Dance 2025 Edition",
   "2026": "Just Dance 2026 Edition",
+  jdu: "Just Dance Unlimited",
   plus: "Just Dance+"
 };
 
@@ -777,10 +784,13 @@ function normalize(value) {
 }
 
 function gameKey(value) {
-  if (String(value).toLowerCase().includes("+")) return "plus";
+  const raw = String(value).toLowerCase();
+  if (raw.includes("+")) return "plus";
+  if (raw.includes("unlimited")) return "jdu";
 
   const normalized = normalize(value);
   if (normalized === "plus" || normalized.includes("dance plus")) return "plus";
+  if (normalized === "jdu" || normalized.includes("dance unlimited")) return "jdu";
 
   const year = normalized.match(/\b20\d{2}\b/);
   return year ? year[0] : normalized;

@@ -75,7 +75,7 @@ function formConfig() {
     channel: getChannel(),
     port: Number.parseInt(portInput.value, 10) || 3000,
     maxQueueSize: Number.parseInt(maxQueueInput.value, 10) || 50,
-    enabledGames: ["2023", "2024", "2025", "2026", "plus"]
+    enabledGames: ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"]
   };
 }
 
