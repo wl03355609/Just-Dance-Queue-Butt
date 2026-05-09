@@ -1,3 +1,6 @@
+const botModeRow = document.querySelector("#bot-mode-row");
+const botModeSelect = document.querySelector("#bot-mode");
+const ownAccountSection = document.querySelector("#own-account-section");
 const clientIdSection = document.querySelector("#client-id-section");
 const clientIdInput = document.querySelector("#client-id");
 const loggedInBadge = document.querySelector("#logged-in-badge");
@@ -24,11 +27,10 @@ function getChannel() {
 }
 
 function renderChannelSelect(channel, defaultChannel) {
-  const isDefault = channel === defaultChannel || !channel;
-  // Make sure the default channel option exists and is up to date
   const defaultOpt = channelSelect.querySelector(`option[value="${defaultChannel}"]`);
   if (defaultOpt) defaultOpt.textContent = `${defaultChannel} (default)`;
 
+  const isDefault = !channel || channel === defaultChannel;
   if (isDefault || channelSelect.querySelector(`option[value="${channel}"]`)) {
     channelSelect.value = isDefault ? defaultChannel : channel;
     channelCustom.hidden = true;
@@ -37,6 +39,10 @@ function renderChannelSelect(channel, defaultChannel) {
     channelCustom.value = channel;
     channelCustom.hidden = false;
   }
+}
+
+function applyBotMode(mode) {
+  ownAccountSection.hidden = mode !== "own";
 }
 
 function render(config) {
@@ -52,10 +58,22 @@ function render(config) {
   runStatus.className = config.running ? "status running" : "status";
   document.querySelector("#next-button").disabled = !config.running;
 
-  if (config.hasBundledClientId) {
-    clientIdSection.hidden = true;
+  // Bot mode dropdown
+  if (config.hasBundledBot) {
+    botModeRow.hidden = false;
+    const bundledOpt = botModeSelect.querySelector('option[value="bundled"]');
+    if (bundledOpt) bundledOpt.textContent = `${config.bundledBotUsername} (built-in bot)`;
+    botModeSelect.value = config.botMode || "bundled";
+  } else {
+    botModeRow.hidden = true;
+    botModeSelect.value = "own";
   }
+  applyBotMode(botModeSelect.value);
 
+  // Client ID field
+  if (config.hasBundledClientId) clientIdSection.hidden = true;
+
+  // Logged-in badge (only relevant in "own" mode)
   if (config.loggedIn && config.username) {
     loggedInBadge.hidden = false;
     loggedInUser.textContent = config.username;
@@ -69,6 +87,7 @@ function render(config) {
 function formConfig() {
   return {
     clientId: clientIdInput.value.trim(),
+    botMode: botModeSelect.value,
     channel: getChannel(),
     port: Number.parseInt(portInput.value, 10) || 3000,
     maxQueueSize: Number.parseInt(maxQueueInput.value, 10) || 50,
@@ -88,6 +107,10 @@ async function copyText(text) {
     return false;
   }
 }
+
+botModeSelect.addEventListener("change", () => {
+  applyBotMode(botModeSelect.value);
+});
 
 channelSelect.addEventListener("change", () => {
   channelCustom.hidden = channelSelect.value !== "__custom__";

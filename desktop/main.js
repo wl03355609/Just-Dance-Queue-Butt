@@ -16,6 +16,13 @@ const BUNDLED_CLIENT_ID = "rpfj350muhxl4ei1kl9glmbkbmea7w";
 // Users change this to their own channel after logging in with their own Twitch account.
 const DEFAULT_CHANNEL = "qutebutt";
 
+// Bot account credentials loaded from desktop/secrets.js (gitignored, never committed).
+// Copy desktop/secrets.example.js → desktop/secrets.js and fill in the token before building.
+let secrets = { BUNDLED_OAUTH_TOKEN: "", BUNDLED_BOT_USERNAME: "" };
+try { secrets = require("./secrets"); } catch {}
+const BUNDLED_OAUTH_TOKEN = String(secrets.BUNDLED_OAUTH_TOKEN || "").trim();
+const BUNDLED_BOT_USERNAME = String(secrets.BUNDLED_BOT_USERNAME || "").trim();
+
 let mainWindow = null;
 let runtime = null;
 let authPollTimer = null;
@@ -53,9 +60,13 @@ function writeConfig(config) {
 
 function publicConfig(config = readConfig()) {
   const port = config.port || DEFAULT_PORT;
+  const hasBundledBot = Boolean(BUNDLED_OAUTH_TOKEN && BUNDLED_BOT_USERNAME);
   return {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
     hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
+    hasBundledBot,
+    bundledBotUsername: BUNDLED_BOT_USERNAME || "",
+    botMode: config.botMode || (hasBundledBot ? "bundled" : "own"),
     username: config.username || "",
     channel: config.channel || DEFAULT_CHANNEL,
     defaultChannel: DEFAULT_CHANNEL,
@@ -110,6 +121,7 @@ function registerIpc() {
     const next = {
       ...current,
       clientId: String(patch.clientId || current.clientId || "").trim(),
+      botMode: String(patch.botMode || current.botMode || "own"),
       channel: String(patch.channel || current.channel || "").trim().replace(/^#/, "").toLowerCase(),
       port: Number.parseInt(patch.port, 10) || current.port || DEFAULT_PORT,
       maxQueueSize: Number.parseInt(patch.maxQueueSize, 10) || current.maxQueueSize || 50,
@@ -135,24 +147,35 @@ function registerIpc() {
     const config = { ...saved, ...patch };
     writeConfig(config);
 
-    const readyConfig = await ensureFreshToken(config);
-    const channel = String(readyConfig.channel || readyConfig.username || "").trim().replace(/^#/, "").toLowerCase();
-    if (!readyConfig.accessToken) throw new Error("Log in with Twitch before starting the bot.");
+    const useBundledBot = config.botMode === "bundled" && Boolean(BUNDLED_OAUTH_TOKEN) && Boolean(BUNDLED_BOT_USERNAME);
+
+    let username, oauth;
+    if (useBundledBot) {
+      username = BUNDLED_BOT_USERNAME;
+      oauth = BUNDLED_OAUTH_TOKEN;
+    } else {
+      const readyConfig = await ensureFreshToken(config);
+      if (!readyConfig.accessToken) throw new Error("Log in with Twitch before starting the bot.");
+      username = readyConfig.username;
+      oauth = readyConfig.accessToken;
+    }
+
+    const channel = String(config.channel || username || "").trim().replace(/^#/, "").toLowerCase();
     if (!channel) throw new Error("Enter the Twitch channel to join.");
 
     stopRuntime();
     runtime = startRuntime({
-      username: readyConfig.username,
-      oauth: readyConfig.accessToken,
+      username,
+      oauth,
       channel,
-      port: readyConfig.port || DEFAULT_PORT,
-      maxQueueSize: readyConfig.maxQueueSize || 50,
-      enabledGames: readyConfig.enabledGames || DEFAULT_GAMES,
-      modUsers: [channel, readyConfig.username].filter(Boolean),
+      port: config.port || DEFAULT_PORT,
+      maxQueueSize: config.maxQueueSize || 50,
+      enabledGames: config.enabledGames || DEFAULT_GAMES,
+      modUsers: [channel, username].filter(Boolean),
       queuePath: getQueuePath()
     });
 
-    const next = { ...readyConfig, channel };
+    const next = { ...config, channel };
     writeConfig(next);
     return publicConfig(next);
   });

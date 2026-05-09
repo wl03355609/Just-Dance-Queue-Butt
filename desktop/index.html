@@ -17,21 +17,34 @@
       </header>
 
       <section class="panel">
-        <h2>Twitch Login</h2>
-        <div id="client-id-section">
+        <h2>Bot Account</h2>
+
+        <div id="bot-mode-row">
           <label>
-            Twitch app Client ID
-            <input id="client-id" autocomplete="off" spellcheck="false">
+            Speaks in chat as
+            <select id="bot-mode">
+              <option value="bundled">Built-in bot</option>
+              <option value="own">My own Twitch account</option>
+            </select>
           </label>
         </div>
-        <div id="logged-in-badge" class="logged-in-badge" hidden>
-          <span>Logged in as</span>
-          <strong id="logged-in-user"></strong>
-        </div>
-        <button id="login-button" type="button">Log in with Twitch</button>
-        <div id="auth-code" class="auth-code" hidden>
-          <span>Enter this code on Twitch</span>
-          <strong id="user-code"></strong>
+
+        <div id="own-account-section">
+          <div id="client-id-section">
+            <label>
+              Twitch app Client ID
+              <input id="client-id" autocomplete="off" spellcheck="false">
+            </label>
+          </div>
+          <div id="logged-in-badge" class="logged-in-badge" hidden>
+            <span>Speaking as</span>
+            <strong id="logged-in-user"></strong>
+          </div>
+          <button id="login-button" type="button">Log in with Twitch</button>
+          <div id="auth-code" class="auth-code" hidden>
+            <span>Enter this code on Twitch</span>
+            <strong id="user-code"></strong>
+          </div>
         </div>
       </section>
 
