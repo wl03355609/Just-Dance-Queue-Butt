@@ -43,12 +43,17 @@ function renderChannelSelect(channel, defaultChannel) {
 
 function applyBotMode(mode) {
   ownAccountSection.hidden = mode !== "own";
+  if (!currentConfig) return;
+  if (mode === "bundled" && currentConfig.hasBundledBot) {
+    usernameInput.value = currentConfig.bundledBotUsername;
+  } else {
+    usernameInput.value = currentConfig.username || "";
+  }
 }
 
 function render(config) {
   currentConfig = config;
   clientIdInput.value = config.clientId || "";
-  usernameInput.value = config.username || "";
   renderChannelSelect(config.channel, config.defaultChannel || "qutebutt");
   portInput.value = config.port || 3000;
   maxQueueInput.value = config.maxQueueSize || 50;
