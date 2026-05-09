@@ -116,6 +116,12 @@ button.danger,
   margin-bottom: 14px;
 }
 
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .filter-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));

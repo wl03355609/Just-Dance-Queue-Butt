@@ -347,7 +347,7 @@ function searchSongs(url, response) {
 async function apiRequestSong(request, response) {
   try {
     const body = await readJsonBody(request);
-    const result = addRequest(body.user || "dashboard", body.song || body.query || "", { announce: false });
+    const result = addRequest(body.user || "test", body.song || body.query || "", { announce: false });
     if (!result.ok) return sendError(response, result.status || 400, result.message);
     sendJson(response, { ok: true, ...result, state: publicState() });
   } catch (error) {

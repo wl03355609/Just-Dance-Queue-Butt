@@ -46,6 +46,10 @@
           <h2>Filtering Games</h2>
           <span id="filter-count">0 active</span>
         </div>
+        <div class="filter-actions">
+          <button id="select-all-filters" type="button">Select All</button>
+          <button id="deselect-all-filters" type="button">Deselect All</button>
+        </div>
         <div id="game-filters" class="filter-grid"></div>
         <button id="apply-filters" type="button">Apply Filters</button>
       </section>
@@ -54,7 +58,7 @@
         <form id="request-form">
           <label>
             Requester
-            <input id="request-user" name="user" value="dashboard" autocomplete="off">
+            <input id="request-user" name="user" value="test" autocomplete="off">
           </label>
           <label>
             Song

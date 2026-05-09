@@ -18,6 +18,8 @@ const clearButton = document.querySelector("#clear-button");
 const gameFiltersElement = document.querySelector("#game-filters");
 const filterCountElement = document.querySelector("#filter-count");
 const applyFiltersButton = document.querySelector("#apply-filters");
+const selectAllFiltersButton = document.querySelector("#select-all-filters");
+const deselectAllFiltersButton = document.querySelector("#deselect-all-filters");
 
 let allSongs = [];
 let gameOptions = [];
@@ -60,6 +62,13 @@ function renderGameFilters(state) {
     label.append(input, text);
     return label;
   }));
+}
+
+function setAllFilters(checked) {
+  for (const input of gameFiltersElement.querySelectorAll("input")) {
+    input.checked = checked;
+  }
+  filterCountElement.textContent = `${gameFiltersElement.querySelectorAll("input:checked").length} active`;
 }
 
 function renderQueueEntry(entry, index) {
@@ -124,7 +133,7 @@ function showMessage(message) {
 async function addRequest(event) {
   event.preventDefault();
   await postJson("/api/request", {
-    user: requestUserInput.value.trim() || "dashboard",
+    user: requestUserInput.value.trim() || "test",
     song: requestSongInput.value.trim()
   });
   requestSongInput.value = "";
@@ -152,7 +161,8 @@ function updateSongSuggestions() {
   songList.replaceChildren(...matches.map((song) => {
     const option = document.createElement("option");
     option.value = song.title;
-    option.label = `${song.artist} - ${song.game}`;
+    option.label = `${song.title} - ${song.artist} - ${song.game}`;
+    option.textContent = `${song.title} - ${song.artist} - ${song.game}`;
     return option;
   }));
 }
@@ -191,6 +201,9 @@ clearButton.addEventListener("click", () => {
   if (!window.confirm("Clear the entire queue?")) return;
   postJson("/api/clear").catch((error) => showMessage(error.message));
 });
+
+selectAllFiltersButton.addEventListener("click", () => setAllFilters(true));
+deselectAllFiltersButton.addEventListener("click", () => setAllFilters(false));
 
 applyFiltersButton.addEventListener("click", async () => {
   const enabledGames = [...gameFiltersElement.querySelectorAll("input:checked")]
