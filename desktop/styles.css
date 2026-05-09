@@ -103,13 +103,21 @@ label {
 }
 
 input,
-button {
+button,
+select {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--text);
   background: rgba(255, 255, 255, 0.08);
   font: inherit;
+}
+
+select {
+  width: 100%;
+  padding: 0 12px;
+  cursor: pointer;
+  appearance: auto;
 }
 
 input {

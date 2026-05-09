@@ -12,6 +12,9 @@ const CHAT_SCOPES = ["chat:read", "chat:edit"];
 // When non-empty, the Client ID field is hidden from users; they just click "Log in with Twitch".
 const BUNDLED_CLIENT_ID = "rpfj350muhxl4ei1kl9glmbkbmea7w";
 
+// Default channel shown to users. They can pick it from the dropdown or type their own.
+const DEFAULT_CHANNEL = "qutebutt";
+
 let mainWindow = null;
 let runtime = null;
 let authPollTimer = null;
@@ -31,7 +34,7 @@ function readConfig() {
     return {
       clientId: "",
       username: "",
-      channel: "",
+      channel: DEFAULT_CHANNEL,
       accessToken: "",
       refreshToken: "",
       expiresAt: 0,
@@ -53,7 +56,8 @@ function publicConfig(config = readConfig()) {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
     hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
     username: config.username || "",
-    channel: config.channel || "",
+    channel: config.channel || DEFAULT_CHANNEL,
+    defaultChannel: DEFAULT_CHANNEL,
     loggedIn: Boolean(config.accessToken),
     port,
     enabledGames: config.enabledGames || DEFAULT_GAMES,

@@ -44,7 +44,11 @@
           </label>
           <label>
             Channel
-            <input id="channel" autocomplete="off" spellcheck="false">
+            <select id="channel-select">
+              <option value="qutebutt">qutebutt (default)</option>
+              <option value="__custom__">Other — type below</option>
+            </select>
+            <input id="channel-custom" autocomplete="off" spellcheck="false" placeholder="your channel name" hidden>
           </label>
           <label>
             Local port

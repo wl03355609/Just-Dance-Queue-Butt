@@ -3,7 +3,8 @@ const clientIdInput = document.querySelector("#client-id");
 const loggedInBadge = document.querySelector("#logged-in-badge");
 const loggedInUser = document.querySelector("#logged-in-user");
 const usernameInput = document.querySelector("#username");
-const channelInput = document.querySelector("#channel");
+const channelSelect = document.querySelector("#channel-select");
+const channelCustom = document.querySelector("#channel-custom");
 const portInput = document.querySelector("#port");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
@@ -15,11 +16,34 @@ const userCode = document.querySelector("#user-code");
 
 let currentConfig = null;
 
+function getChannel() {
+  if (channelSelect.value === "__custom__") {
+    return channelCustom.value.trim().replace(/^#/, "").toLowerCase();
+  }
+  return channelSelect.value;
+}
+
+function renderChannelSelect(channel, defaultChannel) {
+  const isDefault = channel === defaultChannel || !channel;
+  // Make sure the default channel option exists and is up to date
+  const defaultOpt = channelSelect.querySelector(`option[value="${defaultChannel}"]`);
+  if (defaultOpt) defaultOpt.textContent = `${defaultChannel} (default)`;
+
+  if (isDefault || channelSelect.querySelector(`option[value="${channel}"]`)) {
+    channelSelect.value = isDefault ? defaultChannel : channel;
+    channelCustom.hidden = true;
+  } else {
+    channelSelect.value = "__custom__";
+    channelCustom.value = channel;
+    channelCustom.hidden = false;
+  }
+}
+
 function render(config) {
   currentConfig = config;
   clientIdInput.value = config.clientId || "";
   usernameInput.value = config.username || "";
-  channelInput.value = config.channel || "";
+  renderChannelSelect(config.channel, config.defaultChannel || "qutebutt");
   portInput.value = config.port || 3000;
   maxQueueInput.value = config.maxQueueSize || 50;
   overlayUrlCode.textContent = config.overlayUrl;
@@ -44,7 +68,7 @@ function render(config) {
 function formConfig() {
   return {
     clientId: clientIdInput.value.trim(),
-    channel: channelInput.value.trim().replace(/^#/, "").toLowerCase(),
+    channel: getChannel(),
     port: Number.parseInt(portInput.value, 10) || 3000,
     maxQueueSize: Number.parseInt(maxQueueInput.value, 10) || 50,
     enabledGames: ["2023", "2024", "2025", "2026", "plus"]
@@ -63,6 +87,11 @@ async function copyText(text) {
     return false;
   }
 }
+
+channelSelect.addEventListener("change", () => {
+  channelCustom.hidden = channelSelect.value !== "__custom__";
+  if (!channelCustom.hidden) channelCustom.focus();
+});
 
 document.querySelector("#login-button").addEventListener("click", async () => {
   try {

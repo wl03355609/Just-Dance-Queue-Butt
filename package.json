@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
@@ -27,6 +27,7 @@
   "build": {
     "appId": "com.justdancerequests.twitch",
     "productName": "Just Dance Requests",
+    "icon": "build/icon.ico",
     "files": [
       "desktop/**/*",
       "src/**/*",
@@ -42,7 +43,7 @@
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "JustDanceRequests-2.0-Setup-x86.exe"
+      "artifactName": "JustDanceRequests-3.0-Setup-x86.exe"
     }
   }
 }
