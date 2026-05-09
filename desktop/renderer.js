@@ -6,8 +6,7 @@ const clientIdInput = document.querySelector("#client-id");
 const loggedInBadge = document.querySelector("#logged-in-badge");
 const loggedInUser = document.querySelector("#logged-in-user");
 const usernameInput = document.querySelector("#username");
-const channelSelect = document.querySelector("#channel-select");
-const channelCustom = document.querySelector("#channel-custom");
+const channelInput = document.querySelector("#channel");
 const portInput = document.querySelector("#port");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
@@ -20,25 +19,7 @@ const userCode = document.querySelector("#user-code");
 let currentConfig = null;
 
 function getChannel() {
-  if (channelSelect.value === "__custom__") {
-    return channelCustom.value.trim().replace(/^#/, "").toLowerCase();
-  }
-  return channelSelect.value;
-}
-
-function renderChannelSelect(channel, defaultChannel) {
-  const defaultOpt = channelSelect.querySelector(`option[value="${defaultChannel}"]`);
-  if (defaultOpt) defaultOpt.textContent = `${defaultChannel} (default)`;
-
-  const isDefault = !channel || channel === defaultChannel;
-  if (isDefault || channelSelect.querySelector(`option[value="${channel}"]`)) {
-    channelSelect.value = isDefault ? defaultChannel : channel;
-    channelCustom.hidden = true;
-  } else {
-    channelSelect.value = "__custom__";
-    channelCustom.value = channel;
-    channelCustom.hidden = false;
-  }
+  return channelInput.value.trim().replace(/^#/, "").toLowerCase();
 }
 
 function applyBotMode(mode) {
@@ -54,15 +35,13 @@ function applyBotMode(mode) {
 function render(config) {
   currentConfig = config;
   clientIdInput.value = config.clientId || "";
-  renderChannelSelect(config.channel, config.defaultChannel || "qutebutt");
+  channelInput.value = config.channel || "";
   portInput.value = config.port || 3000;
   maxQueueInput.value = config.maxQueueSize || 50;
   overlayUrlCode.textContent = config.overlayUrl;
   dashboardUrlCode.textContent = config.dashboardUrl;
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
-  document.querySelector("#next-button").disabled = !config.running;
-
   // Bot mode dropdown
   if (config.hasBundledBot) {
     botModeRow.hidden = false;
@@ -117,11 +96,6 @@ botModeSelect.addEventListener("change", () => {
   applyBotMode(botModeSelect.value);
 });
 
-channelSelect.addEventListener("change", () => {
-  channelCustom.hidden = channelSelect.value !== "__custom__";
-  if (!channelCustom.hidden) channelCustom.focus();
-});
-
 document.querySelector("#login-button").addEventListener("click", async () => {
   try {
     const config = await window.jdApp.saveConfig(formConfig());
@@ -148,18 +122,6 @@ document.querySelector("#start-button").addEventListener("click", async () => {
   try {
     render(await window.jdApp.startRuntime(formConfig()));
     show("Bot is running. Copy the OBS URL below and add it as a Browser Source in OBS or Streamlabs.");
-  } catch (error) {
-    show(error.message);
-  }
-});
-
-document.querySelector("#next-button").addEventListener("click", async () => {
-  try {
-    const data = await window.jdApp.nextSong();
-    const song = data.entry?.song;
-    show(song
-      ? `Marked as played: ${song.title} — ${song.artist}`
-      : data.message || "Moved to next song.");
   } catch (error) {
     show(error.message);
   }

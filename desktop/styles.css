@@ -93,6 +93,10 @@ h2 {
   gap: 12px;
 }
 
+.span-2 {
+  grid-column: 1 / -1;
+}
+
 label {
   display: grid;
   gap: 6px;
@@ -118,6 +122,11 @@ select {
   padding: 0 12px;
   cursor: pointer;
   appearance: auto;
+}
+
+select option {
+  color: #111;
+  background: #f0f0f0;
 }
 
 input {
