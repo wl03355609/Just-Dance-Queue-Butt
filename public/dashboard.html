@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Just Dance Request Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/dashboard.css">
+  </head>
+  <body class="dashboard-page">
+    <main class="dashboard-shell">
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">Streamer Controls</p>
+          <h1>Request Dashboard</h1>
+        </div>
+        <a class="overlay-link" href="/" target="_blank" rel="noreferrer">Overlay</a>
+      </header>
+
+      <section class="status-bar" aria-label="Status">
+        <div>
+          <span>Channel</span>
+          <strong id="channel">-</strong>
+        </div>
+        <div>
+          <span>Bot</span>
+          <strong id="bot-status">Offline</strong>
+        </div>
+        <div>
+          <span>Queue</span>
+          <strong><span id="queue-count">0</span>/<span id="queue-limit">0</span></strong>
+        </div>
+        <div>
+          <span>Songs</span>
+          <strong id="song-count">0</strong>
+        </div>
+      </section>
+
+      <section class="control-strip" aria-label="Queue Controls">
+        <button id="skip-button" type="button">Skip</button>
+        <button id="clear-button" type="button" class="danger">Clear Queue</button>
+      </section>
+
+      <section class="add-panel" aria-label="Add Request">
+        <form id="request-form">
+          <label>
+            Requester
+            <input id="request-user" name="user" value="dashboard" autocomplete="off">
+          </label>
+          <label>
+            Song
+            <input id="request-song" name="song" list="song-list" autocomplete="off" placeholder="Search song or artist">
+            <datalist id="song-list"></datalist>
+          </label>
+          <button type="submit">Add</button>
+        </form>
+        <p id="message" class="message" role="status"></p>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="tool-panel">
+          <div class="panel-heading">
+            <h2>Queue</h2>
+            <span id="queue-heading-count">0 waiting</span>
+          </div>
+          <ol id="dashboard-queue" class="dashboard-list"></ol>
+          <p class="empty compact" id="dashboard-empty">No requests yet.</p>
+        </div>
+
+        <div class="tool-panel">
+          <div class="panel-heading">
+            <h2>History</h2>
+            <span>Last 10</span>
+          </div>
+          <ol id="history" class="dashboard-list"></ol>
+          <p class="empty compact" id="history-empty">No played songs yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="/dashboard.js"></script>
+  </body>
+</html>

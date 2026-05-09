@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Just Dance Request Queue</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="queue-shell">
+      <header class="queue-header">
+        <div>
+          <p class="eyebrow">Just Dance Requests</p>
+          <h1>Song Queue</h1>
+        </div>
+        <div class="count" id="count">0</div>
+      </header>
+
+      <section class="now-playing" id="now-playing" hidden>
+        <span>Last played</span>
+        <strong id="last-song"></strong>
+      </section>
+
+      <ol class="queue-list" id="queue"></ol>
+
+      <p class="empty" id="empty">Use <strong>!sr song name</strong> in chat to join the queue.</p>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
