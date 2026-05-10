@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, dialog } = require("electron");
 const { startRuntime, stopRuntime } = require("../src/index");
 
 const DEFAULT_PORT = 3000;
@@ -26,13 +26,15 @@ const BUNDLED_BOT_USERNAME = String(secrets.BUNDLED_BOT_USERNAME || "").trim();
 let mainWindow = null;
 let runtime = null;
 let authPollTimer = null;
+let quitAfterPrompt = false;
+let quitPromptActive = false;
 
 function getConfigPath() {
   return path.join(app.getPath("userData"), "config.json");
 }
 
-function getQueuePath() {
-  return path.join(app.getPath("userData"), "queue.json");
+function getQueuePath(channel = readConfig().channel || DEFAULT_CHANNEL) {
+  return path.join(app.getPath("userData"), "queues", `${sanitizeChannelName(channel) || "default"}.json`);
 }
 
 function readConfig() {
@@ -111,9 +113,10 @@ app.whenReady().then(() => {
   });
 });
 
-app.on("before-quit", () => {
-  clearTimeout(authPollTimer);
-  stopRuntime();
+app.on("before-quit", (event) => {
+  if (quitAfterPrompt) return;
+  event.preventDefault();
+  promptBeforeQuit();
 });
 
 app.on("window-all-closed", () => {
@@ -179,7 +182,7 @@ function registerIpc() {
       maxQueueSize: config.maxQueueSize || 50,
       enabledGames: config.enabledGames || DEFAULT_GAMES,
       modUsers: [channel, username].filter(Boolean),
-      queuePath: getQueuePath()
+      queuePath: getQueuePath(channel)
     });
 
     const next = { ...config, channel };
@@ -211,6 +214,47 @@ function registerIpc() {
   ipcMain.handle("open:url", (_event, url) => {
     return openLocalAppUrl(url);
   });
+}
+
+async function promptBeforeQuit() {
+  if (quitPromptActive) return;
+  quitPromptActive = true;
+
+  try {
+    if (runtime && queueHasEntries(runtime.getState())) {
+      const options = {
+        type: "question",
+        buttons: ["Keep Queue", "Clear Queue & History"],
+        defaultId: 0,
+        cancelId: 0,
+        message: "Do you want to clear the queue and history before exiting?",
+        detail: "Choose Keep Queue to save the current channel's queue and history for next time."
+      };
+      const choice = mainWindow && !mainWindow.isDestroyed()
+        ? await dialog.showMessageBox(mainWindow, options)
+        : await dialog.showMessageBox(options);
+
+      if (choice.response === 1) runtime.clearState();
+    }
+  } finally {
+    clearTimeout(authPollTimer);
+    stopRuntime();
+    runtime = null;
+    quitAfterPrompt = true;
+    app.quit();
+  }
+}
+
+function queueHasEntries(state) {
+  return Boolean((state.queue && state.queue.length) || (state.history && state.history.length));
+}
+
+function sanitizeChannelName(value) {
+  return String(value || "")
+    .trim()
+    .replace(/^#/, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_]/g, "");
 }
 
 async function startDeviceLogin(clientId) {

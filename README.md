@@ -79,7 +79,7 @@ The dashboard gives you buttons for:
 - skipping to the next request
 - removing a specific queue item
 - clearing the queue
-- filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, and Just Dance+
+- filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, Just Dance+, and optional YouTube/freeform requests
 - checking whether the bot is connected
 
 Use these URLs while the app is running:
@@ -89,6 +89,8 @@ Use these URLs while the app is running:
 - Song catalog API: `http://localhost:3000/api/songs`
 
 The dashboard token protects local queue controls like skip, clear, remove, and game filters. It is generated each time by default; set `ADMIN_TOKEN` in `.env` if you want a stable dashboard URL.
+
+When the YouTube filter is enabled, requests that do not match the local catalog are added as freeform YouTube requests. When YouTube is disabled, unmatched or filtered-out requests are rejected.
 
 ## Song Data
 
@@ -138,6 +140,7 @@ ENABLED_GAMES=2018,2022,jdu,plus
 
 ## Notes
 
-- Queue state is saved to `data/queue.json`.
+- CLI queue state is saved to `data/queue.json`; desktop app queues are saved per channel in app data.
+- When quitting the desktop app with a non-empty queue or history, choose whether to keep it for next time or clear it on exit.
 - The app has no npm dependencies.
 - Twitch chat requires the bot account to be able to join/send messages in your channel.

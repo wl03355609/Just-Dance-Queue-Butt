@@ -12,7 +12,9 @@ const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
 const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters"]);
 const MAX_QUERY_LENGTH = 200;
+const MIN_REQUEST_MATCH_SCORE = 0.5;
 const DEFAULT_ENABLED_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
+const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
 const GAME_LABELS = {
   "2017": "Just Dance 2017",
   "2018": "Just Dance 2018",
@@ -25,7 +27,8 @@ const GAME_LABELS = {
   "2025": "Just Dance 2025 Edition",
   "2026": "Just Dance 2026 Edition",
   jdu: "Just Dance Unlimited",
-  plus: "Just Dance+"
+  plus: "Just Dance+",
+  youtube: "YouTube"
 };
 
 let config = createConfig();
@@ -46,6 +49,7 @@ module.exports = {
   startRuntime,
   stopRuntime,
   publicState,
+  clearQueueState,
   normalizeOAuth
 };
 
@@ -92,6 +96,7 @@ function runtimeController() {
   return {
     config,
     getState: publicState,
+    clearState: clearQueueState,
     stop: stopRuntime,
     urls: {
       overlay: `http://localhost:${config.port}`,
@@ -183,22 +188,22 @@ function loadSongs() {
 }
 
 function gameOptions() {
-  const counts = new Map(DEFAULT_ENABLED_GAMES.map((key) => [key, 0]));
+  const counts = new Map(FILTER_OPTIONS.map((key) => [key, 0]));
 
   for (const song of JSON.parse(fs.readFileSync(SONGS_PATH, "utf8"))) {
     const key = gameKey(song.game);
     if (counts.has(key)) counts.set(key, counts.get(key) + 1);
   }
 
-  return DEFAULT_ENABLED_GAMES.map((key) => ({
+  return FILTER_OPTIONS.map((key) => ({
     key,
     label: GAME_LABELS[key] || key,
-    count: counts.get(key) || 0
+    count: key === "youtube" ? null : counts.get(key) || 0
   }));
 }
 
 function sanitizeEnabledGames(value) {
-  const allowed = new Set(DEFAULT_ENABLED_GAMES);
+  const allowed = new Set(FILTER_OPTIONS);
   return [...new Set(listValue(value, DEFAULT_ENABLED_GAMES).map(gameKey))]
     .filter((key) => allowed.has(key));
 }
@@ -215,6 +220,12 @@ function saveQueue() {
   fs.mkdirSync(path.dirname(config.queuePath), { recursive: true });
   fs.writeFileSync(config.queuePath, JSON.stringify(state, null, 2));
   broadcast();
+}
+
+function clearQueueState() {
+  state = { queue: [], history: [] };
+  saveQueue();
+  return publicState();
 }
 
 function startHttpServer() {
@@ -437,7 +448,7 @@ async function apiUpdateFilters(request, response) {
 
     sendJson(response, {
       ok: true,
-      message: `Filters updated. ${songs.length} songs are requestable.`,
+      message: filterSummary(),
       state: publicState()
     });
   } catch (error) {
@@ -672,15 +683,23 @@ function addRequest(user, query, options = {}) {
 
   const match = findSong(requestedSong);
   if (!match) {
-    const message = `@${requester} I could not find "${requestedSong}" in the enabled Just Dance catalog.`;
-    if (announce) say(message);
-    return { ok: false, status: 404, message };
+    if (!isYoutubeEnabled()) {
+      const message = `@${requester} The request: "${requestedSong}" is not available in your filtered games.`;
+      if (announce) say(message);
+      return { ok: false, status: 404, message };
+    }
+
+    return addQueueEntry(requester, youtubeSong(requestedSong), announce);
   }
 
+  return addQueueEntry(requester, stripSearch(match.song), announce);
+}
+
+function addQueueEntry(requester, song, announce) {
   const entry = {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     user: requester,
-    song: stripSearch(match.song),
+    song,
     requestedAt: new Date().toISOString()
   };
 
@@ -702,7 +721,7 @@ function findSong(query) {
     if (!best || score > best.score) best = { song, score };
   }
 
-  return best && best.score >= 0.34 ? best : null;
+  return best && best.score >= MIN_REQUEST_MATCH_SCORE ? best : null;
 }
 
 function scoreSong(query, song) {
@@ -714,7 +733,28 @@ function scoreSong(query, song) {
   const tokenScore = overlap / Math.max(queryTokens.size, 1);
   const distanceScore = 1 - levenshtein(query, normalize(song.title)) / Math.max(query.length, song.title.length, 1);
 
+  if (queryTokens.size > 1 && overlap === 0 && distanceScore < 0.75) return 0;
+
   return Math.max(tokenScore * 0.8, distanceScore);
+}
+
+function isYoutubeEnabled() {
+  return config.enabledGames.includes("youtube");
+}
+
+function youtubeSong(title) {
+  return {
+    id: `youtube-${slug(title)}`,
+    title,
+    artist: "YouTube",
+    game: "YouTube"
+  };
+}
+
+function filterSummary() {
+  const youtubeEnabled = isYoutubeEnabled();
+  const suffix = youtubeEnabled ? " YouTube requests are enabled." : "";
+  return `Filters updated. ${songs.length} catalog songs are requestable.${suffix}`;
 }
 
 function leaveQueue(user) {

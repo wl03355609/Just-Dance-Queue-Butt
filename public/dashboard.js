@@ -58,7 +58,7 @@ function renderGameFilters(state) {
     input.checked = enabled.has(game.key);
 
     const text = document.createElement("span");
-    text.textContent = `${game.label} (${game.count})`;
+    text.textContent = game.count === null ? `${game.label} (any song)` : `${game.label} (${game.count})`;
 
     label.append(input, text);
     return label;
