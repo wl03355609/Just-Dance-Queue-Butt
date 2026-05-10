@@ -10,7 +10,7 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
-const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme"]);
+const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme", "/api/promote"]);
 const MAX_QUERY_LENGTH = 200;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
 const DEFAULT_OVERLAY_THEME = "dark";
@@ -262,6 +262,7 @@ function startHttpServer() {
       if (url.pathname === "/api/clear") return apiClearQueue(response);
       if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
       if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
+      if (url.pathname === "/api/promote") return apiPromoteSong(request, response);
     }
     if (url.pathname === "/events") return streamEvents(request, response);
 
@@ -446,6 +447,29 @@ function apiClearQueue(response) {
   const result = clearQueue({ announce: true });
   if (!result.ok) return sendError(response, result.status || 400, result.message);
   sendJson(response, { ok: true, ...result, state: publicState() });
+}
+
+async function apiPromoteSong(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const result = promoteSong(body.id);
+    if (!result.ok) return sendError(response, result.status || 400, result.message);
+    sendJson(response, { ok: true, ...result, state: publicState() });
+  } catch (error) {
+    sendError(response, 400, error.message);
+  }
+}
+
+function promoteSong(id) {
+  const index = state.queue.findIndex((entry) => entry.id === id);
+  if (index === -1) return { ok: false, status: 404, message: "Entry not found in queue." };
+  if (index === 0) return { ok: true, status: 200, message: `${state.queue[0].song.title} is already next.`, entry: state.queue[0] };
+
+  const [entry] = state.queue.splice(index, 1);
+  state.queue.unshift(entry);
+  saveQueue();
+  const message = `Moved ${entry.song.title} (@${entry.user}) to the top of the queue.`;
+  return { ok: true, status: 200, message, entry };
 }
 
 async function apiUpdateFilters(request, response) {
@@ -675,6 +699,7 @@ function handleCommand(message) {
   const lower = command.toLowerCase();
 
   if (lower === "!sr" || lower === "!songrequest") return requestSong(message, arg);
+  if (lower === "!random") return randomSong(message);
   if (lower === "!queue") return say(queueSummary());
   if (lower === "!leave") return leaveQueue(message.user);
   if (!isMod(message)) return;
@@ -687,6 +712,29 @@ function handleCommand(message) {
 
 function requestSong(message, query) {
   addRequest(message.user, query, { announce: true });
+}
+
+function randomSong(message) {
+  const requester = message.user;
+
+  if (state.queue.length >= config.maxQueueSize) {
+    say(`@${requester} the queue is full right now.`);
+    return;
+  }
+
+  const existing = state.queue.find((entry) => entry.user.toLowerCase() === requester.toLowerCase());
+  if (existing) {
+    say(`@${requester} you are already in queue at #${state.queue.indexOf(existing) + 1}: ${existing.song.title}. Use !leave to remove it.`);
+    return;
+  }
+
+  if (!songs.length) {
+    say(`@${requester} no songs are available.`);
+    return;
+  }
+
+  const pick = songs[Math.floor(Math.random() * songs.length)];
+  addQueueEntry(requester, stripSearch(pick), true);
 }
 
 function addRequest(user, query, options = {}) {

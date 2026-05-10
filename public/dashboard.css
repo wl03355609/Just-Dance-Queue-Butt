@@ -248,9 +248,9 @@ input {
 
 .dashboard-item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   min-height: 64px;
   padding: 12px;
   border: 1px solid var(--line);
@@ -283,6 +283,12 @@ input {
 .icon-button {
   min-height: 36px;
   padding: 0 12px;
+}
+
+.icon-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 .compact {

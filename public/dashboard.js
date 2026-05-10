@@ -95,6 +95,13 @@ function renderQueueEntry(entry, index) {
   const details = document.createElement("span");
   details.textContent = `${entry.song.artist} - ${entry.song.game} - @${entry.user}`;
 
+  const pick = document.createElement("button");
+  pick.type = "button";
+  pick.className = "icon-button";
+  pick.textContent = index === 0 ? "Next" : "Pick";
+  pick.disabled = index === 0;
+  pick.addEventListener("click", () => postJson("/api/promote", { id: entry.id }).catch((error) => showMessage(error.message)));
+
   const remove = document.createElement("button");
   remove.type = "button";
   remove.className = "icon-button danger";
@@ -102,7 +109,7 @@ function renderQueueEntry(entry, index) {
   remove.addEventListener("click", () => removeEntry(entry.id));
 
   main.append(title, details);
-  item.append(main, remove);
+  item.append(main, pick, remove);
   return item;
 }
 
