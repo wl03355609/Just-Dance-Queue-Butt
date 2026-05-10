@@ -63,7 +63,10 @@ The installer output goes into `dist/`.
 
 ## Chat Commands
 
-- `!sr <song name>`: add a song request.
+- `!sr <song name>`: add a song request. Requires at least 3 characters. Rejected if the same song is already in the queue.
+- `!random`: add a random song from the enabled catalog.
+- `!random <game>`: add a random song from a specific game — e.g. `!random 2021`, `!random JD+`, `!random JDU`.
+- `!random <game> <year>`: add a random song from a year section within JD+ or JDU — e.g. `!random JD+ 2023`, `!random JDU 2021`.
 - `!queue`: show the first songs in chat.
 - `!leave`: remove your own request.
 - `!skip` or `!next`: mark the first request as played. Broadcaster/mod only.
@@ -76,12 +79,15 @@ The installer output goes into `dist/`.
 The dashboard gives you buttons for:
 
 - adding a test request without typing in Twitch chat
+- **Pick**: promote any queue entry to the top so it plays next
 - skipping to the next request
 - removing a specific queue item
 - clearing the queue
 - switching the OBS overlay between dark and light mode
 - filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, Just Dance+, and optional YouTube/freeform requests
 - checking whether the bot is connected
+
+Queue entries that have already been played in the current session show a **Done before** badge so you can spot repeats at a glance.
 
 Use these URLs while the app is running:
 
