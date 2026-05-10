@@ -12,6 +12,7 @@ const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
 const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme", "/api/promote"]);
 const MAX_QUERY_LENGTH = 200;
+const MIN_SEARCH_LENGTH = 3;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
 const DEFAULT_OVERLAY_THEME = "dark";
 const GENERIC_MATCH_TOKENS = new Set(["song", "dance", "just", "version", "remix", "edition"]);
@@ -699,7 +700,7 @@ function handleCommand(message) {
   const lower = command.toLowerCase();
 
   if (lower === "!sr" || lower === "!songrequest") return requestSong(message, arg);
-  if (lower === "!random") return randomSong(message);
+  if (lower === "!random") return randomSong(message, arg);
   if (lower === "!queue") return say(queueSummary());
   if (lower === "!leave") return leaveQueue(message.user);
   if (!isMod(message)) return;
@@ -714,7 +715,7 @@ function requestSong(message, query) {
   addRequest(message.user, query, { announce: true });
 }
 
-function randomSong(message) {
+function randomSong(message, arg) {
   const requester = message.user;
 
   if (state.queue.length >= config.maxQueueSize) {
@@ -728,13 +729,45 @@ function randomSong(message) {
     return;
   }
 
-  if (!songs.length) {
-    say(`@${requester} no songs are available.`);
+  let pool = songs;
+  if (arg) {
+    const filter = parseRandomFilter(arg);
+    if (!filter) {
+      say(`@${requester} unrecognized filter. Try !random, !random 2021, !random JD+, or !random JD+ 2023.`);
+      return;
+    }
+    pool = songs.filter((song) => {
+      if (gameKey(song.game) !== filter.gameFilter) return false;
+      if (!filter.yearFilter) return true;
+      return song.originalGame && song.originalGame.includes(filter.yearFilter);
+    });
+  }
+
+  if (!pool.length) {
+    say(`@${requester} no songs found for that filter.`);
     return;
   }
 
-  const pick = songs[Math.floor(Math.random() * songs.length)];
+  const pick = pool[Math.floor(Math.random() * pool.length)];
   addQueueEntry(requester, stripSearch(pick), true);
+}
+
+function parseRandomFilter(arg) {
+  const yearMatch = arg.match(/\b(20\d{2})\b/);
+  const yearFilter = yearMatch ? yearMatch[1] : null;
+  const gameArg = arg.replace(/\b20\d{2}\b/, "").trim();
+
+  if (gameArg) {
+    const key = gameKey(gameArg);
+    if (!FILTER_OPTIONS.includes(key) || key === "youtube") return null;
+    return { gameFilter: key, yearFilter };
+  }
+
+  if (yearFilter && FILTER_OPTIONS.includes(yearFilter)) {
+    return { gameFilter: yearFilter, yearFilter: null };
+  }
+
+  return null;
 }
 
 function addRequest(user, query, options = {}) {
@@ -744,6 +777,12 @@ function addRequest(user, query, options = {}) {
 
   if (!requestedSong) {
     const message = `@${requester} usage: !sr song name`;
+    if (announce) say(message);
+    return { ok: false, status: 400, message };
+  }
+
+  if (requestedSong.length < MIN_SEARCH_LENGTH) {
+    const message = `@${requester} please be more specific — type at least part of the song name.`;
     if (announce) say(message);
     return { ok: false, status: 400, message };
   }
@@ -762,17 +801,27 @@ function addRequest(user, query, options = {}) {
   }
 
   const match = findSong(requestedSong);
-  if (!match) {
-    if (!isYoutubeEnabled()) {
-      const message = `@${requester} The request: "${requestedSong}" is not available in ${config.channel}'s filtered games.`;
-      if (announce) say(message);
-      return { ok: false, status: 404, message };
-    }
 
-    return addQueueEntry(requester, youtubeSong(requestedSong), announce);
+  let song;
+  if (match) {
+    song = stripSearch(match.song);
+  } else if (isYoutubeEnabled()) {
+    song = youtubeSong(requestedSong);
+  } else {
+    const message = `@${requester} The request: "${requestedSong}" is not available in ${config.channel}'s filtered games.`;
+    if (announce) say(message);
+    return { ok: false, status: 404, message };
   }
 
-  return addQueueEntry(requester, stripSearch(match.song), announce);
+  const duplicate = state.queue.find((entry) => entry.song.id === song.id || normalize(entry.song.title) === normalize(song.title));
+  if (duplicate) {
+    const pos = state.queue.indexOf(duplicate) + 1;
+    const message = `@${requester} "${duplicate.song.title}" is already in the queue at #${pos}, requested by @${duplicate.user}.`;
+    if (announce) say(message);
+    return { ok: false, status: 409, message };
+  }
+
+  return addQueueEntry(requester, song, announce);
 }
 
 function addQueueEntry(requester, song, announce) {

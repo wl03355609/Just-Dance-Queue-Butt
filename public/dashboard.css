@@ -280,6 +280,20 @@ input {
   font-size: 14px;
 }
 
+.done-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255, 200, 0, 0.15);
+  border: 1px solid rgba(255, 200, 0, 0.35);
+  color: #ffd966;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
 .icon-button {
   min-height: 36px;
   padding: 0 12px;

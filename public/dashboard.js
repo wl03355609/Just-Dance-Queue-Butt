@@ -25,9 +25,11 @@ const deselectAllFiltersButton = document.querySelector("#deselect-all-filters")
 
 let allSongs = [];
 let gameOptions = [];
+let currentHistory = [];
 const adminToken = new URLSearchParams(window.location.search).get("token") || "";
 
 function render(state) {
+  currentHistory = state.history || [];
   channelElement.textContent = state.channel ? `#${state.channel}` : "-";
   botStatusElement.textContent = state.botConnected ? "Connected" : "Offline";
   botStatusElement.className = state.botConnected ? "connected" : "offline";
@@ -95,6 +97,16 @@ function renderQueueEntry(entry, index) {
   const details = document.createElement("span");
   details.textContent = `${entry.song.artist} - ${entry.song.game} - @${entry.user}`;
 
+  const playedBefore = currentHistory.some((h) => h.song.id === entry.song.id || normalize(h.song.title) === normalize(entry.song.title));
+  if (playedBefore) {
+    const badge = document.createElement("span");
+    badge.className = "done-badge";
+    badge.textContent = "Done before";
+    main.append(title, details, badge);
+  } else {
+    main.append(title, details);
+  }
+
   const pick = document.createElement("button");
   pick.type = "button";
   pick.className = "icon-button";
@@ -108,7 +120,6 @@ function renderQueueEntry(entry, index) {
   remove.textContent = "Remove";
   remove.addEventListener("click", () => removeEntry(entry.id));
 
-  main.append(title, details);
   item.append(main, pick, remove);
   return item;
 }
