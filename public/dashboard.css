@@ -11,6 +11,7 @@
 .dashboard-header,
 .status-bar,
 .control-strip,
+.appearance-panel,
 .add-panel,
 .filter-panel,
 .tool-panel {
@@ -107,6 +108,25 @@ button.danger,
   gap: 10px;
   padding: 12px;
   margin-bottom: 14px;
+}
+
+.appearance-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.theme-toggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(110px, 1fr));
+  gap: 10px;
+  max-width: 320px;
+}
+
+.theme-toggle button[aria-pressed="true"] {
+  border-color: rgba(33, 215, 255, 0.7);
+  background: rgba(33, 215, 255, 0.2);
 }
 
 .filter-panel {

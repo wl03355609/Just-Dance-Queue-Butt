@@ -1,10 +1,12 @@
 :root {
   color-scheme: dark;
-  --bg: #080b10;
+  --page-bg: #0d0f14;
   --panel: rgba(14, 18, 27, 0.88);
   --line: rgba(255, 255, 255, 0.14);
   --text: #f9fbff;
   --muted: #aeb8ca;
+  --item-bg: rgba(255, 255, 255, 0.07);
+  --shadow: rgba(0, 0, 0, 0.42);
   --pink: #ff3b82;
   --cyan: #21d7ff;
   --lime: #bbff3c;
@@ -19,8 +21,22 @@ body {
   margin: 0;
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #0d0f14;
+  background: var(--page-bg);
   overflow: hidden;
+}
+
+body[data-overlay-theme="light"] {
+  color-scheme: light;
+  --page-bg: #f6f8fb;
+  --panel: rgba(255, 255, 255, 0.9);
+  --line: rgba(15, 23, 42, 0.14);
+  --text: #111827;
+  --muted: #526173;
+  --item-bg: rgba(15, 23, 42, 0.05);
+  --shadow: rgba(15, 23, 42, 0.16);
+  --pink: #d91f68;
+  --cyan: #0078a8;
+  --lime: #497d00;
 }
 
 .queue-shell {
@@ -31,7 +47,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   backdrop-filter: blur(18px);
-  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 24px 90px var(--shadow);
 }
 
 .queue-header {
@@ -111,7 +127,7 @@ h1 {
   padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--item-bg);
 }
 
 .position {

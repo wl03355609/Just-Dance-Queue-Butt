@@ -15,6 +15,8 @@ const requestSongInput = document.querySelector("#request-song");
 const songList = document.querySelector("#song-list");
 const skipButton = document.querySelector("#skip-button");
 const clearButton = document.querySelector("#clear-button");
+const overlayThemeLabel = document.querySelector("#overlay-theme-label");
+const themeButtons = [...document.querySelectorAll("[data-theme]")];
 const gameFiltersElement = document.querySelector("#game-filters");
 const filterCountElement = document.querySelector("#filter-count");
 const applyFiltersButton = document.querySelector("#apply-filters");
@@ -38,7 +40,15 @@ function render(state) {
   historyElement.replaceChildren(...state.history.map(renderHistoryEntry));
   queueEmptyElement.hidden = state.queue.length > 0;
   historyEmptyElement.hidden = state.history.length > 0;
+  renderOverlayTheme(state.overlayTheme || "dark");
   renderGameFilters(state);
+}
+
+function renderOverlayTheme(theme) {
+  overlayThemeLabel.textContent = theme === "light" ? "Light" : "Dark";
+  for (const button of themeButtons) {
+    button.setAttribute("aria-pressed", String(button.dataset.theme === theme));
+  }
 }
 
 function renderGameFilters(state) {
@@ -208,6 +218,12 @@ clearButton.addEventListener("click", () => {
   if (!window.confirm("Clear the entire queue?")) return;
   postJson("/api/clear").catch((error) => showMessage(error.message));
 });
+
+for (const button of themeButtons) {
+  button.addEventListener("click", () => {
+    postJson("/api/theme", { overlayTheme: button.dataset.theme }).catch((error) => showMessage(error.message));
+  });
+}
 
 selectAllFiltersButton.addEventListener("click", () => setAllFilters(true));
 deselectAllFiltersButton.addEventListener("click", () => setAllFilters(false));

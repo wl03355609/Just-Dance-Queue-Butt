@@ -5,6 +5,7 @@ const nowPlayingElement = document.querySelector("#now-playing");
 const lastSongElement = document.querySelector("#last-song");
 
 function render(state) {
+  document.body.dataset.overlayTheme = state.overlayTheme || "dark";
   countElement.textContent = state.queue.length;
   emptyElement.hidden = state.queue.length > 0;
   queueElement.replaceChildren(...state.queue.slice(0, 10).map(renderEntry));

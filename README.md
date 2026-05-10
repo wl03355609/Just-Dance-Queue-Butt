@@ -79,6 +79,7 @@ The dashboard gives you buttons for:
 - skipping to the next request
 - removing a specific queue item
 - clearing the queue
+- switching the OBS overlay between dark and light mode
 - filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, Just Dance+, and optional YouTube/freeform requests
 - checking whether the bot is connected
 

@@ -10,9 +10,11 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
-const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters"]);
+const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme"]);
 const MAX_QUERY_LENGTH = 200;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
+const DEFAULT_OVERLAY_THEME = "dark";
+const GENERIC_MATCH_TOKENS = new Set(["song", "dance", "just", "version", "remix", "edition"]);
 const DEFAULT_ENABLED_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
 const GAME_LABELS = {
@@ -210,9 +212,9 @@ function sanitizeEnabledGames(value) {
 
 function loadQueue() {
   try {
-    return JSON.parse(fs.readFileSync(config.queuePath, "utf8"));
+    return normalizeQueueState(JSON.parse(fs.readFileSync(config.queuePath, "utf8")));
   } catch {
-    return { queue: [], history: [] };
+    return normalizeQueueState();
   }
 }
 
@@ -223,9 +225,17 @@ function saveQueue() {
 }
 
 function clearQueueState() {
-  state = { queue: [], history: [] };
+  state = { ...state, queue: [], history: [] };
   saveQueue();
   return publicState();
+}
+
+function normalizeQueueState(value = {}) {
+  return {
+    queue: Array.isArray(value.queue) ? value.queue : [],
+    history: Array.isArray(value.history) ? value.history : [],
+    overlayTheme: sanitizeOverlayTheme(value.overlayTheme)
+  };
 }
 
 function startHttpServer() {
@@ -251,6 +261,7 @@ function startHttpServer() {
       if (url.pathname === "/api/remove") return apiRemoveSong(request, response);
       if (url.pathname === "/api/clear") return apiClearQueue(response);
       if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
+      if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
     }
     if (url.pathname === "/events") return streamEvents(request, response);
 
@@ -322,6 +333,7 @@ function publicState() {
     enabledGames: config.enabledGames,
     availableGames: gameOptions(),
     maxQueueSize: config.maxQueueSize,
+    overlayTheme: state.overlayTheme || DEFAULT_OVERLAY_THEME,
     channel: config.channel,
     botConnected: twitchReady
   };
@@ -454,6 +466,26 @@ async function apiUpdateFilters(request, response) {
   } catch (error) {
     sendError(response, 400, error.message);
   }
+}
+
+async function apiUpdateTheme(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    state.overlayTheme = sanitizeOverlayTheme(body.overlayTheme || body.theme);
+    saveQueue();
+
+    sendJson(response, {
+      ok: true,
+      message: `Overlay theme set to ${state.overlayTheme}.`,
+      state: publicState()
+    });
+  } catch (error) {
+    sendError(response, 400, error.message);
+  }
+}
+
+function sanitizeOverlayTheme(value) {
+  return value === "light" ? "light" : DEFAULT_OVERLAY_THEME;
 }
 
 function notFound(response) {
@@ -684,7 +716,7 @@ function addRequest(user, query, options = {}) {
   const match = findSong(requestedSong);
   if (!match) {
     if (!isYoutubeEnabled()) {
-      const message = `@${requester} The request: "${requestedSong}" is not available in your filtered games.`;
+      const message = `@${requester} The request: "${requestedSong}" is not available in ${config.channel}'s filtered games.`;
       if (announce) say(message);
       return { ok: false, status: 404, message };
     }
@@ -729,13 +761,20 @@ function scoreSong(query, song) {
 
   const queryTokens = new Set(query.split(" ").filter(Boolean));
   const songTokens = new Set(song.search.split(" ").filter(Boolean));
-  const overlap = [...queryTokens].filter((token) => songTokens.has(token)).length;
+  const overlappingTokens = [...queryTokens].filter((token) => songTokens.has(token));
+  const overlap = overlappingTokens.length;
   const tokenScore = overlap / Math.max(queryTokens.size, 1);
   const distanceScore = 1 - levenshtein(query, normalize(song.title)) / Math.max(query.length, song.title.length, 1);
 
+  if (hasMissingNumericToken(queryTokens, songTokens)) return 0;
+  if (queryTokens.size > 1 && overlap > 0 && overlappingTokens.every((token) => GENERIC_MATCH_TOKENS.has(token))) return 0;
   if (queryTokens.size > 1 && overlap === 0 && distanceScore < 0.75) return 0;
 
   return Math.max(tokenScore * 0.8, distanceScore);
+}
+
+function hasMissingNumericToken(queryTokens, songTokens) {
+  return [...queryTokens].some((token) => /^\d+$/.test(token) && !songTokens.has(token));
 }
 
 function isYoutubeEnabled() {
