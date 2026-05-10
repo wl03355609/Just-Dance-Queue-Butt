@@ -224,11 +224,11 @@ async function promptBeforeQuit() {
     if (runtime && queueHasEntries(runtime.getState())) {
       const options = {
         type: "question",
-        buttons: ["Keep Queue", "Clear Queue & History"],
+        buttons: ["Keep Queue", "Clear Queue & History", "Don't clear anything"],
         defaultId: 0,
-        cancelId: 0,
+        cancelId: 2,
         message: "Do you want to clear the queue and history before exiting?",
-        detail: "Choose Keep Queue to save the current channel's queue and history for next time."
+        detail: "Keep Queue saves the current channel's queue and history for next time. Don't clear anything exits immediately without changes."
       };
       const choice = mainWindow && !mainWindow.isDestroyed()
         ? await dialog.showMessageBox(mainWindow, options)

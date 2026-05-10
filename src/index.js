@@ -743,8 +743,11 @@ function randomSong(message, arg) {
     });
   }
 
+  const queuedIds = new Set(state.queue.map((entry) => entry.song.id));
+  pool = pool.filter((song) => !queuedIds.has(song.id));
+
   if (!pool.length) {
-    say(`@${requester} no songs found for that filter.`);
+    say(`@${requester} no songs available for that filter — all matching songs are already in the queue.`);
     return;
   }
 
