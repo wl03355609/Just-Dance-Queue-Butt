@@ -16,9 +16,15 @@ const MIN_SEARCH_LENGTH = 3;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
 const DEFAULT_OVERLAY_THEME = "dark";
 const GENERIC_MATCH_TOKENS = new Set(["song", "dance", "just", "version", "remix", "edition"]);
-const DEFAULT_ENABLED_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
+const DEFAULT_ENABLED_GAMES = ["jd1", "jd2", "jd3", "jd4", "2014", "2015", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus", "abba"];
 const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
 const GAME_LABELS = {
+  jd1: "Just Dance",
+  jd2: "Just Dance 2",
+  jd3: "Just Dance 3",
+  jd4: "Just Dance 4",
+  "2014": "Just Dance 2014",
+  "2015": "Just Dance 2015",
   "2017": "Just Dance 2017",
   "2018": "Just Dance 2018",
   "2019": "Just Dance 2019",
@@ -31,6 +37,7 @@ const GAME_LABELS = {
   "2026": "Just Dance 2026 Edition",
   jdu: "Just Dance Unlimited",
   plus: "Just Dance+",
+  abba: "ABBA: You Can Dance",
   youtube: "YouTube"
 };
 
@@ -426,7 +433,7 @@ function searchSongs(url, response) {
 async function apiRequestSong(request, response) {
   try {
     const body = await readJsonBody(request);
-    const result = addRequest(body.user || "test", body.song || body.query || "", { announce: false });
+    const result = await addRequest(body.user || "test", body.song || body.query || "", { announce: false });
     if (!result.ok) return sendError(response, result.status || 400, result.message);
     sendJson(response, { ok: true, ...result, state: publicState() });
   } catch (error) {
@@ -719,7 +726,7 @@ function handleCommand(message) {
 }
 
 function requestSong(message, query) {
-  addRequest(message.user, query, { announce: true });
+  addRequest(message.user, query, { announce: true }).catch(console.error);
 }
 
 function randomSong(message, arg) {
@@ -780,7 +787,7 @@ function parseRandomFilter(arg) {
   return null;
 }
 
-function addRequest(user, query, options = {}) {
+async function addRequest(user, query, options = {}) {
   const { announce = true } = options;
   const requester = cleanChatText(user || "viewer").replace(/^@/, "").slice(0, 50) || "viewer";
   const requestedSong = cleanSearchQuery(query);
@@ -808,6 +815,35 @@ function addRequest(user, query, options = {}) {
     const message = `@${requester} you are already in queue at #${state.queue.indexOf(existing) + 1}: ${existing.song.title}. Use !leave to remove it.`;
     if (announce) say(message);
     return { ok: false, status: 409, message };
+  }
+
+  if (isAnyUrl(requestedSong)) {
+    const youtubeUrl = extractYoutubeUrl(requestedSong);
+    if (!youtubeUrl) {
+      const message = `@${requester} Sorry, we meant YouTube requests, not random porn.`;
+      if (announce) say(message);
+      return { ok: false, status: 400, message };
+    }
+    if (!isYoutubeEnabled()) {
+      const message = `@${requester} YouTube requests are not enabled.`;
+      if (announce) say(message);
+      return { ok: false, status: 400, message };
+    }
+    const title = await fetchYoutubeTitle(youtubeUrl);
+    if (!title) {
+      const message = `@${requester} couldn't find that YouTube video — make sure it's public.`;
+      if (announce) say(message);
+      return { ok: false, status: 404, message };
+    }
+    const song = youtubeSong(title);
+    const dup = state.queue.find((e) => e.song.id === song.id || normalize(e.song.title) === normalize(song.title));
+    if (dup) {
+      const pos = state.queue.indexOf(dup) + 1;
+      const message = `@${requester} "${dup.song.title}" is already in the queue at #${pos}, requested by @${dup.user}.`;
+      if (announce) say(message);
+      return { ok: false, status: 409, message };
+    }
+    return addQueueEntry(requester, song, announce);
   }
 
   const match = findSong(requestedSong);
@@ -886,6 +922,26 @@ function hasMissingNumericToken(queryTokens, songTokens) {
 
 function isYoutubeEnabled() {
   return config.enabledGames.includes("youtube");
+}
+
+function isAnyUrl(text) {
+  return /^https?:\/\//i.test(text);
+}
+
+function extractYoutubeUrl(text) {
+  return /^https?:\/\/(www\.|m\.)?(youtube\.com\/(watch|shorts|live)|youtu\.be\/)/i.test(text) ? text : null;
+}
+
+async function fetchYoutubeTitle(url) {
+  try {
+    const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+    const response = await fetch(endpoint, { signal: AbortSignal.timeout(5000) });
+    if (!response.ok) return null;
+    const data = await response.json();
+    return typeof data.title === "string" && data.title ? data.title : null;
+  } catch {
+    return null;
+  }
 }
 
 function youtubeSong(title) {
@@ -1057,6 +1113,12 @@ function gameKey(value) {
   const normalized = normalize(value);
   if (normalized === "plus" || normalized.includes("dance plus")) return "plus";
   if (normalized === "jdu" || normalized.includes("dance unlimited")) return "jdu";
+  if (normalized.includes("abba")) return "abba";
+
+  if (/^(jd1|just dance 1|just dance)$/.test(normalized)) return "jd1";
+  if (/^(jd2|just dance 2)$/.test(normalized)) return "jd2";
+  if (/^(jd3|just dance 3)$/.test(normalized)) return "jd3";
+  if (/^(jd4|just dance 4)$/.test(normalized)) return "jd4";
 
   const year = normalized.match(/\b20\d{2}\b/);
   return year ? year[0] : normalized;
