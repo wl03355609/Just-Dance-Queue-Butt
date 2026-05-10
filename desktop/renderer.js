@@ -122,6 +122,7 @@ document.querySelector("#start-button").addEventListener("click", async () => {
   try {
     render(await window.jdApp.startRuntime(formConfig()));
     show("Bot is running. Copy the OBS URL below and add it as a Browser Source in OBS or Streamlabs.");
+    window.jdApp.openUrl(currentConfig.dashboardUrl);
   } catch (error) {
     show(error.message);
   }

@@ -220,29 +220,33 @@ async function promptBeforeQuit() {
   if (quitPromptActive) return;
   quitPromptActive = true;
 
-  try {
-    if (runtime && queueHasEntries(runtime.getState())) {
-      const options = {
-        type: "question",
-        buttons: ["Keep Queue", "Clear Queue & History", "Don't clear anything"],
-        defaultId: 0,
-        cancelId: 2,
-        message: "Do you want to clear the queue and history before exiting?",
-        detail: "Keep Queue saves the current channel's queue and history for next time. Don't clear anything exits immediately without changes."
-      };
-      const choice = mainWindow && !mainWindow.isDestroyed()
-        ? await dialog.showMessageBox(mainWindow, options)
-        : await dialog.showMessageBox(options);
+  if (runtime && queueHasEntries(runtime.getState())) {
+    const options = {
+      type: "question",
+      buttons: ["Keep Queue But Clear History", "Clear Queue And History", "Don't Exit"],
+      defaultId: 0,
+      cancelId: 2,
+      message: "What do you want to do before exiting?",
+      detail: "Keep Queue But Clear History saves your current queue for next time. Don't Exit cancels and keeps the bot running."
+    };
+    const choice = mainWindow && !mainWindow.isDestroyed()
+      ? await dialog.showMessageBox(mainWindow, options)
+      : await dialog.showMessageBox(options);
 
-      if (choice.response === 1) runtime.clearState();
+    if (choice.response === 2) {
+      quitPromptActive = false;
+      return;
     }
-  } finally {
-    clearTimeout(authPollTimer);
-    stopRuntime();
-    runtime = null;
-    quitAfterPrompt = true;
-    app.quit();
+
+    if (choice.response === 0) runtime.clearHistory();
+    if (choice.response === 1) runtime.clearState();
   }
+
+  clearTimeout(authPollTimer);
+  stopRuntime();
+  runtime = null;
+  quitAfterPrompt = true;
+  app.quit();
 }
 
 function queueHasEntries(state) {

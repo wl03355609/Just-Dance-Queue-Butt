@@ -100,6 +100,7 @@ function runtimeController() {
     config,
     getState: publicState,
     clearState: clearQueueState,
+    clearHistory: clearHistoryState,
     stop: stopRuntime,
     urls: {
       overlay: `http://localhost:${config.port}`,
@@ -227,6 +228,12 @@ function saveQueue() {
 
 function clearQueueState() {
   state = { ...state, queue: [], history: [] };
+  saveQueue();
+  return publicState();
+}
+
+function clearHistoryState() {
+  state = { ...state, history: [] };
   saveQueue();
   return publicState();
 }
