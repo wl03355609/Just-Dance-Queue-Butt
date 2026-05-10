@@ -61,6 +61,9 @@ function writeConfig(config) {
 function publicConfig(config = readConfig()) {
   const port = config.port || DEFAULT_PORT;
   const hasBundledBot = Boolean(BUNDLED_OAUTH_TOKEN && BUNDLED_BOT_USERNAME);
+  const overlayUrl = runtime?.urls?.overlay || `http://localhost:${port}`;
+  const dashboardUrl = runtime?.urls?.dashboard || `http://localhost:${port}/dashboard`;
+
   return {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
     hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
@@ -74,8 +77,8 @@ function publicConfig(config = readConfig()) {
     port,
     enabledGames: config.enabledGames || DEFAULT_GAMES,
     maxQueueSize: config.maxQueueSize || 50,
-    overlayUrl: `http://localhost:${port}`,
-    dashboardUrl: `http://localhost:${port}/dashboard`,
+    overlayUrl,
+    dashboardUrl,
     running: Boolean(runtime)
   };
 }
@@ -88,10 +91,14 @@ function createWindow() {
     minHeight: 560,
     backgroundColor: "#080b10",
     webPreferences: {
-      preload: path.join(__dirname, "preload.js")
+      preload: path.join(__dirname, "preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: false
     }
   });
 
+  mainWindow.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
   mainWindow.loadFile(path.join(__dirname, "index.html"));
 }
 
@@ -191,7 +198,10 @@ function registerIpc() {
     const port = readConfig().port || DEFAULT_PORT;
     const response = await fetch(`http://localhost:${port}/api/skip`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "application/json",
+        "X-Queue-Admin": runtime.config.adminToken
+      }
     });
     const data = await response.json();
     if (!response.ok || !data.ok) throw new Error(data.message || "The queue is empty.");
@@ -199,7 +209,7 @@ function registerIpc() {
   });
 
   ipcMain.handle("open:url", (_event, url) => {
-    shell.openExternal(url);
+    return openLocalAppUrl(url);
   });
 }
 
@@ -220,7 +230,7 @@ async function startDeviceLogin(clientId) {
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || "Could not start Twitch login.");
 
-  shell.openExternal(data.verification_uri);
+  openTwitchVerificationUrl(data.verification_uri);
   pollDeviceToken(clientId, data.device_code, data.interval || 5);
 
   return {
@@ -311,4 +321,40 @@ async function validateToken(accessToken) {
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || "Could not validate Twitch login.");
   return data;
+}
+
+function openLocalAppUrl(rawUrl) {
+  let url;
+  try {
+    url = new URL(String(rawUrl || ""));
+  } catch {
+    throw new Error("Invalid local URL.");
+  }
+
+  const expectedPort = String(readConfig().port || DEFAULT_PORT);
+  const host = url.hostname.toLowerCase();
+  const port = url.port || (url.protocol === "http:" ? "80" : "443");
+  const allowedHosts = new Set(["localhost", "127.0.0.1"]);
+
+  if (url.protocol !== "http:" || !allowedHosts.has(host) || port !== expectedPort) {
+    throw new Error("Only this app's local URLs can be opened here.");
+  }
+
+  return shell.openExternal(url.toString());
+}
+
+function openTwitchVerificationUrl(rawUrl) {
+  let url;
+  try {
+    url = new URL(String(rawUrl || ""));
+  } catch {
+    throw new Error("Invalid Twitch verification URL.");
+  }
+
+  const allowedHosts = new Set(["twitch.tv", "www.twitch.tv", "id.twitch.tv"]);
+  if (url.protocol !== "https:" || !allowedHosts.has(url.hostname.toLowerCase())) {
+    throw new Error("Twitch returned an unexpected verification URL.");
+  }
+
+  return shell.openExternal(url.toString());
 }

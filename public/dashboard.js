@@ -23,6 +23,7 @@ const deselectAllFiltersButton = document.querySelector("#deselect-all-filters")
 
 let allSongs = [];
 let gameOptions = [];
+const adminToken = new URLSearchParams(window.location.search).get("token") || "";
 
 function render(state) {
   channelElement.textContent = state.channel ? `#${state.channel}` : "-";
@@ -116,7 +117,7 @@ function renderHistoryEntry(entry, index) {
 async function postJson(path, body = {}) {
   const response = await fetch(path, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: adminHeaders(),
     body: JSON.stringify(body)
   });
   const data = await response.json();
@@ -124,6 +125,12 @@ async function postJson(path, body = {}) {
   showMessage(data.message || "Done.");
   if (data.state) render(data.state);
   return data;
+}
+
+function adminHeaders() {
+  const headers = { "Content-Type": "application/json" };
+  if (adminToken) headers["X-Queue-Admin"] = adminToken;
+  return headers;
 }
 
 function showMessage(message) {

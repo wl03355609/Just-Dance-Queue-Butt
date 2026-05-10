@@ -21,7 +21,7 @@ npm start
 
 Open `http://localhost:3000` as a browser source in OBS.
 
-Open `http://localhost:3000/dashboard` in your browser for local streamer controls.
+Open the dashboard URL printed in the terminal for local streamer controls. It includes a local admin token.
 
 ## Desktop App
 
@@ -85,8 +85,10 @@ The dashboard gives you buttons for:
 Use these URLs while the app is running:
 
 - OBS/browser overlay: `http://localhost:3000`
-- Streamer dashboard: `http://localhost:3000/dashboard`
+- Streamer dashboard: use the tokenized URL printed when the bot starts
 - Song catalog API: `http://localhost:3000/api/songs`
+
+The dashboard token protects local queue controls like skip, clear, remove, and game filters. It is generated each time by default; set `ADMIN_TOKEN` in `.env` if you want a stable dashboard URL.
 
 ## Song Data
 

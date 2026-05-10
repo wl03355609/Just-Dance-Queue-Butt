@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
@@ -21,8 +21,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "electron": "^30.5.1",
-    "electron-builder": "^24.13.3"
+    "electron": "^42.0.1",
+    "electron-builder": "^26.8.1"
   },
   "build": {
     "appId": "com.justdancerequests.twitch",
@@ -37,11 +37,16 @@
     ],
     "win": {
       "target": [
-        { "target": "portable", "arch": ["ia32"] }
+        {
+          "target": "portable",
+          "arch": [
+            "ia32"
+          ]
+        }
       ]
     },
     "portable": {
-      "artifactName": "JustDanceRequests-0.7-x86.exe"
+      "artifactName": "JustDanceRequests-0.7.1-x86.exe"
     }
   }
 }

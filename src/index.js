@@ -10,6 +10,8 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
+const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters"]);
+const MAX_QUERY_LENGTH = 200;
 const DEFAULT_ENABLED_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const GAME_LABELS = {
   "2017": "Just Dance 2017",
@@ -93,7 +95,7 @@ function runtimeController() {
     stop: stopRuntime,
     urls: {
       overlay: `http://localhost:${config.port}`,
-      dashboard: `http://localhost:${config.port}/dashboard`,
+      dashboard: `http://localhost:${config.port}/dashboard?token=${encodeURIComponent(config.adminToken)}`,
       songs: `http://localhost:${config.port}/api/songs`
     }
   };
@@ -109,13 +111,14 @@ function createConfig(overrides = {}) {
     : listValue(overrides.modUsers || process.env.MOD_USERS, []);
 
   return {
-    username: overrides.username ?? env("TWITCH_USERNAME", ""),
+    username: sanitizeTwitchName(overrides.username ?? env("TWITCH_USERNAME", "")),
     oauth: normalizeOAuth(overrides.oauth ?? env("TWITCH_OAUTH", "")),
-    channel: overrides.channel ?? env("TWITCH_CHANNEL", ""),
+    channel: sanitizeTwitchName(overrides.channel ?? env("TWITCH_CHANNEL", "")),
     port: numberValue(overrides.port ?? process.env.PORT, 3000),
     maxQueueSize: numberValue(overrides.maxQueueSize ?? process.env.MAX_QUEUE_SIZE, 50),
     enabledGames: sanitizeEnabledGames(enabledGames),
-    modUsers,
+    modUsers: modUsers.map(sanitizeTwitchName).filter(Boolean),
+    adminToken: cleanSecret(overrides.adminToken ?? env("ADMIN_TOKEN", "")) || crypto.randomBytes(24).toString("hex"),
     queuePath: overrides.queuePath || QUEUE_PATH
   };
 }
@@ -161,7 +164,7 @@ function listValue(value, fallback) {
 }
 
 function normalizeOAuth(value) {
-  const token = String(value || "").trim();
+  const token = cleanSecret(value);
   if (!token) return "";
   return token.startsWith("oauth:") ? token : `oauth:${token}`;
 }
@@ -216,12 +219,20 @@ function saveQueue() {
 
 function startHttpServer() {
   httpServer = http.createServer((request, response) => {
-    const url = new URL(request.url, `http://${request.headers.host}`);
+    let url;
+    try {
+      url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
+    } catch {
+      return sendError(response, 400, "Invalid request URL.");
+    }
 
     if (url.pathname === "/api/queue") return sendJson(response, publicState());
     if (url.pathname === "/api/songs") return sendJson(response, { songs });
     if (url.pathname === "/api/search") return searchSongs(url, response);
     if (request.method === "POST") {
+      if (MUTATING_API_PATHS.has(url.pathname) && !isAdminRequest(request, url)) {
+        return sendError(response, 403, "Dashboard token is missing or invalid.");
+      }
       const ct = request.headers["content-type"] || "";
       if (!ct.startsWith("application/json")) return sendError(response, 415, "Content-Type must be application/json.");
       if (url.pathname === "/api/request") return apiRequestSong(request, response);
@@ -250,7 +261,7 @@ function startHttpServer() {
 
   httpServer.listen(config.port, "127.0.0.1", () => {
     console.log(`Queue overlay: http://localhost:${config.port}`);
-    console.log(`Dashboard:     http://localhost:${config.port}/dashboard`);
+    console.log(`Dashboard:     http://localhost:${config.port}/dashboard?token=${encodeURIComponent(config.adminToken)}`);
     console.log(`Song API:      http://localhost:${config.port}/api/songs`);
   });
 }
@@ -262,7 +273,12 @@ function routePath(urlPath) {
 }
 
 function safePublicPath(urlPath) {
-  const decoded = decodeURIComponent(urlPath);
+  let decoded;
+  try {
+    decoded = decodeURIComponent(urlPath);
+  } catch {
+    return null;
+  }
   const resolved = path.resolve(PUBLIC_DIR, `.${decoded}`);
   // startsWith(PUBLIC_DIR) alone is insufficient — a sibling directory whose
   // name starts with "public" (e.g. "public-evil") would pass that check.
@@ -301,13 +317,44 @@ function publicState() {
 }
 
 function sendJson(response, data) {
-  response.writeHead(200, { "Content-Type": "application/json" });
+  response.writeHead(200, {
+    "Content-Type": "application/json",
+    "X-Content-Type-Options": "nosniff"
+  });
   response.end(JSON.stringify(data, null, 2));
 }
 
 function sendError(response, status, message) {
-  response.writeHead(status, { "Content-Type": "application/json" });
+  response.writeHead(status, {
+    "Content-Type": "application/json",
+    "X-Content-Type-Options": "nosniff"
+  });
   response.end(JSON.stringify({ ok: false, message }, null, 2));
+}
+
+function isAdminRequest(request, url) {
+  const expected = config.adminToken;
+  if (!expected) return false;
+
+  const headerToken = headerValue(request.headers["x-queue-admin"]);
+  const auth = headerValue(request.headers.authorization);
+  const bearerToken = auth.replace(/^Bearer\s+/i, "");
+  const queryToken = url.searchParams.get("token") || "";
+
+  return [headerToken, bearerToken, queryToken]
+    .map(cleanSecret)
+    .some((token) => timingSafeEqual(token, expected));
+}
+
+function headerValue(value) {
+  if (Array.isArray(value)) return value[0] || "";
+  return value || "";
+}
+
+function timingSafeEqual(a, b) {
+  const left = Buffer.from(String(a));
+  const right = Buffer.from(String(b));
+  return left.length === right.length && crypto.timingSafeEqual(left, right);
 }
 
 function readJsonBody(request) {
@@ -333,7 +380,7 @@ function readJsonBody(request) {
 }
 
 function searchSongs(url, response) {
-  const query = url.searchParams.get("q") || "";
+  const query = cleanSearchQuery(url.searchParams.get("q") || "");
   const normalized = normalize(query);
   const results = songs
     .map((song) => ({ song: stripSearch(song), score: normalized ? scoreSong(normalized, song) : 0 }))
@@ -601,9 +648,10 @@ function requestSong(message, query) {
 
 function addRequest(user, query, options = {}) {
   const { announce = true } = options;
-  const requester = String(user || "viewer").trim().replace(/^@/, "") || "viewer";
+  const requester = cleanChatText(user || "viewer").replace(/^@/, "").slice(0, 50) || "viewer";
+  const requestedSong = cleanSearchQuery(query);
 
-  if (!query) {
+  if (!requestedSong) {
     const message = `@${requester} usage: !sr song name`;
     if (announce) say(message);
     return { ok: false, status: 400, message };
@@ -622,9 +670,9 @@ function addRequest(user, query, options = {}) {
     return { ok: false, status: 409, message };
   }
 
-  const match = findSong(query);
+  const match = findSong(requestedSong);
   if (!match) {
-    const message = `@${requester} I could not find "${query}" in the enabled Just Dance catalog.`;
+    const message = `@${requester} I could not find "${requestedSong}" in the enabled Just Dance catalog.`;
     if (announce) say(message);
     return { ok: false, status: 404, message };
   }
@@ -763,14 +811,46 @@ function isMod(message) {
 
 function writeIrc(line) {
   if (twitch && twitch.writable && twitchReady) {
-    twitch.write(createWebSocketFrame(`${line}\r\n`));
+    const safeLine = cleanIrcLine(line);
+    if (!safeLine) return;
+    twitch.write(createWebSocketFrame(`${safeLine}\r\n`));
   }
 }
 
 function say(text) {
-  console.log(`[chat] ${text}`);
+  const safeText = cleanChatText(text).slice(0, 480);
+  if (!safeText) return;
+  console.log(`[chat] ${safeText}`);
   if (!twitch || !twitch.writable || !config.channel) return;
-  writeIrc(`PRIVMSG #${config.channel.toLowerCase()} :${text.slice(0, 480)}`);
+  writeIrc(`PRIVMSG #${config.channel.toLowerCase()} :${safeText}`);
+}
+
+function cleanSecret(value) {
+  return String(value || "").trim().replace(/[\r\n]/g, "");
+}
+
+function cleanSearchQuery(value) {
+  return cleanChatText(value).slice(0, MAX_QUERY_LENGTH);
+}
+
+function cleanChatText(value) {
+  return String(value || "")
+    .replace(/[\r\n]+/g, " ")
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function cleanIrcLine(value) {
+  return String(value || "").replace(/[\r\n\u0000]/g, "");
+}
+
+function sanitizeTwitchName(value) {
+  return String(value || "")
+    .trim()
+    .replace(/^[@#]/, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_]/g, "");
 }
 
 function normalize(value) {
