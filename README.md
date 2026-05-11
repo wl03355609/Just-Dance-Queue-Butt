@@ -1,8 +1,10 @@
 # Just Dance Requests for Twitch
 
-A local Twitch chat plugin for Just Dance streamers. Viewers request songs with `!sr song name`, the bot matches the request against Just Dance 2017-2026, Just Dance Unlimited, and Just Dance+ catalogs, and the queue appears live in a browser/OBS overlay.
+A local Twitch chat plugin for Just Dance streamers. Viewers request songs with `!sr song name`, the bot matches the request against the included Just Dance catalogs, and the queue appears live in a browser/OBS overlay.
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
+
+Current release: **0.7.8 "Monday Blues"**.
 
 ## Setup
 
@@ -53,13 +55,13 @@ For a distributable app, create a Twitch Developer application and use its Clien
 
 ## Build Windows EXE
 
-After installing dependencies, build a Windows installer with:
+After installing dependencies, build the Windows portable app with:
 
 ```bash
 npm run build:win
 ```
 
-The installer output goes into `dist/`.
+The portable `.exe` output goes into `dist/`. For 0.7.8, the expected artifact name is `JustDanceRequests-0.7.8-x86.exe`.
 
 ## Chat Commands
 
@@ -85,7 +87,7 @@ The dashboard gives you buttons for:
 - removing a specific queue item
 - clearing the queue
 - switching the OBS overlay between dark and light mode
-- filtering requestable games between Just Dance 2017-2026, Just Dance Unlimited, Just Dance+, and optional YouTube/freeform requests
+- filtering requestable games between the included Just Dance game catalogs, Just Dance Unlimited, Just Dance+, and optional YouTube/freeform requests
 - checking whether the bot is connected
 
 Queue entries that have already been played in the current session show a **Done before** badge so you can spot repeats at a glance.
@@ -106,6 +108,13 @@ The catalog lives in `data/songs.json`, so you can add alternates, regional song
 
 Current included catalogs:
 
+- Just Dance
+- Just Dance 2
+- Just Dance 3
+- Just Dance 4
+- Just Dance 2014
+- Just Dance 2015
+- Just Dance 2016
 - Just Dance 2017
 - Just Dance 2018
 - Just Dance 2019
@@ -119,10 +128,17 @@ Current included catalogs:
 - Just Dance Unlimited classic routines
 - Just Dance+ classic routines
 
-The local catalog currently has 1,372 requestable entries.
+The local catalog currently has 1,688 requestable entries.
 
-I refreshed the yearly tracklists from Wikipedia and imported the Just Dance Wiki/Fandom tables for Just Dance 2017-2022, Just Dance Unlimited, and Just Dance+ on May 10, 2026. The Just Dance+ page states the table is current as of April 28, 2026 and excludes removed songs.
+I refreshed the yearly tracklists from Wikipedia and imported the Just Dance Wiki/Fandom tables for the included game catalogs, Just Dance Unlimited, and Just Dance+ on May 10-11, 2026. The Just Dance+ page states the table is current as of April 28, 2026 and excludes removed songs.
 
+- <https://justdance.fandom.com/wiki/Just_Dance_(video_game)>
+- <https://justdance.fandom.com/wiki/Just_Dance_2>
+- <https://justdance.fandom.com/wiki/Just_Dance_3>
+- <https://justdance.fandom.com/wiki/Just_Dance_4>
+- <https://justdance.fandom.com/wiki/Just_Dance_2014>
+- <https://justdance.fandom.com/wiki/Just_Dance_2015>
+- <https://en.wikipedia.org/wiki/Just_Dance_2016>
 - <https://justdance.fandom.com/wiki/Just_Dance_2017>
 - <https://justdance.fandom.com/wiki/Just_Dance_2018>
 - <https://justdance.fandom.com/wiki/Just_Dance_2019>
@@ -146,9 +162,11 @@ You can also set the startup default with `ENABLED_GAMES` in `.env`:
 ENABLED_GAMES=2018,2022,jdu,plus
 ```
 
+Supported filter keys include `jd1`, `jd2`, `jd3`, `jd4`, `2014` through `2026`, `jdu`, `plus`, and optional `youtube`.
+
 ## Notes
 
 - CLI queue state is saved to `data/queue.json`; desktop app queues are saved per channel in app data.
 - When quitting the desktop app with a non-empty queue or history, choose whether to keep it for next time or clear it on exit.
-- The app has no npm dependencies.
+- Runtime is self-contained; npm is only needed for local development and building.
 - Twitch chat requires the bot account to be able to join/send messages in your channel.
