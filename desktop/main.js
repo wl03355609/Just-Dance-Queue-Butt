@@ -4,7 +4,7 @@ const { app, BrowserWindow, ipcMain, shell, dialog } = require("electron");
 const { startRuntime, stopRuntime } = require("../src/index");
 
 const DEFAULT_PORT = 3000;
-const DEFAULT_GAMES = ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
+const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const CHAT_SCOPES = ["chat:read", "chat:edit"];
 
 // Fill in your Twitch Developer App Client ID here before building.

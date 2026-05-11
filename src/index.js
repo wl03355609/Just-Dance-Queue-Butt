@@ -16,7 +16,7 @@ const MIN_SEARCH_LENGTH = 3;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
 const DEFAULT_OVERLAY_THEME = "dark";
 const GENERIC_MATCH_TOKENS = new Set(["song", "dance", "just", "version", "remix", "edition"]);
-const DEFAULT_ENABLED_GAMES = ["jd1", "jd2", "jd3", "jd4", "2014", "2015", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus", "abba"];
+const DEFAULT_ENABLED_GAMES = ["jd1", "jd2", "jd3", "jd4", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
 const GAME_LABELS = {
   jd1: "Just Dance",
@@ -25,6 +25,7 @@ const GAME_LABELS = {
   jd4: "Just Dance 4",
   "2014": "Just Dance 2014",
   "2015": "Just Dance 2015",
+  "2016": "Just Dance 2016",
   "2017": "Just Dance 2017",
   "2018": "Just Dance 2018",
   "2019": "Just Dance 2019",
@@ -37,7 +38,6 @@ const GAME_LABELS = {
   "2026": "Just Dance 2026 Edition",
   jdu: "Just Dance Unlimited",
   plus: "Just Dance+",
-  abba: "ABBA: You Can Dance",
   youtube: "YouTube"
 };
 
@@ -1143,7 +1143,6 @@ function gameKey(value) {
   const normalized = normalize(value);
   if (normalized === "plus" || normalized.includes("dance plus")) return "plus";
   if (normalized === "jdu" || normalized.includes("dance unlimited")) return "jdu";
-  if (normalized.includes("abba")) return "abba";
 
   if (/^(jd1|just dance 1|just dance)$/.test(normalized)) return "jd1";
   if (/^(jd2|just dance 2)$/.test(normalized)) return "jd2";

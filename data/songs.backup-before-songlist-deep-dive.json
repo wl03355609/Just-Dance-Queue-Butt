@@ -54,13 +54,6 @@
     "game": "Just Dance 2023 Edition"
   },
   {
-    "title": "Farfalle",
-    "artist": "Sangiovanni",
-    "year": 2022,
-    "game": "Just Dance 2023 Edition",
-    "region": "Italy"
-  },
-  {
     "title": "Good Ones",
     "artist": "Charli XCX",
     "year": 2021,
@@ -204,20 +197,6 @@
     "artist": "Britney Spears",
     "year": 2004,
     "game": "Just Dance 2023 Edition"
-  },
-  {
-    "title": "Ubu Love",
-    "artist": "Naniwa Danshi",
-    "year": 2021,
-    "game": "Just Dance 2023 Edition",
-    "region": "Japan"
-  },
-  {
-    "title": "Vleugels",
-    "artist": "K3",
-    "year": 2022,
-    "game": "Just Dance 2023 Edition",
-    "region": "Benelux"
   },
   {
     "title": "Walking on Sunshine",
@@ -410,13 +389,6 @@
     "artist": "Flume featuring Kai",
     "year": 2016,
     "game": "Just Dance 2024 Edition"
-  },
-  {
-    "title": "OTONABLUE",
-    "artist": "Atarashii Gakko!",
-    "year": 2020,
-    "game": "Just Dance 2024 Edition",
-    "region": "Japan"
   },
   {
     "title": "Rapper's Delight",
@@ -1238,7 +1210,7 @@
     "effort": "Chill"
   },
   {
-    "title": "Just Dance",
+    "title": "Just Dance (song)|",
     "artist": "Lady Gaga ft. Colby O'Donis",
     "year": 2008,
     "game": "Just Dance+",
@@ -5979,308 +5951,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "All About That Bass",
-    "artist": "Meghan Trainor",
-    "year": 2014,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Animals",
-    "artist": "Martin Garrix",
-    "year": 2013,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Balkan Blast Remix",
-    "artist": "Angry Birds",
-    "year": 2015,
-    "mode": "Quartet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Blame",
-    "artist": "Calvin Harris featuring John Newman",
-    "year": 2014,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Born This Way",
-    "artist": "Lady Gaga",
-    "year": 2011,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Boys (Summertime Love)",
-    "artist": "The Lemon Cubes (as made famous by Sabrina)",
-    "year": 1987,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Chiwawa",
-    "artist": "Wanko Ni Mero Mero",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Circus",
-    "artist": "Britney Spears",
-    "year": 2008,
-    "mode": "Quartet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Cool For The Summer",
-    "artist": "Demi Lovato",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Copacabana",
-    "artist": "Frankie Bostello (as made famous by Barry Manilow)",
-    "year": 1978,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Drop the Mambo",
-    "artist": "Diva Carmina",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Fancy",
-    "artist": "Iggy Azalea featuring Charli XCX",
-    "year": 2014,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Fun",
-    "artist": "Pitbull featuring Chris Brown",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Gibberish",
-    "artist": "MAX",
-    "year": 2015,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Hangover (BaBaBa)",
-    "artist": "Buraka Som Sistema",
-    "year": 2011,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Heartbeat Song",
-    "artist": "Kelly Clarkson",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Hey Mama",
-    "artist": "David Guetta featuring Nicki Minaj, Bebe Rexha and Afrojack",
-    "year": 2015,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Hit the Road Jack",
-    "artist": "Charles Percy (as made famous by Ray Charles)",
-    "year": 1961,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "I Gotta Feeling",
-    "artist": "The Black Eyed Peas",
-    "year": 2009,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "I'm an Albatraoz",
-    "artist": "AronChupa",
-    "year": 2014,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Ievan Polkka",
-    "artist": "Hatsune Miku",
-    "year": 2007,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Irish Meadow Dance",
-    "artist": "O'Callaghan's Orchestra",
-    "year": 2015,
-    "mode": "Quartet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Junto A Ti",
-    "artist": "Cast of Disney's Violetta",
-    "year": 2012,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Kaboom Pow",
-    "artist": "Nikki Yanofsky",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Kool Kontact",
-    "artist": "Glorious Black Belts",
-    "year": 2015,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Let's Groove",
-    "artist": "Equinox Stars (as made famous by Earth, Wind & Fire)",
-    "year": 1981,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Lights",
-    "artist": "Ellie Goulding",
-    "year": 2011,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "No Control",
-    "artist": "One Direction",
-    "year": 2014,
-    "mode": "Quartet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Rabiosa",
-    "artist": "Shakira featuring El Cata",
-    "year": 2011,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Same Old Love",
-    "artist": "Selena Gomez",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Stadium Flow",
-    "artist": "Imposs",
-    "year": 2015,
-    "mode": "Solo",
-    "region": "Canada",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Stuck on a Feeling",
-    "artist": "Prince Royce",
-    "year": 2014,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Teacher",
-    "artist": "Nick Jonas",
-    "year": 2014,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "The Choice Is Yours",
-    "artist": "Darius Dante Van Dijk",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "These Boots Are Made For Walkin'",
-    "artist": "The Girly Team (as made famous by Nancy Sinatra)",
-    "year": 1966,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "This Is How We Do",
-    "artist": "Katy Perry",
-    "year": 2014,
-    "mode": "Quartet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Under the Sea",
-    "artist": "Disney's The Little Mermaid (as made famous by Samuel E. Wright)",
-    "year": 1989,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Uptown Funk",
-    "artist": "Mark Ronson featuring Bruno Mars",
-    "year": 2014,
-    "mode": "Trio",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "Want to Want Me",
-    "artist": "Jason Derulo",
-    "year": 2015,
-    "mode": "Solo",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "When the Rain Begins to Fall",
-    "artist": "Sky Trucking (as made famous by Jermaine Jackson and Pia Zadora)",
-    "year": 1984,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "William Tell Overture",
-    "artist": "Rossini",
-    "year": 1828,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "You Never Can Tell",
-    "artist": "A. Caveman & The Backseats (as made famous by Chuck Berry)",
-    "year": 1964,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
-    "title": "You're the One That I Want",
-    "artist": "From the Movie Grease (as made famous by John Travolta and Olivia Newton-John)",
-    "year": 1978,
-    "mode": "Duet",
-    "game": "Just Dance 2016"
-  },
-  {
     "title": "Cake By The Ocean",
     "artist": "DNCE",
     "year": 2015,
@@ -6933,6 +6603,20 @@
     "mode": "Solo"
   },
   {
+    "title": "Waka Waka (This Time for Africa)/Kids Mode|Waka Waka (This Time for Africa) (Kids Version)",
+    "artist": "Shakira",
+    "year": 2010,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "Footloose/Kids Mode|Footloose* (Kids Version)",
+    "artist": "Kenny Loggins (Top Culture)",
+    "year": 1984,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
     "title": "Sun (Солнышко)",
     "artist": "Demo",
     "year": 1999,
@@ -6950,6 +6634,27 @@
     "title": "Sugar Dance",
     "artist": "The Just Dance Band",
     "year": 2017,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "Footloose (Kids)",
+    "artist": "Kenny Loggins (Top Culture)",
+    "year": 1984,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "Waka Waka (This Time for Africa) (Kids)",
+    "artist": "Shakira",
+    "year": 2010,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "How Far I’ll Go",
+    "artist": "Auli'i Cravalho (Disney’s Moana)",
+    "year": 2016,
     "game": "Just Dance 2018",
     "mode": "Solo"
   },
@@ -6988,364 +6693,364 @@
     "artist": "Daddy Yankee",
     "year": 2016,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Mi Mi Mi",
     "artist": "SEREBRO (Hit The Electro Beat)",
     "year": 2013,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Where Are You Now?",
     "artist": "Lady Leshurr ft. Wiley",
     "year": 2016,
     "game": "Just Dance 2019",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Bang Bang Bang",
     "artist": "BIGBANG",
     "year": 2015,
     "game": "Just Dance 2019",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Shinobi Cat",
     "artist": "Glorious Black Belts",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Friendly Phantom",
     "artist": "Halloween Thrills",
     "year": 1996,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Work Work",
     "artist": "Britney Spears",
     "year": 2013,
     "game": "Just Dance 2019",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Rhythm of the Night",
     "artist": "Corona (Ultraclub 90)",
     "year": 1993,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Boogiesaurus",
     "artist": "A. Caveman and the Backseats",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Monsters of Jazz",
     "artist": "Groove Century",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Mama Mia",
     "artist": "Mayra Verónica",
     "year": 2013,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Fire",
     "artist": "LLP ft. Mike Diamondz",
     "year": 2015,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "I’m Still Standing",
     "artist": "Elton John (Top Culture)",
     "year": 1983,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Jingle Bells",
     "artist": "Santa Clones",
     "year": 1857,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Ça Plane Pour Moi",
     "artist": "Plastic Bertrand (Bob Platine)",
     "year": 1978,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Irish Meadow Dance",
     "artist": "O'Callagan's Orchestra",
     "year": 2015,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Narco",
     "artist": "Blasterjaxx & Timmy Trumpet",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "I Feel It Coming",
     "artist": "The Weeknd ft. Daft Punk",
     "year": 2016,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Bum Bum Tam Tam",
     "artist": "MC Fioti, Future, J Balvin, Stefflon Don, Juan Magan",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Tales of the Desert",
     "artist": "Persian Nights",
     "year": 2008,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Cosmic Party",
     "artist": "Equinox Stars",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Adeyyo",
     "artist": "Ece Seçkin",
     "year": 2016,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Finesse (Remix)",
     "artist": "Bruno Mars ft. Cardi B",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "New Rules",
     "artist": "Dua Lipa",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Havana",
     "artist": "Camila Cabello",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "New Reality",
     "artist": "Gigi Rowe",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "New World",
     "artist": "Krewella, Yellow Claw ft. Vava",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Mad Love",
     "artist": "Sean Paul, David Guetta ft. Becky G",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "A Little Party Never Killed Nobody (All We Got)",
     "artist": "Fergie ft. Q-Tip, GoonRock",
     "year": 2013,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "OMG",
     "artist": "Arash ft. Snoop Dogg",
     "year": 2016,
     "game": "Just Dance 2019",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Pac-Man",
     "artist": "Toshio Kai (Dancing Bros.)",
     "year": 1980,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Water Me",
     "artist": "Lizzo",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Not Your Ordinary",
     "artist": "Stella Mwangi",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Sugar",
     "artist": "Maroon 5",
     "year": 2014,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Milosc W Zakopanem",
     "artist": "Slawomir",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Nice For What",
     "artist": "Drake",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Sweet Sensation",
     "artist": "Flo Rida",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Sweet Little Unforgettable Thing",
     "artist": "Bea Miller",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Un Poco Loco",
     "artist": "Gael García Bernal & Anthony Gonzalez (Disney’s Coco)",
     "year": 2017,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "TOY",
     "artist": "Netta",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "No Tears Left To Cry",
     "artist": "Ariana Grande",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Familiar",
     "artist": "Liam Payne & J Balvin",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "One Kiss",
     "artist": "Calvin Harris & Dua Lipa",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Rave in the Grave",
     "artist": "AronChupa ft. Little Sis Nora",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Sangria Wine",
     "artist": "Pharrell Williams x Camila Cabello",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Calypso",
     "artist": "Luis Fonsi ft. Stefflon Don",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "DDU-DU DDU-DU",
     "artist": "BLACKPINK",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Obsesión",
     "artist": "Aventura",
     "year": 2002,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Make Me Feel",
     "artist": "Janelle Monáe",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Hala Bel Khamis (ME)",
     "artist": "Maan Barghouth",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "On Ne Porte Pas De Sous-Vêtements (FC)",
     "artist": "McFly & Carlito",
     "year": 2018,
     "game": "Just Dance 2019",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "There Is Nothing Better In The World (Ничего на свете лучше нету)",
     "artist": "Bremenskiye Muzykanty",
     "year": 1969,
     "game": "Just Dance 2019",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Fire On The Dancefloor",
@@ -7353,6 +7058,78 @@
     "year": 2018,
     "game": "Just Dance 2019",
     "mode": "Solo"
+  },
+  {
+    "title": "Friendly Phantom",
+    "artist": "Halloween Thrills",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Boogiesaurus",
+    "artist": "A. Caveman and the Backseats",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Cosmic Party",
+    "artist": "Equinox Stars",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Irish Meadow Dance",
+    "artist": "O'Callagan’s Orchestra",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Jingle Bells",
+    "artist": "Santa Clones",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Monsters of Jazz",
+    "artist": "Groove Century",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Shinobi Cat",
+    "artist": "Glorious Black Belts",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Tales of the Desert",
+    "artist": "Persian Nights",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Un Poco Loco",
+    "artist": "Gael García Bernal, Anthony Gonzalez (Disney Pixar’s Coco)",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Sugar",
+    "artist": "Maroon 5",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Mi Mi Mi",
+    "artist": "Serebro (Hit The Electro Beat)",
+    "year": null,
+    "game": "Just Dance 2019"
+  },
+  {
+    "title": "Water Me",
+    "artist": "Lizzo",
+    "year": null,
+    "game": "Just Dance 2019"
   },
   {
     "title": "7 rings",
@@ -7425,12 +7202,11 @@
     "mode": "Solo"
   },
   {
-    "title": "Tel Aviv",
+    "title": "Tel Aviv (SA-I)",
     "artist": "Omer Adam ft. Arisa",
     "year": 2013,
     "game": "Just Dance 2020",
-    "mode": "Trio",
-    "region": "Southeast Asia, Hong Kong, Taiwan"
+    "mode": "Trio"
   },
   {
     "title": "Ugly Beauty (​怪美的​)",
@@ -7706,7 +7482,7 @@
     "mode": "Solo"
   },
   {
-    "title": "Let’s Groove",
+    "title": "Let’s Groove (D-JDU)",
     "artist": "Earth, Wind & Fire (Equinox Stars)",
     "year": 1981,
     "game": "Just Dance 2020",
@@ -7734,7 +7510,7 @@
     "mode": "Trio"
   },
   {
-    "title": "EZ DO DANCE",
+    "title": "EZ DO DANCE (JDWU)",
     "artist": "TRF",
     "year": 1993,
     "game": "Just Dance 2020",
@@ -7743,6 +7519,60 @@
   {
     "title": "Into the Unknown",
     "artist": "Idina Menzel & AURORA (Disney’s Frozen 2)",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Baby Shark",
+    "artist": "Pinkfong",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Freeze Please",
+    "artist": "The Just Dance School",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Happy Birthday",
+    "artist": "Top Culture",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Jungle Dances",
+    "artist": "The Sunlight Shakers",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Kitchen Kittens",
+    "artist": "Cooking Meow Meow",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Magical Morning",
+    "artist": "The Just Dance Orchestra",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "Mini Yo School",
+    "artist": "Dancing Bros.",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "My Friend The Dragon",
+    "artist": "The Just Dance Orchestra",
+    "year": null,
+    "game": "Just Dance 2020"
+  },
+  {
+    "title": "The Frog Concert",
+    "artist": "Groove Century",
     "year": null,
     "game": "Just Dance 2020"
   },
@@ -7821,308 +7651,308 @@
     "artist": "Harry Styles",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Alexandrie Alexandra",
     "artist": "Claude François (Jérôme Francis)",
     "year": 1977,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "all the good girls go to hell",
     "artist": "Billie Eilish",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Bailando",
     "artist": "Paradisio ft. DJ Patrick Samoy",
     "year": 1996,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Blinding Lights",
     "artist": "The Weeknd",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Boy, You Can Keep It",
     "artist": "Alex Newell",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Buscando",
     "artist": "GTA & Jenn Morel",
     "year": 2018,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Dance Monkey",
     "artist": "Tones And I",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Dans van de Farao",
     "artist": "K3",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Dibby Dibby Sound",
     "artist": "DJ Fresh & Jay Fay ft. Ms. Dynamite",
     "year": 2014,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Don’t Start Now",
     "artist": "Dua Lipa",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Feel Special",
     "artist": "Twice",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Flash (Just Dance Version)",
     "artist": "Bilal Hassani ft. Sundy Jules, Paola Locatelli & Sulivan Gwed",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Georgia",
     "artist": "Tiggs Da Author",
     "year": 2015,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Get Get Down",
     "artist": "Paul Johnson",
     "year": 1999,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Heat Seeker",
     "artist": "Dreamers",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Ice Cream",
     "artist": "BLACKPINK & Selena Gomez",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "In The Navy",
     "artist": "Village People (The Sunlight Shakers)",
     "year": 1979,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Joone Khodet",
     "artist": "Black Cats",
     "year": 2006,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Juice",
     "artist": "Lizzo",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Kick It",
     "artist": "NCT 127",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Kulikitaka",
     "artist": "Toño Rosario",
     "year": 2003,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Lacrimosa",
     "artist": "Apashe",
     "year": 2018,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Magenta Riddim",
     "artist": "DJ Snake",
     "year": 2018,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Paca Dance",
     "artist": "The Just Dance Band",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Que Tire Pa Lante",
     "artist": "Daddy Yankee",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Rain On Me",
     "artist": "Lady Gaga & Ariana Grande",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Rare",
     "artist": "Selena Gomez",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Runaway (U & I)",
     "artist": "Galantis",
     "year": 2014,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Samba de Janeiro",
     "artist": "Bellini (Ultraclub 90)",
     "year": 1997,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Say So",
     "artist": "Doja Cat",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Señorita",
     "artist": "Shawn Mendes & Camila Cabello",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Temperature",
     "artist": "Sean Paul",
     "year": 2005,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "The Other Side",
     "artist": "SZA & Justin Timberlake",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "The Weekend",
     "artist": "Michael Gray",
     "year": 2004,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Till The World Ends",
     "artist": "Britney Spears (The Girly Team)",
     "year": 2011,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "U.S.A.",
     "artist": "Da Pump",
     "year": 2018,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "UNO",
     "artist": "Little Big",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Volar",
     "artist": "Lele Pons ft. Susan Diaz & Victor Cardenas",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Without Me",
     "artist": "Eminem",
     "year": 2002,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Yameen Yasar",
     "artist": "DJ Absi",
     "year": 2020,
     "game": "Just Dance 2021",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "YO LE LLEGO",
     "artist": "J Balvin & Bad Bunny",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "You’ve Got a Friend In Me",
     "artist": "Randy Newman (Disney•Pixar’s Toy Story)",
     "year": 1995,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Zenit",
     "artist": "ONUKA",
     "year": 2019,
     "game": "Just Dance 2021",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Rock N Roll Princess",
@@ -8181,387 +8011,445 @@
     "mode": "Solo"
   },
   {
-    "title": "À la Folie",
+    "title": "You’ve Got a Friend In Me",
+    "artist": "Randy Newman (Disney•Pixar’s Toy Story)",
+    "year": 1995,
+    "game": "Just Dance 2021",
+    "mode": "Solo"
+  },
+  {
+    "title": "Kulikitaka",
+    "artist": "Toño Rosario",
+    "year": 2003,
+    "game": "Just Dance 2021",
+    "mode": "Solo"
+  },
+  {
+    "title": "À la Folie (CA)",
     "artist": "Julien Granel & Lena Situations",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo",
-    "region": "Canada, France"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Baianá",
     "artist": "Bakermat",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Believer",
     "artist": "Imagine Dragons",
     "year": 2017,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Black Mamba",
     "artist": "aespa",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "BOOMBAYAH",
     "artist": "BLACKPINK",
     "year": 2016,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Boss Witch (Ubisoft clean cover)",
     "artist": "Doja Cat (Skarlett Klaw)",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Build A B****",
     "artist": "Bella Poarch",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
-    "title": "Buttons",
+    "title": "Buttons (XK)",
     "artist": "The Pussycat Dolls ft. Snoop Dogg",
     "year": 2006,
     "game": "Just Dance 2022",
-    "mode": "Trio",
-    "region": "Not South Korea"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Chacarron",
     "artist": "El Chombo",
     "year": 2005,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Chandelier",
     "artist": "Sia",
     "year": 2014,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "China",
     "artist": "Anuel AA, Daddy Yankee, Karol G, Ozuna & J Balvin",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Don’t Go Yet",
     "artist": "Camila Cabello",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Flash Pose",
     "artist": "Pabllo Vittar ft. Charli XCX",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Freed from Desire",
     "artist": "Gala",
     "year": 1996,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Funk",
     "artist": "Meghan Trainor",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "GIRL LIKE ME",
     "artist": "Black Eyed Peas & Shakira",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "good 4 u",
     "artist": "Olivia Rodrigo",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Happier Than Ever",
     "artist": "Billie Eilish",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Human",
     "artist": "Sevdaliza",
     "year": 2016,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "I’m Outta Love",
     "artist": "Anastacia",
     "year": 2000,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Jerusalema",
     "artist": "Master KG ft. Nomcebo Zikode",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Jopping",
     "artist": "SuperM",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Judas",
     "artist": "Lady Gaga",
     "year": 2011,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
-    "title": "Koi",
+    "title": "Koi (FR) (J)https://twitter.com/justdancefr/status/1443969029694238720https://twitter.com/UBISOFT_JAPAN/status/1441349294813032448",
     "artist": "Gen Hoshino",
     "year": 2016,
     "game": "Just Dance 2022",
-    "mode": "Trio",
-    "region": "France, Japan"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Last Friday Night (T.G.I.F.)",
     "artist": "Katy Perry",
     "year": 2010,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Level Up",
     "artist": "Ciara",
     "year": 2018,
     "game": "Just Dance 2022",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Levitating",
     "artist": "Dua Lipa",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Love Story (Taylor’s Version)",
     "artist": "Taylor Swift",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Mood",
     "artist": "24kGoldn ft. Iann Dior",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Mr. Blue Sky",
     "artist": "Electric Light Orchestra (The Sunlight Shakers)",
     "year": 1977,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
-    "title": "My Way",
+    "title": "My Way1",
     "artist": "Domino Saints",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Nails, Hair, Hips, Heels (Just Dance Version)",
     "artist": "Todrick Hall",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "POP/STARS",
     "artist": "K/DA, Madison Beer & (G)I-dle ft. Jaira Burns",
     "year": 2018,
     "game": "Just Dance 2022",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Poster Girl",
     "artist": "Zara Larsson",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
-    "title": "Princess (王妃)",
+    "title": "Princess (王妃)2 (S) (R)",
     "artist": "Jam Hsiao",
     "year": 2009,
     "game": "Just Dance 2022",
-    "mode": "Solo",
-    "region": "Southeast Asia, Hong Kong, Taiwan"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Rock Your Body",
     "artist": "Justin Timberlake",
     "year": 2002,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Run the World (Girls)",
     "artist": "Beyoncé",
     "year": 2011,
     "game": "Just Dance 2022",
-    "mode": "Trio"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Save Your Tears (Remix)",
     "artist": "The Weeknd & Ariana Grande",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Shoutout",
     "artist": "Lisa Pac",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Smalltown Boy",
     "artist": "Bronski Beat",
     "year": 1984,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Stop Drop Roll",
     "artist": "Ayo & Teo",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Quartet"
+    "mode": "data-sort-value=\"4\" |Quartet"
   },
   {
     "title": "Sua Cara",
     "artist": "Major Lazer ft. Anitta & Pabllo Vittar",
     "year": 2017,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Think About Things",
     "artist": "Daði Freyr",
     "year": 2020,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
-    "title": "Waterval",
+    "title": "Waterval3 (BL)https://www.instagram.com/p/CVA6w0lIqQ_/",
     "artist": "K3",
     "year": 2021,
     "game": "Just Dance 2022",
-    "mode": "Trio",
-    "region": "Benelux"
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "You Can Dance",
     "artist": "Chilly Gonzales",
     "year": 2010,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "You Make Me Feel (Mighty Real)",
     "artist": "Sylvester",
     "year": 1978,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Jungle Dances",
     "artist": "The Sunlight Shakers",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Dance Of The Mirlitons",
     "artist": "Piotr Ilitch Tchaikovski (The Just Dance Orchestra)",
     "year": 1892,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Kitchen Kittens",
     "artist": "Cooking Meow Meow",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Fearless Pirate",
     "artist": "The Yetties (Marine Band)",
     "year": 2003,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "Get On The Fire Truck",
     "artist": "Terry Devine-King (The Step Brigade)",
     "year": 2005,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Funky Robot",
     "artist": "Tom Haines & Christopher Branch (Dancing Bros)",
     "year": 2006,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
   },
   {
     "title": "My Friend The Dragon",
     "artist": "The Just Dance Orchestra",
     "year": 2019,
     "game": "Just Dance 2022",
-    "mode": "Duet"
+    "mode": "data-sort-value=\"2\" |Duet"
   },
   {
     "title": "Monsters of Jazz",
     "artist": "Jacky Arthur, Harold Geller (Groove Century)",
     "year": 2015,
     "game": "Just Dance 2022",
-    "mode": "Solo"
+    "mode": "data-sort-value=\"1\" |Solo"
+  },
+  {
+    "title": "Break My Heart (JDU)",
+    "artist": "Dua Lipa",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"1\" |Solo"
+  },
+  {
+    "title": "Call on Me:File:Callonme driverslicense letsparty jd2022 beta proof.png",
+    "artist": "Eric Prydz",
+    "year": 2004,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"1\" |Solo"
+  },
+  {
+    "title": "Drivers License (2023E)",
+    "artist": "Olivia Rodrigo",
+    "year": 2021,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"1\" |Solo"
+  },
+  {
+    "title": "Follow the White Rabbit (JDU)",
+    "artist": "Madison Beer",
+    "year": 2021,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"1\" |Solo"
+  },
+  {
+    "title": "Hello:File:Hello jd2022 beta proof.png",
+    "artist": "Lionel Richie",
+    "year": 1984,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"1\" |Duet"
+  },
+  {
+    "title": "Let’s Party (飞艇派对)",
+    "artist": "Wu Xuanyi and Game For Peace",
+    "year": 2021,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"4\" |Quartet"
+  },
+  {
+    "title": "Malibu (JDU)",
+    "artist": "Kim Petras",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "data-sort-value=\"3\" |Trio"
   },
   {
     "title": "Eye of the Tiger",
@@ -9650,7 +9538,7 @@
     "game": "Just Dance Unlimited",
     "mode": "Solo",
     "originalGame": "Just Dance 2017",
-    "releaseDate": "October 27, 2016"
+    "releaseDate": "October 27, 2016 (F|In certain French-speaking regions)"
   },
   {
     "title": "The Greatest",
@@ -9839,7 +9727,7 @@
     "game": "Just Dance Unlimited",
     "mode": "Solo",
     "originalGame": "Just Dance 2016",
-    "releaseDate": "October 12, 2017"
+    "releaseDate": "March 3, 2017 (Leaked) |October 12, 2017 (Release)"
   },
   {
     "title": "Kool Kontact",
@@ -9848,7 +9736,7 @@
     "game": "Just Dance Unlimited",
     "mode": "Duet",
     "originalGame": "Just Dance 2016",
-    "releaseDate": "October 12, 2017"
+    "releaseDate": "March 3, 2017 (Leaked) |October 12, 2017 (Release)"
   },
   {
     "title": "Balkan Blast Remix",
@@ -9869,7 +9757,7 @@
     "releaseDate": "March 9, 2017"
   },
   {
-    "title": "Chiwawa",
+    "title": "Chiwawa (N-Switch|Not available through Just Dance Unlimited on Nintendo Switch copies of Just Dance 2017)",
     "artist": "Wanko Ni Mero Mero",
     "year": 2015,
     "game": "Just Dance Unlimited",
@@ -10330,7 +10218,7 @@
     "releaseDate": "October 12, 2017"
   },
   {
-    "title": "William Tell Overture",
+    "title": "William Tell Overture (N-Switch|Not available through Just Dance Unlimited on Nintendo Switch copies of Just Dance 2017)",
     "artist": "Rossini",
     "year": 1829,
     "game": "Just Dance Unlimited",
@@ -10339,7 +10227,7 @@
     "releaseDate": "October 24, 2017"
   },
   {
-    "title": "Thumbs",
+    "title": "Thumbs (F|Free on Just Dance 2018 with a Uplay account connected)",
     "artist": "Sabrina Carpenter",
     "year": 2016,
     "game": "Just Dance Unlimited",
@@ -11248,7 +11136,7 @@
     "releaseDate": "November 2, 2019"
   },
   {
-    "title": "Into the Unknown",
+    "title": "Into the Unknown (F|Free on Just Dance 2020)",
     "artist": "Idina Menzel ft. AURORA (Disney’s Frozen 2)",
     "year": 2019,
     "game": "Just Dance Unlimited",
@@ -12199,13 +12087,6 @@
     "mode": "Solo"
   },
   {
-    "title": "Groove Is in the Heart",
-    "artist": "Deee-Lite",
-    "year": 1990,
-    "game": "Just Dance",
-    "mode": "Solo"
-  },
-  {
     "title": "Jerk It Out",
     "artist": "Caesars",
     "game": "Just Dance",
@@ -12214,13 +12095,6 @@
   {
     "title": "I Like to Move It",
     "artist": "Reel 2 Real feat. The Mad Stuntman",
-    "game": "Just Dance",
-    "mode": "Solo"
-  },
-  {
-    "title": "Hot N Cold",
-    "artist": "Katy Perry",
-    "year": 2008,
     "game": "Just Dance",
     "mode": "Solo"
   },
@@ -12251,13 +12125,6 @@
   {
     "title": "Kids in America",
     "artist": "Kim Wilde",
-    "game": "Just Dance",
-    "mode": "Solo"
-  },
-  {
-    "title": "Pump Up the Jam",
-    "artist": "Technotronic",
-    "year": 1989,
     "game": "Just Dance",
     "mode": "Solo"
   },
@@ -12318,13 +12185,6 @@
   {
     "title": "Can’t Get You Out of My Head",
     "artist": "Kylie Minogue",
-    "game": "Just Dance",
-    "mode": "Solo"
-  },
-  {
-    "title": "Acceptable in the 80s",
-    "artist": "Calvin Harris",
-    "year": 2007,
     "game": "Just Dance",
     "mode": "Solo"
   },
@@ -12641,29 +12501,8 @@
     "mode": "Solo"
   },
   {
-    "title": "California Gurls",
-    "artist": "Katy Perry featuring Snoop Dogg",
-    "year": 2010,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
-    "title": "Take On Me",
-    "artist": "a-ha",
-    "year": 1985,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
     "title": "Pump It",
     "artist": "The Black Eyed Peas",
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
-    "title": "Lollipop",
-    "artist": "MIKA",
-    "year": 2007,
     "game": "Just Dance 3",
     "mode": "Solo"
   },
@@ -12716,11 +12555,10 @@
     "mode": "Duet"
   },
   {
-    "title": "Dynamite",
-    "artist": "Taio Cruz",
-    "year": 2010,
+    "title": "(Xbox 360)",
+    "artist": "(Xbox 360)",
     "game": "Just Dance 3",
-    "mode": "Dance Crew"
+    "mode": "Solo"
   },
   {
     "title": "Teenage Dream",
@@ -12741,13 +12579,6 @@
     "mode": "Solo"
   },
   {
-    "title": "Jump (For My Love)",
-    "artist": "Girls Aloud",
-    "year": 2003,
-    "game": "Just Dance 3",
-    "mode": "Duet"
-  },
-  {
     "title": "Gonna Make You Sweat (Everybody Dance Now)",
     "artist": "C+C Music Factory feat. Freedom Williams ft. (Sweat Invaders)",
     "game": "Just Dance 3",
@@ -12758,13 +12589,6 @@
     "artist": "Gwen Stefani",
     "game": "Just Dance 3",
     "mode": "Solo"
-  },
-  {
-    "title": "Crazy Little Thing Called Love",
-    "artist": "Queen",
-    "year": 1979,
-    "game": "Just Dance 3",
-    "mode": "Duet"
   },
   {
     "title": "Think",
@@ -12803,49 +12627,14 @@
     "mode": "Duet"
   },
   {
-    "title": "I Feel Love",
-    "artist": "Donna Summer",
-    "year": 1977,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
     "title": "Dance All Nite",
     "artist": "Anja",
     "game": "Just Dance 3",
     "mode": "Solo"
   },
   {
-    "title": "Spectronizer",
-    "artist": "Sentai Express",
-    "year": 2011,
-    "game": "Just Dance 3",
-    "mode": "Dance Crew"
-  },
-  {
-    "title": "Party Rock Anthem",
-    "artist": "LMFAO featuring Lauren Bennett and GoonRock",
-    "year": 2011,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
     "title": "Are You Gonna Go My Way",
     "artist": "Lenny Kravitz",
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
-    "title": "Land Of 1000 Dances",
-    "artist": "Wilson Pickett",
-    "year": 1966,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
-    "title": "She’s Got Me Dancing",
-    "artist": "Tommy Sparks",
-    "year": 2009,
     "game": "Just Dance 3",
     "mode": "Solo"
   },
@@ -12880,24 +12669,10 @@
     "mode": "Solo"
   },
   {
-    "title": "Kurio ko uddah le jana",
-    "artist": "Lata Mangeshkar and S. P. Balasubrahmanyam (Bollywood Rainbow)",
-    "year": 1994,
-    "game": "Just Dance 3",
-    "mode": "Duet"
-  },
-  {
     "title": "Giddy on Up (Giddy on Out)",
     "artist": "Laura Bell Bundy",
     "game": "Just Dance 3",
     "mode": "Solo"
-  },
-  {
-    "title": "I Was Made For Lovin' You",
-    "artist": "Kiss",
-    "year": 1979,
-    "game": "Just Dance 3",
-    "mode": "Dance Crew"
   },
   {
     "title": "Tightrope",
@@ -12918,13 +12693,6 @@
     "mode": "Duet"
   },
   {
-    "title": "Apache (Jump On It)",
-    "artist": "The Sugarhill Gang",
-    "year": 1981,
-    "game": "Just Dance 3",
-    "mode": "Solo"
-  },
-  {
     "title": "Pata Pata",
     "artist": "Miriam Makeba ft. (African Ladies)",
     "game": "Just Dance 3",
@@ -12935,20 +12703,6 @@
     "artist": "Lena Meyer-Landrut",
     "game": "Just Dance 3",
     "mode": "Solo"
-  },
-  {
-    "title": "Somethin’ Stupid",
-    "artist": "Robbie Williams and Nicole Kidman",
-    "year": 2001,
-    "game": "Just Dance 3",
-    "mode": "Duet"
-  },
-  {
-    "title": "This is Halloween",
-    "artist": "Danny Elfman",
-    "year": 1993,
-    "game": "Just Dance 3",
-    "mode": "Dance Crew"
   },
   {
     "title": "Jambo Mambo",
@@ -13980,6 +13734,162 @@
     "title": "You Never Can Tell",
     "artist": "Chuck Berry",
     "game": "Just Dance 2015",
+    "mode": "Duet"
+  },
+  {
+    "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Head Over Heels",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "I’m a Marionette",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "If It Wasn’t for the Nights",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Knowing Me, Knowing You",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "Lay All Your Love On Me",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Mamma Mia",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "Money, Money, Money",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "SOS",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "Summer Night City",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Super Trouper",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Take a Chance on Me",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "The Winner Takes It All",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Voulez-Vous",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Waterloo",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "When I Kissed The Teacher",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Hole In Your Soul",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "I Do, I Do, I Do, I Do, I Do",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "Does Your Mother Know",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "Honey, Honey",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "Bang-A-Boomerang",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Duet"
+  },
+  {
+    "title": "People Need Love",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Dance Crew"
+  },
+  {
+    "title": "Angeleyes",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "As Good as New",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Dancing Queen",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
+    "mode": "Solo"
+  },
+  {
+    "title": "Fernando",
+    "artist": "ABBA",
+    "game": "ABBA: You Can Dance",
     "mode": "Duet"
   }
 ]
