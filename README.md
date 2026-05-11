@@ -70,6 +70,7 @@ The installer output goes into `dist/`.
 - `!queue`: show the first songs in chat.
 - `!leave`: remove your own request.
 - `!skip` or `!next`: mark the first request as played. Broadcaster/mod only.
+- `!pick random`: randomly mark one queued request as played. Broadcaster only.
 - `!remove <number>`: remove a queue item. Broadcaster/mod only.
 - `!clear`: clear the full queue. Broadcaster/mod only.
 - `!song`: show the last played song. Broadcaster/mod only.
@@ -79,8 +80,8 @@ The installer output goes into `dist/`.
 The dashboard gives you buttons for:
 
 - adding a test request without typing in Twitch chat
-- **Pick**: promote any queue entry to the top so it plays next
-- skipping to the next request
+- **Pick**: mark that queue entry as playing now and move it to history
+- **Next**: mark the first request as playing now and move it to history
 - removing a specific queue item
 - clearing the queue
 - switching the OBS overlay between dark and light mode

@@ -110,9 +110,8 @@ function renderQueueEntry(entry, index) {
   const pick = document.createElement("button");
   pick.type = "button";
   pick.className = "icon-button";
-  pick.textContent = index === 0 ? "Next" : "Pick";
-  pick.disabled = index === 0;
-  pick.addEventListener("click", () => postJson("/api/promote", { id: entry.id }).catch((error) => showMessage(error.message)));
+  pick.textContent = "Pick";
+  pick.addEventListener("click", () => postJson("/api/pick", { id: entry.id }).catch((error) => showMessage(error.message)));
 
   const remove = document.createElement("button");
   remove.type = "button";

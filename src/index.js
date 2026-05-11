@@ -10,7 +10,7 @@ const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const SONGS_PATH = path.join(ROOT, "data", "songs.json");
 const QUEUE_PATH = path.join(ROOT, "data", "queue.json");
-const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme", "/api/promote"]);
+const MUTATING_API_PATHS = new Set(["/api/request", "/api/skip", "/api/remove", "/api/clear", "/api/filters", "/api/theme", "/api/pick", "/api/promote"]);
 const MAX_QUERY_LENGTH = 200;
 const MIN_SEARCH_LENGTH = 3;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
@@ -277,7 +277,7 @@ function startHttpServer() {
       if (url.pathname === "/api/clear") return apiClearQueue(response);
       if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
       if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
-      if (url.pathname === "/api/promote") return apiPromoteSong(request, response);
+      if (url.pathname === "/api/pick" || url.pathname === "/api/promote") return apiPickSong(request, response);
     }
     if (url.pathname === "/events") return streamEvents(request, response);
 
@@ -464,27 +464,15 @@ function apiClearQueue(response) {
   sendJson(response, { ok: true, ...result, state: publicState() });
 }
 
-async function apiPromoteSong(request, response) {
+async function apiPickSong(request, response) {
   try {
     const body = await readJsonBody(request);
-    const result = promoteSong(body.id);
+    const result = pickSong(body.id, body.position, { announce: true });
     if (!result.ok) return sendError(response, result.status || 400, result.message);
     sendJson(response, { ok: true, ...result, state: publicState() });
   } catch (error) {
     sendError(response, 400, error.message);
   }
-}
-
-function promoteSong(id) {
-  const index = state.queue.findIndex((entry) => entry.id === id);
-  if (index === -1) return { ok: false, status: 404, message: "Entry not found in queue." };
-  if (index === 0) return { ok: true, status: 200, message: `${state.queue[0].song.title} is already next.`, entry: state.queue[0] };
-
-  const [entry] = state.queue.splice(index, 1);
-  state.queue.unshift(entry);
-  saveQueue();
-  const message = `Moved ${entry.song.title} (@${entry.user}) to the top of the queue.`;
-  return { ok: true, status: 200, message, entry };
 }
 
 async function apiUpdateFilters(request, response) {
@@ -717,6 +705,10 @@ function handleCommand(message) {
   if (lower === "!random") return randomSong(message, arg);
   if (lower === "!queue") return say(queueSummary());
   if (lower === "!leave") return leaveQueue(message.user);
+  if (lower === "!pick" && arg.toLowerCase() === "random") {
+    if (isStreamer(message)) return pickRandomSong({ announce: true });
+    return;
+  }
   if (!isMod(message)) return;
 
   if (lower === "!skip" || lower === "!next") return skipSong();
@@ -972,8 +964,40 @@ function leaveQueue(user) {
 }
 
 function skipSong(options = {}) {
+  return pickQueueEntryAt(0, options);
+}
+
+function pickSong(id, position, options = {}) {
+  let index = -1;
+
+  if (id) {
+    index = state.queue.findIndex((entry) => entry.id === id);
+  } else {
+    index = Number.parseInt(position, 10) - 1;
+  }
+
+  if (!Number.isInteger(index) || index < 0 || index >= state.queue.length) {
+    const message = "Entry not found in queue.";
+    return { ok: false, status: 404, message };
+  }
+
+  return pickQueueEntryAt(index, options);
+}
+
+function pickRandomSong(options = {}) {
+  if (!state.queue.length) {
+    const message = "The queue is empty.";
+    if (options.announce !== false) say(message);
+    return { ok: false, status: 409, message };
+  }
+
+  const index = Math.floor(Math.random() * state.queue.length);
+  return pickQueueEntryAt(index, options);
+}
+
+function pickQueueEntryAt(index, options = {}) {
   const { announce = true } = options;
-  const next = state.queue.shift();
+  const [next] = state.queue.splice(index, 1);
   if (!next) {
     const message = "The queue is empty.";
     if (announce) say(message);
@@ -1049,6 +1073,12 @@ function isMod(message) {
     badges.includes("broadcaster/") ||
     badges.includes("moderator/")
   );
+}
+
+function isStreamer(message) {
+  const user = message.user.toLowerCase();
+  const badges = message.tags.badges || "";
+  return user === config.channel.toLowerCase() || badges.includes("broadcaster/");
 }
 
 function writeIrc(line) {
