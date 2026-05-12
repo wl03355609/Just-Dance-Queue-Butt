@@ -1,7 +1,7 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.7.9",
-  "codename": "Wonder Tales",
+  "version": "0.7.10",
+  "codename": "Alternate Reality",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
@@ -47,7 +47,7 @@
       ]
     },
     "portable": {
-      "artifactName": "JustDanceRequests-0.7.9-x86.exe"
+      "artifactName": "JustDanceRequests-0.7.10-x86.exe"
     }
   }
 }

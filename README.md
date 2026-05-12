@@ -4,7 +4,7 @@ A local Twitch chat plugin for Just Dance streamers. Viewers request songs with 
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
 
-Current release: **0.7.9 "Wonder Tales"**.
+Current release: **0.7.10 "Alternate Reality"**.
 
 ## Setup
 
@@ -61,7 +61,7 @@ After installing dependencies, build the Windows portable app with:
 npm run build:win
 ```
 
-The portable `.exe` output goes into `dist/`. For 0.7.9, the expected artifact name is `JustDanceRequests-0.7.9-x86.exe`.
+The portable `.exe` output goes into `dist/`. For 0.7.10, the expected artifact name is `JustDanceRequests-0.7.10-x86.exe`.
 
 ## Chat Commands
 
@@ -128,9 +128,9 @@ Current included catalogs:
 - Just Dance Unlimited classic routines
 - Just Dance+ classic routines
 
-The local catalog currently has 1,692 requestable entries.
+The local catalog currently has 1,911 requestable entries.
 
-I refreshed the yearly tracklists from Wikipedia and imported the Just Dance Wiki/Fandom tables for the included game catalogs, Just Dance Unlimited, and Just Dance+ on May 10-11, 2026. The catalog also includes the Wonder Tales seasonal update from May 12, 2026.
+I refreshed the yearly tracklists from Wikipedia and imported the Just Dance Wiki/Fandom tables for the included game catalogs, Just Dance Unlimited, and Just Dance+ on May 10-11, 2026. The catalog also includes the Wonder Tales seasonal update from May 12, 2026, plus available main-series alternate routines, Kids Mode routines, and VIP routines.
 
 - <https://justdance.fandom.com/wiki/Just_Dance_(video_game)>
 - <https://justdance.fandom.com/wiki/Just_Dance_2>

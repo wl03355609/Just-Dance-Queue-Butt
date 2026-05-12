@@ -18,6 +18,15 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "Boy With Luv (Extreme Version)",
+    "artist": "BTS ft. Halsey",
+    "year": 2019,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Bring Me to Life",
     "artist": "Evanescence",
     "year": 2003,
@@ -30,10 +39,28 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "Can't Stop the Feeling! (Danceverses Prince Version)",
+    "artist": "Justin Timberlake",
+    "year": 2016,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Hard",
+    "effort": "Intense"
+  },
+  {
     "title": "Danger! High Voltage",
     "artist": "Electric Six",
     "year": 2002,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Danger! High Voltage (16-Bit Version)",
+    "artist": "Electric Six",
+    "year": 2002,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Moderate"
   },
   {
     "title": "Disco Inferno",
@@ -52,6 +79,15 @@
     "artist": "BTS",
     "year": 2020,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Dynamite (Extreme Version)",
+    "artist": "BTS",
+    "year": 2020,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Quartet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Farfalle",
@@ -128,6 +164,15 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "More (Seraphine Version)",
+    "artist": "K/DA ft. Madison Beer, -IDLE, Lexie Liu, Seraphine, Jaira Burns",
+    "year": 2020,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Chill"
+  },
+  {
     "title": "Numb",
     "artist": "Linkin Park",
     "year": 2003,
@@ -140,6 +185,15 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "Physical (Extreme Version)",
+    "artist": "Dua Lipa",
+    "year": 2020,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Playground",
     "artist": "Bea Miller",
     "year": 2021,
@@ -150,6 +204,15 @@
     "artist": "Red Velvet",
     "year": 2019,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Psycho (Extreme Version)",
+    "artist": "Red Velvet",
+    "year": 2019,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
   },
   {
     "title": "Radioactive",
@@ -176,6 +239,24 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "Stay (Inflatable Version)",
+    "artist": "The Kid Laroi and Justin Bieber",
+    "year": 2021,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Moderate"
+  },
+  {
+    "title": "Stay (VIP Version)",
+    "artist": "The Kid Laroi and Justin Bieber",
+    "year": 2021,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
+  },
+  {
     "title": "Sweet but Psycho",
     "artist": "Ava Max",
     "year": 2018,
@@ -186,6 +267,15 @@
     "artist": "Lady Gaga featuring Beyonce",
     "year": 2010,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Telephone (Runaway Version)",
+    "artist": "Lady Gaga ft. Beyoncé",
+    "year": 2009,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Chill"
   },
   {
     "title": "Therefore I Am",
@@ -204,6 +294,15 @@
     "artist": "Britney Spears",
     "year": 2004,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Toxic (Extreme Version)",
+    "artist": "Britney Spears",
+    "year": 2003,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
   },
   {
     "title": "Ubu Love",
@@ -232,6 +331,15 @@
     "game": "Just Dance 2023 Edition"
   },
   {
+    "title": "Wannabe (Extreme Version)",
+    "artist": "Itzy",
+    "year": 2020,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Watch Out for This (Bumaye)",
     "artist": "Major Lazer featuring Busy Signal, The Flexican and FS Green",
     "year": 2013,
@@ -254,6 +362,24 @@
     "artist": "Doja Cat",
     "year": 2021,
     "game": "Just Dance 2023 Edition"
+  },
+  {
+    "title": "Woman (All-Mother Version)",
+    "artist": "Doja Cat",
+    "year": 2021,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Moderate"
+  },
+  {
+    "title": "Woman (VIP Version)",
+    "artist": "Doja Cat",
+    "year": 2021,
+    "game": "Just Dance 2023 Edition",
+    "mode": "Solo",
+    "difficulty": "Hard",
+    "effort": "Moderate"
   },
   {
     "title": "Wouldn't It Be Nice",
@@ -292,6 +418,15 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Butter (Extreme Version)",
+    "artist": "BTS",
+    "year": 2021,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Quartet",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
+  },
+  {
     "title": "Calm Down",
     "artist": "Rema",
     "year": 2022,
@@ -328,6 +463,15 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Cure For Me (Paper Version)",
+    "artist": "AURORA",
+    "year": 2021,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Moderate"
+  },
+  {
     "title": "Despecha",
     "artist": "Rosalia",
     "year": 2022,
@@ -340,10 +484,28 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Don't Cha (Extreme Version)",
+    "artist": "The Pussycat Dolls ft. Busta Rhymes",
+    "year": 2005,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Flowers",
     "artist": "Miley Cyrus",
     "year": 2023,
     "game": "Just Dance 2024 Edition"
+  },
+  {
+    "title": "Flowers (Fitness Version)",
+    "artist": "Miley Cyrus",
+    "year": 2023,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Intense"
   },
   {
     "title": "Gimme More",
@@ -352,10 +514,28 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Gimme More (Extreme Version)",
+    "artist": "Britney Spears",
+    "year": 2007,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "How You Like That",
     "artist": "Blackpink",
     "year": 2020,
     "game": "Just Dance 2024 Edition"
+  },
+  {
+    "title": "How You Like That (Extreme Version)",
+    "artist": "BLACKPINK",
+    "year": 2020,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Quartet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "I Am My Own Muse",
@@ -370,10 +550,28 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "I Wanna Dance with Somebody (Who Loves Me) (Extravaganza Version)",
+    "artist": "Whitney Houston",
+    "year": 1987,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Chill"
+  },
+  {
     "title": "I'm Good (Blue)",
     "artist": "David Guetta and Bebe Rexha",
     "year": 2022,
     "game": "Just Dance 2024 Edition"
+  },
+  {
+    "title": "I'm Good (Blue) (Extreme Version)",
+    "artist": "David Guetta & Bebe Rexha",
+    "year": 2022,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "I'm Not Here to Make Friends",
@@ -437,6 +635,15 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Say My Name (Extreme Version)",
+    "artist": "ATEEZ",
+    "year": 2019,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Seven",
     "artist": "Jungkook featuring Latto",
     "year": 2023,
@@ -459,6 +666,15 @@
     "artist": "Destiny's Child",
     "year": 2001,
     "game": "Just Dance 2024 Edition"
+  },
+  {
+    "title": "Survivor (Fitness Version)",
+    "artist": "Destiny's Child",
+    "year": 2001,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Intense"
   },
   {
     "title": "Swan Lake",
@@ -485,6 +701,15 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "Tití Me Preguntó (Barbecue Version)",
+    "artist": "Bad Bunny",
+    "year": 2022,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Chill"
+  },
+  {
     "title": "Treasure",
     "artist": "Bruno Mars",
     "year": 2013,
@@ -501,6 +726,15 @@
     "artist": "Little Mix",
     "year": 2018,
     "game": "Just Dance 2024 Edition"
+  },
+  {
+    "title": "Wasabi (Extreme Version)",
+    "artist": "Little Mix",
+    "year": 2018,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Duet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Whitney",
@@ -521,6 +755,15 @@
     "game": "Just Dance 2024 Edition"
   },
   {
+    "title": "If You Wanna Party (VIP Version)",
+    "artist": "The Just Dancers",
+    "year": 2022,
+    "game": "Just Dance 2024 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Bang Bang! (My Neurodivergent Anthem)",
     "artist": "Galantis",
     "year": 2023,
@@ -531,6 +774,15 @@
     "artist": "Green Day",
     "year": 1994,
     "game": "Just Dance 2025 Edition"
+  },
+  {
+    "title": "Basket Case (Bathtub Version)",
+    "artist": "Green Day",
+    "year": 1994,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Chill"
   },
   {
     "title": "Break Up with Your Girlfriend, I'm Bored",
@@ -569,6 +821,15 @@
     "game": "Just Dance 2025 Edition"
   },
   {
+    "title": "Espresso (Hair Salon Version)",
+    "artist": "Sabrina Carpenter",
+    "year": 2024,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Trio",
+    "difficulty": "Easy",
+    "effort": "Chill"
+  },
+  {
     "title": "Exes",
     "artist": "Tate McRae",
     "year": 2023,
@@ -597,6 +858,15 @@
     "artist": "Jack Harlow",
     "year": 2023,
     "game": "Just Dance 2025 Edition"
+  },
+  {
+    "title": "Lovin On Me (Moo Version)",
+    "artist": "Jack Harlow",
+    "year": 2023,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Trio",
+    "difficulty": "Easy",
+    "effort": "Chill"
   },
   {
     "title": "Lunch",
@@ -629,6 +899,15 @@
     "game": "Just Dance 2025 Edition"
   },
   {
+    "title": "One Last Time (Extreme Version)",
+    "artist": "Ariana Grande",
+    "year": 2014,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
+  },
+  {
     "title": "Padam Padam",
     "artist": "Kylie Minogue",
     "year": 2023,
@@ -641,10 +920,28 @@
     "game": "Just Dance 2025 Edition"
   },
   {
+    "title": "Paint The Town Red (Extreme Version)",
+    "artist": "Doja Cat",
+    "year": 2023,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Party in the U.S.A.",
     "artist": "Miley Cyrus",
     "year": 2009,
     "game": "Just Dance 2025 Edition"
+  },
+  {
+    "title": "Party in the U.S.A. (Night Parade Version)",
+    "artist": "Miley Cyrus",
+    "year": 2009,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Duet",
+    "difficulty": "Hard",
+    "effort": "Moderate"
   },
   {
     "title": "Payphone",
@@ -659,6 +956,15 @@
     "game": "Just Dance 2025 Edition"
   },
   {
+    "title": "Pink Venom (Extreme Version)",
+    "artist": "BLACKPINK",
+    "year": 2022,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
+  },
+  {
     "title": "Play Date",
     "artist": "Melanie Martinez",
     "year": 2015,
@@ -669,6 +975,15 @@
     "artist": "Lady Gaga",
     "year": 2008,
     "game": "Just Dance 2025 Edition"
+  },
+  {
+    "title": "Poker Face (Magical Version)",
+    "artist": "Lady Gaga",
+    "year": 2008,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Chill"
   },
   {
     "title": "Sleigh Ride",
@@ -731,6 +1046,15 @@
     "game": "Just Dance 2025 Edition"
   },
   {
+    "title": "Unstoppable (Boxing Version)",
+    "artist": "Sia",
+    "year": 2016,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Intense"
+  },
+  {
     "title": "Vogue",
     "artist": "Madonna",
     "year": 1990,
@@ -747,6 +1071,15 @@
     "artist": "Shakira",
     "year": 2001,
     "game": "Just Dance 2025 Edition"
+  },
+  {
+    "title": "Whenever, Wherever (Woolly's Version)",
+    "artist": "Shakira",
+    "year": 2001,
+    "game": "Just Dance 2025 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Moderate"
   },
   {
     "title": "Yeah!",
@@ -773,6 +1106,15 @@
     "game": "Just Dance 2026 Edition"
   },
   {
+    "title": "Abracadabra (Extreme Version)",
+    "artist": "Lady Gaga",
+    "year": 2025,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "All Star",
     "artist": "Smash Mouth",
     "year": 1999,
@@ -789,6 +1131,15 @@
     "artist": "Rose and Bruno Mars",
     "year": 2024,
     "game": "Just Dance 2026 Edition"
+  },
+  {
+    "title": "APT. (Graffiti Version)",
+    "artist": "Rose and Bruno Mars",
+    "year": 2024,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Hard",
+    "effort": "Moderate"
   },
   {
     "title": "Azizam",
@@ -813,6 +1164,15 @@
     "artist": "Patrick Hernandez",
     "year": 1978,
     "game": "Just Dance 2026 Edition"
+  },
+  {
+    "title": "Born to Be Alive (Reborn Version) (Aerobics Version)",
+    "artist": "Patrick Hernandez",
+    "year": 2021,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Intense"
   },
   {
     "title": "Chichika",
@@ -857,10 +1217,28 @@
     "game": "Just Dance 2026 Edition"
   },
   {
+    "title": "Feather (Parachute Version)",
+    "artist": "Sabrina Carpenter",
+    "year": 2023,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Chill"
+  },
+  {
     "title": "Girls Just Want to Have Fun",
     "artist": "Cyndi Lauper",
     "year": 1983,
     "game": "Just Dance 2026 Edition"
+  },
+  {
+    "title": "Girls Just Want to Have Fun (Sporty Version)",
+    "artist": "Cyndi Lauper",
+    "year": 1983,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Intense"
   },
   {
     "title": "Good Girls",
@@ -875,16 +1253,43 @@
     "game": "Just Dance 2026 Edition"
   },
   {
+    "title": "Good Luck, Babe! (Drag Version)",
+    "artist": "Chappell Roan",
+    "year": 2024,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Chill"
+  },
+  {
     "title": "Houdini",
     "artist": "Dua Lipa",
     "year": 2023,
     "game": "Just Dance 2026 Edition"
   },
   {
+    "title": "Houdini (Extreme Version)",
+    "artist": "Dua Lipa",
+    "year": 2023,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Hung Up",
     "artist": "Madonna",
     "year": 2005,
     "game": "Just Dance 2026 Edition"
+  },
+  {
+    "title": "Hung Up (Cosmic Fitness Version)",
+    "artist": "Madonna",
+    "year": 2005,
+    "game": "Just Dance 2026 Edition",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Intense"
   },
   {
     "title": "I Had Some Help",
@@ -6022,11 +6427,25 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "All About That Bass (Flower & Bee Version)",
+    "artist": "Meghan Trainor",
+    "year": 2014,
+    "game": "Just Dance 2016",
+    "mode": "Duet"
+  },
+  {
     "title": "Animals",
     "artist": "Martin Garrix",
     "year": 2013,
     "mode": "Duet",
     "game": "Just Dance 2016"
+  },
+  {
+    "title": "Animals (Extreme Version)",
+    "artist": "Martin Garrix",
+    "year": 2013,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
   },
   {
     "title": "Balkan Blast Remix",
@@ -6050,6 +6469,13 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Born This Way (Nerd Version)",
+    "artist": "Lady Gaga",
+    "year": 2011,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "Boys (Summertime Love)",
     "artist": "The Lemon Cubes (as made famous by Sabrina)",
     "year": 1987,
@@ -6069,6 +6495,13 @@
     "year": 2008,
     "mode": "Quartet",
     "game": "Just Dance 2016"
+  },
+  {
+    "title": "Circus (Extreme Version)",
+    "artist": "Britney Spears",
+    "year": 2008,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
   },
   {
     "title": "Cool For The Summer",
@@ -6097,6 +6530,13 @@
     "year": 2014,
     "mode": "Trio",
     "game": "Just Dance 2016"
+  },
+  {
+    "title": "Fancy (Indian Version)",
+    "artist": "Iggy Azalea ft. Charli XCX",
+    "year": 2014,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
   },
   {
     "title": "Fun",
@@ -6134,6 +6574,13 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Hey Mama (Geisha Version)",
+    "artist": "David Guetta ft. Nicki Minaj, Bebe Rexha & Afrojack",
+    "year": 2014,
+    "game": "Just Dance 2016",
+    "mode": "Trio"
+  },
+  {
     "title": "Hit the Road Jack",
     "artist": "Charles Percy (as made famous by Ray Charles)",
     "year": 1961,
@@ -6141,11 +6588,25 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Hit The Road Jack (Line Dance Version)",
+    "artist": "Ray Charles (Charles Percy)",
+    "year": 1961,
+    "game": "Just Dance 2016",
+    "mode": "Trio"
+  },
+  {
     "title": "I Gotta Feeling",
     "artist": "The Black Eyed Peas",
     "year": 2009,
     "mode": "Solo",
     "game": "Just Dance 2016"
+  },
+  {
+    "title": "I Gotta Feeling (Classroom Version)",
+    "artist": "The Black Eyed Peas",
+    "year": 2009,
+    "game": "Just Dance 2016",
+    "mode": "Duet"
   },
   {
     "title": "I'm an Albatraoz",
@@ -6218,6 +6679,13 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Rabiosa (Latin Fitness Version)",
+    "artist": "Shakira ft. El Cata",
+    "year": 2010,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "Same Old Love",
     "artist": "Selena Gomez",
     "year": 2015,
@@ -6247,6 +6715,13 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Teacher (Car Version)",
+    "artist": "Nick Jonas",
+    "year": 2014,
+    "game": "Just Dance 2016",
+    "mode": "Duet"
+  },
+  {
     "title": "The Choice Is Yours",
     "artist": "Darius Dante Van Dijk",
     "year": 2015,
@@ -6268,6 +6743,13 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "This Is How We Do (Aerobics Version)",
+    "artist": "Katy Perry",
+    "year": 2013,
+    "game": "Just Dance 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "Under the Sea",
     "artist": "Disney's The Little Mermaid (as made famous by Samuel E. Wright)",
     "year": 1989,
@@ -6282,11 +6764,25 @@
     "game": "Just Dance 2016"
   },
   {
+    "title": "Uptown Funk (Tuxedo Version)",
+    "artist": "Mark Ronson ft. Bruno Mars",
+    "year": 2014,
+    "game": "Just Dance 2016",
+    "mode": "Trio"
+  },
+  {
     "title": "Want to Want Me",
     "artist": "Jason Derulo",
     "year": 2015,
     "mode": "Solo",
     "game": "Just Dance 2016"
+  },
+  {
+    "title": "Want To Want Me (Couple Version)",
+    "artist": "Jason Derulo",
+    "year": 2015,
+    "game": "Just Dance 2016",
+    "mode": "Duet"
   },
   {
     "title": "When the Rain Begins to Fall",
@@ -6324,11 +6820,33 @@
     "mode": "Solo"
   },
   {
+    "title": "Cake By The Ocean (Earphones Version)",
+    "artist": "DNCE",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
+  },
+  {
+    "title": "Cake By The Ocean (VIPMADE)",
+    "artist": "DNCE",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "releaseDate": "November 14, 2016",
+    "mode": "Duet"
+  },
+  {
     "title": "Cheap Thrills",
     "artist": "Sia ft. Sean Paul",
     "year": 2016,
     "game": "Just Dance 2017",
     "mode": "Solo"
+  },
+  {
+    "title": "Cheap Thrills (Bollywood Version)",
+    "artist": "Sia ft. Sean Paul",
+    "year": 2016,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
   },
   {
     "title": "DADDY",
@@ -6338,7 +6856,21 @@
     "mode": "Trio"
   },
   {
+    "title": "DADDY (Son Version)",
+    "artist": "PSY ft. CL of 2NE1",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
+  },
+  {
     "title": "Sorry",
+    "artist": "Justin Bieber",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Solo"
+  },
+  {
+    "title": "Sorry (Extreme Version)",
     "artist": "Justin Bieber",
     "year": 2015,
     "game": "Just Dance 2017",
@@ -6352,11 +6884,33 @@
     "mode": "Solo"
   },
   {
+    "title": "Hips Don't Lie (Sumo Version)",
+    "artist": "Shakira ft. Wyclef Jean",
+    "year": 2005,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
+  },
+  {
+    "title": "Hips Don't Lie (VIPMADE)",
+    "artist": "Shakira ft. Wyclef Jean",
+    "year": 2005,
+    "game": "Just Dance 2017",
+    "releaseDate": "November 24, 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "September",
     "artist": "Earth, Wind & Fire (Equinox Stars)",
     "year": 1978,
     "game": "Just Dance 2017",
     "mode": "Trio"
+  },
+  {
+    "title": "September (Disco Fitness Version)",
+    "artist": "Earth, Wind & Fire (Equinox Stars)",
+    "year": 1978,
+    "game": "Just Dance 2017",
+    "mode": "Solo"
   },
   {
     "title": "Single Ladies (Put a Ring on It)",
@@ -6373,11 +6927,25 @@
     "mode": "Solo"
   },
   {
+    "title": "Don't Stop Me Now (Panda Version)",
+    "artist": "Queen",
+    "year": 1978,
+    "game": "Just Dance 2017",
+    "mode": "Solo"
+  },
+  {
     "title": "Lean On",
     "artist": "Major Lazer & DJ Snake ft. MØ",
     "year": 2015,
     "game": "Just Dance 2017",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Lean On (Scarf Version)",
+    "artist": "Major Lazer & DJ Snake ft. MØ",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Solo"
   },
   {
     "title": "Can’t Feel My Face",
@@ -6429,6 +6997,13 @@
     "mode": "Solo"
   },
   {
+    "title": "RADICAL (Helmet Version)",
+    "artist": "Dyro & Dannic",
+    "year": 2014,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
+  },
+  {
     "title": "La Bicicleta",
     "artist": "Carlos Vives & Shakira",
     "year": 2016,
@@ -6455,6 +7030,13 @@
     "year": 2015,
     "game": "Just Dance 2017",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Watch Me (Whip/Nae Nae) (Family Battle Version)",
+    "artist": "Silentó",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Quartet"
   },
   {
     "title": "I Love Rock ‘N’ Roll",
@@ -6485,11 +7067,26 @@
     "mode": "Duet"
   },
   {
+    "title": "Oishii Oishii (VIPMADE)",
+    "artist": "Wanko Ni Mero Mero",
+    "year": 2016,
+    "game": "Just Dance 2017",
+    "releaseDate": "November 24, 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "Worth It",
     "artist": "Fifth Harmony ft. Kid Ink",
     "year": 2015,
     "game": "Just Dance 2017",
     "mode": "Solo"
+  },
+  {
+    "title": "Worth It (Extreme Crew Version)",
+    "artist": "Fifth Harmony ft. Kid Ink",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Quartet"
   },
   {
     "title": "Last Christmas",
@@ -6527,6 +7124,13 @@
     "mode": "Solo"
   },
   {
+    "title": "Cola Song (Candy Version)",
+    "artist": "INNA ft. J Balvin",
+    "year": 2014,
+    "game": "Just Dance 2017",
+    "mode": "Quartet"
+  },
+  {
     "title": "Little Swing",
     "artist": "AronChupa ft. Little Sis Nora",
     "year": 2016,
@@ -6553,6 +7157,13 @@
     "year": 2012,
     "game": "Just Dance 2017",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Scream & Shout (Extreme Version)",
+    "artist": "will.i.am ft. Britney Spears",
+    "year": 2012,
+    "game": "Just Dance 2017",
+    "mode": "Solo"
   },
   {
     "title": "Tico-Tico No Fubá",
@@ -6590,11 +7201,25 @@
     "mode": "Solo"
   },
   {
+    "title": "What Is Love (Car Version)",
+    "artist": "Haddaway (Ultraclub 90)",
+    "year": 1993,
+    "game": "Just Dance 2017",
+    "mode": "Duet"
+  },
+  {
     "title": "El Tiki",
     "artist": "Maluma",
     "year": 2015,
     "game": "Just Dance 2017",
     "mode": "Duet"
+  },
+  {
+    "title": "El Tiki (Trio Version)",
+    "artist": "Maluma",
+    "year": 2015,
+    "game": "Just Dance 2017",
+    "mode": "Trio"
   },
   {
     "title": "Chiwawa",
@@ -6654,11 +7279,25 @@
     "mode": "Duet"
   },
   {
+    "title": "24K Magic (Extreme Version)",
+    "artist": "Bruno Mars",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
     "title": "Bubble Pop!",
     "artist": "HyunA",
     "year": 2011,
     "game": "Just Dance 2018",
     "mode": "Trio"
+  },
+  {
+    "title": "Bubble Pop! (Bubble Gum Version)",
+    "artist": "HyunA",
+    "year": 2011,
+    "game": "Just Dance 2018",
+    "mode": "Quartet"
   },
   {
     "title": "Make It Jingle",
@@ -6673,6 +7312,13 @@
     "year": 2017,
     "game": "Just Dance 2018",
     "mode": "Quartet"
+  },
+  {
+    "title": "Despacito (Extreme Version)",
+    "artist": "Luis Fonsi & Daddy Yankee",
+    "year": 2017,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
   },
   {
     "title": "Instruction",
@@ -6690,6 +7336,13 @@
   },
   {
     "title": "Side to Side",
+    "artist": "Ariana Grande ft. Nicki Minaj",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "Side to Side (Cycling Version)",
     "artist": "Ariana Grande ft. Nicki Minaj",
     "year": 2016,
     "game": "Just Dance 2018",
@@ -6717,11 +7370,32 @@
     "mode": "Duet"
   },
   {
+    "title": "Chantaje (Subway Version)",
+    "artist": "Shakira ft. Maluma",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Trio"
+  },
+  {
     "title": "Waka Waka (This Time for Africa)",
     "artist": "Shakira",
     "year": 2010,
     "game": "Just Dance 2018",
     "mode": "Trio"
+  },
+  {
+    "title": "Waka Waka (This Time for Africa) (Football Version)",
+    "artist": "Shakira",
+    "year": 2010,
+    "game": "Just Dance 2018",
+    "mode": "Quartet"
+  },
+  {
+    "title": "Waka Waka (This Time for Africa) (Kids Mode)",
+    "artist": "Shakira",
+    "year": 2010,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
   },
   {
     "title": "Daddy Cool",
@@ -6745,6 +7419,13 @@
     "mode": "Solo"
   },
   {
+    "title": "Dharma (Fight Version)",
+    "artist": "Headhunterz & KSHMR",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Duet"
+  },
+  {
     "title": "Itsy Bitsy Teenie Weenie Yellow Polka Dot Bikini",
     "artist": "Brian Hyland (The Sunlight Shakers)",
     "year": 1960,
@@ -6759,11 +7440,25 @@
     "mode": "Solo"
   },
   {
+    "title": "Automaton (Tomato Version)",
+    "artist": "Jamiroquai",
+    "year": 2017,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
     "title": "Tumbum",
     "artist": "Yemi Alade",
     "year": 2016,
     "game": "Just Dance 2018",
     "mode": "Quartet"
+  },
+  {
+    "title": "Tumbum (Extreme Version)",
+    "artist": "Yemi Alade",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
   },
   {
     "title": "In the Hall of the Pixel King",
@@ -6794,7 +7489,21 @@
     "mode": "Duet"
   },
   {
+    "title": "Kissing Strangers (Charleston Version)",
+    "artist": "DNCE ft. Nicki Minaj",
+    "year": 2017,
+    "game": "Just Dance 2018",
+    "mode": "Duet"
+  },
+  {
     "title": "John Wayne",
+    "artist": "Lady Gaga",
+    "year": 2016,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "John Wayne (Extreme Version)",
     "artist": "Lady Gaga",
     "year": 2016,
     "game": "Just Dance 2018",
@@ -6813,6 +7522,13 @@
     "year": 1980,
     "game": "Just Dance 2018",
     "mode": "Quartet"
+  },
+  {
+    "title": "Another One Bites the Dust (Stunt Version)",
+    "artist": "Queen",
+    "year": 1980,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
   },
   {
     "title": "Naughty Girl",
@@ -6865,6 +7581,13 @@
   },
   {
     "title": "Footloose",
+    "artist": "Kenny Loggins (Top Culture)",
+    "year": 1984,
+    "game": "Just Dance 2018",
+    "mode": "Solo"
+  },
+  {
+    "title": "Footloose (Kids Mode)",
     "artist": "Kenny Loggins (Top Culture)",
     "year": 1984,
     "game": "Just Dance 2018",
@@ -7034,6 +7757,15 @@
     "mode": "Duet"
   },
   {
+    "title": "Mi Mi Mi (Sassy Version)",
+    "artist": "Serebro (Hit The Electro Beat)",
+    "year": 2013,
+    "game": "Just Dance 2019",
+    "mode": "Quartet",
+    "difficulty": "Easy",
+    "effort": "Low"
+  },
+  {
     "title": "Where Are You Now?",
     "artist": "Lady Leshurr ft. Wiley",
     "year": 2016,
@@ -7041,11 +7773,39 @@
     "mode": "Trio"
   },
   {
+    "title": "Where Are You Now? (Hide-and-Seek Version)",
+    "artist": "Lady Leshurr ft. Wiley",
+    "year": 2016,
+    "game": "Just Dance 2019",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Moderate"
+  },
+  {
     "title": "Bang Bang Bang",
     "artist": "BIGBANG",
     "year": 2015,
     "game": "Just Dance 2019",
     "mode": "Trio"
+  },
+  {
+    "title": "Bang Bang Bang (Extreme Version)",
+    "artist": "BIGBANG",
+    "year": 2015,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
+    "title": "Bang Bang Bang (VIPMADE)",
+    "artist": "BIGBANG",
+    "year": 2015,
+    "game": "Just Dance 2019",
+    "releaseDate": "December 20, 2018",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Shinobi Cat",
@@ -7067,6 +7827,15 @@
     "year": 2013,
     "game": "Just Dance 2019",
     "mode": "Trio"
+  },
+  {
+    "title": "Work Work (Extreme Version)",
+    "artist": "Britney Spears",
+    "year": 2013,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Rhythm of the Night",
@@ -7132,6 +7901,15 @@
     "mode": "Duet"
   },
   {
+    "title": "Irish Meadow Dance (Kids Mode)",
+    "artist": "O'Callagan's Orchestra",
+    "year": 2015,
+    "game": "Just Dance 2019",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Low"
+  },
+  {
     "title": "Narco",
     "artist": "Blasterjaxx & Timmy Trumpet",
     "year": 2017,
@@ -7151,6 +7929,15 @@
     "year": 2017,
     "game": "Just Dance 2019",
     "mode": "Duet"
+  },
+  {
+    "title": "Bum Bum Tam Tam (Mad Scientist Version)",
+    "artist": "MC Fioti, Future, J Balvin, Stefflon Don, Juan Magan",
+    "year": 2017,
+    "game": "Just Dance 2019",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Low"
   },
   {
     "title": "Tales of the Desert",
@@ -7181,11 +7968,29 @@
     "mode": "Quartet"
   },
   {
+    "title": "Finesse (Remix) (Extreme Version)",
+    "artist": "Bruno Mars ft. Cardi B",
+    "year": 2018,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "New Rules",
     "artist": "Dua Lipa",
     "year": 2017,
     "game": "Just Dance 2019",
     "mode": "Solo"
+  },
+  {
+    "title": "New Rules (Extreme Version)",
+    "artist": "Dua Lipa",
+    "year": 2017,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Havana",
@@ -7195,11 +8000,30 @@
     "mode": "Solo"
   },
   {
+    "title": "Havana (Tango Version)",
+    "artist": "Camila Cabello",
+    "year": 2017,
+    "game": "Just Dance 2019",
+    "mode": "Duet",
+    "difficulty": "Hard",
+    "effort": "Moderate"
+  },
+  {
     "title": "New Reality",
     "artist": "Gigi Rowe",
     "year": 2018,
     "game": "Just Dance 2019",
     "mode": "Solo"
+  },
+  {
+    "title": "New Reality (VIPMADE)",
+    "artist": "Gigi Rowe",
+    "year": 2018,
+    "game": "Just Dance 2019",
+    "releaseDate": "December 21, 2018",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Low"
   },
   {
     "title": "New World",
@@ -7216,6 +8040,15 @@
     "mode": "Duet"
   },
   {
+    "title": "Mad Love (Extreme Version)",
+    "artist": "Sean Paul & David Guetta ft. Becky G",
+    "year": 2018,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "A Little Party Never Killed Nobody (All We Got)",
     "artist": "Fergie ft. Q-Tip, GoonRock",
     "year": 2013,
@@ -7223,11 +8056,29 @@
     "mode": "Solo"
   },
   {
+    "title": "A Little Party Never Killed Nobody (All We Got) (Twenties Version)",
+    "artist": "Fergie ft. Q-Tip, GoonRock",
+    "year": 2013,
+    "game": "Just Dance 2019",
+    "mode": "Trio",
+    "difficulty": "Hard",
+    "effort": "Moderate"
+  },
+  {
     "title": "OMG",
     "artist": "Arash ft. Snoop Dogg",
     "year": 2016,
     "game": "Just Dance 2019",
     "mode": "Trio"
+  },
+  {
+    "title": "OMG (Extreme Version)",
+    "artist": "Arash ft. Snoop Dogg",
+    "year": 2016,
+    "game": "Just Dance 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Pac-Man",
@@ -7242,6 +8093,15 @@
     "year": 2017,
     "game": "Just Dance 2019",
     "mode": "Solo"
+  },
+  {
+    "title": "Water Me (Tennis Version)",
+    "artist": "Lizzo",
+    "year": 2017,
+    "game": "Just Dance 2019",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Moderate"
   },
   {
     "title": "Not Your Ordinary",
@@ -7391,6 +8251,16 @@
     "mode": "Solo"
   },
   {
+    "title": "Swish Swish (World Cup Champion Version)",
+    "artist": "Katy Perry ft. Nicki Minaj",
+    "year": 2017,
+    "game": "Just Dance 2019",
+    "releaseDate": "January 17, 2019",
+    "mode": "Duet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "7 rings",
     "artist": "Ariana Grande",
     "year": 2019,
@@ -7398,11 +8268,29 @@
     "mode": "Trio"
   },
   {
+    "title": "7 Rings (Extreme Version)",
+    "artist": "Ariana Grande",
+    "year": 2019,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Old Town Road (Remix)",
     "artist": "Lil Nas X ft. Billy Ray Cyrus",
     "year": 2019,
     "game": "Just Dance 2020",
     "mode": "Solo"
+  },
+  {
+    "title": "Old Town Road (Remix) (Line Dance Version)",
+    "artist": "Lil Nas X ft. Billy Ray Cyrus",
+    "year": 2019,
+    "game": "Just Dance 2020",
+    "mode": "Trio",
+    "difficulty": "Easy",
+    "effort": "Low"
   },
   {
     "title": "Skibidi",
@@ -7433,11 +8321,29 @@
     "mode": "Solo"
   },
   {
+    "title": "Sushi (Extreme Version)",
+    "artist": "Merk & Kremont",
+    "year": 2018,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Kill This Love",
     "artist": "BLACKPINK",
     "year": 2019,
     "game": "Just Dance 2020",
     "mode": "Quartet"
+  },
+  {
+    "title": "Kill This Love (Extreme Version)",
+    "artist": "BLACKPINK",
+    "year": 2019,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Baby Shark",
@@ -7454,11 +8360,29 @@
     "mode": "Solo"
   },
   {
+    "title": "Taki Taki (Caveman Version)",
+    "artist": "DJ Snake ft. Selena Gomez, Ozuna, Cardi B",
+    "year": 2018,
+    "game": "Just Dance 2020",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Moderate"
+  },
+  {
     "title": "Rain Over Me",
     "artist": "Pitbull ft. Marc Anthony",
     "year": 2011,
     "game": "Just Dance 2020",
     "mode": "Solo"
+  },
+  {
+    "title": "Rain Over Me (Extreme Version)",
+    "artist": "Pitbull ft. Marc Anthony",
+    "year": 2011,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Tel Aviv",
@@ -7483,6 +8407,15 @@
     "mode": "Solo"
   },
   {
+    "title": "bad guy (Billie Version)",
+    "artist": "Billie Eilish",
+    "year": 2019,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
+  },
+  {
     "title": "High Hopes",
     "artist": "Panic! At the Disco",
     "year": 2018,
@@ -7504,6 +8437,15 @@
     "mode": "Solo"
   },
   {
+    "title": "God Is a Woman (Goddess Version)",
+    "artist": "Ariana Grande",
+    "year": 2018,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Low"
+  },
+  {
     "title": "I Like It",
     "artist": "Cardi B, Bad Bunny & J Balvin",
     "year": 2018,
@@ -7523,6 +8465,15 @@
     "year": 2011,
     "game": "Just Dance 2020",
     "mode": "Trio"
+  },
+  {
+    "title": "I Am The Best (Extreme Version)",
+    "artist": "2NE1",
+    "year": 2011,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Fit But You Know It",
@@ -7553,6 +8504,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Bangarang (Extreme Version)",
+    "artist": "Skrillex ft. Sirah",
+    "year": 2011,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "FANCY",
     "artist": "TWICE",
     "year": 2019,
@@ -7567,6 +8527,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Soy Yo (Snake Version)",
+    "artist": "Bomba Estéreo",
+    "year": 2015,
+    "game": "Just Dance 2020",
+    "mode": "Duet",
+    "difficulty": "Medium",
+    "effort": "Moderate"
+  },
+  {
     "title": "Le Bal Masqué",
     "artist": "La Compagnie Créole (Dr. Creole)",
     "year": 1984,
@@ -7579,6 +8548,15 @@
     "year": 2010,
     "game": "Just Dance 2020",
     "mode": "Quartet"
+  },
+  {
+    "title": "The Time (Dirty Bit) (Extreme Version)",
+    "artist": "The Black Eyed Peas",
+    "year": 2010,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "My New Swag (我的新衣)",
@@ -7621,6 +8599,15 @@
     "year": 2019,
     "game": "Just Dance 2020",
     "mode": "Solo"
+  },
+  {
+    "title": "Talk (Extreme Version)",
+    "artist": "Khalid",
+    "year": 2019,
+    "game": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Bad Boy",
@@ -7853,6 +8840,16 @@
     "mode": "Trio"
   },
   {
+    "title": "New World (World Cup Champion Version)",
+    "artist": "Krewella, Yellow Claw ft. Vava",
+    "year": 2017,
+    "game": "Just Dance 2020",
+    "releaseDate": "July 9, 2020",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Adore You",
     "artist": "Harry Styles",
     "year": 2019,
@@ -7888,6 +8885,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Blinding Lights (Extreme Version)",
+    "artist": "The Weeknd",
+    "year": 2019,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Boy, You Can Keep It",
     "artist": "Alex Newell",
     "year": 2020,
@@ -7900,6 +8906,15 @@
     "year": 2018,
     "game": "Just Dance 2021",
     "mode": "Solo"
+  },
+  {
+    "title": "Buscando (Extreme Version)",
+    "artist": "Good Times Ahead & Jenn Morel",
+    "year": 2018,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Dance Monkey",
@@ -7930,11 +8945,29 @@
     "mode": "Solo"
   },
   {
+    "title": "Don't Start Now (Extreme Version)",
+    "artist": "Dua Lipa",
+    "year": 2019,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Feel Special",
     "artist": "Twice",
     "year": 2019,
     "game": "Just Dance 2021",
     "mode": "Trio"
+  },
+  {
+    "title": "Feel Special (Extreme Version)",
+    "artist": "TWICE",
+    "year": 2019,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Flash (Just Dance Version)",
@@ -7993,11 +9026,38 @@
     "mode": "Trio"
   },
   {
+    "title": "Juice (Yummy Version)",
+    "artist": "Lizzo",
+    "year": 2019,
+    "game": "Just Dance 2021",
+    "mode": "Trio",
+    "difficulty": "Medium",
+    "effort": "Low"
+  },
+  {
+    "title": "Juice (VIPMADE)",
+    "artist": "Lizzo",
+    "year": 2019,
+    "game": "Just Dance 2021",
+    "mode": "Trio",
+    "difficulty": "Hard",
+    "effort": "Moderate"
+  },
+  {
     "title": "Kick It",
     "artist": "NCT 127",
     "year": 2020,
     "game": "Just Dance 2021",
     "mode": "Quartet"
+  },
+  {
+    "title": "Kick It (Extreme Version)",
+    "artist": "NCT 127",
+    "year": 2020,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Kulikitaka",
@@ -8049,6 +9109,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Rare (Fairy Version)",
+    "artist": "Selena Gomez",
+    "year": 2020,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Low"
+  },
+  {
     "title": "Runaway (U & I)",
     "artist": "Galantis",
     "year": 2014,
@@ -8061,6 +9130,15 @@
     "year": 1997,
     "game": "Just Dance 2021",
     "mode": "Trio"
+  },
+  {
+    "title": "Samba De Janeiro (Samba Version)",
+    "artist": "Bellini (Ultraclub 90)",
+    "year": 1997,
+    "game": "Just Dance 2021",
+    "mode": "Duet",
+    "difficulty": "Hard",
+    "effort": "Intense"
   },
   {
     "title": "Say So",
@@ -8084,6 +9162,15 @@
     "mode": "Quartet"
   },
   {
+    "title": "Temperature (Extreme Version)",
+    "artist": "Sean Paul",
+    "year": 2005,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "The Other Side",
     "artist": "SZA & Justin Timberlake",
     "year": 2020,
@@ -8103,6 +9190,15 @@
     "year": 2011,
     "game": "Just Dance 2021",
     "mode": "Solo"
+  },
+  {
+    "title": "Till The World Ends (Extreme Version)",
+    "artist": "Britney Spears (The Girly Team)",
+    "year": 2011,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "U.S.A.",
@@ -8133,11 +9229,29 @@
     "mode": "Trio"
   },
   {
+    "title": "Without Me (Extreme Version)",
+    "artist": "Eminem",
+    "year": 2002,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Yameen Yasar",
     "artist": "DJ Absi",
     "year": 2020,
     "game": "Just Dance 2021",
     "mode": "Trio"
+  },
+  {
+    "title": "Yameen Yasar (Extreme Version)",
+    "artist": "DJ Absi",
+    "year": 2020,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "YO LE LLEGO",
@@ -8217,6 +9331,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Calypso (VIPMADE)",
+    "artist": "Luis Fonsi & Stefflon Don",
+    "year": 2018,
+    "game": "Just Dance 2021",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Low"
+  },
+  {
     "title": "À la Folie",
     "artist": "Julien Granel & Lena Situations",
     "year": 2021,
@@ -8246,11 +9369,29 @@
     "mode": "Solo"
   },
   {
+    "title": "Black Mamba (Extreme Version)",
+    "artist": "aespa",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "BOOMBAYAH",
     "artist": "BLACKPINK",
     "year": 2016,
     "game": "Just Dance 2022",
     "mode": "Solo"
+  },
+  {
+    "title": "BOOMBAYAH (Extreme Version)",
+    "artist": "BLACKPINK",
+    "year": 2016,
+    "game": "Just Dance 2022",
+    "mode": "Quartet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Boss Witch (Ubisoft clean cover)",
@@ -8275,6 +9416,15 @@
     "region": "Not South Korea"
   },
   {
+    "title": "Buttons (Night Version)",
+    "artist": "The Pussycat Dolls ft. Snoop Dogg",
+    "year": 2006,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Low"
+  },
+  {
     "title": "Chacarron",
     "artist": "El Chombo",
     "year": 2005,
@@ -8289,6 +9439,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Chandelier (Contemporary Dance Version)",
+    "artist": "Sia",
+    "year": 2014,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Low"
+  },
+  {
     "title": "China",
     "artist": "Anuel AA, Daddy Yankee, Karol G, Ozuna & J Balvin",
     "year": 2019,
@@ -8296,11 +9455,29 @@
     "mode": "Trio"
   },
   {
+    "title": "China (DJ Version)",
+    "artist": "Anuel AA, Daddy Yankee, Karol G, Ozuna & J Balvin",
+    "year": 2019,
+    "game": "Just Dance 2022",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Low"
+  },
+  {
     "title": "Don’t Go Yet",
     "artist": "Camila Cabello",
     "year": 2021,
     "game": "Just Dance 2022",
     "mode": "Quartet"
+  },
+  {
+    "title": "Don't Go Yet (Alternate Version)",
+    "artist": "Camila Cabello",
+    "year": 2021,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Low"
   },
   {
     "title": "Flash Pose",
@@ -8329,6 +9506,15 @@
     "year": 2020,
     "game": "Just Dance 2022",
     "mode": "Solo"
+  },
+  {
+    "title": "Girl Like Me (Extreme Version)",
+    "artist": "Black Eyed Peas & Shakira",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Moderate"
   },
   {
     "title": "good 4 u",
@@ -8373,6 +9559,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Jopping (Extreme Version)",
+    "artist": "SuperM",
+    "year": 2019,
+    "game": "Just Dance 2022",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Judas",
     "artist": "Lady Gaga",
     "year": 2011,
@@ -8402,11 +9597,29 @@
     "mode": "Trio"
   },
   {
+    "title": "Level Up (VIPMADE)",
+    "artist": "Ciara",
+    "year": 2019,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Medium",
+    "effort": "Intense"
+  },
+  {
     "title": "Levitating",
     "artist": "Dua Lipa",
     "year": 2020,
     "game": "Just Dance 2022",
     "mode": "Solo"
+  },
+  {
+    "title": "Levitating (Extreme Version)",
+    "artist": "Dua Lipa",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Love Story (Taylor’s Version)",
@@ -8421,6 +9634,15 @@
     "year": 2020,
     "game": "Just Dance 2022",
     "mode": "Duet"
+  },
+  {
+    "title": "Mood (Alternate Version)",
+    "artist": "24kGoldn ft. Iann Dior",
+    "year": 2020,
+    "game": "Just Dance 2022",
+    "mode": "Trio",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "Mr. Blue Sky",
@@ -8442,6 +9664,15 @@
     "year": 2021,
     "game": "Just Dance 2022",
     "mode": "Solo"
+  },
+  {
+    "title": "Nails, Hair, Hips, Heels (Official Choreo)",
+    "artist": "Todrick Hall",
+    "year": 2019,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
   },
   {
     "title": "POP/STARS",
@@ -8480,6 +9711,15 @@
     "mode": "Trio"
   },
   {
+    "title": "Run the World (Girls) (Extreme Version)",
+    "artist": "Beyoncé",
+    "year": 2011,
+    "game": "Just Dance 2022",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Save Your Tears (Remix)",
     "artist": "The Weeknd & Ariana Grande",
     "year": 2021,
@@ -8492,6 +9732,15 @@
     "year": 2021,
     "game": "Just Dance 2022",
     "mode": "Duet"
+  },
+  {
+    "title": "Shoutout (VIPMADE)",
+    "artist": "Lisa Pac",
+    "year": 2021,
+    "game": "Just Dance 2022",
+    "mode": "Duet",
+    "difficulty": "Hard",
+    "effort": "Intense"
   },
   {
     "title": "Smalltown Boy",
@@ -8513,6 +9762,15 @@
     "year": 2017,
     "game": "Just Dance 2022",
     "mode": "Solo"
+  },
+  {
+    "title": "Sua Cara (Limo Version)",
+    "artist": "Major Lazer ft. Anitta & Pabllo Vittar",
+    "year": 2017,
+    "game": "Just Dance 2022",
+    "mode": "Duet",
+    "difficulty": "Easy",
+    "effort": "Low"
   },
   {
     "title": "Think About Things",
@@ -9581,6 +10839,15 @@
     "releaseDate": "March 10, 2016"
   },
   {
+    "title": "Taste The Feeling (Olympic Version)",
+    "artist": "Avicii vs. Conrad Sewell",
+    "year": 2016,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2016",
+    "releaseDate": "July 11, 2016",
+    "mode": "Solo"
+  },
+  {
     "title": "Crying Blood",
     "artist": "V V Brown",
     "year": 2008,
@@ -10094,6 +11361,15 @@
     "mode": "Solo",
     "originalGame": "Just Dance 2",
     "releaseDate": "August 10, 2017"
+  },
+  {
+    "title": "Wake Me Up Before You Go-Go (From the Emoji Movie)",
+    "artist": "Wham!",
+    "year": 1984,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2017",
+    "releaseDate": "July 20, 2017",
+    "mode": "Duet"
   },
   {
     "title": "All About Us",
@@ -10807,6 +12083,15 @@
     "releaseDate": "October 20, 2018"
   },
   {
+    "title": "Naughty Girl (Rabbid Peach Version)",
+    "artist": "Beyoncé",
+    "year": 2003,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2018",
+    "releaseDate": "April 12, 2018",
+    "mode": "Solo"
+  },
+  {
     "title": "Pixie Land",
     "artist": "The Sunlight Shakers",
     "year": 2010,
@@ -10967,6 +12252,16 @@
     "mode": "Solo",
     "originalGame": "Just Dance Unlimited Exclusive",
     "releaseDate": "October 31, 2019"
+  },
+  {
+    "title": "Boys (Voguing Version)",
+    "artist": "Lizzo",
+    "year": 2018,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2020",
+    "mode": "Solo",
+    "difficulty": "Hard",
+    "effort": "Moderate"
   },
   {
     "title": "Soul Bossa Nova",
@@ -12193,6 +13488,26 @@
     "releaseDate": "July 12, 2022"
   },
   {
+    "title": "All You Gotta Do (Is Just Dance) (VIPMADE)",
+    "artist": "The Just Dance Band",
+    "year": 2017,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2018",
+    "releaseDate": "November 23, 2017",
+    "mode": "Solo"
+  },
+  {
+    "title": "Medicina (Extreme Version)",
+    "artist": "Anitta",
+    "year": 2018,
+    "game": "Just Dance Unlimited",
+    "originalGame": "Just Dance 2019",
+    "releaseDate": "June 27, 2019",
+    "mode": "Solo",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
     "title": "Girls Just Want to Have Fun",
     "artist": "Cyndi Lauper",
     "game": "Just Dance",
@@ -12415,6 +13730,27 @@
   {
     "title": "When I Grow Up",
     "artist": "The Pussycat Dolls",
+    "game": "Just Dance 2",
+    "mode": "Solo"
+  },
+  {
+    "title": "When I Grow Up (Contest Winner - Sam)",
+    "artist": "The Pussycat Dolls",
+    "year": 2008,
+    "game": "Just Dance 2",
+    "mode": "Solo"
+  },
+  {
+    "title": "When I Grow Up (Contest Winner - Mandy Davies)",
+    "artist": "The Pussycat Dolls",
+    "year": 2008,
+    "game": "Just Dance 2",
+    "mode": "Solo"
+  },
+  {
+    "title": "When I Grow Up (Contest Winner - Liana Veda)",
+    "artist": "The Pussycat Dolls",
+    "year": 2008,
     "game": "Just Dance 2",
     "mode": "Solo"
   },
@@ -12740,6 +14076,15 @@
     "mode": "Solo"
   },
   {
+    "title": "Barbra Streisand (Extreme Version)",
+    "artist": "Duck Sauce",
+    "year": 2010,
+    "game": "Just Dance 3",
+    "mode": "Solo",
+    "difficulty": "3",
+    "effort": "3"
+  },
+  {
     "title": "Venus",
     "artist": "Bananarama",
     "game": "Just Dance 3",
@@ -12929,11 +14274,29 @@
     "mode": "Solo"
   },
   {
+    "title": "Giddy on Up (Giddy on Out) (Hold My Hand)",
+    "artist": "Laura Bell Bundy",
+    "year": 2010,
+    "game": "Just Dance 3",
+    "mode": "Hold My Hand",
+    "difficulty": "1",
+    "effort": "1"
+  },
+  {
     "title": "I Was Made For Lovin' You",
     "artist": "Kiss",
     "year": 1979,
     "game": "Just Dance 3",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "I Was Made For Lovin' You (Sweat Version)",
+    "artist": "Kiss",
+    "year": 1979,
+    "game": "Just Dance 3",
+    "mode": "Solo",
+    "difficulty": "2",
+    "effort": "3"
   },
   {
     "title": "Tightrope",
@@ -13053,10 +14416,26 @@
     "mode": "Solo"
   },
   {
+    "title": "Call Me Maybe (Alternate Version)",
+    "artist": "Carly Rae Jepsen",
+    "year": 2011,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "3"
+  },
+  {
     "title": "Good Feeling",
     "artist": "Flo Rida",
     "game": "Just Dance 4",
     "mode": "Solo"
+  },
+  {
+    "title": "Good Feeling (Extreme Version)",
+    "artist": "Flo Rida",
+    "year": 2011,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "4"
   },
   {
     "title": "Rock Lobster",
@@ -13113,6 +14492,14 @@
     "mode": "Duet"
   },
   {
+    "title": "Everybody Needs Somebody To Love (Hold My Hand)",
+    "artist": "The Blues Brothers (Dancing Bros.)",
+    "year": 1980,
+    "game": "Just Dance 4",
+    "mode": "Hold My Hand",
+    "difficulty": "1"
+  },
+  {
     "title": "Crazy Little Thing",
     "artist": "Anja",
     "game": "Just Dance 4",
@@ -13129,6 +14516,14 @@
     "artist": "2 Unlimited",
     "game": "Just Dance 4",
     "mode": "Duet"
+  },
+  {
+    "title": "Tribal Dance (Katana Version)",
+    "artist": "2 Unlimited",
+    "year": 1993,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "1"
   },
   {
     "title": "On the Floor",
@@ -13159,6 +14554,14 @@
     "artist": "Kat DeLuna ft. Busta Rhymes",
     "game": "Just Dance 4",
     "mode": "Duet"
+  },
+  {
+    "title": "Run The Show (Extreme Version)",
+    "artist": "Kat DeLuna ft. Busta Rhymes",
+    "year": 2007,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "4"
   },
   {
     "title": "Livin’ la Vida Loca",
@@ -13221,6 +14624,14 @@
     "mode": "Dance Crew"
   },
   {
+    "title": "Jailhouse Rock (Line Dance Version)",
+    "artist": "Elvis Presley",
+    "year": 1957,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "3"
+  },
+  {
     "title": "Moves Like Jagger",
     "artist": "Maroon 5 ft. Christina Aguilera",
     "game": "Just Dance 4",
@@ -13233,6 +14644,14 @@
     "mode": "Duet"
   },
   {
+    "title": "Can't Take My Eyes Off You (Wrestler Version)",
+    "artist": "Boys Town Gang",
+    "year": 1982,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "3"
+  },
+  {
     "title": "Make The Party (Don’t Stop)",
     "artist": "Bunny Beatz ft. Liquid",
     "game": "Just Dance 4",
@@ -13243,6 +14662,14 @@
     "artist": "Will Smith",
     "game": "Just Dance 4",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Wild Wild West (Extreme Version)",
+    "artist": "Will Smith",
+    "year": 1999,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "4"
   },
   {
     "title": "Istanbul (Not Constantinople)",
@@ -13297,6 +14724,14 @@
     "artist": "Rihanna ft. Jay-Z",
     "game": "Just Dance 4",
     "mode": "Solo"
+  },
+  {
+    "title": "Umbrella (With an Umbrella)",
+    "artist": "Rihanna ft. Jay-Z",
+    "year": 2007,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "2"
   },
   {
     "title": "Cercavo Amore",
@@ -13371,10 +14806,34 @@
     "mode": "Duet"
   },
   {
+    "title": "What Makes You Beautiful (Extreme Version)",
+    "artist": "One Direction",
+    "year": 2011,
+    "game": "Just Dance 4",
+    "mode": "Solo",
+    "difficulty": "4"
+  },
+  {
     "title": "Kiss You",
     "artist": "One Direction",
     "game": "Just Dance 2014",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Kiss You (Sweat Version)",
+    "artist": "One Direction",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Medium"
+  },
+  {
+    "title": "Kiss You (6-Player)",
+    "artist": "One Direction",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "6 Player",
+    "difficulty": "Medium"
   },
   {
     "title": "Just Dance",
@@ -13383,10 +14842,34 @@
     "mode": "Solo"
   },
   {
+    "title": "Just Dance (Sweat Version)",
+    "artist": "Lady Gaga ft. Colby O' Donis",
+    "year": 2008,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Medium"
+  },
+  {
+    "title": "Just Dance (On-Stage Mode)",
+    "artist": "Lady Gaga ft. Colby O' Donis",
+    "year": 2008,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Hard"
+  },
+  {
     "title": "Careless Whisper",
     "artist": "George Michael",
     "game": "Just Dance 2014",
     "mode": "Duet"
+  },
+  {
+    "title": "Careless Whisper (On-Stage Mode)",
+    "artist": "George Michael",
+    "year": 1985,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Medium"
   },
   {
     "title": "C’mon",
@@ -13431,10 +14914,26 @@
     "mode": "Solo"
   },
   {
+    "title": "Gentleman (Sweat Version)",
+    "artist": "PSY",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Easy"
+  },
+  {
     "title": "Blurred Lines",
     "artist": "Robin Thicke ft. Pharrell Williams",
     "game": "Just Dance 2014",
     "mode": "Duet"
+  },
+  {
+    "title": "Blurred Lines (Extreme Version)",
+    "artist": "Robin Thicke ft. Pharrell Williams",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
   },
   {
     "title": "Ghostbusters",
@@ -13443,10 +14942,26 @@
     "mode": "Dance Crew"
   },
   {
+    "title": "Ghostbusters (Sweat Version)",
+    "artist": "Ray Parker Jr.",
+    "year": 1984,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Medium"
+  },
+  {
     "title": "I Will Survive",
     "artist": "Gloria Gaynor",
     "game": "Just Dance 2014",
     "mode": "Solo"
+  },
+  {
+    "title": "I Will Survive (On-Stage Mode)",
+    "artist": "Gloria Gaynor",
+    "year": 1978,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Easy"
   },
   {
     "title": "thatPower",
@@ -13455,10 +14970,34 @@
     "mode": "Solo"
   },
   {
+    "title": "#thatPOWER (Extreme Version)",
+    "artist": "will.i.am ft. Justin Bieber",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
+  },
+  {
+    "title": "#thatPOWER (On-Stage Mode)",
+    "artist": "will.i.am ft. Justin Bieber",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Hard"
+  },
+  {
     "title": "Limbo",
     "artist": "Daddy Yankee",
     "game": "Just Dance 2014",
     "mode": "Duet"
+  },
+  {
+    "title": "Limbo (Sweat Version)",
+    "artist": "Daddy Yankee",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Easy"
   },
   {
     "title": "The Way",
@@ -13473,6 +15012,14 @@
     "mode": "Dance Crew"
   },
   {
+    "title": "Pound The Alarm (Extreme Version)",
+    "artist": "Nicki Minaj",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
+  },
+  {
     "title": "Love Boat",
     "artist": "Jack Jones ft. (Frankie Bostello)",
     "game": "Just Dance 2014",
@@ -13485,16 +15032,40 @@
     "mode": "Solo"
   },
   {
+    "title": "Troublemaker (Sweat Version)",
+    "artist": "Olly Murs ft. Flo Rida",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Easy"
+  },
+  {
     "title": "Applause",
     "artist": "Lady Gaga",
     "game": "Just Dance 2014",
     "mode": "Solo"
   },
   {
+    "title": "Applause (Official Choreo)",
+    "artist": "Lady Gaga",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hard"
+  },
+  {
     "title": "Blame It on the Boogie",
     "artist": "Mick Jackson",
     "game": "Just Dance 2014",
     "mode": "Dance Crew"
+  },
+  {
+    "title": "Blame It on the Boogie (Extreme Version)",
+    "artist": "Mick Jackson",
+    "year": 1978,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
   },
   {
     "title": "Feel So Right",
@@ -13515,6 +15086,14 @@
     "mode": "Solo"
   },
   {
+    "title": "Fine China (Extreme Version)",
+    "artist": "Chris Brown",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
+  },
+  {
     "title": "Just A Gigolo",
     "artist": "Louis Prima",
     "game": "Just Dance 2014",
@@ -13527,16 +15106,48 @@
     "mode": "Solo"
   },
   {
+    "title": "Where Have You Been (Extreme Version)",
+    "artist": "Rihanna",
+    "year": 2011,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hardest"
+  },
+  {
+    "title": "Where Have You Been (On-Stage Mode)",
+    "artist": "Rihanna",
+    "year": 2011,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Hard"
+  },
+  {
     "title": "María",
     "artist": "Ricky Martin",
     "game": "Just Dance 2014",
     "mode": "Solo"
   },
   {
+    "title": "María (Sweat Version)",
+    "artist": "Ricky Martin",
+    "year": 1995,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Medium"
+  },
+  {
     "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
     "artist": "ABBA",
     "game": "Just Dance 2014",
     "mode": "Solo"
+  },
+  {
+    "title": "Gimme! Gimme! Gimme! (A Man After Midnight) (On-Stage Mode)",
+    "artist": "ABBA",
+    "year": 1979,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Medium"
   },
   {
     "title": "Moskau",
@@ -13557,6 +15168,14 @@
     "mode": "Solo"
   },
   {
+    "title": "Follow the Leader (Sweat Version)",
+    "artist": "Wisin & Yandel ft. Jennifer Lopez",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Medium"
+  },
+  {
     "title": "Y.M.C.A.",
     "artist": "Village People",
     "game": "Just Dance 2014",
@@ -13569,6 +15188,14 @@
     "mode": "Duet"
   },
   {
+    "title": "Turn Up The Love (Sumo Version)",
+    "artist": "Far East Movement ft. Cover Drive",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Quartet",
+    "difficulty": "Medium"
+  },
+  {
     "title": "Could You Be Loved",
     "artist": "Bob Marley",
     "game": "Just Dance 2014",
@@ -13579,6 +15206,14 @@
     "artist": "Nicki Minaj",
     "game": "Just Dance 2014",
     "mode": "Solo"
+  },
+  {
+    "title": "Starships (Charleston Version)",
+    "artist": "Nicki Minaj",
+    "year": 2012,
+    "game": "Just Dance 2014",
+    "mode": "Duet",
+    "difficulty": "Hard"
   },
   {
     "title": "99 Luftballons",
@@ -13599,6 +15234,22 @@
     "mode": "Solo"
   },
   {
+    "title": "I Kissed a Girl (Sweat Version)",
+    "artist": "Katy Perry",
+    "year": 2008,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Easy"
+  },
+  {
+    "title": "I Kissed a Girl (On-Stage Mode)",
+    "artist": "Katy Perry",
+    "year": 2008,
+    "game": "Just Dance 2014",
+    "mode": "Trio",
+    "difficulty": "Easy"
+  },
+  {
     "title": "Isidora",
     "artist": "Bog Bog Orkestar",
     "game": "Just Dance 2014",
@@ -13611,10 +15262,26 @@
     "mode": "Solo"
   },
   {
+    "title": "Rich Girl (With a Chair)",
+    "artist": "Gwen Stefani ft. Eve",
+    "year": 2004,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Hard"
+  },
+  {
     "title": "It’s You",
     "artist": "Duck Sauce",
     "game": "Just Dance 2014",
     "mode": "Solo"
+  },
+  {
+    "title": "It's You (Sweat Version)",
+    "artist": "Duck Sauce",
+    "year": 2013,
+    "game": "Just Dance 2014",
+    "mode": "Solo",
+    "difficulty": "Easy"
   },
   {
     "title": "Miss Understood",
@@ -13713,16 +15380,42 @@
     "mode": "Solo"
   },
   {
+    "title": "Happy (Sing Along)",
+    "artist": "Pharrell Williams",
+    "year": 2013,
+    "game": "Just Dance 2015",
+    "mode": "Trio"
+  },
+  {
+    "title": "Happy (VIPMADE)",
+    "artist": "Pharrel Williams",
+    "year": 2013,
+    "game": "Just Dance 2015"
+  },
+  {
     "title": "The Fox (What Does The Fox Say?)",
     "artist": "Ylvis",
     "game": "Just Dance 2015",
     "mode": "Trio"
   },
   {
+    "title": "The Fox (What Does The Fox Say?) (Campfire Dance)",
+    "artist": "Ylvis",
+    "year": 2013,
+    "game": "Just Dance 2015",
+    "mode": "Duet"
+  },
+  {
     "title": "Love Me Again",
     "artist": "John Newman",
     "game": "Just Dance 2015",
     "mode": "Solo"
+  },
+  {
+    "title": "Love Me Again (VIPMADE)",
+    "artist": "John Newman",
+    "year": 2013,
+    "game": "Just Dance 2015"
   },
   {
     "title": "Dark Horse",
@@ -13743,10 +15436,29 @@
     "mode": "Duet"
   },
   {
+    "title": "Me And My Broken Heart (VIPMADE)",
+    "artist": "Rixton",
+    "year": 2014,
+    "game": "Just Dance 2015"
+  },
+  {
     "title": "I Love It",
     "artist": "Icona Pop ft. Charli XCX",
     "game": "Just Dance 2015",
     "mode": "Solo"
+  },
+  {
+    "title": "I Love It (Guards Dance)",
+    "artist": "Icona Pop ft. Charli XCX",
+    "year": 2012,
+    "game": "Just Dance 2015",
+    "mode": "Duet"
+  },
+  {
+    "title": "I Love It (VIPMADE)",
+    "artist": "Icona Pop ft. Charli XCX",
+    "year": 2012,
+    "game": "Just Dance 2015"
   },
   {
     "title": "Tetris",
@@ -13761,10 +15473,24 @@
     "mode": "Dance Crew"
   },
   {
+    "title": "Walk This Way (Extreme Version)",
+    "artist": "Run DMC & Aerosmith",
+    "year": 1986,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
+  },
+  {
     "title": "Let It Go",
     "artist": "Idina Menzel ft. (Disney’s Frozen)",
     "game": "Just Dance 2015",
     "mode": "Duet"
+  },
+  {
+    "title": "Let It Go (Sing Along)",
+    "artist": "Idina Menzel (Disney's Frozen)",
+    "year": 2013,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
   },
   {
     "title": "Built For This",
@@ -13785,6 +15511,13 @@
     "mode": "Solo"
   },
   {
+    "title": "Summer (Fitness Dance)",
+    "artist": "Calvin Harris",
+    "year": 2014,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
+  },
+  {
     "title": "Don’t Worry Be Happy",
     "artist": "Bobby McFerrin ft. (The Bench Men)",
     "game": "Just Dance 2015",
@@ -13797,10 +15530,22 @@
     "mode": "Dance Crew"
   },
   {
+    "title": "Macarena (VIPMADE)",
+    "artist": "Los Del Rio (The Girly Team)",
+    "year": 1995,
+    "game": "Just Dance 2015"
+  },
+  {
     "title": "Black Widow",
     "artist": "Iggy Azalea ft. Rita Ora",
     "game": "Just Dance 2015",
     "mode": "Solo"
+  },
+  {
+    "title": "Black Widow (VIPMADE)",
+    "artist": "Iggy Azalea ft. Rita Ora",
+    "year": 2014,
+    "game": "Just Dance 2015"
   },
   {
     "title": "Ain’t No Mountain High Enough",
@@ -13813,6 +15558,12 @@
     "artist": "Dillon Francis ft. DJ Snake",
     "game": "Just Dance 2015",
     "mode": "Duet"
+  },
+  {
+    "title": "Get Low (VIPMADE)",
+    "artist": "Dillon Francis ft. DJ Snake",
+    "year": 2014,
+    "game": "Just Dance 2015"
   },
   {
     "title": "Bang Bang",
@@ -13839,6 +15590,12 @@
     "mode": "Solo"
   },
   {
+    "title": "Birthday (VIPMADE)",
+    "artist": "Katy Perry",
+    "year": 2013,
+    "game": "Just Dance 2015"
+  },
+  {
     "title": "Only You (And You Alone)",
     "artist": "The Platters ft. (Love Letter)",
     "game": "Just Dance 2015",
@@ -13849,6 +15606,13 @@
     "artist": "Rihanna",
     "game": "Just Dance 2015",
     "mode": "Solo"
+  },
+  {
+    "title": "Diamonds (Seated Dance)",
+    "artist": "Rihanna",
+    "year": 2012,
+    "game": "Just Dance 2015",
+    "mode": "Duet"
   },
   {
     "title": "She Looks So Perfect",
@@ -13873,6 +15637,13 @@
     "artist": "Lady Gaga",
     "game": "Just Dance 2015",
     "mode": "Trio"
+  },
+  {
+    "title": "Bad Romance (Official Choreo)",
+    "artist": "Lady Gaga",
+    "year": 2009,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
   },
   {
     "title": "Never Can Say Goodbye",
@@ -13903,6 +15674,19 @@
     "artist": "will.i.am ft. Cody Wise",
     "game": "Just Dance 2015",
     "mode": "Trio"
+  },
+  {
+    "title": "It's My Birthday (Bollywood Dance)",
+    "artist": "will.i.am ft. Cody Wise",
+    "year": 2014,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
+  },
+  {
+    "title": "It's My Birthday (VIPMADE)",
+    "artist": "will.i.am ft. Cody Wise",
+    "year": 2014,
+    "game": "Just Dance 2015"
   },
   {
     "title": "Burn",
@@ -13947,10 +15731,23 @@
     "mode": "Solo"
   },
   {
+    "title": "Till I Find You (VIPMADE)",
+    "artist": "Austin Mahone",
+    "year": 2014,
+    "game": "Just Dance 2015"
+  },
+  {
     "title": "Papaoutai",
     "artist": "Stromae",
     "game": "Just Dance 2015",
     "mode": "Duet"
+  },
+  {
+    "title": "Papaoutai (African Dance)",
+    "artist": "Stromae",
+    "year": 2013,
+    "game": "Just Dance 2015",
+    "mode": "Solo"
   },
   {
     "title": "Movement is Happiness (Find Your Thing)",
