@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.7.10",
+  "version": "0.8.0",
   "codename": "Alternate Reality",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
@@ -9,7 +9,7 @@
     "start": "node src/index.js",
     "desktop": "electron .",
     "check": "node --check src/index.js && node --check desktop/main.js && node --check desktop/preload.js && node --check desktop/renderer.js",
-    "build:win": "electron-builder --win --ia32"
+    "build:win": "electron-builder --win --ia32 && node scripts/copy-songlist-to-dist.js"
   },
   "engines": {
     "node": ">=18"
@@ -47,7 +47,7 @@
       ]
     },
     "portable": {
-      "artifactName": "JustDanceRequests-0.7.10-x86.exe"
+      "artifactName": "JustDanceRequests-0.8.0-x86.exe"
     }
   }
 }

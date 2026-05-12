@@ -4,7 +4,7 @@ A local Twitch chat plugin for Just Dance streamers. Viewers request songs with 
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
 
-Current release: **0.7.10 "Alternate Reality"**.
+Current release: **0.8.0 "Alternate Reality"**.
 
 ## Setup
 
@@ -61,7 +61,7 @@ After installing dependencies, build the Windows portable app with:
 npm run build:win
 ```
 
-The portable `.exe` output goes into `dist/`. For 0.7.10, the expected artifact name is `JustDanceRequests-0.7.10-x86.exe`.
+The portable `.exe` output goes into `dist/`. For 0.8.0, the expected artifact name is `JustDanceRequests-0.8.0-x86.exe`. Older local exe builds can live in `dist/older version/`; the build also refreshes `dist/songlist.xlsx`.
 
 ## Chat Commands
 
