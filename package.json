@@ -1,7 +1,7 @@
 {
   "name": "just-dance-requests-twitch",
   "version": "0.8.0",
-  "codename": "Alternate Reality",
+  "codename": "Happy Meals",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",

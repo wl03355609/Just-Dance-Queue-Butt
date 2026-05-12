@@ -4,7 +4,7 @@ A local Twitch chat plugin for Just Dance streamers. Viewers request songs with 
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
 
-Current release: **0.8.0 "Alternate Reality"**.
+Current release: **0.8.0 "Happy Meals"**.
 
 ## Setup
 
