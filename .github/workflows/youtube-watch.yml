@@ -1,0 +1,55 @@
+name: Watch Just Dance YouTube
+
+on:
+  schedule:
+    # Daily at 14:00 UTC. Adjust via the cron expression if you want a different cadence.
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check Just Dance YouTube for new videos
+        id: check
+        run: |
+          set -e
+          node scripts/check-youtube-updates.js --output youtube-summary.md > result.json
+          cat result.json
+          NEW_COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('result.json','utf8')).newCount)")
+          echo "new_count=$NEW_COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Open issue for new videos
+        if: steps.check.outputs.new_count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          gh issue create \
+            --title "Just Dance YouTube: new videos ($DATE)" \
+            --body-file youtube-summary.md \
+            --label "youtube-watch" || \
+          gh issue create \
+            --title "Just Dance YouTube: new videos ($DATE)" \
+            --body-file youtube-summary.md
+
+      - name: Commit updated seen list
+        if: steps.check.outputs.new_count != '0'
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/youtube-seen.json
+          git diff --cached --quiet || git commit -m "Update YouTube seen list (${{ steps.check.outputs.new_count }} new)"
+          git push
