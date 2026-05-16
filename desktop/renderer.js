@@ -27,6 +27,10 @@ const overlayUrlCode = document.querySelector("#overlay-url");
 const dashboardUrlCode = document.querySelector("#dashboard-url");
 const companionUrlCode = document.querySelector("#companion-url");
 const companionLinkRow = document.querySelector("#companion-link-row");
+const pairCompanionButton = document.querySelector("#pair-companion");
+const pairingCodePanel = document.querySelector("#pairing-code-panel");
+const pairingCode = document.querySelector("#pairing-code");
+const pairingCodeStatus = document.querySelector("#pairing-code-status");
 const message = document.querySelector("#message");
 const runStatus = document.querySelector("#run-status");
 const authCode = document.querySelector("#auth-code");
@@ -59,6 +63,8 @@ function render(config) {
   dashboardUrlCode.textContent = config.dashboardUrl;
   companionUrlCode.textContent = config.companionUrl || "Not available until the Mac is on Wi-Fi";
   companionLinkRow.hidden = config.companionAccess === false;
+  pairCompanionButton.disabled = !config.running || config.companionAccess === false;
+  if (!config.running) pairingCodePanel.hidden = true;
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
   if (config.appVersion) appVersionEl.textContent = `v${config.appVersion}`;
@@ -221,6 +227,19 @@ document.querySelector("#copy-companion").addEventListener("click", async () => 
   }
   const ok = await copyText(currentConfig.companionUrl);
   show(ok ? "Phone companion URL copied to clipboard." : "Could not copy — select the URL below manually.");
+});
+
+pairCompanionButton.addEventListener("click", async () => {
+  try {
+    const result = await window.jdApp.createCompanionPairingCode();
+    pairingCode.textContent = result.code;
+    pairingCodeStatus.textContent = "Enter this code in the Android app within 5 minutes.";
+    pairingCodePanel.hidden = false;
+    show("Phone pairing code created.");
+  } catch (error) {
+    pairingCodePanel.hidden = true;
+    show(error.message);
+  }
 });
 
 window.jdApp.onAuthComplete((config) => {

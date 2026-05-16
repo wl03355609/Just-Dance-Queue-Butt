@@ -316,6 +316,11 @@ function registerIpc() {
     return data;
   });
 
+  ipcMain.handle("companion:pairingCode", () => {
+    if (!runtime) throw new Error("Start the bot first.");
+    return runtime.createCompanionPairingCode();
+  });
+
   ipcMain.handle("open:url", (_event, url) => {
     return openLocalAppUrl(url);
   });

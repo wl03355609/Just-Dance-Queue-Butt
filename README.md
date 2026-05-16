@@ -99,7 +99,7 @@ Update checks are best-effort: any failure (offline, rate-limited, GitHub down) 
 
 The dashboard gives you buttons for:
 
-- adding a test request without typing in Twitch chat
+- adding a request without typing in Twitch chat; local requests use the configured channel as the requester
 - **Pick**: mark that queue entry as playing now and move it to history
 - **Next**: mark the first request as playing now and move it to history
 - removing a specific queue item
@@ -130,7 +130,8 @@ Desktop app:
 1. Keep **Phone companion access** enabled in **Bot Settings**. It is on by default.
 2. Start the bot.
 3. In the Android app, tap **Scan**, or manually enter the **Phone companion** URL/IP shown in the desktop app.
-4. Paste the dashboard token into the Android app if you want controls such as next, clear, pick, remove, filters, or theme switching.
+4. Click **Pair Phone** in the desktop app.
+5. Tap **Update Token** in the Android app and enter the 6-digit pairing code. The app stores the dashboard token automatically after pairing.
 
 CLI:
 

@@ -16,6 +16,7 @@ const runtime = {
   state: { queue: [], history: [], overlayTheme: DEFAULT_OVERLAY_THEME },
   http: { server: null, clients: new Set() },
   bot: { socket: null, buffer: Buffer.alloc(0), ready: false, reconnectTimer: null },
+  companion: { pairingCode: "", pairingExpiresAt: 0, pairingAttempts: 0 },
   songs: null,
   queue: null,
   twitch: null,
@@ -71,6 +72,7 @@ function runtimeController() {
     getState: runtime.server.publicState,
     clearState: runtime.queue.clearQueueState,
     clearHistory: runtime.queue.clearHistoryState,
+    createCompanionPairingCode: runtime.server.createCompanionPairingCode,
     stop: stopRuntime,
     urls: {
       overlay: `http://localhost:${runtime.config.port}`,

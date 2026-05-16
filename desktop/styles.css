@@ -395,6 +395,26 @@ input:disabled {
   font-size: 12px;
 }
 
+.pairing-code-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid rgba(33, 215, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(33, 215, 255, 0.08);
+}
+
+.pairing-code-panel strong {
+  color: var(--cyan);
+  font-size: 28px;
+  letter-spacing: 0.12em;
+}
+
+.pairing-code-panel small {
+  color: var(--muted);
+}
+
 .panel-footer {
   margin-top: 12px;
   padding-top: 12px;

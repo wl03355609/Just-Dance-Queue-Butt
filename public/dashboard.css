@@ -127,6 +127,7 @@ button.danger,
 .theme-toggle button[aria-pressed="true"] {
   border-color: rgba(33, 215, 255, 0.7);
   background: rgba(33, 215, 255, 0.2);
+  color: var(--cyan);
 }
 
 .filter-panel {
@@ -155,10 +156,19 @@ button.danger,
   min-height: 42px;
   padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.06);
   color: var(--text);
   text-transform: none;
+}
+
+.filter-option:has(input:checked) {
+  border-color: rgba(33, 215, 255, 0.75);
+  background: rgba(33, 215, 255, 0.12);
+}
+
+.filter-option:has(input:checked) span {
+  color: var(--cyan);
 }
 
 .filter-option input {
@@ -182,7 +192,7 @@ button.danger,
 
 .add-panel form {
   display: grid;
-  grid-template-columns: minmax(140px, 220px) minmax(220px, 1fr) auto;
+  grid-template-columns: minmax(220px, 1fr) auto;
   gap: 12px;
   align-items: end;
 }

@@ -10,7 +10,6 @@ const historyElement = document.querySelector("#history");
 const historyEmptyElement = document.querySelector("#history-empty");
 const messageElement = document.querySelector("#message");
 const requestForm = document.querySelector("#request-form");
-const requestUserInput = document.querySelector("#request-user");
 const requestSongInput = document.querySelector("#request-song");
 const songList = document.querySelector("#song-list");
 const skipButton = document.querySelector("#skip-button");
@@ -167,7 +166,6 @@ function showMessage(message) {
 async function addRequest(event) {
   event.preventDefault();
   await postJson("/api/request", {
-    user: requestUserInput.value.trim() || "test",
     song: requestSongInput.value.trim()
   });
   requestSongInput.value = "";

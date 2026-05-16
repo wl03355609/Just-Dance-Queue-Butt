@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld("jdApp", {
   startRuntime: (config) => ipcRenderer.invoke("runtime:start", config),
   stopRuntime: () => ipcRenderer.invoke("runtime:stop"),
   nextSong: () => ipcRenderer.invoke("runtime:next"),
+  createCompanionPairingCode: () => ipcRenderer.invoke("companion:pairingCode"),
   openUrl: (url) => ipcRenderer.invoke("open:url", url),
   importCredentials: () => ipcRenderer.invoke("secrets:import"),
   clearImportedCredentials: () => ipcRenderer.invoke("secrets:clearImport"),

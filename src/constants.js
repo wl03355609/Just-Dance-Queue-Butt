@@ -13,7 +13,8 @@ const MUTATING_API_PATHS = new Set([
   "/api/filters",
   "/api/theme",
   "/api/pick",
-  "/api/promote"
+  "/api/promote",
+  "/api/companion/pairing-code"
 ]);
 
 const MAX_QUERY_LENGTH = 200;

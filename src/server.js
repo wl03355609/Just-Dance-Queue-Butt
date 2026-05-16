@@ -1,4 +1,5 @@
 const fs = require("node:fs");
+const crypto = require("node:crypto");
 const http = require("node:http");
 const path = require("node:path");
 
@@ -22,6 +23,9 @@ const {
   sanitizeEnabledGames
 } = require("./config");
 
+const COMPANION_PAIRING_TTL_MS = 5 * 60 * 1000;
+const COMPANION_PAIRING_MAX_ATTEMPTS = 10;
+
 function createServer(runtime) {
   function startHttpServer() {
     runtime.http.server = http.createServer((request, response) => {
@@ -32,10 +36,16 @@ function createServer(runtime) {
         return sendError(response, 400, "Invalid request URL.");
       }
 
+      if (url.pathname === "/api/companion") return apiCompanionInfo(response);
       if (url.pathname === "/api/queue") return sendJson(response, publicState());
       if (url.pathname === "/api/songs") return sendJson(response, { songs: runtime.catalog });
       if (url.pathname === "/api/search") return searchSongs(url, response);
       if (request.method === "POST") {
+        if (url.pathname === "/api/companion/pair") {
+          const ct = request.headers["content-type"] || "";
+          if (!ct.startsWith("application/json")) return sendError(response, 415, "Content-Type must be application/json.");
+          return apiPairCompanion(request, response);
+        }
         if (MUTATING_API_PATHS.has(url.pathname) && !isAdminRequest(request, url)) {
           return sendError(response, 403, "Dashboard token is missing or invalid.");
         }
@@ -48,6 +58,7 @@ function createServer(runtime) {
         if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
         if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
         if (url.pathname === "/api/pick" || url.pathname === "/api/promote") return apiPickSong(request, response);
+        if (url.pathname === "/api/companion/pairing-code") return apiCreateCompanionPairingCode(response);
       }
       if (url.pathname === "/events") return streamEvents(request, response);
 
@@ -147,6 +158,62 @@ function createServer(runtime) {
     };
   }
 
+  function apiCompanionInfo(response) {
+    sendJson(response, {
+      ok: true,
+      companionAccess: Boolean(runtime.config.companionAccess),
+      pairingRequired: true,
+      channel: runtime.config.channel,
+      urls: runtime.config.companionAccess ? lanUrls(runtime.config.port) : []
+    });
+  }
+
+  function apiCreateCompanionPairingCode(response) {
+    try {
+      sendJson(response, {
+        ok: true,
+        ...createCompanionPairingCode()
+      });
+    } catch (error) {
+      sendError(response, 400, error.message);
+    }
+  }
+
+  async function apiPairCompanion(request, response) {
+    if (!runtime.config.companionAccess) {
+      return sendError(response, 403, "Phone companion access is disabled.");
+    }
+
+    try {
+      const body = await readJsonBody(request);
+      const code = cleanPairingCode(body.code);
+      const pairing = runtime.companion || {};
+
+      if (!pairing.pairingCode || Date.now() > pairing.pairingExpiresAt) {
+        clearCompanionPairingCode();
+        return sendError(response, 403, "Pairing code expired. Generate a new code.");
+      }
+
+      if (pairing.pairingAttempts >= COMPANION_PAIRING_MAX_ATTEMPTS) {
+        clearCompanionPairingCode();
+        return sendError(response, 403, "Too many pairing attempts. Generate a new code.");
+      }
+
+      if (!timingSafeEqual(code, pairing.pairingCode)) {
+        pairing.pairingAttempts += 1;
+        return sendError(response, 403, "Pairing code is incorrect.");
+      }
+
+      clearCompanionPairingCode();
+      sendJson(response, {
+        ok: true,
+        dashboardToken: runtime.config.adminToken
+      });
+    } catch (error) {
+      sendError(response, 400, error.message);
+    }
+  }
+
   function sendJson(response, data) {
     response.writeHead(200, {
       "Content-Type": "application/json",
@@ -224,8 +291,12 @@ function createServer(runtime) {
 
   function apiRequestSong(request, response) {
     return withJsonBody(request, response, (body) =>
-      runtime.queue.addRequest(body.user || "test", body.song || body.query || "", { announce: false })
+      runtime.queue.addRequest(body.user || defaultRequester(), body.song || body.query || "", { announce: false })
     );
+  }
+
+  function defaultRequester() {
+    return runtime.config.channel || runtime.config.username || "streamer";
   }
 
   function apiSkipSong(response) {
@@ -300,11 +371,44 @@ function createServer(runtime) {
     return "text/html";
   }
 
+  function createCompanionPairingCode() {
+    if (!runtime.config?.companionAccess) {
+      throw new Error("Phone companion access is disabled.");
+    }
+
+    const code = crypto.randomInt(0, 1_000_000).toString().padStart(6, "0");
+    const expiresAt = Date.now() + COMPANION_PAIRING_TTL_MS;
+    runtime.companion = {
+      pairingCode: code,
+      pairingExpiresAt: expiresAt,
+      pairingAttempts: 0
+    };
+
+    return {
+      code,
+      expiresAt,
+      ttlSeconds: Math.round(COMPANION_PAIRING_TTL_MS / 1000)
+    };
+  }
+
+  function clearCompanionPairingCode() {
+    runtime.companion = {
+      pairingCode: "",
+      pairingExpiresAt: 0,
+      pairingAttempts: 0
+    };
+  }
+
+  function cleanPairingCode(value) {
+    return String(value || "").replace(/\D/g, "").slice(0, 6);
+  }
+
   return {
     startHttpServer,
     stopHttpServer,
     broadcast,
-    publicState
+    publicState,
+    createCompanionPairingCode
   };
 }
 
