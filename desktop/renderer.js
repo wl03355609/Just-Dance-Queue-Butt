@@ -10,10 +10,12 @@ const channelInput = document.querySelector("#channel");
 const importButton = document.querySelector("#import-credentials");
 const clearImportButton = document.querySelector("#clear-imported-credentials");
 const importedHint = document.querySelector("#imported-credentials-hint");
-const updateBanner = document.querySelector("#update-banner");
-const updateBannerText = document.querySelector("#update-banner-text");
-const updateBannerAction = document.querySelector("#update-banner-action");
-const updateBannerDismiss = document.querySelector("#update-banner-dismiss");
+const updatePill = document.querySelector("#update-pill");
+const updatePillText = document.querySelector("#update-pill-text");
+const updatePopover = document.querySelector("#update-popover");
+const updatePopoverDetail = document.querySelector("#update-popover-detail");
+const updatePopoverInstall = document.querySelector("#update-popover-install");
+const updatePopoverLater = document.querySelector("#update-popover-later");
 const appVersionEl = document.querySelector("#app-version");
 const footerReleasesLink = document.querySelector("#footer-releases");
 const checkSonglistButton = document.querySelector("#check-songlist");
@@ -218,63 +220,46 @@ window.jdApp.onAuthError((error) => {
 window.jdApp.getConfig().then(render).catch((error) => show(error.message));
 
 let pendingUpdate = null;
-let checkingHideTimer = null;
 
-updateBannerAction.addEventListener("click", () => {
-  if (!pendingUpdate) return;
-  if (pendingUpdate.status === "available") {
-    window.jdApp.downloadUpdate();
-  } else if (pendingUpdate.status === "downloaded") {
-    window.jdApp.installUpdate();
-  }
+function hideUpdatePopover() {
+  updatePopover.hidden = true;
+}
+
+updatePill.addEventListener("click", (event) => {
+  event.stopPropagation();
+  updatePopover.hidden = !updatePopover.hidden;
 });
 
-updateBannerDismiss.addEventListener("click", () => {
-  updateBanner.hidden = true;
+updatePopoverInstall.addEventListener("click", () => {
+  if (pendingUpdate?.canInstall) window.jdApp.installUpdate();
+});
+
+updatePopoverLater.addEventListener("click", () => {
+  hideUpdatePopover();
+});
+
+document.addEventListener("click", (event) => {
+  if (!updatePopover.hidden && !updatePopover.contains(event.target) && event.target !== updatePill && !updatePill.contains(event.target)) {
+    hideUpdatePopover();
+  }
 });
 
 function renderUpdateState(info) {
-  clearTimeout(checkingHideTimer);
+  // The pill is the only update UI. It only appears once a new version is
+  // fully downloaded and ready to install. Everything else (checking,
+  // downloading, errors) is silent.
+  pendingUpdate = info || null;
 
-  if (!info) {
-    updateBanner.hidden = true;
+  if (!info || info.status !== "downloaded") {
+    updatePill.hidden = true;
+    hideUpdatePopover();
     return;
   }
 
-  pendingUpdate = info;
-
-  // "checking" appears briefly. If the check finishes with no update available
-  // (status flips back to "idle"), the banner disappears. If it takes more
-  // than 4 seconds, hide it so the user isn't staring at a permanent spinner.
-  if (info.status === "checking") {
-    updateBannerText.textContent = info.message || "Checking for updates…";
-    updateBannerAction.hidden = true;
-    updateBannerDismiss.hidden = false;
-    updateBanner.hidden = false;
-    checkingHideTimer = setTimeout(() => { updateBanner.hidden = true; }, 4000);
-    return;
-  }
-
-  if (info.status === "idle" || info.status === "error") {
-    updateBanner.hidden = true;
-    return;
-  }
-
-  let actionLabel = "";
-  if (info.status === "available") {
-    actionLabel = "Download";
-  } else if (info.status === "downloading") {
-    actionLabel = "";
-  } else if (info.status === "downloaded") {
-    actionLabel = "Restart now";
-  }
-
-  updateBannerText.textContent = info.message
-    || `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
-  updateBannerAction.hidden = !actionLabel;
-  if (actionLabel) updateBannerAction.textContent = actionLabel;
-  updateBannerDismiss.hidden = info.status === "downloading";
-  updateBanner.hidden = false;
+  const version = info.latestVersion ? `v${info.latestVersion}` : "Update";
+  updatePillText.textContent = `↻ ${version}`;
+  updatePopoverDetail.textContent = `${info.releaseName || version} is downloaded.`;
+  updatePill.hidden = false;
 }
 
 function renderSonglistState(state) {

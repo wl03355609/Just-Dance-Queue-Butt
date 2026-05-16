@@ -13,105 +13,127 @@
           <p class="eyebrow">Twitch Song Requests</p>
           <h1>Just Dance Requests</h1>
         </div>
-        <strong id="run-status" class="status">Stopped</strong>
+        <div class="header-status">
+          <div class="update-pill-wrap">
+            <button id="update-pill" class="update-pill" type="button" hidden>
+              <span class="update-pill-dot"></span>
+              <span id="update-pill-text">↻ Update</span>
+            </button>
+            <div id="update-popover" class="update-popover" hidden>
+              <p class="update-popover-title">Update ready</p>
+              <p id="update-popover-detail" class="update-popover-detail">A new version is downloaded.</p>
+              <p class="update-popover-hint">It will install when you close the app, or click below.</p>
+              <div class="update-popover-actions">
+                <button id="update-popover-install" type="button" class="update-popover-primary">Restart now</button>
+                <button id="update-popover-later" type="button" class="update-popover-link">Later</button>
+              </div>
+            </div>
+          </div>
+          <strong id="run-status" class="status">Stopped</strong>
+        </div>
       </header>
 
-      <div id="update-banner" class="update-banner" hidden>
-        <span id="update-banner-text"></span>
-        <button id="update-banner-action" type="button">Download</button>
-        <button id="update-banner-dismiss" type="button" class="link-button">Dismiss</button>
-      </div>
+      <div class="layout-grid">
+        <div class="layout-col">
+          <section class="panel">
+            <h2>Bot Settings</h2>
+            <div class="grid">
+              <label class="span-2">
+                Speaking as
+                <input id="username" disabled placeholder="log in below">
+                <span class="field-hint">Log in with your own Twitch account — that account speaks in chat</span>
+              </label>
+              <div id="bot-mode-row">
+                <label>
+                  Bot account
+                  <select id="bot-mode">
+                    <option value="bundled">Built-in bot</option>
+                    <option value="own">My own Twitch account</option>
+                  </select>
+                </label>
+              </div>
+              <div class="bundled-import">
+                <button id="import-credentials" type="button">Import credentials file…</button>
+                <button id="clear-imported-credentials" type="button" hidden>Clear imported</button>
+              </div>
+              <span id="imported-credentials-hint" class="field-hint span-2">Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.</span>
+              <label class="span-2">
+                Channel
+                <input id="channel" autocomplete="off" spellcheck="false" placeholder="your channel name">
+              </label>
+              <label>
+                Local port
+                <input id="port" type="number" min="1024" max="65535">
+              </label>
+              <label>
+                Max queue size
+                <input id="max-queue" type="number" min="1" max="500">
+              </label>
+              <div class="span-2 songlist-row">
+                <button id="check-songlist" type="button">Update songlist</button>
+                <span id="songlist-status" class="field-hint"></span>
+              </div>
+            </div>
+          </section>
 
-      <section class="panel">
-        <h2>Bot Settings</h2>
-        <div class="grid">
-          <label>
-            Speaking as
-            <input id="username" disabled placeholder="log in below">
-            <span class="field-hint">Log in with your own Twitch account — that account speaks in chat</span>
-          </label>
-          <div id="bot-mode-row">
-            <label>
-              Bot account
-              <select id="bot-mode">
-                <option value="bundled">Built-in bot</option>
-                <option value="own">My own Twitch account</option>
-              </select>
-            </label>
-          </div>
-          <div class="span-2 bundled-import">
-            <button id="import-credentials" type="button">Import bot credentials file…</button>
-            <button id="clear-imported-credentials" type="button" hidden>Clear imported credentials</button>
-            <span id="imported-credentials-hint" class="field-hint">Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.</span>
-          </div>
-          <label class="span-2">
-            Channel
-            <input id="channel" autocomplete="off" spellcheck="false" placeholder="your channel name">
-          </label>
-          <label>
-            Local port
-            <input id="port" type="number" min="1024" max="65535">
-          </label>
-          <label>
-            Max queue size
-            <input id="max-queue" type="number" min="1" max="500">
-          </label>
-          <div class="span-2 songlist-row">
-            <button id="check-songlist" type="button">Update songlist</button>
-            <span id="songlist-status" class="field-hint"></span>
+          <div id="own-account-section" hidden>
+            <section class="panel">
+              <h2>Twitch Login</h2>
+              <div id="client-id-section">
+                <label>
+                  Twitch app Client ID
+                  <input id="client-id" autocomplete="off" spellcheck="false">
+                </label>
+              </div>
+              <div id="logged-in-badge" class="logged-in-badge" hidden>
+                <span>Speaking as</span>
+                <strong id="logged-in-user"></strong>
+              </div>
+              <button id="login-button" type="button">Log in with Twitch</button>
+              <div id="auth-code" class="auth-code" hidden>
+                <span>Enter this code on Twitch</span>
+                <strong id="user-code"></strong>
+              </div>
+            </section>
           </div>
         </div>
-      </section>
 
-      <p id="message" role="status"></p>
+        <div class="layout-col">
+          <section class="panel">
+            <h2>Controls</h2>
+            <section class="actions primary-actions">
+              <button id="start-button" type="button">Start Bot</button>
+              <button id="stop-button" type="button" class="danger">Stop Bot</button>
+            </section>
+            <p id="message" role="status"></p>
+          </section>
 
-      <section class="actions primary-actions">
-        <button id="start-button" type="button">Start Bot</button>
-        <button id="stop-button" type="button" class="danger">Stop Bot</button>
-      </section>
-
-      <div id="own-account-section" hidden>
-        <section class="panel">
-          <h2>Twitch Login</h2>
-          <div id="client-id-section">
-            <label>
-              Twitch app Client ID
-              <input id="client-id" autocomplete="off" spellcheck="false">
-            </label>
-          </div>
-          <div id="logged-in-badge" class="logged-in-badge" hidden>
-            <span>Speaking as</span>
-            <strong id="logged-in-user"></strong>
-          </div>
-          <button id="login-button" type="button">Log in with Twitch</button>
-          <div id="auth-code" class="auth-code" hidden>
-            <span>Enter this code on Twitch</span>
-            <strong id="user-code"></strong>
-          </div>
-        </section>
-      </div>
-
-      <section class="panel">
-        <h2>Local Links</h2>
-        <div class="links">
-          <div>
-            <span>OBS / Streamlabs Browser Source</span>
-            <button id="overlay-link" type="button">Open</button>
-            <button id="copy-overlay" type="button">Copy URL</button>
-            <code id="overlay-url"></code>
-          </div>
-          <div>
-            <span>Streamer controls</span>
-            <button id="dashboard-link" type="button">Open</button>
-            <button id="copy-dashboard" type="button">Copy URL</button>
-            <code id="dashboard-url"></code>
-          </div>
+          <section class="panel">
+            <h2>Local Links</h2>
+            <div class="links">
+              <div>
+                <span>OBS / Streamlabs Browser Source</span>
+                <div class="link-buttons">
+                  <button id="overlay-link" type="button">Open</button>
+                  <button id="copy-overlay" type="button">Copy URL</button>
+                </div>
+                <code id="overlay-url"></code>
+              </div>
+              <div>
+                <span>Streamer controls</span>
+                <div class="link-buttons">
+                  <button id="dashboard-link" type="button">Open</button>
+                  <button id="copy-dashboard" type="button">Copy URL</button>
+                </div>
+                <code id="dashboard-url"></code>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <button id="save-button" type="button">Save Settings</button>
+            </div>
+          </section>
         </div>
-      </section>
-
-      <section class="actions">
-        <button id="save-button" type="button">Save Settings</button>
-      </section>
+      </div>
 
       <footer class="app-footer">
         <span id="app-version">v0.0.0</span>

@@ -376,27 +376,6 @@ function registerIpc() {
     return updateState;
   });
 
-  ipcMain.handle("update:download", async () => {
-    if (!app.isPackaged) return updateState;
-    if (updateState.status !== "available") return updateState;
-    try {
-      setUpdateState({
-        status: "downloading",
-        message: `Downloading update ${updateState.latestVersion || ""}…`,
-        percent: 0,
-        canInstall: false
-      });
-      await autoUpdater.downloadUpdate();
-    } catch (error) {
-      setUpdateState({
-        status: "error",
-        message: `Could not download update: ${error.message}`,
-        canInstall: false
-      });
-    }
-    return updateState;
-  });
-
   ipcMain.handle("update:install", () => {
     if (updateState.status !== "downloaded") return updateState;
     quitAfterPrompt = true;
@@ -586,41 +565,42 @@ function dateOnly(value) {
 }
 
 function setupAutoUpdater() {
-  // Ask the user before downloading so they're not surprised by a sudden
-  // 70+ MB transfer. Background download starts when they click "Download" in
-  // the banner. Once downloaded, autoInstallOnAppQuit applies it silently when
-  // the app next exits, Discord-style — no GitHub round-trip required.
-  autoUpdater.autoDownload = false;
+  // Silent auto-download. The user only sees UI (the lime pill in the header)
+  // once the new version is fully downloaded and ready to install — closing the
+  // app applies it automatically, Discord-style.
+  autoUpdater.autoDownload = true;
   autoUpdater.autoInstallOnAppQuit = true;
 
   autoUpdater.on("checking-for-update", () => {
     setUpdateState({
-      status: "checking",
-      message: "Checking for updates…",
+      status: "idle",
+      message: "",
       canInstall: false
-    });
+    }, { silent: true });
   });
 
   autoUpdater.on("update-available", (info) => {
     setUpdateState({
-      status: "available",
+      status: "downloading",
       latestVersion: updateVersion(info),
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: `Version ${updateVersion(info)} is available. Download in the background?`,
+      message: "",
       percent: 0,
       canInstall: false
-    });
+    }, { silent: true });
   });
 
   autoUpdater.on("download-progress", (progress) => {
     const percent = Math.max(0, Math.min(100, Number(progress.percent) || 0));
+    // Silent download — track percent on the state object for diagnostics but
+    // don't push it to the renderer, since the new UI doesn't show progress.
     setUpdateState({
       status: "downloading",
-      message: `Downloading update ${Math.round(percent)}%...`,
+      message: "",
       percent,
       canInstall: false
-    });
+    }, { silent: true });
   });
 
   autoUpdater.on("update-downloaded", (info) => {
@@ -629,7 +609,7 @@ function setupAutoUpdater() {
       latestVersion: updateVersion(info),
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: `Update ${updateVersion(info)} is ready. It will install automatically when you close the app, or click Restart now.`,
+      message: `Update ${updateVersion(info)} is ready.`,
       percent: 100,
       canInstall: true
     });
@@ -644,15 +624,16 @@ function setupAutoUpdater() {
       message: "",
       percent: 0,
       canInstall: false
-    });
+    }, { silent: true });
   });
 
   autoUpdater.on("error", (error) => {
+    // Silent failure — failed update checks shouldn't pollute the UI.
     setUpdateState({
-      status: "error",
+      status: "idle",
       message: `Could not update automatically: ${error.message}`,
       canInstall: false
-    });
+    }, { silent: true });
   });
 }
 
