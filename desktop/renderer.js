@@ -14,6 +14,8 @@ const updateBanner = document.querySelector("#update-banner");
 const updateBannerText = document.querySelector("#update-banner-text");
 const updateBannerAction = document.querySelector("#update-banner-action");
 const updateBannerDismiss = document.querySelector("#update-banner-dismiss");
+const appVersionEl = document.querySelector("#app-version");
+const footerReleasesLink = document.querySelector("#footer-releases");
 const checkSonglistButton = document.querySelector("#check-songlist");
 const songlistStatus = document.querySelector("#songlist-status");
 const portInput = document.querySelector("#port");
@@ -51,6 +53,7 @@ function render(config) {
   dashboardUrlCode.textContent = config.dashboardUrl;
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
+  if (config.appVersion) appVersionEl.textContent = `v${config.appVersion}`;
   // Bot mode dropdown
   if (config.hasBundledBot) {
     botModeRow.hidden = false;
@@ -215,12 +218,14 @@ window.jdApp.onAuthError((error) => {
 window.jdApp.getConfig().then(render).catch((error) => show(error.message));
 
 let pendingUpdate = null;
+let checkingHideTimer = null;
 
 updateBannerAction.addEventListener("click", () => {
-  if (pendingUpdate?.canInstall) {
+  if (!pendingUpdate) return;
+  if (pendingUpdate.status === "available") {
+    window.jdApp.downloadUpdate();
+  } else if (pendingUpdate.status === "downloaded") {
     window.jdApp.installUpdate();
-  } else if (pendingUpdate?.releaseUrl) {
-    window.jdApp.openReleasePage(pendingUpdate.releaseUrl);
   }
 });
 
@@ -229,15 +234,46 @@ updateBannerDismiss.addEventListener("click", () => {
 });
 
 function renderUpdateState(info) {
-  if (!info || info.status === "idle" || info.status === "error") {
+  clearTimeout(checkingHideTimer);
+
+  if (!info) {
     updateBanner.hidden = true;
     return;
   }
 
   pendingUpdate = info;
-  updateBannerText.textContent = info.message || `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
-  updateBannerAction.hidden = !info.canInstall;
-  updateBannerAction.textContent = info.canInstall ? "Restart" : "Download";
+
+  // "checking" appears briefly. If the check finishes with no update available
+  // (status flips back to "idle"), the banner disappears. If it takes more
+  // than 4 seconds, hide it so the user isn't staring at a permanent spinner.
+  if (info.status === "checking") {
+    updateBannerText.textContent = info.message || "Checking for updates…";
+    updateBannerAction.hidden = true;
+    updateBannerDismiss.hidden = false;
+    updateBanner.hidden = false;
+    checkingHideTimer = setTimeout(() => { updateBanner.hidden = true; }, 4000);
+    return;
+  }
+
+  if (info.status === "idle" || info.status === "error") {
+    updateBanner.hidden = true;
+    return;
+  }
+
+  let actionLabel = "";
+  if (info.status === "available") {
+    actionLabel = "Download";
+  } else if (info.status === "downloading") {
+    actionLabel = "";
+  } else if (info.status === "downloaded") {
+    actionLabel = "Restart now";
+  }
+
+  updateBannerText.textContent = info.message
+    || `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
+  updateBannerAction.hidden = !actionLabel;
+  if (actionLabel) updateBannerAction.textContent = actionLabel;
+  updateBannerDismiss.hidden = info.status === "downloading";
   updateBanner.hidden = false;
 }
 
@@ -259,6 +295,11 @@ window.jdApp.onSonglistState(renderSonglistState);
 
 window.jdApp.checkForUpdate().then(renderUpdateState).catch(() => {
   // Update checks are best-effort; ignore failures (offline, rate-limited, repo private).
+});
+
+footerReleasesLink.addEventListener("click", (event) => {
+  event.preventDefault();
+  window.jdApp.openReleasePage("https://github.com/wl03355609/Just-Dance-Queue-Butt/releases/latest");
 });
 
 window.jdApp.checkSonglist().then(renderSonglistState).catch(() => {
