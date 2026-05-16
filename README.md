@@ -67,6 +67,19 @@ Users installed through the NSIS installer receive program updates through the i
 
 Do not keep real bot tokens inside `desktop/` for release builds. Put shareable bot credential files in an ignored private folder such as `.private/qutebutt-secrets.js`, then send that file privately to trusted users so they can choose **Import bot credentials file...** in the app. Packaged builds explicitly exclude `desktop/secrets.js`.
 
+## Automatic Updates
+
+The desktop app checks GitHub Releases for a newer version on startup. The flow is intentionally ask-first so a slow network or a fresh launch isn't surprised by a 70+ MB download:
+
+1. **Checking** — a brief "Checking for updates…" banner appears, then auto-hides after 4 seconds if the check is still in flight.
+2. **Available** — when a newer release is found, the banner reads "Version X.Y.Z is available. Download in the background?" with a **Download** button. Nothing transfers until you click.
+3. **Downloading** — clicking Download starts a silent background fetch. The banner reflects the percentage; the action button is hidden so a stray click can't cancel.
+4. **Downloaded** — the banner becomes "Update X.Y.Z is ready. It will install automatically when you close the app, or click Restart now." Closing the app applies the installer; clicking **Restart now** restarts immediately.
+
+You can also trigger a check manually from **Help → Check for Updates…**, jump to the release notes via **Help → View Releases on GitHub**, or open the **Help → About** dialog to confirm which version is running. The current version is also shown at the bottom of the main window.
+
+Update checks are best-effort: any failure (offline, rate-limited, GitHub down) silently leaves the banner hidden so the app keeps working as a normal local bot.
+
 ## Chat Commands
 
 - `!sr <song name>`: add a song request. Requires at least 3 characters. Rejected if the same song is already in the queue.
