@@ -114,7 +114,7 @@ function slug(value) {
 }
 
 function stripSearch(song) {
-  const { search, ...publicSong } = song;
+  const { search, normalizedTitle, ...publicSong } = song;
   return publicSong;
 }
 
