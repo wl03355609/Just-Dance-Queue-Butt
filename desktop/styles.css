@@ -14,6 +14,14 @@
   box-sizing: border-box;
 }
 
+/* HTML's hidden attribute is equivalent to display:none, but later
+ * class rules like .update-pill { display: inline-flex } override it
+ * because attribute and class selectors have equal specificity. Force
+ * hidden to win for every element that uses the attribute. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
