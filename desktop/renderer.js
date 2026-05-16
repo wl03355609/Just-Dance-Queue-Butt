@@ -10,6 +10,10 @@ const channelInput = document.querySelector("#channel");
 const importButton = document.querySelector("#import-credentials");
 const clearImportButton = document.querySelector("#clear-imported-credentials");
 const importedHint = document.querySelector("#imported-credentials-hint");
+const updateBanner = document.querySelector("#update-banner");
+const updateBannerText = document.querySelector("#update-banner-text");
+const updateBannerAction = document.querySelector("#update-banner-action");
+const updateBannerDismiss = document.querySelector("#update-banner-dismiss");
 const portInput = document.querySelector("#port");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
@@ -193,3 +197,22 @@ window.jdApp.onAuthError((error) => {
 });
 
 window.jdApp.getConfig().then(render).catch((error) => show(error.message));
+
+let pendingUpdate = null;
+
+updateBannerAction.addEventListener("click", () => {
+  if (pendingUpdate?.releaseUrl) window.jdApp.openReleasePage(pendingUpdate.releaseUrl);
+});
+
+updateBannerDismiss.addEventListener("click", () => {
+  updateBanner.hidden = true;
+});
+
+window.jdApp.checkForUpdate().then((info) => {
+  if (!info || !info.isNewer) return;
+  pendingUpdate = info;
+  updateBannerText.textContent = `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
+  updateBanner.hidden = false;
+}).catch(() => {
+  // Update checks are best-effort; ignore failures (offline, rate-limited, repo private).
+});

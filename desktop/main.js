@@ -6,6 +6,8 @@ const { startRuntime, stopRuntime } = require("../src/index");
 const DEFAULT_PORT = 3000;
 const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const CHAT_SCOPES = ["chat:read", "chat:edit"];
+const RELEASES_API_URL = "https://api.github.com/repos/wl03355609/Just-Dance-Queue-Butt/releases/latest";
+const RELEASES_PAGE_URL = "https://github.com/wl03355609/Just-Dance-Queue-Butt/releases/latest";
 
 // Fill in your Twitch Developer App Client ID here before building.
 // Register at https://dev.twitch.tv/console/apps — use Device Code Grant, no redirect URI needed.
@@ -309,6 +311,50 @@ function registerIpc() {
     return publicConfig(config);
   });
 
+  ipcMain.handle("update:check", async () => {
+    try {
+      const response = await fetch(RELEASES_API_URL, {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "JustDanceRequests-Desktop"
+        },
+        signal: AbortSignal.timeout(8000)
+      });
+      if (!response.ok) {
+        // 404 means the repo is private (no public latest endpoint) or no releases.
+        // Either way, we can't usefully notify, so return null.
+        return null;
+      }
+      const data = await response.json();
+      const latestTag = String(data.tag_name || "").trim();
+      const latestVersion = latestTag.replace(/^v/i, "");
+      const currentVersion = app.getVersion();
+      const isNewer = compareSemver(latestVersion, currentVersion) > 0;
+      return {
+        currentVersion,
+        latestVersion,
+        isNewer,
+        releaseUrl: data.html_url || RELEASES_PAGE_URL,
+        releaseName: data.name || latestTag
+      };
+    } catch {
+      return null;
+    }
+  });
+
+  ipcMain.handle("update:openReleasePage", (_event, url) => {
+    let target;
+    try {
+      target = new URL(String(url || ""));
+    } catch {
+      target = new URL(RELEASES_PAGE_URL);
+    }
+    if (target.protocol !== "https:" || target.hostname.toLowerCase() !== "github.com") {
+      target = new URL(RELEASES_PAGE_URL);
+    }
+    return shell.openExternal(target.toString());
+  });
+
   ipcMain.handle("secrets:clearImport", () => {
     const config = readConfig();
     delete config.importedBundledUsername;
@@ -510,4 +556,17 @@ function openTwitchVerificationUrl(rawUrl) {
   }
 
   return shell.openExternal(url.toString());
+}
+
+function compareSemver(a, b) {
+  const pa = String(a).split(".").map((n) => Number.parseInt(n, 10) || 0);
+  const pb = String(b).split(".").map((n) => Number.parseInt(n, 10) || 0);
+  const len = Math.max(pa.length, pb.length);
+  for (let i = 0; i < len; i += 1) {
+    const da = pa[i] || 0;
+    const db = pb[i] || 0;
+    if (da > db) return 1;
+    if (da < db) return -1;
+  }
+  return 0;
 }
