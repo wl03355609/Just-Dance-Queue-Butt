@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "codename": "Happy Meals",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
@@ -47,7 +47,7 @@
       ]
     },
     "portable": {
-      "artifactName": "JustDanceRequests-0.8.0-x86.exe"
+      "artifactName": "JustDanceRequests-0.8.1-x86.exe"
     }
   }
 }
