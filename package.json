@@ -51,6 +51,7 @@
       "oneClick": true,
       "perMachine": false,
       "runAfterFinish": true,
+      "createDesktopShortcut": false,
       "deleteAppDataOnUninstall": false,
       "artifactName": "JustDanceRequests-Setup-${version}-${arch}.${ext}"
     },
