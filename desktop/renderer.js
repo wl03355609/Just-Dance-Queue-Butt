@@ -333,9 +333,6 @@ document.addEventListener("click", (event) => {
 });
 
 function renderUpdateState(info) {
-  // The pill is the only update UI. It only appears once a new version is
-  // fully downloaded AND that version differs from what's currently running.
-  // Everything else (checking, downloading, errors) is silent.
   pendingUpdate = info || null;
 
   const hasActionableUpdate = info
@@ -343,15 +340,49 @@ function renderUpdateState(info) {
     && info.latestVersion
     && info.latestVersion !== info.currentVersion;
 
-  if (!hasActionableUpdate) {
+  const hasVisibleStatus = info
+    && ["checking", "downloading", "error"].includes(info.status);
+  const hasManualMessage = info
+    && info.status === "idle"
+    && Boolean(info.message);
+
+  if (!hasActionableUpdate && !hasVisibleStatus && !hasManualMessage) {
     updatePill.hidden = true;
     hideUpdatePopover();
     return;
   }
 
-  const version = `v${info.latestVersion}`;
-  updatePillText.textContent = `↻ ${version}`;
-  updatePopoverDetail.textContent = `${info.releaseName || version} is downloaded.`;
+  const version = info.latestVersion ? `v${info.latestVersion}` : "";
+  updatePopoverInstall.hidden = !info.canInstall;
+  updatePopoverLater.textContent = info.canInstall ? "Later" : "OK";
+
+  if (hasActionableUpdate) {
+    updatePillText.textContent = `↻ ${version}`;
+    updatePopover.querySelector(".update-popover-title").textContent = "Update ready";
+    updatePopoverDetail.textContent = `${info.releaseName || version} is downloaded.`;
+    updatePopover.querySelector(".update-popover-hint").textContent = "It will install when you close the app, or click below.";
+  } else if (info.status === "checking") {
+    updatePillText.textContent = "Checking";
+    updatePopover.querySelector(".update-popover-title").textContent = "Checking updates";
+    updatePopoverDetail.textContent = info.message || "Checking GitHub Releases...";
+    updatePopover.querySelector(".update-popover-hint").textContent = "";
+  } else if (info.status === "downloading") {
+    updatePillText.textContent = info.percent ? `Downloading ${Math.round(info.percent)}%` : "Downloading update";
+    updatePopover.querySelector(".update-popover-title").textContent = "Downloading update";
+    updatePopoverDetail.textContent = info.message || "Downloading update...";
+    updatePopover.querySelector(".update-popover-hint").textContent = "The app will offer a restart when the download is ready.";
+  } else if (info.status === "error") {
+    updatePillText.textContent = "Update issue";
+    updatePopover.querySelector(".update-popover-title").textContent = "Update check failed";
+    updatePopoverDetail.textContent = info.message || "Could not check for updates.";
+    updatePopover.querySelector(".update-popover-hint").textContent = "Use the releases link if you need to update manually.";
+  } else {
+    updatePillText.textContent = "Up to date";
+    updatePopover.querySelector(".update-popover-title").textContent = "No update found";
+    updatePopoverDetail.textContent = info.message || "You're up to date.";
+    updatePopover.querySelector(".update-popover-hint").textContent = "";
+  }
+
   updatePill.hidden = false;
 }
 
@@ -371,7 +402,7 @@ function renderSonglistState(state) {
 window.jdApp.onUpdateState(renderUpdateState);
 window.jdApp.onSonglistState(renderSonglistState);
 
-window.jdApp.checkForUpdate().then(renderUpdateState).catch(() => {
+window.jdApp.checkForUpdate({ visible: false }).then(renderUpdateState).catch(() => {
   // Update checks are best-effort; ignore failures (offline, rate-limited, repo private).
 });
 

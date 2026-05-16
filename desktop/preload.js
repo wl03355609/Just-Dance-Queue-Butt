@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld("jdApp", {
   openUrl: (url) => ipcRenderer.invoke("open:url", url),
   importCredentials: () => ipcRenderer.invoke("secrets:import"),
   clearImportedCredentials: () => ipcRenderer.invoke("secrets:clearImport"),
-  checkForUpdate: () => ipcRenderer.invoke("update:check"),
+  checkForUpdate: (options) => ipcRenderer.invoke("update:check", options),
   installUpdate: () => ipcRenderer.invoke("update:install"),
   openReleasePage: (url) => ipcRenderer.invoke("update:openReleasePage", url),
   checkSonglist: () => ipcRenderer.invoke("songlist:check"),

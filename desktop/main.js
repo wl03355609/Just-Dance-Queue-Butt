@@ -89,6 +89,7 @@ let authPollTimer = null;
 let quitAfterPrompt = false;
 let quitPromptActive = false;
 let updateCheckStarted = false;
+let visibleUpdateCheck = false;
 let songlistCheckPromise = null;
 let updateState = {
   status: "idle",
@@ -361,34 +362,8 @@ function registerIpc() {
     return publicConfig(config);
   });
 
-  ipcMain.handle("update:check", async () => {
-    if (!app.isPackaged) {
-      return setUpdateState({
-        status: "idle",
-        message: "",
-        canInstall: false
-      }, { silent: true });
-    }
-
-    if (updateState.status === "downloading" || updateState.status === "downloaded") {
-      return updateState;
-    }
-
-    if (updateCheckStarted && updateState.status === "checking") {
-      return updateState;
-    }
-
-    updateCheckStarted = true;
-    try {
-      await autoUpdater.checkForUpdates();
-    } catch (error) {
-      setUpdateState({
-        status: "error",
-        message: `Could not check for updates: ${error.message}`,
-        canInstall: false
-      });
-    }
-    return updateState;
+  ipcMain.handle("update:check", (_event, options = {}) => {
+    return checkForUpdates({ visible: Boolean(options.visible) });
   });
 
   ipcMain.handle("update:install", () => {
@@ -588,37 +563,38 @@ function setupAutoUpdater() {
 
   autoUpdater.on("checking-for-update", () => {
     setUpdateState({
-      status: "idle",
-      message: "",
+      status: "checking",
+      message: "Checking for updates...",
       canInstall: false
-    }, { silent: true });
+    }, { silent: !visibleUpdateCheck });
   });
 
   autoUpdater.on("update-available", (info) => {
+    const version = updateVersion(info);
     setUpdateState({
       status: "downloading",
-      latestVersion: updateVersion(info),
+      latestVersion: version,
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: "",
+      message: version ? `Downloading update ${version}...` : "Downloading update...",
       percent: 0,
       canInstall: false
-    }, { silent: true });
+    }, { silent: !visibleUpdateCheck });
   });
 
   autoUpdater.on("download-progress", (progress) => {
     const percent = Math.max(0, Math.min(100, Number(progress.percent) || 0));
-    // Silent download — track percent on the state object for diagnostics but
-    // don't push it to the renderer, since the new UI doesn't show progress.
     setUpdateState({
       status: "downloading",
-      message: "",
+      message: `Downloading update... ${Math.round(percent)}%`,
       percent,
       canInstall: false
-    }, { silent: true });
+    }, { silent: !visibleUpdateCheck });
   });
 
   autoUpdater.on("update-downloaded", (info) => {
+    updateCheckStarted = false;
+    visibleUpdateCheck = false;
     setUpdateState({
       status: "downloaded",
       latestVersion: updateVersion(info),
@@ -631,25 +607,66 @@ function setupAutoUpdater() {
   });
 
   autoUpdater.on("update-not-available", (info) => {
+    const visible = visibleUpdateCheck;
+    updateCheckStarted = false;
+    visibleUpdateCheck = false;
     setUpdateState({
       status: "idle",
       latestVersion: updateVersion(info),
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: "",
+      message: visible ? `You're up to date on ${app.getVersion()}.` : "",
       percent: 0,
       canInstall: false
-    }, { silent: true });
+    }, { silent: !visible });
   });
 
   autoUpdater.on("error", (error) => {
-    // Silent failure — failed update checks shouldn't pollute the UI.
+    const visible = visibleUpdateCheck;
+    updateCheckStarted = false;
+    visibleUpdateCheck = false;
     setUpdateState({
-      status: "idle",
-      message: `Could not update automatically: ${error.message}`,
+      status: visible ? "error" : "idle",
+      message: `Could not check for updates: ${error.message}`,
       canInstall: false
-    }, { silent: true });
+    }, { silent: !visible });
   });
+}
+
+async function checkForUpdates(options = {}) {
+  const visible = Boolean(options.visible);
+  if (!app.isPackaged) {
+    return setUpdateState({
+      status: visible ? "error" : "idle",
+      message: visible ? "Updates only work in packaged builds." : "",
+      canInstall: false
+    }, { silent: !visible });
+  }
+
+  if (updateState.status === "downloading" || updateState.status === "downloaded") {
+    if (visible) sendUpdateState();
+    return updateState;
+  }
+
+  if (updateCheckStarted && updateState.status === "checking") {
+    if (visible) sendUpdateState();
+    return updateState;
+  }
+
+  visibleUpdateCheck = visible;
+  updateCheckStarted = true;
+  try {
+    await autoUpdater.checkForUpdates();
+  } catch (error) {
+    updateCheckStarted = false;
+    visibleUpdateCheck = false;
+    setUpdateState({
+      status: visible ? "error" : "idle",
+      message: `Could not check for updates: ${error.message}`,
+      canInstall: false
+    }, { silent: !visible });
+  }
+  return updateState;
 }
 
 function setUpdateState(patch, options = {}) {
@@ -684,15 +701,7 @@ function setupAppMenu() {
         {
           label: "Check for Updates…",
           click: async () => {
-            if (!app.isPackaged) {
-              dialog.showMessageBox(mainWindow, {
-                type: "info",
-                message: "Updates only work in packaged builds.",
-                detail: "Run `npm run build:win` to test the update flow."
-              });
-              return;
-            }
-            try { await autoUpdater.checkForUpdates(); } catch { /* swallowed; banner shows error */ }
+            await checkForUpdates({ visible: true });
           }
         },
         { type: "separator" },
