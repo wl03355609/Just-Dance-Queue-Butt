@@ -199,15 +199,21 @@ function createServer(runtime) {
     sendJson(response, { results });
   }
 
-  async function apiRequestSong(request, response) {
+  async function withJsonBody(request, response, handler) {
     try {
       const body = await readJsonBody(request);
-      const result = await runtime.queue.addRequest(body.user || "test", body.song || body.query || "", { announce: false });
+      const result = await handler(body);
       if (!result.ok) return sendError(response, result.status || 400, result.message);
       sendJson(response, { ok: true, ...result, state: publicState() });
     } catch (error) {
       sendError(response, 400, error.message);
     }
+  }
+
+  function apiRequestSong(request, response) {
+    return withJsonBody(request, response, (body) =>
+      runtime.queue.addRequest(body.user || "test", body.song || body.query || "", { announce: false })
+    );
   }
 
   function apiSkipSong(response) {
@@ -216,15 +222,10 @@ function createServer(runtime) {
     sendJson(response, { ok: true, ...result, state: publicState() });
   }
 
-  async function apiRemoveSong(request, response) {
-    try {
-      const body = await readJsonBody(request);
-      const result = runtime.queue.removeQueueEntry(body.id, body.position, { announce: false });
-      if (!result.ok) return sendError(response, result.status || 400, result.message);
-      sendJson(response, { ok: true, ...result, state: publicState() });
-    } catch (error) {
-      sendError(response, 400, error.message);
-    }
+  function apiRemoveSong(request, response) {
+    return withJsonBody(request, response, (body) =>
+      runtime.queue.removeQueueEntry(body.id, body.position, { announce: false })
+    );
   }
 
   function apiClearQueue(response) {
@@ -233,15 +234,10 @@ function createServer(runtime) {
     sendJson(response, { ok: true, ...result, state: publicState() });
   }
 
-  async function apiPickSong(request, response) {
-    try {
-      const body = await readJsonBody(request);
-      const result = runtime.queue.pickSong(body.id, body.position, { announce: true });
-      if (!result.ok) return sendError(response, result.status || 400, result.message);
-      sendJson(response, { ok: true, ...result, state: publicState() });
-    } catch (error) {
-      sendError(response, 400, error.message);
-    }
+  function apiPickSong(request, response) {
+    return withJsonBody(request, response, (body) =>
+      runtime.queue.pickSong(body.id, body.position, { announce: true })
+    );
   }
 
   async function apiUpdateFilters(request, response) {
