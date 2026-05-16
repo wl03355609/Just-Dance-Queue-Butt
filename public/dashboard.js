@@ -14,13 +14,18 @@ const requestSongInput = document.querySelector("#request-song");
 const songList = document.querySelector("#song-list");
 const skipButton = document.querySelector("#skip-button");
 const clearButton = document.querySelector("#clear-button");
-const overlayThemeLabel = document.querySelector("#overlay-theme-label");
-const themeButtons = [...document.querySelectorAll("[data-theme]")];
+const queueToggleButton = document.querySelector("#queue-toggle-button");
+const queueHeading = document.querySelector("#queue-heading");
+let queueOpenState = true;
+const themeToggleButton = document.querySelector("#theme-toggle-button");
+let currentTheme = "dark";
 const gameFiltersElement = document.querySelector("#game-filters");
 const filterCountElement = document.querySelector("#filter-count");
 const applyFiltersButton = document.querySelector("#apply-filters");
 const selectAllFiltersButton = document.querySelector("#select-all-filters");
 const deselectAllFiltersButton = document.querySelector("#deselect-all-filters");
+const filterToggle = document.querySelector("#filter-toggle");
+const filterBody = document.querySelector("#filter-body");
 
 let allSongs = [];
 let gameOptions = [];
@@ -43,12 +48,21 @@ function render(state) {
   historyEmptyElement.hidden = state.history.length > 0;
   renderOverlayTheme(state.overlayTheme || "dark");
   renderGameFilters(state);
+  renderQueueOpenState(state.queueOpen !== false);
+}
+
+function renderQueueOpenState(open) {
+  queueOpenState = open;
+  if (queueHeading) queueHeading.textContent = open ? "Queue (Opened)" : "Queue (Closed)";
+  if (!queueToggleButton) return;
+  queueToggleButton.textContent = open ? "Close Queue" : "Open Queue";
+  queueToggleButton.classList.toggle("danger", open);
 }
 
 function renderOverlayTheme(theme) {
-  overlayThemeLabel.textContent = theme === "light" ? "Light" : "Dark";
-  for (const button of themeButtons) {
-    button.setAttribute("aria-pressed", String(button.dataset.theme === theme));
+  currentTheme = theme === "light" ? "light" : "dark";
+  if (themeToggleButton) {
+    themeToggleButton.textContent = currentTheme === "dark" ? "Light Overlay" : "Dark Overlay";
   }
 }
 
@@ -234,14 +248,24 @@ clearButton.addEventListener("click", () => {
   postJson("/api/clear").catch((error) => showMessage(error.message));
 });
 
-for (const button of themeButtons) {
-  button.addEventListener("click", () => {
-    postJson("/api/theme", { overlayTheme: button.dataset.theme }).catch((error) => showMessage(error.message));
-  });
-}
+queueToggleButton.addEventListener("click", () => {
+  postJson("/api/queue/state", { open: !queueOpenState }).catch((error) => showMessage(error.message));
+});
+
+themeToggleButton.addEventListener("click", () => {
+  const next = currentTheme === "dark" ? "light" : "dark";
+  postJson("/api/theme", { overlayTheme: next }).catch((error) => showMessage(error.message));
+});
 
 selectAllFiltersButton.addEventListener("click", () => setAllFilters(true));
 deselectAllFiltersButton.addEventListener("click", () => setAllFilters(false));
+
+filterToggle.addEventListener("click", () => {
+  const expanded = filterToggle.getAttribute("aria-expanded") === "true";
+  filterToggle.setAttribute("aria-expanded", String(!expanded));
+  filterBody.hidden = expanded;
+  filterToggle.querySelector(".collapsible-chevron").textContent = expanded ? "▸" : "▾";
+});
 
 applyFiltersButton.addEventListener("click", async () => {
   const enabledGames = [...gameFiltersElement.querySelectorAll("input:checked")]

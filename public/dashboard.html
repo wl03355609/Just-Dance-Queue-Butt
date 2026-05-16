@@ -37,32 +37,28 @@
       </section>
 
       <section class="control-strip" aria-label="Queue Controls">
+        <button id="theme-toggle-button" type="button">Light Overlay</button>
+        <button id="queue-toggle-button" type="button" class="danger">Close Queue</button>
         <button id="skip-button" type="button">Next</button>
         <button id="clear-button" type="button" class="danger">Clear Queue</button>
       </section>
 
-      <section class="appearance-panel" aria-label="Overlay Appearance">
-        <div class="panel-heading">
-          <h2>Overlay Appearance</h2>
-          <span id="overlay-theme-label">Dark</span>
-        </div>
-        <div class="theme-toggle" role="group" aria-label="Overlay Theme">
-          <button id="theme-dark" type="button" data-theme="dark" aria-pressed="true">Dark</button>
-          <button id="theme-light" type="button" data-theme="light" aria-pressed="false">Light</button>
-        </div>
-      </section>
-
       <section class="filter-panel" aria-label="Filtering Games">
-        <div class="panel-heading">
-          <h2>Filtering Games</h2>
+        <button id="filter-toggle" type="button" class="panel-heading collapsible-heading" aria-expanded="false" aria-controls="filter-body">
+          <span class="collapsible-heading-main">
+            <span class="collapsible-chevron" aria-hidden="true">▸</span>
+            <h2>Filtering Games</h2>
+          </span>
           <span id="filter-count">0 active</span>
+        </button>
+        <div id="filter-body" class="filter-body" hidden>
+          <div class="filter-actions">
+            <button id="select-all-filters" type="button">Select All</button>
+            <button id="deselect-all-filters" type="button">Deselect All</button>
+          </div>
+          <div id="game-filters" class="filter-grid"></div>
+          <button id="apply-filters" type="button">Apply Filters</button>
         </div>
-        <div class="filter-actions">
-          <button id="select-all-filters" type="button">Select All</button>
-          <button id="deselect-all-filters" type="button">Deselect All</button>
-        </div>
-        <div id="game-filters" class="filter-grid"></div>
-        <button id="apply-filters" type="button">Apply Filters</button>
       </section>
 
       <section class="add-panel" aria-label="Add Request">
@@ -80,7 +76,7 @@
       <section class="dashboard-grid">
         <div class="tool-panel">
           <div class="panel-heading">
-            <h2>Queue</h2>
+            <h2 id="queue-heading">Queue</h2>
             <span id="queue-heading-count">0 waiting</span>
           </div>
           <ol id="dashboard-queue" class="dashboard-list"></ol>
