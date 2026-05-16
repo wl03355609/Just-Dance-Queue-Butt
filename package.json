@@ -1,7 +1,7 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.8.6",
-  "codename": "David Ultra Stinky Butt",
+  "version": "0.8.7",
+  "codename": "Phone Pairing Polish",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
