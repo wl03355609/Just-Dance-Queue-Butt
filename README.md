@@ -110,6 +110,8 @@ The dashboard gives you buttons for:
 
 Queue entries that have already been played in the current session show a **Done before** badge so you can spot repeats at a glance.
 
+The configured channel/streamer can add more than one local or chat request and can exceed the normal queue size limit. Viewer requests still respect the queue size and one-request-at-a-time limits.
+
 Use these URLs while the app is running:
 
 - OBS/browser overlay: `http://localhost:3000`

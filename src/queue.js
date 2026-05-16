@@ -64,13 +64,14 @@ function createQueue(runtime) {
   }
 
   function checkCanRequest(requester) {
-    if (runtime.state.queue.length >= runtime.config.maxQueueSize) {
+    const isStreamer = isStreamerRequester(requester);
+    if (!isStreamer && runtime.state.queue.length >= runtime.config.maxQueueSize) {
       return { ok: false, status: 409, message: `@${requester} the queue is full right now.` };
     }
     const existing = runtime.state.queue.find((entry) =>
       entry.user.toLowerCase() === requester.toLowerCase()
     );
-    if (existing) {
+    if (!isStreamer && existing) {
       const pos = runtime.state.queue.indexOf(existing) + 1;
       return {
         ok: false,
@@ -79,6 +80,12 @@ function createQueue(runtime) {
       };
     }
     return { ok: true };
+  }
+
+  function isStreamerRequester(requester) {
+    const channel = String(runtime.config.channel || "").trim().toLowerCase();
+    const user = String(requester || "").trim().replace(/^@/, "").toLowerCase();
+    return Boolean(channel && user === channel);
   }
 
   async function addRequest(user, query, options = {}) {
