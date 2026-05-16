@@ -14,6 +14,7 @@ const MUTATING_API_PATHS = new Set([
   "/api/theme",
   "/api/pick",
   "/api/promote",
+  "/api/queue/state",
   "/api/companion/pairing-code"
 ]);
 

@@ -1,7 +1,7 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.8.8",
-  "codename": "Visible Updates",
+  "version": "0.9.0",
+  "codename": "Closed Doors",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
@@ -32,6 +32,7 @@
     "files": [
       "desktop/**/*",
       "!desktop/secrets.js",
+      "!desktop/preview.html",
       "src/**/*",
       "public/**/*",
       "data/songs.json",

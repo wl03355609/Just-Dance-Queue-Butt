@@ -27,11 +27,12 @@ const overlayUrlCode = document.querySelector("#overlay-url");
 const dashboardUrlCode = document.querySelector("#dashboard-url");
 const companionUrlCode = document.querySelector("#companion-url");
 const companionLinkRow = document.querySelector("#companion-link-row");
+const companionCodeSlot = document.querySelector("#companion-code-slot");
+const primaryActions = document.querySelector(".primary-actions");
 const pairCompanionButton = document.querySelector("#pair-companion");
 const pairingCodePanel = document.querySelector("#pairing-code-panel");
 const pairingCode = document.querySelector("#pairing-code");
 const pairingCodeTimer = document.querySelector("#pairing-code-timer");
-const pairingCodeCountdown = document.querySelector("#pairing-code-countdown");
 const message = document.querySelector("#message");
 const runStatus = document.querySelector("#run-status");
 const authCode = document.querySelector("#auth-code");
@@ -67,9 +68,12 @@ function render(config) {
   overlayUrlCode.textContent = config.overlayUrl;
   dashboardUrlCode.textContent = config.dashboardUrl;
   companionUrlCode.textContent = config.companionUrl || "Not available until the Mac is on Wi-Fi";
-  companionLinkRow.hidden = config.companionAccess === false;
-  pairCompanionButton.disabled = !config.running || config.companionAccess === false;
-  if (!config.running || config.companionAccess === false) hidePairingCode();
+  const companionOff = config.companionAccess === false;
+  companionLinkRow.hidden = companionOff;
+  companionCodeSlot.hidden = companionOff;
+  primaryActions.classList.toggle("has-companion", !companionOff);
+  pairCompanionButton.disabled = !config.running || companionOff;
+  if (!config.running || companionOff) hidePairingCode();
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
   if (config.appVersion) appVersionEl.textContent = `v${config.appVersion}`;
@@ -127,6 +131,7 @@ function show(text) {
 function hidePairingCode() {
   clearPairingTimers();
   pairingCodePanel.hidden = true;
+  pairCompanionButton.hidden = false;
   pairingCode.textContent = "";
 }
 
@@ -137,16 +142,9 @@ function clearPairingTimers() {
   pairingRefreshTimer = null;
 }
 
-function formatPairingRemaining(ms) {
-  const seconds = Math.max(0, Math.ceil(ms / 1000));
-  const minutes = Math.floor(seconds / 60);
-  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
-}
-
 function updatePairingCountdown() {
   const remaining = Math.max(0, pairingExpiresAt - Date.now());
   const progress = pairingTtlMs <= 0 ? 0 : remaining / pairingTtlMs;
-  pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
   pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
 }
 
@@ -169,6 +167,7 @@ async function showCompanionCode(options = {}) {
   const result = await window.jdApp.createCompanionPairingCode();
   pairingCode.textContent = result.code;
   pairingCodePanel.hidden = false;
+  pairCompanionButton.hidden = true;
   schedulePairingRefresh(result);
   show(options.refreshed ? "Phone pairing code refreshed." : "Phone pairing code shown.");
 }
@@ -184,6 +183,22 @@ async function copyText(text) {
 
 botModeSelect.addEventListener("change", () => {
   applyBotMode(botModeSelect.value);
+});
+
+companionAccessInput.addEventListener("change", async () => {
+  try {
+    const wasRunning = Boolean(currentConfig?.running);
+    render(await window.jdApp.saveConfig(formConfig()));
+    if (companionAccessInput.checked) {
+      show(wasRunning
+        ? "Phone companion access enabled. Restart the bot so phones on the network can connect."
+        : "Phone companion access enabled.");
+    } else {
+      show("Phone companion access disabled. The phone app can no longer reach the bot.");
+    }
+  } catch (error) {
+    show(error.message);
+  }
 });
 
 importButton.addEventListener("click", async () => {

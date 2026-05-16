@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Just Dance Requests</title>
+    <title>Just Dance Requests — Preview</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <main class="app-shell">
       <header>
         <div>
-          <p class="eyebrow">Twitch Song Requests</p>
+          <p class="eyebrow">Twitch Song Requests — Browser Preview</p>
           <h1>Just Dance Requests</h1>
         </div>
         <div class="header-status">
@@ -163,6 +163,67 @@
       </footer>
     </main>
 
+    <script>
+      // Mock the Electron preload bridge so renderer.js can run in a plain browser.
+      const mockConfig = {
+        clientId: "preview-client-id",
+        hasBundledClientId: true,
+        hasBundledBot: true,
+        bundledBotUsername: "justdancebot",
+        bundledFromImport: false,
+        botMode: "bundled",
+        username: "justdancebot",
+        channel: "yourchannel",
+        defaultChannel: "yourchannel",
+        loggedIn: true,
+        port: 3000,
+        companionAccess: true,
+        companionUrl: "http://192.168.1.50:3000",
+        companionUrls: ["http://192.168.1.50:3000"],
+        enabledGames: ["2025", "jdu", "plus"],
+        maxQueueSize: 50,
+        songlist: { status: "idle", count: 4200, source: "updated" },
+        overlayUrl: "http://localhost:3000",
+        dashboardUrl: "http://localhost:3000/dashboard?token=preview",
+        running: true,
+        appVersion: "0.8.8-preview"
+      };
+
+      window.jdApp = {
+        async getConfig() { return mockConfig; },
+        async saveConfig(patch) {
+          Object.assign(mockConfig, patch);
+          return mockConfig;
+        },
+        async startRuntime(patch) {
+          Object.assign(mockConfig, patch, { running: true });
+          return mockConfig;
+        },
+        async stopRuntime() {
+          mockConfig.running = false;
+          return mockConfig;
+        },
+        async startAuth() { return { userCode: "AB12CD" }; },
+        async importCredentials() { return mockConfig; },
+        async clearImportedCredentials() { return mockConfig; },
+        async checkSonglist() { return mockConfig.songlist; },
+        async createCompanionPairingCode() {
+          return {
+            code: "428193",
+            ttlSeconds: 300,
+            expiresAt: Date.now() + 5 * 60 * 1000
+          };
+        },
+        async checkForUpdate() { return { status: "idle" }; },
+        async installUpdate() {},
+        openUrl() {},
+        openReleasePage() {},
+        onAuthComplete() {},
+        onAuthError() {},
+        onUpdateState() {},
+        onSonglistState() {}
+      };
+    </script>
     <script src="./renderer.js"></script>
   </body>
 </html>

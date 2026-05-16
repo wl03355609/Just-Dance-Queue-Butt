@@ -6,8 +6,14 @@ function createCommands(runtime) {
     const arg = parts.join(" ").trim();
     const lower = command.toLowerCase();
 
-    if (lower === "!sr" || lower === "!songrequest") return requestSong(message, arg);
-    if (lower === "!random") return randomSong(message, arg);
+    if (lower === "!sr" || lower === "!songrequest") {
+      if (!checkQueueOpenForChat(message)) return;
+      return requestSong(message, arg);
+    }
+    if (lower === "!random") {
+      if (!checkQueueOpenForChat(message)) return;
+      return randomSong(message, arg);
+    }
     if (lower === "!queue") return runtime.twitch.say(runtime.queue.queueSummary());
     if (lower === "!leave") return runtime.queue.leaveQueue(message.user);
     if (lower === "!pick" && arg.toLowerCase() === "random") {
@@ -20,6 +26,8 @@ function createCommands(runtime) {
     if (lower === "!remove") return runtime.queue.removeSong(arg);
     if (lower === "!clear") return runtime.queue.clearQueue();
     if (lower === "!song") return runtime.twitch.say(runtime.queue.currentSongSummary());
+    if (lower === "!open") return runtime.queue.setQueueOpen(true, { announce: true });
+    if (lower === "!close") return runtime.queue.setQueueOpen(false, { announce: true });
   }
 
   function requestSong(message, query) {
@@ -77,6 +85,13 @@ function createCommands(runtime) {
     const user = message.user.toLowerCase();
     const badges = message.tags.badges || "";
     return user === runtime.config.channel.toLowerCase() || badges.includes("broadcaster/");
+  }
+
+  function checkQueueOpenForChat(message) {
+    if (runtime.state.queueOpen !== false) return true;
+    if (isStreamer(message)) return true;
+    runtime.twitch.say(`@${message.user} Queue is currently closed.`);
+    return false;
   }
 
   return {

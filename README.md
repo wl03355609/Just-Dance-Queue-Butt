@@ -50,6 +50,8 @@ The desktop app stores login/config locally in your user app data folder. It mus
 - `!remove <number>`: remove a queue item. Broadcaster/mod only.
 - `!clear`: clear the queue. Broadcaster/mod only.
 - `!song`: show the last played song. Broadcaster/mod only.
+- `!open`: open the queue so viewers can request again. Broadcaster/mod only.
+- `!close`: close the queue. Only the broadcaster can keep adding via chat; everyone else sees "Queue is currently closed". Broadcaster/mod only.
 
 ## Dashboard
 

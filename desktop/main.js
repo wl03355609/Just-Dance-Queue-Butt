@@ -239,6 +239,7 @@ function registerIpc() {
       enabledGames: Array.isArray(patch.enabledGames) && patch.enabledGames.length ? patch.enabledGames : current.enabledGames || DEFAULT_GAMES
     };
     writeConfig(next);
+    if (runtime?.config) runtime.config.companionAccess = next.companionAccess;
     return publicConfig(next);
   });
 

@@ -47,8 +47,24 @@ function createQueue(runtime) {
     return {
       queue: Array.isArray(value.queue) ? value.queue : [],
       history: Array.isArray(value.history) ? value.history : [],
-      overlayTheme: sanitizeOverlayTheme(value.overlayTheme)
+      overlayTheme: sanitizeOverlayTheme(value.overlayTheme),
+      queueOpen: value.queueOpen !== false
     };
+  }
+
+  function setQueueOpen(open, options = {}) {
+    const { announce = true } = options;
+    const next = Boolean(open);
+    if (runtime.state.queueOpen === next) {
+      return { ok: true, status: 200, message: `Queue is already ${next ? "open" : "closed"}.`, queueOpen: next };
+    }
+    runtime.state.queueOpen = next;
+    saveQueue();
+    const message = next
+      ? "The queue is now open — viewers can use !sr."
+      : "The queue is now closed. Only the broadcaster can add requests.";
+    if (announce) runtime.twitch.say(message);
+    return { ok: true, status: 200, message, queueOpen: next };
   }
 
   function sanitizeOverlayTheme(value) {
@@ -320,6 +336,8 @@ function createQueue(runtime) {
     clearHistoryState,
     normalizeQueueState,
     sanitizeOverlayTheme,
+    setQueueOpen,
+    isStreamerRequester,
     checkCanRequest,
     addRequest,
     addQueueEntry,

@@ -26,6 +26,12 @@ const {
 const COMPANION_PAIRING_TTL_MS = 5 * 60 * 1000;
 const COMPANION_PAIRING_MAX_ATTEMPTS = 10;
 
+function isLoopbackRemote(request) {
+  const addr = request.socket?.remoteAddress || "";
+  // Node returns IPv4-mapped IPv6 like ::ffff:127.0.0.1 for v4 sockets on a dual-stack listener.
+  return addr === "127.0.0.1" || addr === "::1" || addr === "::ffff:127.0.0.1";
+}
+
 function createServer(runtime) {
   function startHttpServer() {
     runtime.http.server = http.createServer((request, response) => {
@@ -34,6 +40,10 @@ function createServer(runtime) {
         url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
       } catch {
         return sendError(response, 400, "Invalid request URL.");
+      }
+
+      if (!runtime.config.companionAccess && !isLoopbackRemote(request)) {
+        return sendError(response, 403, "Phone companion access is disabled.");
       }
 
       if (url.pathname === "/api/companion") return apiCompanionInfo(response);
@@ -58,6 +68,7 @@ function createServer(runtime) {
         if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
         if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
         if (url.pathname === "/api/pick" || url.pathname === "/api/promote") return apiPickSong(request, response);
+        if (url.pathname === "/api/queue/state") return apiSetQueueState(request, response);
         if (url.pathname === "/api/companion/pairing-code") return apiCreateCompanionPairingCode(response);
       }
       if (url.pathname === "/events") return streamEvents(request, response);
@@ -153,6 +164,7 @@ function createServer(runtime) {
       availableGames: runtime.availableGames,
       maxQueueSize: runtime.config.maxQueueSize,
       overlayTheme: runtime.state.overlayTheme || DEFAULT_OVERLAY_THEME,
+      queueOpen: runtime.state.queueOpen !== false,
       channel: runtime.config.channel,
       botConnected: runtime.twitch.isConnected()
     };
@@ -338,6 +350,17 @@ function createServer(runtime) {
         message: runtime.queue.filterSummary(),
         state: publicState()
       });
+    } catch (error) {
+      sendError(response, 400, error.message);
+    }
+  }
+
+  async function apiSetQueueState(request, response) {
+    try {
+      const body = await readJsonBody(request);
+      const next = body.open !== undefined ? Boolean(body.open) : !runtime.state.queueOpen;
+      const result = runtime.queue.setQueueOpen(next, { announce: true });
+      sendJson(response, { ok: true, ...result, state: publicState() });
     } catch (error) {
       sendError(response, 400, error.message);
     }

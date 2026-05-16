@@ -19,6 +19,8 @@ This file lists chat commands and local dashboard actions for permission review.
 | `!remove <number>` | Broadcaster or mod | Removes a queued request by queue position without adding it to history. |
 | `!clear` | Broadcaster or mod | Clears the current queue without clearing history. |
 | `!song` | Broadcaster or mod | Shows the most recently played song from history. |
+| `!open` | Broadcaster or mod | Opens the queue so anyone can use `!sr` / `!random` again. |
+| `!close` | Broadcaster or mod | Closes the queue. Viewer chat requests are rejected with "Queue is currently closed". Only the broadcaster can still add via chat; dashboard and paired-phone admin adds still work. |
 
 ## Permission Notes
 
