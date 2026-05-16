@@ -246,17 +246,22 @@ document.addEventListener("click", (event) => {
 
 function renderUpdateState(info) {
   // The pill is the only update UI. It only appears once a new version is
-  // fully downloaded and ready to install. Everything else (checking,
-  // downloading, errors) is silent.
+  // fully downloaded AND that version differs from what's currently running.
+  // Everything else (checking, downloading, errors) is silent.
   pendingUpdate = info || null;
 
-  if (!info || info.status !== "downloaded") {
+  const hasActionableUpdate = info
+    && info.status === "downloaded"
+    && info.latestVersion
+    && info.latestVersion !== info.currentVersion;
+
+  if (!hasActionableUpdate) {
     updatePill.hidden = true;
     hideUpdatePopover();
     return;
   }
 
-  const version = info.latestVersion ? `v${info.latestVersion}` : "Update";
+  const version = `v${info.latestVersion}`;
   updatePillText.textContent = `↻ ${version}`;
   updatePopoverDetail.textContent = `${info.releaseName || version} is downloaded.`;
   updatePill.hidden = false;
