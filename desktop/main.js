@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { app, BrowserWindow, ipcMain, shell, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, dialog, Menu } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const { startRuntime, stopRuntime } = require("../src/index");
 
@@ -169,7 +169,8 @@ function publicConfig(config = readConfig()) {
     songlist: currentSonglistInfo(),
     overlayUrl,
     dashboardUrl,
-    running: Boolean(runtime)
+    running: Boolean(runtime),
+    appVersion: app.getVersion()
   };
 }
 
@@ -195,6 +196,7 @@ function createWindow() {
 app.whenReady().then(() => {
   registerIpc();
   setupAutoUpdater();
+  setupAppMenu();
   createWindow();
 
   app.on("activate", () => {
@@ -368,6 +370,27 @@ function registerIpc() {
       setUpdateState({
         status: "error",
         message: `Could not check for updates: ${error.message}`,
+        canInstall: false
+      });
+    }
+    return updateState;
+  });
+
+  ipcMain.handle("update:download", async () => {
+    if (!app.isPackaged) return updateState;
+    if (updateState.status !== "available") return updateState;
+    try {
+      setUpdateState({
+        status: "downloading",
+        message: `Downloading update ${updateState.latestVersion || ""}…`,
+        percent: 0,
+        canInstall: false
+      });
+      await autoUpdater.downloadUpdate();
+    } catch (error) {
+      setUpdateState({
+        status: "error",
+        message: `Could not download update: ${error.message}`,
         canInstall: false
       });
     }
@@ -563,24 +586,28 @@ function dateOnly(value) {
 }
 
 function setupAutoUpdater() {
-  autoUpdater.autoDownload = true;
+  // Ask the user before downloading so they're not surprised by a sudden
+  // 70+ MB transfer. Background download starts when they click "Download" in
+  // the banner. Once downloaded, autoInstallOnAppQuit applies it silently when
+  // the app next exits, Discord-style — no GitHub round-trip required.
+  autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = true;
 
   autoUpdater.on("checking-for-update", () => {
     setUpdateState({
       status: "checking",
-      message: "Checking for updates...",
+      message: "Checking for updates…",
       canInstall: false
     });
   });
 
   autoUpdater.on("update-available", (info) => {
     setUpdateState({
-      status: "downloading",
+      status: "available",
       latestVersion: updateVersion(info),
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: `Downloading update ${updateVersion(info)}...`,
+      message: `Version ${updateVersion(info)} is available. Download in the background?`,
       percent: 0,
       canInstall: false
     });
@@ -602,7 +629,7 @@ function setupAutoUpdater() {
       latestVersion: updateVersion(info),
       releaseName: updateReleaseName(info),
       releaseUrl: updateReleaseUrl(info),
-      message: `Update ${updateVersion(info)} is ready. Restart to install it.`,
+      message: `Update ${updateVersion(info)} is ready. It will install automatically when you close the app, or click Restart now.`,
       percent: 100,
       canInstall: true
     });
@@ -642,6 +669,64 @@ function setUpdateState(patch, options = {}) {
 function sendUpdateState() {
   if (!mainWindow || mainWindow.isDestroyed()) return;
   mainWindow.webContents.send("update:state", updateState);
+}
+
+function setupAppMenu() {
+  const template = [
+    ...(process.platform === "darwin" ? [{ role: "appMenu" }] : []),
+    { role: "fileMenu" },
+    { role: "editMenu" },
+    { role: "viewMenu" },
+    { role: "windowMenu" },
+    {
+      role: "help",
+      submenu: [
+        {
+          label: "About Just Dance Requests",
+          click: () => showAboutDialog()
+        },
+        {
+          label: "Check for Updates…",
+          click: async () => {
+            if (!app.isPackaged) {
+              dialog.showMessageBox(mainWindow, {
+                type: "info",
+                message: "Updates only work in packaged builds.",
+                detail: "Run `npm run build:win` to test the update flow."
+              });
+              return;
+            }
+            try { await autoUpdater.checkForUpdates(); } catch { /* swallowed; banner shows error */ }
+          }
+        },
+        { type: "separator" },
+        {
+          label: "View Releases on GitHub",
+          click: () => shell.openExternal(RELEASES_PAGE_URL)
+        }
+      ]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
+function showAboutDialog() {
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  const version = app.getVersion();
+  dialog.showMessageBox(mainWindow, {
+    type: "info",
+    title: "About Just Dance Requests",
+    message: "Just Dance Requests",
+    detail: `Version ${version}\n\nA local Twitch chat song request queue for Just Dance streamers.\n\nhttps://github.com/wl03355609/Just-Dance-Queue-Butt`,
+    buttons: ["OK", "View on GitHub"],
+    defaultId: 0,
+    cancelId: 0,
+    noLink: true
+  }).then((result) => {
+    if (result.response === 1) {
+      shell.openExternal("https://github.com/wl03355609/Just-Dance-Queue-Butt");
+    }
+  });
 }
 
 function updateVersion(info = {}) {
