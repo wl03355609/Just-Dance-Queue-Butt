@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "codename": "David Ultra Stinky Butt",
   "description": "A local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
@@ -48,9 +48,9 @@
       ]
     },
     "nsis": {
-      "oneClick": false,
+      "oneClick": true,
       "perMachine": false,
-      "allowToChangeInstallationDirectory": false,
+      "runAfterFinish": true,
       "deleteAppDataOnUninstall": false,
       "artifactName": "JustDanceRequests-Setup-${version}-${arch}.${ext}"
     },
