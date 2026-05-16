@@ -80,3 +80,11 @@ The desktop app can update the songlist independently from the program. On start
 - Desktop app queues are saved per channel in app data.
 - CLI queue state is saved to `data/queue.json`.
 - Twitch chat requires the bot account to be able to join/send messages in your channel.
+
+## Disclaimer
+
+This is an unofficial, fan-made tool. It is not affiliated with, endorsed by, or sponsored by Ubisoft Entertainment.
+
+*Just Dance*, *Just Dance Unlimited*, *Just Dance+*, all related logos, song titles, artwork, and other identifiers are trademarks and/or copyrighted material of [Ubisoft Entertainment](https://www.ubisoft.com/) and their respective owners. They are referenced here only to describe and link to the songs viewers request — no game files, music, video, or artwork is bundled with this project.
+
+If you are a rights holder and would like content removed, open an issue on this repository.
