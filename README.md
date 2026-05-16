@@ -65,6 +65,8 @@ The installer output goes into `dist/` as `JustDanceRequests-Setup-<version>-ia3
 
 Users installed through the NSIS installer receive program updates through the in-app updater. Older portable `.exe` builds still need to be replaced manually once.
 
+Do not keep real bot tokens inside `desktop/` for release builds. Put shareable bot credential files in an ignored private folder such as `.private/qutebutt-secrets.js`, then send that file privately to trusted users so they can choose **Import bot credentials file...** in the app. Packaged builds explicitly exclude `desktop/secrets.js`.
+
 ## Chat Commands
 
 - `!sr <song name>`: add a song request. Requires at least 3 characters. Rejected if the same song is already in the queue.

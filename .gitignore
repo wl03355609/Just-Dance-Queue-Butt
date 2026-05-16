@@ -1,8 +1,10 @@
 .env
+.private/
 data/queue.json
 node_modules/
 dist/
 release/
 .DS_Store
 desktop/secrets.js
+private/
 *.code-workspace

@@ -19,9 +19,9 @@ const BUNDLED_CLIENT_ID = "rpfj350muhxl4ei1kl9glmbkbmea7w";
 // Users change this to their own channel after logging in with their own Twitch account.
 const DEFAULT_CHANNEL = "qutebutt";
 
-// Bot account credentials loaded from desktop/secrets.js (gitignored, never committed).
-// Copy desktop/secrets.example.js → desktop/secrets.js and fill in the token before building.
-// Users can also import a credentials file at runtime — see ipcMain "secrets:import".
+// Bot account credentials can be imported at runtime — see ipcMain "secrets:import".
+// desktop/secrets.js is intentionally excluded from packaged builds so tokens are
+// not bundled accidentally.
 let secrets = { BUNDLED_OAUTH_TOKEN: "", BUNDLED_BOT_USERNAME: "" };
 try { secrets = require("./secrets"); } catch {}
 const BUILD_TIME_OAUTH = String(secrets.BUNDLED_OAUTH_TOKEN || "").trim();
