@@ -30,7 +30,6 @@ const companionLinkRow = document.querySelector("#companion-link-row");
 const pairCompanionButton = document.querySelector("#pair-companion");
 const pairingCodePanel = document.querySelector("#pairing-code-panel");
 const pairingCode = document.querySelector("#pairing-code");
-const pairingCodeStatus = document.querySelector("#pairing-code-status");
 const pairingCodeTimer = document.querySelector("#pairing-code-timer");
 const pairingCodeCountdown = document.querySelector("#pairing-code-countdown");
 const message = document.querySelector("#message");
@@ -129,7 +128,6 @@ function hidePairingCode() {
   clearPairingTimers();
   pairingCodePanel.hidden = true;
   pairingCode.textContent = "";
-  pairingCodeStatus.textContent = "";
 }
 
 function clearPairingTimers() {
@@ -150,7 +148,6 @@ function updatePairingCountdown() {
   const progress = pairingTtlMs <= 0 ? 0 : remaining / pairingTtlMs;
   pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
   pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
-  pairingCodeStatus.textContent = "Enter this code in the Android app. The code rotates when the countdown reaches 0.";
 }
 
 function schedulePairingRefresh(result) {
@@ -162,7 +159,7 @@ function schedulePairingRefresh(result) {
   pairingRefreshTimer = setTimeout(() => {
     if (!pairingCodePanel.hidden && currentConfig?.running && currentConfig.companionAccess !== false) {
       showCompanionCode({ refreshed: true }).catch((error) => {
-        pairingCodeStatus.textContent = error.message;
+        show(error.message);
       });
     }
   }, Math.max(1000, pairingExpiresAt - Date.now()));
