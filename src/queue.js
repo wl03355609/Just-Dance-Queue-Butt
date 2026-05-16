@@ -55,6 +55,14 @@ function createQueue(runtime) {
     return value === "light" ? "light" : DEFAULT_OVERLAY_THEME;
   }
 
+  function findDuplicateEntry(song) {
+    const titleKey = normalize(song.title);
+    const index = runtime.state.queue.findIndex((entry) =>
+      entry.song.id === song.id || normalize(entry.song.title) === titleKey
+    );
+    return index === -1 ? null : { entry: runtime.state.queue[index], position: index + 1 };
+  }
+
   async function addRequest(user, query, options = {}) {
     const { announce = true } = options;
     const requester = cleanChatText(user || "viewer").replace(/^@/, "").slice(0, 50) || "viewer";
@@ -104,10 +112,9 @@ function createQueue(runtime) {
         return { ok: false, status: 404, message };
       }
       const song = runtime.songs.youtubeSong(title);
-      const dup = runtime.state.queue.find((e) => e.song.id === song.id || normalize(e.song.title) === normalize(song.title));
+      const dup = findDuplicateEntry(song);
       if (dup) {
-        const pos = runtime.state.queue.indexOf(dup) + 1;
-        const message = `@${requester} "${dup.song.title}" is already in the queue at #${pos}, requested by @${dup.user}.`;
+        const message = `@${requester} "${dup.entry.song.title}" is already in the queue at #${dup.position}, requested by @${dup.entry.user}.`;
         if (announce) runtime.twitch.say(message);
         return { ok: false, status: 409, message };
       }
@@ -127,10 +134,9 @@ function createQueue(runtime) {
       return { ok: false, status: 404, message };
     }
 
-    const duplicate = runtime.state.queue.find((entry) => entry.song.id === song.id || normalize(entry.song.title) === normalize(song.title));
+    const duplicate = findDuplicateEntry(song);
     if (duplicate) {
-      const pos = runtime.state.queue.indexOf(duplicate) + 1;
-      const message = `@${requester} "${duplicate.song.title}" is already in the queue at #${pos}, requested by @${duplicate.user}.`;
+      const message = `@${requester} "${duplicate.entry.song.title}" is already in the queue at #${duplicate.position}, requested by @${duplicate.entry.user}.`;
       if (announce) runtime.twitch.say(message);
       return { ok: false, status: 409, message };
     }
