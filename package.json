@@ -31,6 +31,7 @@
     "icon": "build/icon.ico",
     "files": [
       "desktop/**/*",
+      "!desktop/secrets.js",
       "src/**/*",
       "public/**/*",
       "data/songs.json",
