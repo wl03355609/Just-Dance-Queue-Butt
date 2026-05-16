@@ -21,21 +21,10 @@ const filterCountElement = document.querySelector("#filter-count");
 const applyFiltersButton = document.querySelector("#apply-filters");
 const selectAllFiltersButton = document.querySelector("#select-all-filters");
 const deselectAllFiltersButton = document.querySelector("#deselect-all-filters");
-const showPairingCodeButton = document.querySelector("#show-pairing-code");
-const pairingStatusElement = document.querySelector("#pairing-status");
-const pairingCodePanel = document.querySelector("#dashboard-pairing-code-panel");
-const pairingCodeElement = document.querySelector("#dashboard-pairing-code");
-const pairingCodeStatusElement = document.querySelector("#dashboard-pairing-code-status");
-const pairingCodeTimer = document.querySelector("#dashboard-pairing-code-timer");
-const pairingCodeCountdown = document.querySelector("#dashboard-pairing-code-countdown");
 
 let allSongs = [];
 let gameOptions = [];
 let currentHistory = [];
-let pairingExpiresAt = 0;
-let pairingTtlMs = 5 * 60 * 1000;
-let pairingCountdownTimer = null;
-let pairingRefreshTimer = null;
 const adminToken = new URLSearchParams(window.location.search).get("token") || "";
 
 function render(state) {
@@ -174,51 +163,6 @@ function showMessage(message) {
   messageElement.textContent = message;
 }
 
-function clearPairingTimers() {
-  clearInterval(pairingCountdownTimer);
-  clearTimeout(pairingRefreshTimer);
-  pairingCountdownTimer = null;
-  pairingRefreshTimer = null;
-}
-
-function formatPairingRemaining(ms) {
-  const seconds = Math.max(0, Math.ceil(ms / 1000));
-  const minutes = Math.floor(seconds / 60);
-  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
-}
-
-function updatePairingCountdown() {
-  const remaining = Math.max(0, pairingExpiresAt - Date.now());
-  const progress = pairingTtlMs <= 0 ? 0 : remaining / pairingTtlMs;
-  pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
-  pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
-  pairingStatusElement.textContent = "Visible";
-  pairingCodeStatusElement.textContent = "Enter this code in the Android app. The code rotates when the countdown reaches 0.";
-}
-
-function schedulePairingRefresh(result) {
-  clearPairingTimers();
-  pairingTtlMs = Math.max(1, Number(result.ttlSeconds || 300)) * 1000;
-  pairingExpiresAt = Number(result.expiresAt) || Date.now() + pairingTtlMs;
-  updatePairingCountdown();
-  pairingCountdownTimer = setInterval(updatePairingCountdown, 1000);
-  pairingRefreshTimer = setTimeout(() => {
-    if (!pairingCodePanel.hidden) {
-      showPairingCode({ refreshed: true }).catch((error) => {
-        pairingCodeStatusElement.textContent = error.message;
-      });
-    }
-  }, Math.max(1000, pairingExpiresAt - Date.now()));
-}
-
-async function showPairingCode(options = {}) {
-  const result = await postJson("/api/companion/pairing-code", {}, { silent: true });
-  pairingCodeElement.textContent = result.code;
-  pairingCodePanel.hidden = false;
-  schedulePairingRefresh(result);
-  showMessage(options.refreshed ? "Phone pairing code refreshed." : "Phone pairing code shown.");
-}
-
 async function addRequest(event) {
   event.preventDefault();
   await postJson("/api/request", {
@@ -288,9 +232,6 @@ skipButton.addEventListener("click", () => postJson("/api/skip").catch((error) =
 clearButton.addEventListener("click", () => {
   if (!window.confirm("Clear the entire queue?")) return;
   postJson("/api/clear").catch((error) => showMessage(error.message));
-});
-showPairingCodeButton.addEventListener("click", () => {
-  showPairingCode().catch((error) => showMessage(error.message));
 });
 
 for (const button of themeButtons) {
