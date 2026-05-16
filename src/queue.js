@@ -63,6 +63,24 @@ function createQueue(runtime) {
     return index === -1 ? null : { entry: runtime.state.queue[index], position: index + 1 };
   }
 
+  function checkCanRequest(requester) {
+    if (runtime.state.queue.length >= runtime.config.maxQueueSize) {
+      return { ok: false, status: 409, message: `@${requester} the queue is full right now.` };
+    }
+    const existing = runtime.state.queue.find((entry) =>
+      entry.user.toLowerCase() === requester.toLowerCase()
+    );
+    if (existing) {
+      const pos = runtime.state.queue.indexOf(existing) + 1;
+      return {
+        ok: false,
+        status: 409,
+        message: `@${requester} you are already in queue at #${pos}: ${existing.song.title}. Use !leave to remove it.`
+      };
+    }
+    return { ok: true };
+  }
+
   async function addRequest(user, query, options = {}) {
     const { announce = true } = options;
     const requester = cleanChatText(user || "viewer").replace(/^@/, "").slice(0, 50) || "viewer";
@@ -80,17 +98,10 @@ function createQueue(runtime) {
       return { ok: false, status: 400, message };
     }
 
-    if (runtime.state.queue.length >= runtime.config.maxQueueSize) {
-      const message = `@${requester} the queue is full right now.`;
-      if (announce) runtime.twitch.say(message);
-      return { ok: false, status: 409, message };
-    }
-
-    const existing = runtime.state.queue.find((entry) => entry.user.toLowerCase() === requester.toLowerCase());
-    if (existing) {
-      const message = `@${requester} you are already in queue at #${runtime.state.queue.indexOf(existing) + 1}: ${existing.song.title}. Use !leave to remove it.`;
-      if (announce) runtime.twitch.say(message);
-      return { ok: false, status: 409, message };
+    const gate = checkCanRequest(requester);
+    if (!gate.ok) {
+      if (announce) runtime.twitch.say(gate.message);
+      return gate;
     }
 
     if (runtime.songs.isAnyUrl(requestedSong)) {
@@ -302,6 +313,7 @@ function createQueue(runtime) {
     clearHistoryState,
     normalizeQueueState,
     sanitizeOverlayTheme,
+    checkCanRequest,
     addRequest,
     addQueueEntry,
     leaveQueue,

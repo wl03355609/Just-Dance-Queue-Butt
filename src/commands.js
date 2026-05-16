@@ -29,14 +29,9 @@ function createCommands(runtime) {
   function randomSong(message, arg) {
     const requester = message.user;
 
-    if (runtime.state.queue.length >= runtime.config.maxQueueSize) {
-      runtime.twitch.say(`@${requester} the queue is full right now.`);
-      return;
-    }
-
-    const existing = runtime.state.queue.find((entry) => entry.user.toLowerCase() === requester.toLowerCase());
-    if (existing) {
-      runtime.twitch.say(`@${requester} you are already in queue at #${runtime.state.queue.indexOf(existing) + 1}: ${existing.song.title}. Use !leave to remove it.`);
+    const gate = runtime.queue.checkCanRequest(requester);
+    if (!gate.ok) {
+      runtime.twitch.say(gate.message);
       return;
     }
 
