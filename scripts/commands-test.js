@@ -52,6 +52,7 @@ function makeRuntime({ catalog = [], queue = [], history = [] } = {}) {
   const realQueue = createQueue(runtime);
   runtime.queue = {
     parseRandomFilter: realQueue.parseRandomFilter,
+    checkCanRequest: realQueue.checkCanRequest,
     queueSummary: () => "summary",
     currentSongSummary: () => "current",
     addRequest: (...args) => { calls.addRequest.push(args); return Promise.resolve({ ok: true }); },
