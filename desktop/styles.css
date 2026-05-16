@@ -146,6 +146,62 @@ input:disabled {
   letter-spacing: 0;
 }
 
+.update-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(33, 215, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(33, 215, 255, 0.1);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.update-banner span {
+  flex: 1;
+}
+
+.update-banner button {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+.link-button {
+  min-height: unset !important;
+  padding: 4px 10px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--muted) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.link-button:hover {
+  color: var(--text) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.bundled-import {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bundled-import button {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+.bundled-import .field-hint {
+  flex-basis: 100%;
+}
+
 button {
   padding: 0 16px;
   font-weight: 900;

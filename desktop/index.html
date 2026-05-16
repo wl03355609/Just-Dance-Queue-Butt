@@ -16,6 +16,12 @@
         <strong id="run-status" class="status">Stopped</strong>
       </header>
 
+      <div id="update-banner" class="update-banner" hidden>
+        <span id="update-banner-text"></span>
+        <button id="update-banner-action" type="button">Download</button>
+        <button id="update-banner-dismiss" type="button" class="link-button">Dismiss</button>
+      </div>
+
       <section class="panel">
         <h2>Bot Settings</h2>
         <div class="grid">
@@ -32,6 +38,11 @@
                 <option value="own">My own Twitch account</option>
               </select>
             </label>
+          </div>
+          <div class="span-2 bundled-import">
+            <button id="import-credentials" type="button">Import bot credentials file…</button>
+            <button id="clear-imported-credentials" type="button" hidden>Clear imported credentials</button>
+            <span id="imported-credentials-hint" class="field-hint">Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.</span>
           </div>
           <label class="span-2">
             Channel

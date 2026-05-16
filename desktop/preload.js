@@ -8,6 +8,10 @@ contextBridge.exposeInMainWorld("jdApp", {
   stopRuntime: () => ipcRenderer.invoke("runtime:stop"),
   nextSong: () => ipcRenderer.invoke("runtime:next"),
   openUrl: (url) => ipcRenderer.invoke("open:url", url),
+  importCredentials: () => ipcRenderer.invoke("secrets:import"),
+  clearImportedCredentials: () => ipcRenderer.invoke("secrets:clearImport"),
+  checkForUpdate: () => ipcRenderer.invoke("update:check"),
+  openReleasePage: (url) => ipcRenderer.invoke("update:openReleasePage", url),
   onAuthComplete: (callback) => ipcRenderer.on("auth:complete", (_event, config) => callback(config)),
   onAuthError: (callback) => ipcRenderer.on("auth:error", (_event, message) => callback(message))
 });
