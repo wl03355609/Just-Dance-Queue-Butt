@@ -18,10 +18,66 @@ const DEFAULT_CHANNEL = "qutebutt";
 
 // Bot account credentials loaded from desktop/secrets.js (gitignored, never committed).
 // Copy desktop/secrets.example.js → desktop/secrets.js and fill in the token before building.
+// Users can also import a credentials file at runtime — see ipcMain "secrets:import".
 let secrets = { BUNDLED_OAUTH_TOKEN: "", BUNDLED_BOT_USERNAME: "" };
 try { secrets = require("./secrets"); } catch {}
-const BUNDLED_OAUTH_TOKEN = String(secrets.BUNDLED_OAUTH_TOKEN || "").trim();
-const BUNDLED_BOT_USERNAME = String(secrets.BUNDLED_BOT_USERNAME || "").trim();
+const BUILD_TIME_OAUTH = String(secrets.BUNDLED_OAUTH_TOKEN || "").trim();
+const BUILD_TIME_USERNAME = String(secrets.BUNDLED_BOT_USERNAME || "").trim();
+
+function effectiveBundled(config = readConfig()) {
+  const importedUsername = String(config.importedBundledUsername || "").trim();
+  const importedOauth = String(config.importedBundledOauth || "").trim();
+  const username = importedUsername || BUILD_TIME_USERNAME;
+  const oauth = importedOauth || BUILD_TIME_OAUTH;
+  return {
+    username,
+    oauth,
+    hasBundled: Boolean(username && oauth),
+    fromImport: Boolean(importedUsername && importedOauth)
+  };
+}
+
+function parseCredentialsFile(text, filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+
+  if (ext === ".json") {
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error("Invalid JSON in credentials file.");
+    }
+    return {
+      username: String(data.BUNDLED_BOT_USERNAME || data.username || data.TWITCH_USERNAME || "").trim(),
+      oauth: String(data.BUNDLED_OAUTH_TOKEN || data.oauth || data.TWITCH_OAUTH || "").trim()
+    };
+  }
+
+  if (ext === ".env") {
+    const env = {};
+    for (const line of text.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const eq = trimmed.indexOf("=");
+      if (eq === -1) continue;
+      const key = trimmed.slice(0, eq).trim();
+      const value = trimmed.slice(eq + 1).trim().replace(/^["']|["']$/g, "");
+      env[key] = value;
+    }
+    return {
+      username: String(env.TWITCH_USERNAME || env.BUNDLED_BOT_USERNAME || "").trim(),
+      oauth: String(env.TWITCH_OAUTH || env.BUNDLED_OAUTH_TOKEN || "").trim()
+    };
+  }
+
+  // Default: .js parsing via regex — no eval, so the picked file can't run code.
+  const tokenMatch = text.match(/BUNDLED_OAUTH_TOKEN\s*[:=]\s*["']([^"']*)["']/);
+  const userMatch = text.match(/BUNDLED_BOT_USERNAME\s*[:=]\s*["']([^"']*)["']/);
+  return {
+    username: userMatch ? userMatch[1].trim() : "",
+    oauth: tokenMatch ? tokenMatch[1].trim() : ""
+  };
+}
 
 let mainWindow = null;
 let runtime = null;
@@ -62,16 +118,17 @@ function writeConfig(config) {
 
 function publicConfig(config = readConfig()) {
   const port = config.port || DEFAULT_PORT;
-  const hasBundledBot = Boolean(BUNDLED_OAUTH_TOKEN && BUNDLED_BOT_USERNAME);
+  const bundled = effectiveBundled(config);
   const overlayUrl = runtime?.urls?.overlay || `http://localhost:${port}`;
   const dashboardUrl = runtime?.urls?.dashboard || `http://localhost:${port}/dashboard`;
 
   return {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
     hasBundledClientId: Boolean(BUNDLED_CLIENT_ID),
-    hasBundledBot,
-    bundledBotUsername: BUNDLED_BOT_USERNAME || "",
-    botMode: config.botMode || (hasBundledBot ? "bundled" : "own"),
+    hasBundledBot: bundled.hasBundled,
+    bundledBotUsername: bundled.username,
+    bundledFromImport: bundled.fromImport,
+    botMode: config.botMode || (bundled.hasBundled ? "bundled" : "own"),
     username: config.username || "",
     channel: config.channel || DEFAULT_CHANNEL,
     defaultChannel: DEFAULT_CHANNEL,
@@ -157,12 +214,13 @@ function registerIpc() {
     const config = { ...saved, ...patch };
     writeConfig(config);
 
-    const useBundledBot = config.botMode === "bundled" && Boolean(BUNDLED_OAUTH_TOKEN) && Boolean(BUNDLED_BOT_USERNAME);
+    const bundled = effectiveBundled(config);
+    const useBundledBot = config.botMode === "bundled" && bundled.hasBundled;
 
     let username, oauth;
     if (useBundledBot) {
-      username = BUNDLED_BOT_USERNAME;
-      oauth = BUNDLED_OAUTH_TOKEN;
+      username = bundled.username;
+      oauth = bundled.oauth;
     } else {
       const readyConfig = await ensureFreshToken(config);
       if (!readyConfig.accessToken) throw new Error("Log in with Twitch before starting the bot.");
@@ -213,6 +271,53 @@ function registerIpc() {
 
   ipcMain.handle("open:url", (_event, url) => {
     return openLocalAppUrl(url);
+  });
+
+  ipcMain.handle("secrets:import", async () => {
+    if (!mainWindow || mainWindow.isDestroyed()) {
+      throw new Error("Main window is not available.");
+    }
+    const result = await dialog.showOpenDialog(mainWindow, {
+      title: "Import bot credentials",
+      filters: [
+        { name: "Credentials files", extensions: ["js", "json", "env"] },
+        { name: "All files", extensions: ["*"] }
+      ],
+      properties: ["openFile"]
+    });
+    if (result.canceled || !result.filePaths.length) return null;
+
+    const filePath = result.filePaths[0];
+    let text;
+    try {
+      text = fs.readFileSync(filePath, "utf8");
+    } catch (error) {
+      throw new Error(`Could not read file: ${error.message}`);
+    }
+
+    const parsed = parseCredentialsFile(text, filePath);
+    if (!parsed.username || !parsed.oauth) {
+      throw new Error("That file doesn't contain a bot username and OAuth token. Expected fields: BUNDLED_BOT_USERNAME / BUNDLED_OAUTH_TOKEN, or TWITCH_USERNAME / TWITCH_OAUTH, or username / oauth.");
+    }
+
+    const oauth = parsed.oauth.startsWith("oauth:") ? parsed.oauth : `oauth:${parsed.oauth}`;
+    const config = readConfig();
+    config.importedBundledUsername = parsed.username;
+    config.importedBundledOauth = oauth;
+    config.botMode = "bundled";
+    writeConfig(config);
+    return publicConfig(config);
+  });
+
+  ipcMain.handle("secrets:clearImport", () => {
+    const config = readConfig();
+    delete config.importedBundledUsername;
+    delete config.importedBundledOauth;
+    if (config.botMode === "bundled" && !BUILD_TIME_OAUTH) {
+      config.botMode = "own";
+    }
+    writeConfig(config);
+    return publicConfig(config);
   });
 }
 

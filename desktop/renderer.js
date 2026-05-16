@@ -7,6 +7,9 @@ const loggedInBadge = document.querySelector("#logged-in-badge");
 const loggedInUser = document.querySelector("#logged-in-user");
 const usernameInput = document.querySelector("#username");
 const channelInput = document.querySelector("#channel");
+const importButton = document.querySelector("#import-credentials");
+const clearImportButton = document.querySelector("#clear-imported-credentials");
+const importedHint = document.querySelector("#imported-credentials-hint");
 const portInput = document.querySelector("#port");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
@@ -54,6 +57,14 @@ function render(config) {
   }
   applyBotMode(botModeSelect.value);
 
+  // Imported-credentials clear button: only show when the bundled bot came from an import
+  clearImportButton.hidden = !config.bundledFromImport;
+  if (config.bundledFromImport) {
+    importedHint.textContent = `Imported credentials for @${config.bundledBotUsername}. They live in this app's config on this machine.`;
+  } else {
+    importedHint.innerHTML = "Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.";
+  }
+
   // Client ID field
   if (config.hasBundledClientId) clientIdSection.hidden = true;
 
@@ -94,6 +105,26 @@ async function copyText(text) {
 
 botModeSelect.addEventListener("change", () => {
   applyBotMode(botModeSelect.value);
+});
+
+importButton.addEventListener("click", async () => {
+  try {
+    const result = await window.jdApp.importCredentials();
+    if (!result) return; // user canceled the file picker
+    render(result);
+    show(`Bot credentials imported for @${result.bundledBotUsername}.`);
+  } catch (error) {
+    show(error.message);
+  }
+});
+
+clearImportButton.addEventListener("click", async () => {
+  try {
+    render(await window.jdApp.clearImportedCredentials());
+    show("Imported bot credentials cleared.");
+  } catch (error) {
+    show(error.message);
+  }
 });
 
 document.querySelector("#login-button").addEventListener("click", async () => {
