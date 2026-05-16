@@ -25,7 +25,8 @@ function createSongs(runtime) {
       .map((song, index) => ({
         id: `${gameKey(song.game)}-${slug(song.title)}-${index}`,
         ...song,
-        search: normalize(`${song.title} ${song.artist} ${song.game} ${song.originalGame || ""}`)
+        search: normalize(`${song.title} ${song.artist} ${song.game} ${song.originalGame || ""}`),
+        normalizedTitle: normalize(song.title)
       }));
 
     const counts = new Map(FILTER_OPTIONS.map((key) => [key, 0]));
@@ -44,13 +45,14 @@ function createSongs(runtime) {
 
   function findSong(query) {
     const normalized = normalize(query);
-    const exact = runtime.catalog.find((song) => normalize(song.title) === normalized);
+    const exact = runtime.catalog.find((song) => song.normalizedTitle === normalized);
     if (exact) return { song: exact, score: 1 };
 
     let best = null;
     for (const song of runtime.catalog) {
       const score = scoreSong(normalized, song);
       if (!best || score > best.score) best = { song, score };
+      if (best && best.score >= 0.92) break;
     }
 
     return best && best.score >= MIN_REQUEST_MATCH_SCORE ? best : null;
@@ -64,7 +66,7 @@ function createSongs(runtime) {
     const overlappingTokens = [...queryTokens].filter((token) => songTokens.has(token));
     const overlap = overlappingTokens.length;
     const tokenScore = overlap / Math.max(queryTokens.size, 1);
-    const distanceScore = 1 - levenshtein(query, normalize(song.title)) / Math.max(query.length, song.title.length, 1);
+    const distanceScore = 1 - levenshtein(query, song.normalizedTitle) / Math.max(query.length, song.title.length, 1);
 
     if (hasMissingNumericToken(queryTokens, songTokens)) return 0;
     if (queryTokens.size > 1 && overlap > 0 && overlappingTokens.every((token) => GENERIC_MATCH_TOKENS.has(token))) return 0;
