@@ -11,7 +11,11 @@ contextBridge.exposeInMainWorld("jdApp", {
   importCredentials: () => ipcRenderer.invoke("secrets:import"),
   clearImportedCredentials: () => ipcRenderer.invoke("secrets:clearImport"),
   checkForUpdate: () => ipcRenderer.invoke("update:check"),
+  installUpdate: () => ipcRenderer.invoke("update:install"),
   openReleasePage: (url) => ipcRenderer.invoke("update:openReleasePage", url),
+  checkSonglist: () => ipcRenderer.invoke("songlist:check"),
   onAuthComplete: (callback) => ipcRenderer.on("auth:complete", (_event, config) => callback(config)),
-  onAuthError: (callback) => ipcRenderer.on("auth:error", (_event, message) => callback(message))
+  onAuthError: (callback) => ipcRenderer.on("auth:error", (_event, message) => callback(message)),
+  onUpdateState: (callback) => ipcRenderer.on("update:state", (_event, state) => callback(state)),
+  onSonglistState: (callback) => ipcRenderer.on("songlist:state", (_event, state) => callback(state))
 });

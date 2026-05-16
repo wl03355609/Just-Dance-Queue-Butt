@@ -17,7 +17,7 @@ const {
 
 function createSongs(runtime) {
   function loadSongs() {
-    const raw = JSON.parse(fs.readFileSync(SONGS_PATH, "utf8"));
+    const raw = JSON.parse(fs.readFileSync(runtime.config.songsPath || SONGS_PATH, "utf8"));
     const enabled = new Set(runtime.config.enabledGames.map(gameKey));
 
     runtime.catalog = raw

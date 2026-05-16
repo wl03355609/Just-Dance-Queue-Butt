@@ -2,6 +2,7 @@ const crypto = require("node:crypto");
 
 const {
   QUEUE_PATH,
+  SONGS_PATH,
   DEFAULT_ENABLED_GAMES,
   FILTER_OPTIONS
 } = require("./constants");
@@ -34,7 +35,8 @@ function createConfig(overrides = {}) {
     enabledGames: sanitizeEnabledGames(enabledGames),
     modUsers: modUsers.map(sanitizeTwitchName).filter(Boolean),
     adminToken: cleanSecret(overrides.adminToken ?? env("ADMIN_TOKEN", "")) || crypto.randomBytes(24).toString("hex"),
-    queuePath: overrides.queuePath || QUEUE_PATH
+    queuePath: overrides.queuePath || QUEUE_PATH,
+    songsPath: overrides.songsPath || SONGS_PATH
   };
 }
 

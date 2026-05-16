@@ -1,13 +1,14 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { app, BrowserWindow, ipcMain, shell, dialog } = require("electron");
+const { autoUpdater } = require("electron-updater");
 const { startRuntime, stopRuntime } = require("../src/index");
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
 const CHAT_SCOPES = ["chat:read", "chat:edit"];
-const RELEASES_API_URL = "https://api.github.com/repos/wl03355609/Just-Dance-Queue-Butt/releases/latest";
 const RELEASES_PAGE_URL = "https://github.com/wl03355609/Just-Dance-Queue-Butt/releases/latest";
+const SONGLIST_URL = "https://raw.githubusercontent.com/wl03355609/Just-Dance-Queue-Butt/main/data/songs.json";
 
 // Fill in your Twitch Developer App Client ID here before building.
 // Register at https://dev.twitch.tv/console/apps — use Device Code Grant, no redirect URI needed.
@@ -86,6 +87,25 @@ let runtime = null;
 let authPollTimer = null;
 let quitAfterPrompt = false;
 let quitPromptActive = false;
+let updateCheckStarted = false;
+let songlistCheckPromise = null;
+let updateState = {
+  status: "idle",
+  currentVersion: app.getVersion(),
+  latestVersion: "",
+  releaseName: "",
+  releaseUrl: RELEASES_PAGE_URL,
+  message: "",
+  percent: 0,
+  canInstall: false
+};
+let songlistState = {
+  status: "idle",
+  source: "bundled",
+  count: 0,
+  updatedAt: "",
+  message: ""
+};
 
 function getConfigPath() {
   return path.join(app.getPath("userData"), "config.json");
@@ -93,6 +113,14 @@ function getConfigPath() {
 
 function getQueuePath(channel = readConfig().channel || DEFAULT_CHANNEL) {
   return path.join(app.getPath("userData"), "queues", `${sanitizeChannelName(channel) || "default"}.json`);
+}
+
+function getSonglistPath() {
+  return path.join(app.getPath("userData"), "songlist", "songs.json");
+}
+
+function getSonglistMetaPath() {
+  return path.join(app.getPath("userData"), "songlist", "songs-meta.json");
 }
 
 function readConfig() {
@@ -138,6 +166,7 @@ function publicConfig(config = readConfig()) {
     port,
     enabledGames: config.enabledGames || DEFAULT_GAMES,
     maxQueueSize: config.maxQueueSize || 50,
+    songlist: currentSonglistInfo(),
     overlayUrl,
     dashboardUrl,
     running: Boolean(runtime)
@@ -165,6 +194,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   registerIpc();
+  setupAutoUpdater();
   createWindow();
 
   app.on("activate", () => {
@@ -233,6 +263,8 @@ function registerIpc() {
     const channel = String(config.channel || username || "").trim().replace(/^#/, "").toLowerCase();
     if (!channel) throw new Error("Enter the Twitch channel to join.");
 
+    await checkSonglistUpdate({ silent: true });
+
     stopRuntime();
     runtime = startRuntime({
       username,
@@ -242,7 +274,8 @@ function registerIpc() {
       maxQueueSize: config.maxQueueSize || 50,
       enabledGames: config.enabledGames || DEFAULT_GAMES,
       modUsers: [channel, username].filter(Boolean),
-      queuePath: getQueuePath(channel)
+      queuePath: getQueuePath(channel),
+      songsPath: getEffectiveSonglistPath()
     });
 
     const next = { ...config, channel };
@@ -312,35 +345,46 @@ function registerIpc() {
   });
 
   ipcMain.handle("update:check", async () => {
-    try {
-      const response = await fetch(RELEASES_API_URL, {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "User-Agent": "JustDanceRequests-Desktop"
-        },
-        signal: AbortSignal.timeout(8000)
-      });
-      if (!response.ok) {
-        // 404 means the repo is private (no public latest endpoint) or no releases.
-        // Either way, we can't usefully notify, so return null.
-        return null;
-      }
-      const data = await response.json();
-      const latestTag = String(data.tag_name || "").trim();
-      const latestVersion = latestTag.replace(/^v/i, "");
-      const currentVersion = app.getVersion();
-      const isNewer = compareSemver(latestVersion, currentVersion) > 0;
-      return {
-        currentVersion,
-        latestVersion,
-        isNewer,
-        releaseUrl: data.html_url || RELEASES_PAGE_URL,
-        releaseName: data.name || latestTag
-      };
-    } catch {
-      return null;
+    if (!app.isPackaged) {
+      return setUpdateState({
+        status: "idle",
+        message: "",
+        canInstall: false
+      }, { silent: true });
     }
+
+    if (updateState.status === "downloading" || updateState.status === "downloaded") {
+      return updateState;
+    }
+
+    if (updateCheckStarted && updateState.status === "checking") {
+      return updateState;
+    }
+
+    updateCheckStarted = true;
+    try {
+      await autoUpdater.checkForUpdates();
+    } catch (error) {
+      setUpdateState({
+        status: "error",
+        message: `Could not check for updates: ${error.message}`,
+        canInstall: false
+      });
+    }
+    return updateState;
   });
+
+  ipcMain.handle("update:install", () => {
+    if (updateState.status !== "downloaded") return updateState;
+    quitAfterPrompt = true;
+    clearTimeout(authPollTimer);
+    stopRuntime();
+    runtime = null;
+    autoUpdater.quitAndInstall(false, true);
+    return updateState;
+  });
+
+  ipcMain.handle("songlist:check", () => checkSonglistUpdate());
 
   ipcMain.handle("update:openReleasePage", (_event, url) => {
     let target;
@@ -365,6 +409,251 @@ function registerIpc() {
     writeConfig(config);
     return publicConfig(config);
   });
+}
+
+function currentSonglistInfo() {
+  const cachedPath = getSonglistPath();
+  const meta = readJsonFile(getSonglistMetaPath(), {});
+  const cachedCount = countSongs(cachedPath);
+  if (cachedCount > 0) {
+    songlistState = {
+      ...songlistState,
+      source: "updated",
+      count: cachedCount,
+      updatedAt: meta.updatedAt || "",
+      message: songlistState.status === "checking" ? songlistState.message : `Songlist updated${meta.updatedAt ? ` ${dateOnly(meta.updatedAt)}` : ""}.`
+    };
+    return songlistState;
+  }
+
+  const bundledCount = countSongs(path.resolve(__dirname, "..", "data", "songs.json"));
+  songlistState = {
+    ...songlistState,
+    source: "bundled",
+    count: bundledCount,
+    updatedAt: "",
+    message: songlistState.status === "checking" ? songlistState.message : "Using bundled songlist."
+  };
+  return songlistState;
+}
+
+function getEffectiveSonglistPath() {
+  return countSongs(getSonglistPath()) > 0 ? getSonglistPath() : undefined;
+}
+
+async function checkSonglistUpdate(options = {}) {
+  if (songlistCheckPromise) return songlistCheckPromise;
+
+  songlistCheckPromise = doCheckSonglistUpdate(options)
+    .finally(() => {
+      songlistCheckPromise = null;
+    });
+  return songlistCheckPromise;
+}
+
+async function doCheckSonglistUpdate(options = {}) {
+  setSonglistState({
+    ...currentSonglistInfo(),
+    status: "checking",
+    message: "Checking songlist updates..."
+  }, options);
+
+  const meta = readJsonFile(getSonglistMetaPath(), {});
+  const headers = {
+    Accept: "application/json",
+    "User-Agent": "JustDanceRequests-Desktop"
+  };
+  if (meta.etag) headers["If-None-Match"] = meta.etag;
+
+  try {
+    const response = await fetch(SONGLIST_URL, {
+      headers,
+      signal: AbortSignal.timeout(10000)
+    });
+
+    if (response.status === 304) {
+      return setSonglistState({
+        ...currentSonglistInfo(),
+        status: "idle",
+        message: "Songlist is already up to date."
+      }, options);
+    }
+
+    if (!response.ok) {
+      throw new Error(`GitHub returned ${response.status}`);
+    }
+
+    const text = await response.text();
+    const songs = parseSonglist(text);
+    const updatedAt = new Date().toISOString();
+    const songlistPath = getSonglistPath();
+
+    fs.mkdirSync(path.dirname(songlistPath), { recursive: true });
+    fs.writeFileSync(songlistPath, JSON.stringify(songs, null, 2) + "\n");
+    fs.writeFileSync(getSonglistMetaPath(), JSON.stringify({
+      updatedAt,
+      count: songs.length,
+      etag: response.headers.get("etag") || "",
+      source: SONGLIST_URL
+    }, null, 2) + "\n");
+
+    return setSonglistState({
+      status: "updated",
+      source: "updated",
+      count: songs.length,
+      updatedAt,
+      message: `Songlist updated (${songs.length} songs).`
+    }, options);
+  } catch (error) {
+    return setSonglistState({
+      ...currentSonglistInfo(),
+      status: "error",
+      message: `Could not update songlist: ${error.message}.`
+    }, options);
+  }
+}
+
+function setSonglistState(next, options = {}) {
+  songlistState = next;
+  if (!options.silent && mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.webContents.send("songlist:state", songlistState);
+  }
+  return songlistState;
+}
+
+function parseSonglist(text) {
+  let songs;
+  try {
+    songs = JSON.parse(text);
+  } catch {
+    throw new Error("Downloaded songlist was not valid JSON");
+  }
+
+  if (!Array.isArray(songs) || songs.length < 100) {
+    throw new Error("Downloaded songlist did not look complete");
+  }
+
+  const invalid = songs.find((song) => !song || typeof song.title !== "string" || typeof song.game !== "string");
+  if (invalid) {
+    throw new Error("Downloaded songlist had invalid entries");
+  }
+
+  return songs;
+}
+
+function countSongs(filePath) {
+  try {
+    const songs = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return Array.isArray(songs) ? songs.length : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function readJsonFile(filePath, fallback) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
+function dateOnly(value) {
+  return String(value || "").slice(0, 10);
+}
+
+function setupAutoUpdater() {
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+
+  autoUpdater.on("checking-for-update", () => {
+    setUpdateState({
+      status: "checking",
+      message: "Checking for updates...",
+      canInstall: false
+    });
+  });
+
+  autoUpdater.on("update-available", (info) => {
+    setUpdateState({
+      status: "downloading",
+      latestVersion: updateVersion(info),
+      releaseName: updateReleaseName(info),
+      releaseUrl: updateReleaseUrl(info),
+      message: `Downloading update ${updateVersion(info)}...`,
+      percent: 0,
+      canInstall: false
+    });
+  });
+
+  autoUpdater.on("download-progress", (progress) => {
+    const percent = Math.max(0, Math.min(100, Number(progress.percent) || 0));
+    setUpdateState({
+      status: "downloading",
+      message: `Downloading update ${Math.round(percent)}%...`,
+      percent,
+      canInstall: false
+    });
+  });
+
+  autoUpdater.on("update-downloaded", (info) => {
+    setUpdateState({
+      status: "downloaded",
+      latestVersion: updateVersion(info),
+      releaseName: updateReleaseName(info),
+      releaseUrl: updateReleaseUrl(info),
+      message: `Update ${updateVersion(info)} is ready. Restart to install it.`,
+      percent: 100,
+      canInstall: true
+    });
+  });
+
+  autoUpdater.on("update-not-available", (info) => {
+    setUpdateState({
+      status: "idle",
+      latestVersion: updateVersion(info),
+      releaseName: updateReleaseName(info),
+      releaseUrl: updateReleaseUrl(info),
+      message: "",
+      percent: 0,
+      canInstall: false
+    });
+  });
+
+  autoUpdater.on("error", (error) => {
+    setUpdateState({
+      status: "error",
+      message: `Could not update automatically: ${error.message}`,
+      canInstall: false
+    });
+  });
+}
+
+function setUpdateState(patch, options = {}) {
+  updateState = {
+    ...updateState,
+    currentVersion: app.getVersion(),
+    ...patch
+  };
+  if (!options.silent) sendUpdateState();
+  return updateState;
+}
+
+function sendUpdateState() {
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  mainWindow.webContents.send("update:state", updateState);
+}
+
+function updateVersion(info = {}) {
+  return String(info.version || info.tag || info.tag_name || "").replace(/^v/i, "");
+}
+
+function updateReleaseName(info = {}) {
+  return String(info.releaseName || info.name || info.tag || info.version || "").trim();
+}
+
+function updateReleaseUrl(info = {}) {
+  return String(info.releaseNotesUrl || info.html_url || RELEASES_PAGE_URL);
 }
 
 async function promptBeforeQuit() {
@@ -556,17 +845,4 @@ function openTwitchVerificationUrl(rawUrl) {
   }
 
   return shell.openExternal(url.toString());
-}
-
-function compareSemver(a, b) {
-  const pa = String(a).split(".").map((n) => Number.parseInt(n, 10) || 0);
-  const pb = String(b).split(".").map((n) => Number.parseInt(n, 10) || 0);
-  const len = Math.max(pa.length, pb.length);
-  for (let i = 0; i < len; i += 1) {
-    const da = pa[i] || 0;
-    const db = pb[i] || 0;
-    if (da > db) return 1;
-    if (da < db) return -1;
-  }
-  return 0;
 }
