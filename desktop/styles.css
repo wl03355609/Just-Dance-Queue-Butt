@@ -202,6 +202,23 @@ input:disabled {
   flex-basis: 100%;
 }
 
+.songlist-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.songlist-row button {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+.songlist-row .field-hint {
+  flex: 1;
+  min-width: 220px;
+}
+
 button {
   padding: 0 16px;
   font-weight: 900;

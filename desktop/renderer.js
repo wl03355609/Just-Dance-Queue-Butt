@@ -14,6 +14,8 @@ const updateBanner = document.querySelector("#update-banner");
 const updateBannerText = document.querySelector("#update-banner-text");
 const updateBannerAction = document.querySelector("#update-banner-action");
 const updateBannerDismiss = document.querySelector("#update-banner-dismiss");
+const checkSonglistButton = document.querySelector("#check-songlist");
+const songlistStatus = document.querySelector("#songlist-status");
 const portInput = document.querySelector("#port");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
@@ -68,6 +70,7 @@ function render(config) {
   } else {
     importedHint.innerHTML = "Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.";
   }
+  renderSonglistState(config.songlist);
 
   // Client ID field
   if (config.hasBundledClientId) clientIdSection.hidden = true;
@@ -128,6 +131,19 @@ clearImportButton.addEventListener("click", async () => {
     show("Imported bot credentials cleared.");
   } catch (error) {
     show(error.message);
+  }
+});
+
+checkSonglistButton.addEventListener("click", async () => {
+  try {
+    checkSonglistButton.disabled = true;
+    const state = await window.jdApp.checkSonglist();
+    renderSonglistState(state);
+    if (state?.message) show(state.message);
+  } catch (error) {
+    show(error.message);
+  } finally {
+    checkSonglistButton.disabled = false;
   }
 });
 
@@ -201,18 +217,50 @@ window.jdApp.getConfig().then(render).catch((error) => show(error.message));
 let pendingUpdate = null;
 
 updateBannerAction.addEventListener("click", () => {
-  if (pendingUpdate?.releaseUrl) window.jdApp.openReleasePage(pendingUpdate.releaseUrl);
+  if (pendingUpdate?.canInstall) {
+    window.jdApp.installUpdate();
+  } else if (pendingUpdate?.releaseUrl) {
+    window.jdApp.openReleasePage(pendingUpdate.releaseUrl);
+  }
 });
 
 updateBannerDismiss.addEventListener("click", () => {
   updateBanner.hidden = true;
 });
 
-window.jdApp.checkForUpdate().then((info) => {
-  if (!info || !info.isNewer) return;
+function renderUpdateState(info) {
+  if (!info || info.status === "idle" || info.status === "error") {
+    updateBanner.hidden = true;
+    return;
+  }
+
   pendingUpdate = info;
-  updateBannerText.textContent = `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
+  updateBannerText.textContent = info.message || `A newer version is available: ${info.releaseName || `v${info.latestVersion}`} (you have v${info.currentVersion}).`;
+  updateBannerAction.hidden = !info.canInstall;
+  updateBannerAction.textContent = info.canInstall ? "Restart" : "Download";
   updateBanner.hidden = false;
-}).catch(() => {
+}
+
+function renderSonglistState(state) {
+  if (!state) {
+    songlistStatus.textContent = "";
+    return;
+  }
+
+  const count = state.count ? `${state.count} songs` : "bundled songs";
+  const source = state.source === "updated" ? "updated catalog" : "bundled catalog";
+  songlistStatus.textContent = state.status === "checking"
+    ? "Checking songlist updates..."
+    : `${count} using ${source}`;
+}
+
+window.jdApp.onUpdateState(renderUpdateState);
+window.jdApp.onSonglistState(renderSonglistState);
+
+window.jdApp.checkForUpdate().then(renderUpdateState).catch(() => {
   // Update checks are best-effort; ignore failures (offline, rate-limited, repo private).
+});
+
+window.jdApp.checkSonglist().then(renderSonglistState).catch(() => {
+  // Songlist updates fall back to the bundled catalog.
 });

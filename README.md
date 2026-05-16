@@ -4,7 +4,7 @@ A local Twitch chat plugin for Just Dance streamers. Viewers request songs with 
 
 This is inspired by Tandashi's archived JDR-Twitch extension, but built as a simpler self-hosted bot so you do not need Twitch Extension review just to run requests on stream.
 
-Current release: **0.8.0 "Happy Meals"**.
+Current release: **0.8.3 "David Ultra Stinky Butt"**.
 
 ## Setup
 
@@ -53,15 +53,17 @@ For a distributable app, create a Twitch Developer application and use its Clien
 - OAuth flow used by the desktop app: Twitch Device Code Grant
 - Scopes requested: `chat:read chat:edit`
 
-## Build Windows EXE
+## Build Windows Installer
 
-After installing dependencies, build the Windows portable app with:
+After installing dependencies, build the Windows installer with:
 
 ```bash
 npm run build:win
 ```
 
-The portable `.exe` output goes into `dist/`. For 0.8.0, the expected artifact name is `JustDanceRequests-0.8.0-x86.exe`. Older local exe builds can live in `dist/older version/`; the build also refreshes `dist/songlist.xlsx`.
+The installer output goes into `dist/` as `JustDanceRequests-Setup-<version>-ia32.exe`, alongside `latest.yml` and a `.blockmap` file for automatic updates. Upload all three files to the matching GitHub Release. The NSIS installer creates a normal Windows uninstall entry; app data is preserved on uninstall so queues and imported credentials are not erased accidentally. The build also refreshes `dist/songlist.xlsx`.
+
+Users installed through the NSIS installer receive program updates through the in-app updater. Older portable `.exe` builds still need to be replaced manually once.
 
 ## Chat Commands
 
@@ -104,7 +106,9 @@ When the YouTube filter is enabled, requests that do not match the local catalog
 
 ## Song Data
 
-The catalog lives in `data/songs.json`, so you can add alternates, regional songs, fan nicknames, or newer Just Dance+ tracks whenever you want.
+The bundled catalog lives in `data/songs.json`, so you can add alternates, regional songs, fan nicknames, or newer Just Dance+ tracks whenever you want.
+
+The desktop app also updates the songlist independently from the program. On startup and before starting the bot, it checks GitHub for the latest `data/songs.json`, downloads only that JSON file into the user's app data folder, and falls back to the bundled catalog when offline. Users can also click **Update songlist** in the desktop app.
 
 Current included catalogs:
 
