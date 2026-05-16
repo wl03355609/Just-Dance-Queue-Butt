@@ -3,6 +3,10 @@
   overflow: auto;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .dashboard-shell {
   width: min(1180px, calc(100vw - 40px));
   margin: 28px auto;
@@ -11,6 +15,7 @@
 .dashboard-header,
 .status-bar,
 .control-strip,
+.pairing-panel,
 .appearance-panel,
 .add-panel,
 .filter-panel,
@@ -108,6 +113,72 @@ button.danger,
   gap: 10px;
   padding: 12px;
   margin-bottom: 14px;
+}
+
+.pairing-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.pairing-row {
+  display: grid;
+  grid-template-columns: auto minmax(220px, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.pairing-code-panel {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid rgba(33, 215, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(33, 215, 255, 0.08);
+}
+
+.pairing-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pairing-code-panel strong {
+  color: var(--cyan);
+  font-size: 28px;
+  letter-spacing: 0.12em;
+}
+
+.pairing-code-panel small {
+  color: var(--muted);
+}
+
+.otp-timer {
+  --otp-progress: 360deg;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: conic-gradient(var(--cyan) var(--otp-progress), rgba(255, 255, 255, 0.12) 0deg);
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.otp-timer::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #0e121b;
+}
+
+.otp-timer span {
+  position: relative;
 }
 
 .appearance-panel {
@@ -323,6 +394,7 @@ input {
   .status-bar,
   .dashboard-grid,
   .filter-grid,
+  .pairing-row,
   .add-panel form {
     grid-template-columns: 1fr;
   }

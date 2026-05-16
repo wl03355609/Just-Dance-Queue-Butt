@@ -137,12 +137,17 @@
               <div id="companion-link-row">
                 <span>Phone companion</span>
                 <div class="link-buttons">
-                  <button id="pair-companion" type="button">Pair Phone</button>
+                  <button id="pair-companion" type="button">Show Code</button>
                   <button id="copy-companion" type="button">Copy URL</button>
                 </div>
                 <code id="companion-url"></code>
                 <div id="pairing-code-panel" class="pairing-code-panel" hidden>
-                  <span>Pairing code</span>
+                  <div class="pairing-code-header">
+                    <span>Pairing code</span>
+                    <div id="pairing-code-timer" class="otp-timer">
+                      <span id="pairing-code-countdown">5:00</span>
+                    </div>
+                  </div>
                   <strong id="pairing-code"></strong>
                   <small id="pairing-code-status"></small>
                 </div>

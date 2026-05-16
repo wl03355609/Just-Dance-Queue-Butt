@@ -291,7 +291,7 @@ function createServer(runtime) {
 
   function apiRequestSong(request, response) {
     return withJsonBody(request, response, (body) =>
-      runtime.queue.addRequest(body.user || defaultRequester(), body.song || body.query || "", { announce: false })
+      runtime.queue.addRequest(body.user || defaultRequester(), body.song || body.query || "", { announce: true })
     );
   }
 
@@ -307,7 +307,7 @@ function createServer(runtime) {
 
   function apiRemoveSong(request, response) {
     return withJsonBody(request, response, (body) =>
-      runtime.queue.removeQueueEntry(body.id, body.position, { announce: false })
+      runtime.queue.removeQueueEntry(body.id, body.position, { announce: true })
     );
   }
 

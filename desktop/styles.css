@@ -398,11 +398,18 @@ input:disabled {
 .pairing-code-panel {
   grid-column: 1 / -1;
   display: grid;
-  gap: 4px;
+  gap: 6px;
   padding: 12px;
   border: 1px solid rgba(33, 215, 255, 0.34);
   border-radius: 8px;
   background: rgba(33, 215, 255, 0.08);
+}
+
+.pairing-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .pairing-code-panel strong {
@@ -413,6 +420,32 @@ input:disabled {
 
 .pairing-code-panel small {
   color: var(--muted);
+}
+
+.otp-timer {
+  --otp-progress: 360deg;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: conic-gradient(var(--cyan) var(--otp-progress), rgba(255, 255, 255, 0.12) 0deg);
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.otp-timer::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #0e121b;
+}
+
+.otp-timer span {
+  position: relative;
 }
 
 .panel-footer {

@@ -31,12 +31,18 @@ const pairCompanionButton = document.querySelector("#pair-companion");
 const pairingCodePanel = document.querySelector("#pairing-code-panel");
 const pairingCode = document.querySelector("#pairing-code");
 const pairingCodeStatus = document.querySelector("#pairing-code-status");
+const pairingCodeTimer = document.querySelector("#pairing-code-timer");
+const pairingCodeCountdown = document.querySelector("#pairing-code-countdown");
 const message = document.querySelector("#message");
 const runStatus = document.querySelector("#run-status");
 const authCode = document.querySelector("#auth-code");
 const userCode = document.querySelector("#user-code");
 
 let currentConfig = null;
+let pairingExpiresAt = 0;
+let pairingTtlMs = 5 * 60 * 1000;
+let pairingCountdownTimer = null;
+let pairingRefreshTimer = null;
 
 function getChannel() {
   return channelInput.value.trim().replace(/^#/, "").toLowerCase();
@@ -64,7 +70,7 @@ function render(config) {
   companionUrlCode.textContent = config.companionUrl || "Not available until the Mac is on Wi-Fi";
   companionLinkRow.hidden = config.companionAccess === false;
   pairCompanionButton.disabled = !config.running || config.companionAccess === false;
-  if (!config.running) pairingCodePanel.hidden = true;
+  if (!config.running || config.companionAccess === false) hidePairingCode();
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
   if (config.appVersion) appVersionEl.textContent = `v${config.appVersion}`;
@@ -117,6 +123,57 @@ function formConfig() {
 
 function show(text) {
   message.textContent = text;
+}
+
+function hidePairingCode() {
+  clearPairingTimers();
+  pairingCodePanel.hidden = true;
+  pairingCode.textContent = "";
+  pairingCodeStatus.textContent = "";
+}
+
+function clearPairingTimers() {
+  clearInterval(pairingCountdownTimer);
+  clearTimeout(pairingRefreshTimer);
+  pairingCountdownTimer = null;
+  pairingRefreshTimer = null;
+}
+
+function formatPairingRemaining(ms) {
+  const seconds = Math.max(0, Math.ceil(ms / 1000));
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function updatePairingCountdown() {
+  const remaining = Math.max(0, pairingExpiresAt - Date.now());
+  const progress = pairingTtlMs <= 0 ? 0 : remaining / pairingTtlMs;
+  pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
+  pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
+  pairingCodeStatus.textContent = "Enter this code in the Android app. Refreshes every 5 minutes while shown.";
+}
+
+function schedulePairingRefresh(result) {
+  clearPairingTimers();
+  pairingTtlMs = Math.max(1, Number(result.ttlSeconds || 300)) * 1000;
+  pairingExpiresAt = Number(result.expiresAt) || Date.now() + pairingTtlMs;
+  updatePairingCountdown();
+  pairingCountdownTimer = setInterval(updatePairingCountdown, 1000);
+  pairingRefreshTimer = setTimeout(() => {
+    if (!pairingCodePanel.hidden && currentConfig?.running && currentConfig.companionAccess !== false) {
+      showCompanionCode({ refreshed: true }).catch((error) => {
+        pairingCodeStatus.textContent = error.message;
+      });
+    }
+  }, Math.max(1000, pairingExpiresAt - Date.now()));
+}
+
+async function showCompanionCode(options = {}) {
+  const result = await window.jdApp.createCompanionPairingCode();
+  pairingCode.textContent = result.code;
+  pairingCodePanel.hidden = false;
+  schedulePairingRefresh(result);
+  show(options.refreshed ? "Phone pairing code refreshed." : "Phone pairing code shown.");
 }
 
 async function copyText(text) {
@@ -231,13 +288,9 @@ document.querySelector("#copy-companion").addEventListener("click", async () => 
 
 pairCompanionButton.addEventListener("click", async () => {
   try {
-    const result = await window.jdApp.createCompanionPairingCode();
-    pairingCode.textContent = result.code;
-    pairingCodeStatus.textContent = "Enter this code in the Android app within 5 minutes.";
-    pairingCodePanel.hidden = false;
-    show("Phone pairing code created.");
+    await showCompanionCode();
   } catch (error) {
-    pairingCodePanel.hidden = true;
+    hidePairingCode();
     show(error.message);
   }
 });
