@@ -3,6 +3,7 @@ const path = require("node:path");
 const { app, BrowserWindow, ipcMain, shell, dialog, Menu } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const { startRuntime, stopRuntime } = require("../src/index");
+const { lanUrls } = require("../src/util");
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
@@ -135,6 +136,7 @@ function readConfig() {
       refreshToken: "",
       expiresAt: 0,
       port: DEFAULT_PORT,
+      companionAccess: true,
       enabledGames: DEFAULT_GAMES,
       maxQueueSize: 50
     };
@@ -151,6 +153,9 @@ function publicConfig(config = readConfig()) {
   const bundled = effectiveBundled(config);
   const overlayUrl = runtime?.urls?.overlay || `http://localhost:${port}`;
   const dashboardUrl = runtime?.urls?.dashboard || `http://localhost:${port}/dashboard`;
+  const companionAccess = config.companionAccess !== false;
+  const companionUrls = runtime?.urls?.companionUrls || (companionAccess ? lanUrls(port) : []);
+  const companionUrl = runtime?.urls?.companion || companionUrls[0] || "";
 
   return {
     clientId: config.clientId || BUNDLED_CLIENT_ID || "",
@@ -164,6 +169,9 @@ function publicConfig(config = readConfig()) {
     defaultChannel: DEFAULT_CHANNEL,
     loggedIn: Boolean(config.accessToken),
     port,
+    companionAccess,
+    companionUrl,
+    companionUrls,
     enabledGames: config.enabledGames || DEFAULT_GAMES,
     maxQueueSize: config.maxQueueSize || 50,
     songlist: currentSonglistInfo(),
@@ -225,6 +233,7 @@ function registerIpc() {
       botMode: String(patch.botMode || current.botMode || "own"),
       channel: String(patch.channel || current.channel || "").trim().replace(/^#/, "").toLowerCase(),
       port: Number.parseInt(patch.port, 10) || current.port || DEFAULT_PORT,
+      companionAccess: patch.companionAccess !== false,
       maxQueueSize: Number.parseInt(patch.maxQueueSize, 10) || current.maxQueueSize || 50,
       enabledGames: Array.isArray(patch.enabledGames) && patch.enabledGames.length ? patch.enabledGames : current.enabledGames || DEFAULT_GAMES
     };
@@ -273,6 +282,7 @@ function registerIpc() {
       oauth,
       channel,
       port: config.port || DEFAULT_PORT,
+      companionAccess: config.companionAccess !== false,
       maxQueueSize: config.maxQueueSize || 50,
       enabledGames: config.enabledGames || DEFAULT_GAMES,
       modUsers: [channel, username].filter(Boolean),

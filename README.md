@@ -40,8 +40,9 @@ In the app:
 2. Click **Log in with Twitch**.
 3. Authorize the app on Twitch using the code shown in the desktop window.
 4. Set the channel name.
-5. Click **Start Bot**.
-6. Add the overlay URL as a Browser Source in OBS or Streamlabs.
+5. Leave **Phone companion access** on if you want the Android app to connect from the same Wi-Fi network.
+6. Click **Start Bot**.
+7. Add the overlay URL as a Browser Source in OBS or Streamlabs.
 
 The desktop app stores its login/config locally in your user app data folder. The `.exe` must stay open while you stream.
 
@@ -114,8 +115,33 @@ Use these URLs while the app is running:
 - OBS/browser overlay: `http://localhost:3000`
 - Streamer dashboard: use the tokenized URL printed when the bot starts
 - Song catalog API: `http://localhost:3000/api/songs`
+- Android companion: use the phone companion URL shown in the desktop app, or type the computer's LAN IP into the Android app
 
 The dashboard token protects local queue controls like skip, clear, remove, and game filters. It is generated each time by default; set `ADMIN_TOKEN` in `.env` if you want a stable dashboard URL.
+
+## Android Companion
+
+The Android companion app can control the queue from a phone on the same Wi-Fi
+network. The bot exposes companion access by default, so the old separate bridge
+is no longer required for normal use.
+
+Desktop app:
+
+1. Keep **Phone companion access** enabled in **Bot Settings**. It is on by default.
+2. Start the bot.
+3. In the Android app, tap **Scan**, or manually enter the **Phone companion** URL/IP shown in the desktop app.
+4. Paste the dashboard token into the Android app if you want controls such as next, clear, pick, remove, filters, or theme switching.
+
+CLI:
+
+```env
+PHONE_COMPANION_ACCESS=true
+```
+
+When enabled, the bot listens on the computer's Wi-Fi/LAN address as well as
+`localhost`. Set `PHONE_COMPANION_ACCESS=false` to keep the server local-only.
+If a firewall prompt appears, allow Node.js on private networks. The phone and
+computer must be on the same Wi-Fi network.
 
 When the YouTube filter is enabled, requests that do not match the local catalog are added as freeform YouTube requests. When YouTube is disabled, unmatched or filtered-out requests are rejected.
 

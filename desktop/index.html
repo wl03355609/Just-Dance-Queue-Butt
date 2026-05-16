@@ -69,6 +69,13 @@
                 Max queue size
                 <input id="max-queue" type="number" min="1" max="500">
               </label>
+              <label class="span-2 toggle-row">
+                <input id="companion-access" type="checkbox">
+                <span>
+                  <strong>Phone companion access</strong>
+                  <small>Allow the Android companion app on the same Wi-Fi to connect directly. On by default.</small>
+                </span>
+              </label>
               <div class="span-2 songlist-row">
                 <button id="check-songlist" type="button">Update songlist</button>
                 <span id="songlist-status" class="field-hint"></span>
@@ -126,6 +133,13 @@
                   <button id="copy-dashboard" type="button">Copy URL</button>
                 </div>
                 <code id="dashboard-url"></code>
+              </div>
+              <div id="companion-link-row">
+                <span>Phone companion</span>
+                <div class="link-buttons">
+                  <button id="copy-companion" type="button">Copy URL</button>
+                </div>
+                <code id="companion-url"></code>
               </div>
             </div>
             <div class="panel-footer">

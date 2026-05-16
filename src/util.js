@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
+const os = require("node:os");
 
 const { MAX_QUERY_LENGTH } = require("./constants");
 
@@ -28,6 +29,16 @@ function env(key, fallback) {
 function numberValue(value, fallback) {
   const parsed = Number.parseInt(value, 10);
   return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function booleanValue(value, fallback) {
+  if (typeof value === "boolean") return value;
+  if (value == null || value === "") return fallback;
+
+  const normalized = String(value).trim().toLowerCase();
+  if (["1", "true", "yes", "on", "enabled"].includes(normalized)) return true;
+  if (["0", "false", "no", "off", "disabled"].includes(normalized)) return false;
+  return fallback;
 }
 
 function listValue(value, fallback) {
@@ -137,10 +148,23 @@ function levenshtein(a, b) {
   return matrix[a.length][b.length];
 }
 
+function lanUrls(port) {
+  const urls = [];
+  for (const addresses of Object.values(os.networkInterfaces())) {
+    for (const address of addresses || []) {
+      if (address.family === "IPv4" && !address.internal) {
+        urls.push(`http://${address.address}:${port}`);
+      }
+    }
+  }
+  return [...new Set(urls)];
+}
+
 module.exports = {
   loadEnv,
   env,
   numberValue,
+  booleanValue,
   listValue,
   normalizeOAuth,
   headerValue,
@@ -154,5 +178,6 @@ module.exports = {
   gameKey,
   slug,
   stripSearch,
-  levenshtein
+  levenshtein,
+  lanUrls
 };

@@ -14,7 +14,8 @@ const {
   stripSearch,
   headerValue,
   timingSafeEqual,
-  cleanSecret
+  cleanSecret,
+  lanUrls
 } = require("./util");
 
 const {
@@ -66,10 +67,22 @@ function createServer(runtime) {
       process.exitCode = 1;
     });
 
-    runtime.http.server.listen(runtime.config.port, "127.0.0.1", () => {
+    const host = runtime.config.companionAccess ? "0.0.0.0" : "127.0.0.1";
+    runtime.http.server.listen(runtime.config.port, host, () => {
       console.log(`Queue overlay: http://localhost:${runtime.config.port}`);
       console.log(`Dashboard:     http://localhost:${runtime.config.port}/dashboard?token=${encodeURIComponent(runtime.config.adminToken)}`);
       console.log(`Song API:      http://localhost:${runtime.config.port}/api/songs`);
+      if (runtime.config.companionAccess) {
+        const urls = lanUrls(runtime.config.port);
+        if (urls.length) {
+          console.log("Phone companion:");
+          for (const url of urls) console.log(`  ${url}`);
+        } else {
+          console.log("Phone companion: enabled, but no LAN IPv4 address was found.");
+        }
+      } else {
+        console.log("Phone companion: disabled.");
+      }
     });
   }
 

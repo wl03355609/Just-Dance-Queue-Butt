@@ -1,4 +1,4 @@
-const { loadEnv, normalizeOAuth } = require("./util");
+const { loadEnv, normalizeOAuth, lanUrls } = require("./util");
 
 loadEnv();
 
@@ -65,6 +65,7 @@ function stopRuntime() {
 }
 
 function runtimeController() {
+  const companionUrls = runtime.config.companionAccess ? lanUrls(runtime.config.port) : [];
   return {
     config: runtime.config,
     getState: runtime.server.publicState,
@@ -74,7 +75,9 @@ function runtimeController() {
     urls: {
       overlay: `http://localhost:${runtime.config.port}`,
       dashboard: `http://localhost:${runtime.config.port}/dashboard?token=${encodeURIComponent(runtime.config.adminToken)}`,
-      songs: `http://localhost:${runtime.config.port}/api/songs`
+      songs: `http://localhost:${runtime.config.port}/api/songs`,
+      companion: companionUrls[0] || "",
+      companionUrls
     }
   };
 }

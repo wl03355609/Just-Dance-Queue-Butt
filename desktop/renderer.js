@@ -21,9 +21,12 @@ const footerReleasesLink = document.querySelector("#footer-releases");
 const checkSonglistButton = document.querySelector("#check-songlist");
 const songlistStatus = document.querySelector("#songlist-status");
 const portInput = document.querySelector("#port");
+const companionAccessInput = document.querySelector("#companion-access");
 const maxQueueInput = document.querySelector("#max-queue");
 const overlayUrlCode = document.querySelector("#overlay-url");
 const dashboardUrlCode = document.querySelector("#dashboard-url");
+const companionUrlCode = document.querySelector("#companion-url");
+const companionLinkRow = document.querySelector("#companion-link-row");
 const message = document.querySelector("#message");
 const runStatus = document.querySelector("#run-status");
 const authCode = document.querySelector("#auth-code");
@@ -50,9 +53,12 @@ function render(config) {
   clientIdInput.value = config.clientId || "";
   channelInput.value = config.channel || "";
   portInput.value = config.port || 3000;
+  companionAccessInput.checked = config.companionAccess !== false;
   maxQueueInput.value = config.maxQueueSize || 50;
   overlayUrlCode.textContent = config.overlayUrl;
   dashboardUrlCode.textContent = config.dashboardUrl;
+  companionUrlCode.textContent = config.companionUrl || "Not available until the Mac is on Wi-Fi";
+  companionLinkRow.hidden = config.companionAccess === false;
   runStatus.textContent = config.running ? "Running" : "Stopped";
   runStatus.className = config.running ? "status running" : "status";
   if (config.appVersion) appVersionEl.textContent = `v${config.appVersion}`;
@@ -97,6 +103,7 @@ function formConfig() {
     botMode: botModeSelect.value,
     channel: getChannel(),
     port: Number.parseInt(portInput.value, 10) || 3000,
+    companionAccess: companionAccessInput.checked,
     maxQueueSize: Number.parseInt(maxQueueInput.value, 10) || 50,
     enabledGames: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"]
   };
@@ -205,6 +212,15 @@ document.querySelector("#copy-overlay").addEventListener("click", async () => {
 document.querySelector("#copy-dashboard").addEventListener("click", async () => {
   const ok = await copyText(currentConfig.dashboardUrl);
   show(ok ? "Dashboard URL copied to clipboard." : "Could not copy — select the URL below manually.");
+});
+
+document.querySelector("#copy-companion").addEventListener("click", async () => {
+  if (!currentConfig.companionUrl) {
+    show("No phone companion URL is available yet.");
+    return;
+  }
+  const ok = await copyText(currentConfig.companionUrl);
+  show(ok ? "Phone companion URL copied to clipboard." : "Could not copy — select the URL below manually.");
 });
 
 window.jdApp.onAuthComplete((config) => {
