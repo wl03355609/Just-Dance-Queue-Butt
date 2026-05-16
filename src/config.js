@@ -1,12 +1,9 @@
-const fs = require("node:fs");
 const crypto = require("node:crypto");
 
 const {
   QUEUE_PATH,
-  SONGS_PATH,
   DEFAULT_ENABLED_GAMES,
-  FILTER_OPTIONS,
-  GAME_LABELS
+  FILTER_OPTIONS
 } = require("./constants");
 
 const {
@@ -47,23 +44,7 @@ function sanitizeEnabledGames(value) {
     .filter((key) => allowed.has(key));
 }
 
-function gameOptions() {
-  const counts = new Map(FILTER_OPTIONS.map((key) => [key, 0]));
-
-  for (const song of JSON.parse(fs.readFileSync(SONGS_PATH, "utf8"))) {
-    const key = gameKey(song.game);
-    if (counts.has(key)) counts.set(key, counts.get(key) + 1);
-  }
-
-  return FILTER_OPTIONS.map((key) => ({
-    key,
-    label: GAME_LABELS[key] || key,
-    count: key === "youtube" ? null : counts.get(key) || 0
-  }));
-}
-
 module.exports = {
   createConfig,
-  sanitizeEnabledGames,
-  gameOptions
+  sanitizeEnabledGames
 };

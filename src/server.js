@@ -18,8 +18,7 @@ const {
 } = require("./util");
 
 const {
-  sanitizeEnabledGames,
-  gameOptions
+  sanitizeEnabledGames
 } = require("./config");
 
 function createServer(runtime) {
@@ -127,7 +126,7 @@ function createServer(runtime) {
       history: runtime.state.history.slice(0, 10),
       totalSongs: runtime.catalog.length,
       enabledGames: runtime.config.enabledGames,
-      availableGames: gameOptions(),
+      availableGames: runtime.availableGames,
       maxQueueSize: runtime.config.maxQueueSize,
       overlayTheme: runtime.state.overlayTheme || DEFAULT_OVERLAY_THEME,
       channel: runtime.config.channel,

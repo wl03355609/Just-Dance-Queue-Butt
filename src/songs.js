@@ -3,7 +3,9 @@ const fs = require("node:fs");
 const {
   SONGS_PATH,
   MIN_REQUEST_MATCH_SCORE,
-  GENERIC_MATCH_TOKENS
+  GENERIC_MATCH_TOKENS,
+  FILTER_OPTIONS,
+  GAME_LABELS
 } = require("./constants");
 
 const {
@@ -25,6 +27,17 @@ function createSongs(runtime) {
         ...song,
         search: normalize(`${song.title} ${song.artist} ${song.game} ${song.originalGame || ""}`)
       }));
+
+    const counts = new Map(FILTER_OPTIONS.map((key) => [key, 0]));
+    for (const song of raw) {
+      const key = gameKey(song.game);
+      if (counts.has(key)) counts.set(key, counts.get(key) + 1);
+    }
+    runtime.availableGames = FILTER_OPTIONS.map((key) => ({
+      key,
+      label: GAME_LABELS[key] || key,
+      count: key === "youtube" ? null : counts.get(key) || 0
+    }));
 
     return runtime.catalog;
   }
