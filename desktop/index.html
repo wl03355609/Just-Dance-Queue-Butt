@@ -17,11 +17,11 @@
           <div class="update-pill-wrap">
             <button id="update-pill" class="update-pill" type="button" hidden>
               <span class="update-pill-dot"></span>
-              <span id="update-pill-text">↻ Update</span>
+              <span id="update-pill-text"></span>
             </button>
             <div id="update-popover" class="update-popover" hidden>
               <p class="update-popover-title">Update ready</p>
-              <p id="update-popover-detail" class="update-popover-detail">A new version is downloaded.</p>
+              <p id="update-popover-detail" class="update-popover-detail"></p>
               <p class="update-popover-hint">It will install when you close the app, or click below.</p>
               <div class="update-popover-actions">
                 <button id="update-popover-install" type="button" class="update-popover-primary">Restart now</button>
@@ -53,7 +53,7 @@
                 </label>
               </div>
               <div class="bundled-import">
-                <button id="import-credentials" type="button">Import credentials file…</button>
+                <button id="import-credentials" type="button">Import credential</button>
                 <button id="clear-imported-credentials" type="button" hidden>Clear imported</button>
               </div>
               <span id="imported-credentials-hint" class="field-hint span-2">Accepts <code>secrets.js</code>, <code>.json</code>, or <code>.env</code>. The file stays on this machine.</span>
