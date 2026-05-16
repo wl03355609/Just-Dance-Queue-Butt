@@ -422,6 +422,19 @@ input:disabled {
   color: var(--muted);
 }
 
+.otp-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.otp-wrap small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 .otp-timer {
   --otp-progress: 360deg;
   position: relative;

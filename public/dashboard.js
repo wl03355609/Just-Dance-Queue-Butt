@@ -193,7 +193,7 @@ function updatePairingCountdown() {
   pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
   pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
   pairingStatusElement.textContent = "Visible";
-  pairingCodeStatusElement.textContent = "Enter this code in the Android app. Refreshes every 5 minutes while shown.";
+  pairingCodeStatusElement.textContent = "Enter this code in the Android app. The code rotates when the countdown reaches 0.";
 }
 
 function schedulePairingRefresh(result) {

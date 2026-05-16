@@ -150,7 +150,7 @@ function updatePairingCountdown() {
   const progress = pairingTtlMs <= 0 ? 0 : remaining / pairingTtlMs;
   pairingCodeCountdown.textContent = formatPairingRemaining(remaining);
   pairingCodeTimer.style.setProperty("--otp-progress", `${Math.round(progress * 360)}deg`);
-  pairingCodeStatus.textContent = "Enter this code in the Android app. Refreshes every 5 minutes while shown.";
+  pairingCodeStatus.textContent = "Enter this code in the Android app. The code rotates when the countdown reaches 0.";
 }
 
 function schedulePairingRefresh(result) {
