@@ -81,11 +81,11 @@ function pluck(block, regex) {
 
 function decodeEntities(text) {
   return text
-    .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, "\"")
-    .replace(/&#39;/g, "'");
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
 }
 
 function loadSeen() {
@@ -112,7 +112,7 @@ function buildSummary(entries) {
   ];
   for (const entry of entries) {
     const date = entry.published ? entry.published.slice(0, 10) : "";
-    const safeTitle = entry.title.replace(/\|/g, "\\|");
+    const safeTitle = entry.title.replace(/\\/g, "\\\\").replace(/\|/g, "\\|");
     lines.push(`| ${date} | ${safeTitle} | ${entry.link} |`);
   }
   lines.push("");
