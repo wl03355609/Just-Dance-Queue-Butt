@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Just Dance Request Dashboard</title>
+    <title>Just Dance Butt test Dashboard</title>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/dashboard.css">
   </head>
@@ -14,7 +14,13 @@
           <p class="eyebrow">Streamer Controls</p>
           <h1>Request Dashboard</h1>
         </div>
-        <a class="overlay-link" href="/" target="_blank" rel="noreferrer">Overlay</a>
+        <div class="dashboard-header-actions">
+          <button id="theme-toggle-button" class="theme-toggle-button" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+          </button>
+          <a class="overlay-link" href="/" target="_blank" rel="noreferrer">Overlay</a>
+        </div>
       </header>
 
       <section class="status-bar" aria-label="Status">
@@ -36,8 +42,15 @@
         </div>
       </section>
 
+      <section class="current-playing" id="current-playing" aria-label="Current playing">
+        <div>
+          <span>Current playing</span>
+          <strong id="current-playing-title"></strong>
+          <em id="current-playing-detail"></em>
+        </div>
+      </section>
+
       <section class="control-strip" aria-label="Queue Controls">
-        <button id="theme-toggle-button" type="button">Light Overlay</button>
         <button id="queue-toggle-button" type="button" class="danger">Close Queue</button>
         <button id="skip-button" type="button">Next</button>
         <button id="clear-button" type="button" class="danger">Clear Queue</button>

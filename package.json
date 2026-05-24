@@ -2,7 +2,7 @@
   "name": "just-dance-requests-twitch",
   "version": "0.9.1",
   "codename": "Closed Doors",
-  "description": "A local Twitch chat song request queue for Just Dance streamers.",
+  "description": "Just Dance Butt test - a local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
   "type": "commonjs",
   "scripts": {
@@ -27,7 +27,7 @@
   },
   "build": {
     "appId": "com.justdancerequests.twitch",
-    "productName": "Just Dance Requests",
+    "productName": "Just Dance Butt test",
     "icon": "build/icon.ico",
     "files": [
       "desktop/**/*",

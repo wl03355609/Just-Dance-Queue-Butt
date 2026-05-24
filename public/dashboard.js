@@ -3,6 +3,9 @@ const botStatusElement = document.querySelector("#bot-status");
 const queueCountElement = document.querySelector("#queue-count");
 const queueLimitElement = document.querySelector("#queue-limit");
 const songCountElement = document.querySelector("#song-count");
+const currentPlayingElement = document.querySelector("#current-playing");
+const currentPlayingTitleElement = document.querySelector("#current-playing-title");
+const currentPlayingDetailElement = document.querySelector("#current-playing-detail");
 const queueHeadingCountElement = document.querySelector("#queue-heading-count");
 const queueElement = document.querySelector("#dashboard-queue");
 const queueEmptyElement = document.querySelector("#dashboard-empty");
@@ -49,6 +52,20 @@ function render(state) {
   renderOverlayTheme(state.overlayTheme || "dark");
   renderGameFilters(state);
   renderQueueOpenState(state.queueOpen !== false);
+  renderCurrentPlaying(state);
+}
+
+function renderCurrentPlaying(state) {
+  const current = state.history?.[0];
+  if (!current) {
+    currentPlayingElement.classList.add("is-empty");
+    currentPlayingTitleElement.textContent = "Nothing playing yet";
+    currentPlayingDetailElement.textContent = "Pick or skip a request and it will appear here.";
+    return;
+  }
+  currentPlayingElement.classList.remove("is-empty");
+  currentPlayingTitleElement.textContent = current.song.title;
+  currentPlayingDetailElement.textContent = `${current.song.artist} - requested by @${current.user}`;
 }
 
 function renderQueueOpenState(open) {
@@ -61,8 +78,13 @@ function renderQueueOpenState(open) {
 
 function renderOverlayTheme(theme) {
   currentTheme = theme === "light" ? "light" : "dark";
+  document.body.dataset.overlayTheme = currentTheme;
   if (themeToggleButton) {
-    themeToggleButton.textContent = currentTheme === "dark" ? "Light Overlay" : "Dark Overlay";
+    const label = currentTheme === "dark"
+      ? "Current theme: dark. Switch to light mode"
+      : "Current theme: light. Switch to dark mode";
+    themeToggleButton.setAttribute("aria-label", label);
+    themeToggleButton.title = label;
   }
 }
 
