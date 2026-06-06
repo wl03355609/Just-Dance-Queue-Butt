@@ -25,6 +25,9 @@
     "electron": "^42.0.1",
     "electron-builder": "^26.8.1"
   },
+  "overrides": {
+    "tmp": "^0.2.6"
+  },
   "build": {
     "appId": "com.justdancerequests.twitch",
     "productName": "Just Dance Butt test",
