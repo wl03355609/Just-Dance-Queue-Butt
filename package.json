@@ -9,7 +9,8 @@
     "start": "node src/index.js",
     "desktop": "electron .",
     "check": "node --check src/index.js && node --check desktop/main.js && node --check desktop/preload.js && node --check desktop/renderer.js",
-    "build:win": "electron-builder --win --ia32 && node scripts/copy-songlist-to-dist.js"
+    "build:win": "electron-builder --win --ia32 && node scripts/copy-songlist-to-dist.js",
+    "build:mac": "electron-builder --mac --arm64"
   },
   "engines": {
     "node": ">=18"
@@ -50,6 +51,25 @@
           ]
         }
       ]
+    },
+    "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.entertainment",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "artifactName": "JustDanceButt-${version}-${arch}.${ext}"
     },
     "nsis": {
       "oneClick": true,
