@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "codename": "Closed Doors",
   "description": "Just Dance Butt test - a local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
