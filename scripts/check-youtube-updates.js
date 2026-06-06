@@ -24,7 +24,9 @@ async function main() {
 
   const seen = loadSeen();
   const seenIds = new Set(seen);
-  const newEntries = entries.filter((entry) => !seenIds.has(entry.videoId));
+  const unseen = entries.filter((entry) => !seenIds.has(entry.videoId));
+  const newEntries = unseen.filter((entry) => isRelevant(entry.title));
+  const filtered = unseen.filter((entry) => !isRelevant(entry.title));
 
   const summary = buildSummary(newEntries);
   if (outputPath) {
@@ -41,9 +43,29 @@ async function main() {
   console.log(JSON.stringify({
     channel: channelId,
     totalEntries: entries.length,
+    unseenCount: unseen.length,
     newCount: newEntries.length,
+    filteredCount: filtered.length,
+    filteredTitles: filtered.map((e) => e.title),
     newVideoIds: newEntries.map((e) => e.videoId)
   }));
+}
+
+// Only surface real content: new song drops and new seasons / music packs.
+// Everything else the channel posts — behind-the-scenes clips, shorts, teasers,
+// community spotlights, lore videos — is noise and gets filtered out.
+//
+// Note on "BTS": the channel titles behind-the-scenes clips "<song> BTS", but a
+// genuine drop of a song by the band BTS is titled "<song> by BTS - Just Dance".
+// The song-drop rule below requires " by " + "just dance", so band-BTS drops
+// still pass while "<song> BTS" behind-the-scenes clips do not.
+function isRelevant(title) {
+  const t = title.toLowerCase();
+  const isSongDrop =
+    (/ by /.test(t) && /just dance/.test(t)) ||        // "<song> by <artist> ... Just Dance+"
+    (/just dance/.test(t) && /\bofficial\b/.test(t));  // "<song> - <artist> | Just Dance [Official]"
+  const isSeason = /\bseason\b/.test(t) || /\bmusic pack\b/.test(t);
+  return isSongDrop || isSeason;
 }
 
 async function fetchFeed(url) {
