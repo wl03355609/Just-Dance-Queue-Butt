@@ -8,3 +8,7 @@ release/
 desktop/secrets.js
 private/
 *.code-workspace
+.agents/
+.claude/
+hallmark-ui-preview.*
+skills-lock.json
