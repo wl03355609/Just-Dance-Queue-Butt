@@ -14,6 +14,10 @@ function createCommands(runtime) {
       if (!checkQueueOpenForChat(message)) return;
       return randomSong(message, arg);
     }
+    if (lower === "!wheel") {
+      if (!checkQueueOpenForChat(message)) return;
+      return runtime.queue.addWheelRequest(message.user, arg);
+    }
     if (lower === "!queue") return runtime.twitch.say(runtime.queue.queueSummary());
     if (lower === "!leave") return runtime.queue.leaveQueue(message.user);
     if (lower === "!pick" && arg.toLowerCase() === "random") {

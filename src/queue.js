@@ -178,7 +178,7 @@ function createQueue(runtime) {
     return addQueueEntry(requester, song, announce);
   }
 
-  function addQueueEntry(requester, song, announce) {
+  function addQueueEntry(requester, song, announce, customMessage) {
     const entry = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       user: requester,
@@ -188,9 +188,39 @@ function createQueue(runtime) {
 
     runtime.state.queue.push(entry);
     saveQueue();
-    const message = `@${requester} added #${runtime.state.queue.length}: ${entry.song.title} - ${entry.song.artist} (${entry.song.game}).`;
+    const message = customMessage
+      || `@${requester} added #${runtime.state.queue.length}: ${entry.song.title} - ${entry.song.artist} (${entry.song.game}).`;
     if (announce) runtime.twitch.say(message);
     return { ok: true, status: 200, message, entry };
+  }
+
+  function addWheelRequest(user, note, options = {}) {
+    const { announce = true } = options;
+    const requester = cleanChatText(user || "viewer").replace(/^@/, "").slice(0, 50) || "viewer";
+    // Note is a free-text hint for the streamer (e.g. "Katy") — sanitized for safety only,
+    // never matched against the catalog, since the wheel is spun by a human in-game.
+    const cleanNote = cleanSearchQuery(note || "");
+
+    const gate = checkCanRequest(requester);
+    if (!gate.ok) {
+      if (announce) runtime.twitch.say(gate.message);
+      return gate;
+    }
+
+    const song = {
+      id: `wheel-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      title: cleanNote ? `Wheel Spin: ${cleanNote}` : "Wheel Spin",
+      artist: "Streamer's pick",
+      game: "Wheel",
+      wheel: true
+    };
+
+    const position = runtime.state.queue.length + 1;
+    const message = cleanNote
+      ? `@${requester} added #${position}: 🎡 Streamer spins the wheel until a "${cleanNote}" song.`
+      : `@${requester} added #${position}: 🎡 Streamer spins the wheel.`;
+
+    return addQueueEntry(requester, song, announce, message);
   }
 
   function leaveQueue(user) {
@@ -341,6 +371,7 @@ function createQueue(runtime) {
     checkCanRequest,
     addRequest,
     addQueueEntry,
+    addWheelRequest,
     leaveQueue,
     skipSong,
     pickSong,
