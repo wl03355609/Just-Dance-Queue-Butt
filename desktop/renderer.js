@@ -30,6 +30,7 @@ const companionLinkRow = document.querySelector("#companion-link-row");
 const companionCodeSlot = document.querySelector("#companion-code-slot");
 const primaryActions = document.querySelector(".primary-actions");
 const pairCompanionButton = document.querySelector("#pair-companion");
+const hideCompanionButton = document.querySelector("#hide-companion");
 const pairingCodePanel = document.querySelector("#pairing-code-panel");
 const pairingCode = document.querySelector("#pairing-code");
 const pairingCodeTimer = document.querySelector("#pairing-code-timer");
@@ -305,6 +306,11 @@ pairCompanionButton.addEventListener("click", async () => {
     hidePairingCode();
     show(error.message);
   }
+});
+
+hideCompanionButton.addEventListener("click", () => {
+  hidePairingCode();
+  show("Pairing code hidden.");
 });
 
 window.jdApp.onAuthComplete((config) => {

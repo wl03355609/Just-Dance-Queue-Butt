@@ -696,7 +696,7 @@ function setupAppMenu() {
       role: "help",
       submenu: [
         {
-          label: "About Just Dance Butt test",
+          label: "About Just Dance Butt",
           click: () => showAboutDialog()
         },
         {
@@ -721,8 +721,8 @@ function showAboutDialog() {
   const version = app.getVersion();
   dialog.showMessageBox(mainWindow, {
     type: "info",
-    title: "About Just Dance Butt test",
-    message: "Just Dance Butt test",
+    title: "About Just Dance Butt",
+    message: "Just Dance Butt",
     detail: `Version ${version}\n\nA local Twitch chat song request queue for Just Dance streamers.\n\nhttps://github.com/wl03355609/Just-Dance-Queue-Butt`,
     buttons: ["OK", "View on GitHub"],
     defaultId: 0,
