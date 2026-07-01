@@ -43,6 +43,8 @@ The desktop app stores login/config locally in your user app data folder. It mus
 - `!random`: add a random song from the enabled catalog.
 - `!random <game>`: add a random song from a specific game, such as `!random 2021`, `!random JD+`, or `!random JDU`.
 - `!random <game> <year>`: add a random song from a year section within JD+ or JDU, such as `!random JD+ 2023`.
+- `!wheel`: ask the streamer to spin the in-game wheel. Adds a "spin the wheel" entry to the queue.
+- `!wheel <note>`: spin until a matching song, such as `!wheel Katy`. The note is free text and is not matched against the catalog.
 - `!queue`: show the first songs in chat.
 - `!leave`: remove your own request.
 - `!skip` or `!next`: mark the first request as played. Broadcaster/mod only.
@@ -52,6 +54,8 @@ The desktop app stores login/config locally in your user app data folder. It mus
 - `!song`: show the last played song. Broadcaster/mod only.
 - `!open`: open the queue so viewers can request again. Broadcaster/mod only.
 - `!close`: close the queue. Only the broadcaster can keep adding via chat; everyone else sees "Queue is currently closed". Broadcaster/mod only.
+
+See [COMMANDS.md](COMMANDS.md) for the full command reference, including who can use each command and the local dashboard actions.
 
 ## Dashboard
 

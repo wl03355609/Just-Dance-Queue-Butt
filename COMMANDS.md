@@ -11,6 +11,8 @@ This file lists chat commands and local dashboard actions for permission review.
 | `!random` | Any viewer | Adds one random catalog song for the viewer from the enabled filters. |
 | `!random <game>` | Any viewer | Adds one random catalog song from a game filter, such as `!random 2021`, `!random JD+`, or `!random JDU`. |
 | `!random <game> <year>` | Any viewer | Adds one random song from a JD+ or JDU year section, such as `!random JD+ 2023`. |
+| `!wheel` | Any viewer | Adds a "spin the in-game wheel" request to the queue for the streamer to spin by hand. |
+| `!wheel <note>` | Any viewer | Adds a wheel-spin request with a free-text target hint, such as `!wheel Katy`. The note is sanitized but never matched against the catalog. |
 | `!queue` | Any viewer | Shows the first queued songs in chat. |
 | `!leave` | Any viewer | Removes that viewer's own queued request. |
 | `!skip` | Broadcaster or mod | Marks the first queued request as playing now and moves it to history. |
