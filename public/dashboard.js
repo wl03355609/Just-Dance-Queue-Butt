@@ -126,13 +126,20 @@ function renderQueueEntry(entry, index) {
   const main = document.createElement("div");
   main.className = "dashboard-song";
 
+  const isWheel = entry.song.wheel === true;
+
   const title = document.createElement("strong");
   title.textContent = `${index + 1}. ${entry.song.title}`;
 
   const details = document.createElement("span");
-  details.textContent = `${entry.song.artist} - ${entry.song.game} - @${entry.user}`;
+  // Wheel spins already say "Wheel" in the title, so drop the redundant game to avoid duplicate text.
+  details.textContent = isWheel
+    ? `${entry.song.artist} - @${entry.user}`
+    : `${entry.song.artist} - ${entry.song.game} - @${entry.user}`;
 
-  const playedBefore = currentHistory.some((h) => h.song.id === entry.song.id || normalize(h.song.title) === normalize(entry.song.title));
+  // A wheel spin isn't a specific catalog song, so it should never be flagged as a repeat.
+  const playedBefore = !isWheel
+    && currentHistory.some((h) => h.song.id === entry.song.id || normalize(h.song.title) === normalize(entry.song.title));
   if (playedBefore) {
     const badge = document.createElement("span");
     badge.className = "done-badge";
