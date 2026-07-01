@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "codename": "Spin Cycle",
   "description": "Just Dance Butt - a local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
