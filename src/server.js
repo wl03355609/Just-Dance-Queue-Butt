@@ -338,10 +338,14 @@ function createServer(runtime) {
   async function apiUpdateFilters(request, response) {
     try {
       const body = await readJsonBody(request);
-      const nextEnabledGames = sanitizeEnabledGames(body.enabledGames);
-      if (!nextEnabledGames.length) return sendError(response, 400, "Choose at least one game catalog.");
+      const selectedGames = sanitizeEnabledGames(body.enabledGames);
+      if (!selectedGames.length) return sendError(response, 400, "Choose at least one game catalog.");
 
-      runtime.config.enabledGames = nextEnabledGames;
+      // Hidden (songless) games can't be ticked on the dashboard or phone, so keep
+      // them enabled; their songs become requestable as soon as they're added.
+      const visibleGames = new Set(runtime.availableGames.map((game) => game.key));
+      const hiddenGames = runtime.config.enabledGames.filter((key) => !visibleGames.has(key));
+      runtime.config.enabledGames = sanitizeEnabledGames([...selectedGames, ...hiddenGames]);
       runtime.songs.loadSongs();
       broadcast();
 

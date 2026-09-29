@@ -34,11 +34,13 @@ function createSongs(runtime) {
       const key = gameKey(song.game);
       if (counts.has(key)) counts.set(key, counts.get(key) + 1);
     }
+    // Games with no songs yet (an announced game before launch) stay out of the
+    // filter lists so nothing about them shows until a songlist update adds them.
     runtime.availableGames = FILTER_OPTIONS.map((key) => ({
       key,
       label: GAME_LABELS[key] || key,
       count: key === "youtube" ? null : counts.get(key) || 0
-    }));
+    })).filter((game) => game.count !== 0);
 
     return runtime.catalog;
   }
