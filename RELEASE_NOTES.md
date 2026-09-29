@@ -1,4 +1,4 @@
-## 0.12.0 — Throwback
+## 0.12.0 — Get Ready for DOH
 
 Getting ready for **Just Dance: Decades of Hits**, out October 13.
 
