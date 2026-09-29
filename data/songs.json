@@ -2483,7 +2483,7 @@
     "artist": "Reel 2 Real ft. The Mad Stuntman (The Just Dance Kids)",
     "year": 1993,
     "game": "Just Dance+",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 21, 2022",
     "mode": "Solo",
     "difficulty": "Easy",
@@ -3451,7 +3451,7 @@
     "artist": "ABBA",
     "year": 1974,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "May 25, 2023",
     "mode": "Quartet",
     "difficulty": "Easy",
@@ -3484,7 +3484,7 @@
     "artist": "ABBA",
     "year": 1974,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "June 1, 2023",
     "mode": "Quartet",
     "difficulty": "Easy",
@@ -3572,7 +3572,7 @@
     "artist": "Trady (Cui Di)",
     "year": 2021,
     "game": "Just Dance+",
-    "originalGame": "jduc",
+    "originalGame": "Just Dance Unlimited (Chinese Version)",
     "releaseDate": "June 29, 2023",
     "mode": "Quartet",
     "difficulty": "Hard",
@@ -3671,7 +3671,7 @@
     "artist": "ABBA",
     "year": 1980,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "October 17, 2023",
     "mode": "Solo",
     "difficulty": "Easy",
@@ -3902,7 +3902,7 @@
     "artist": "ABBA",
     "year": 1976,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "October 23, 2023",
     "mode": "Duet",
     "difficulty": "Easy",
@@ -3913,7 +3913,7 @@
     "artist": "ABBA",
     "year": 1978,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "October 23, 2023",
     "mode": "Duet",
     "difficulty": "Easy",
@@ -3935,7 +3935,7 @@
     "artist": "The Just Dance Kids",
     "year": 1835,
     "game": "Just Dance+",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "October 23, 2023",
     "mode": "Solo",
     "difficulty": "Medium",
@@ -3946,7 +3946,7 @@
     "artist": "The Just Dance Kids",
     "year": 1894,
     "game": "Just Dance+",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "October 23, 2023",
     "mode": "Solo",
     "difficulty": "Medium",
@@ -4166,7 +4166,7 @@
     "artist": "ABBA",
     "year": 1976,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "February 19, 2024",
     "mode": "Solo",
     "difficulty": "Medium",
@@ -4309,7 +4309,7 @@
     "artist": "ABBA",
     "year": 1981,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "March 28, 2024",
     "mode": "Solo",
     "difficulty": "Easy",
@@ -4705,7 +4705,7 @@
     "artist": "ABBA",
     "year": 1980,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "October 22, 2024",
     "mode": "Solo",
     "difficulty": "Hard",
@@ -4804,7 +4804,7 @@
     "artist": "ABBA",
     "year": 1975,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "December 17, 2024",
     "mode": "Quartet",
     "difficulty": "Medium",
@@ -4815,7 +4815,7 @@
     "artist": "ABBA",
     "year": 1975,
     "game": "Just Dance+",
-    "originalGame": "abba",
+    "originalGame": "ABBA: You Can Dance",
     "releaseDate": "December 17, 2024",
     "mode": "Duet",
     "difficulty": "Easy",
@@ -5105,7 +5105,7 @@
     "releaseDate": "June 3, 2025",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Little Swing",
@@ -5266,7 +5266,7 @@
     "artist": "Blaiz Fayah, Maureen & Dj Glad",
     "year": 2024,
     "game": "Just Dance+",
-    "originalGame": "now",
+    "originalGame": "Just Dance Now",
     "releaseDate": "January 20, 2026",
     "mode": "Duet",
     "difficulty": "Medium",
@@ -5742,7 +5742,7 @@
     "originalGame": "Just Dance 2024 Edition",
     "releaseDate": "April 14, 2026",
     "mode": "Duet",
-    "difficulty": "Mediun",
+    "difficulty": "Medium",
     "effort": "Moderate"
   },
   {
@@ -5801,7 +5801,7 @@
     "releaseDate": "May 12, 2026",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Canned Heat",
@@ -7330,31 +7330,28 @@
   {
     "title": "Better Call The Handyman",
     "artist": "Just Vibes",
-    "year": null,
     "game": "Just Dance 2018"
   },
   {
     "title": "El Sabor Del Ritmo",
     "artist": "Just Vibes",
-    "year": null,
+    "year": 2017,
     "game": "Just Dance 2018"
   },
   {
     "title": "Food Paradise",
     "artist": "Just Vibes",
-    "year": null,
+    "year": 2011,
     "game": "Just Dance 2018"
   },
   {
     "title": "Sports ’Til I Drop",
     "artist": "Just Vibes",
-    "year": null,
     "game": "Just Dance 2018"
   },
   {
     "title": "Tales Of The Cauldron",
     "artist": "Just Vibes",
-    "year": null,
     "game": "Just Dance 2018"
   },
   {
@@ -7378,7 +7375,7 @@
     "game": "Just Dance 2019",
     "mode": "Quartet",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Where Are You Now?",
@@ -7522,7 +7519,7 @@
     "game": "Just Dance 2019",
     "mode": "Duet",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Narco",
@@ -7552,7 +7549,7 @@
     "game": "Just Dance 2019",
     "mode": "Duet",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Tales of the Desert",
@@ -7638,7 +7635,7 @@
     "releaseDate": "December 21, 2018",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "New World",
@@ -7905,7 +7902,7 @@
     "game": "Just Dance 2020",
     "mode": "Trio",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Skibidi",
@@ -8058,7 +8055,7 @@
     "game": "Just Dance 2020",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "I Like It",
@@ -8381,7 +8378,7 @@
   {
     "title": "Into the Unknown",
     "artist": "Idina Menzel & AURORA (Disney’s Frozen 2)",
-    "year": null,
+    "year": 2019,
     "game": "Just Dance 2020"
   },
   {
@@ -8647,7 +8644,7 @@
     "game": "Just Dance 2021",
     "mode": "Trio",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Juice (VIPMADE)",
@@ -8730,7 +8727,7 @@
     "game": "Just Dance 2021",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Runaway (U & I)",
@@ -8952,7 +8949,7 @@
     "game": "Just Dance 2021",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "À la Folie",
@@ -9037,7 +9034,7 @@
     "game": "Just Dance 2022",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Chacarron",
@@ -9060,7 +9057,7 @@
     "game": "Just Dance 2022",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "China",
@@ -9076,7 +9073,7 @@
     "game": "Just Dance 2022",
     "mode": "Duet",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Don’t Go Yet",
@@ -9092,7 +9089,7 @@
     "game": "Just Dance 2022",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Flash Pose",
@@ -9385,7 +9382,7 @@
     "game": "Just Dance 2022",
     "mode": "Duet",
     "difficulty": "Easy",
-    "effort": "Low"
+    "effort": "Chill"
   },
   {
     "title": "Think About Things",
@@ -10297,7 +10294,7 @@
     "year": 2014,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "now",
+    "originalGame": "Just Dance Now",
     "releaseDate": "Available at launch"
   },
   {
@@ -10585,7 +10582,7 @@
     "year": 2013,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 24, 2016"
   },
   {
@@ -10594,7 +10591,7 @@
     "year": 1744,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 24, 2016"
   },
   {
@@ -10603,7 +10600,7 @@
     "year": 1830,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 24, 2016"
   },
   {
@@ -10612,7 +10609,7 @@
     "year": 2003,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 24, 2016"
   },
   {
@@ -10621,7 +10618,7 @@
     "year": 1835,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "November 29, 2016"
   },
   {
@@ -10630,7 +10627,7 @@
     "year": 1857,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k2",
+    "originalGame": "Just Dance Kids 2",
     "releaseDate": "November 29, 2016"
   },
   {
@@ -10639,7 +10636,7 @@
     "year": 1961,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k2",
+    "originalGame": "Just Dance Kids 2",
     "releaseDate": "November 29, 2016"
   },
   {
@@ -10648,7 +10645,7 @@
     "year": 1993,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "November 29, 2016"
   },
   {
@@ -10738,7 +10735,7 @@
     "year": 2015,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "rowspan=\"2\" Just Dance Unlimited Exclusive",
+    "originalGame": "Just Dance Unlimited Exclusive",
     "releaseDate": "March 3, 2017 (Switch)"
   },
   {
@@ -11271,7 +11268,7 @@
     "year": 2016,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "Just Dance 2018|Ubisoft Club unlockable",
+    "originalGame": "Just Dance 2018",
     "releaseDate": "October 24, 2017"
   },
   {
@@ -11280,7 +11277,7 @@
     "year": 2017,
     "game": "Just Dance Unlimited",
     "mode": "Duet",
-    "originalGame": "Just Dance 2018|Regional exclusive",
+    "originalGame": "Just Dance 2018",
     "releaseDate": "October 26, 2017"
   },
   {
@@ -11361,7 +11358,7 @@
     "year": 2011,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k2",
+    "originalGame": "Just Dance Kids 2",
     "releaseDate": "February 1, 2018"
   },
   {
@@ -11370,7 +11367,7 @@
     "year": 1956,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "March 1, 2018"
   },
   {
@@ -11379,7 +11376,7 @@
     "year": 1939,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "May 31, 2018"
   },
   {
@@ -11397,7 +11394,7 @@
     "year": 1957,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "July 4, 2018"
   },
   {
@@ -11424,7 +11421,7 @@
     "year": 1927,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k1",
+    "originalGame": "Just Dance Kids",
     "releaseDate": "July 26, 2018"
   },
   {
@@ -11433,7 +11430,7 @@
     "year": 1983,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "k3",
+    "originalGame": "Just Dance Kids 2014",
     "releaseDate": "August 23, 2018"
   },
   {
@@ -11766,7 +11763,7 @@
     "year": 2018,
     "game": "Just Dance Unlimited",
     "mode": "Solo",
-    "originalGame": "Just Dance 2019|Regional exclusive",
+    "originalGame": "Just Dance 2019",
     "releaseDate": "October 24, 2018 December 20, 2018"
   },
   {
@@ -12253,7 +12250,7 @@
     "year": 1993,
     "game": "Just Dance Unlimited",
     "mode": "Duet",
-    "originalGame": "wiiu",
+    "originalGame": "Just Dance Wii U",
     "releaseDate": "May 20, 2020"
   },
   {
@@ -12757,7 +12754,7 @@
     "year": 2020,
     "game": "Just Dance Unlimited",
     "mode": "Duet",
-    "originalGame": "2020c",
+    "originalGame": "Just Dance China",
     "releaseDate": "October 14, 2021"
   },
   {
@@ -13696,8 +13693,8 @@
     "year": 2010,
     "game": "Just Dance 3",
     "mode": "Solo",
-    "difficulty": "3",
-    "effort": "3"
+    "difficulty": "Hard",
+    "effort": "Intense"
   },
   {
     "title": "Venus",
@@ -13894,8 +13891,8 @@
     "year": 2010,
     "game": "Just Dance 3",
     "mode": "Hold My Hand",
-    "difficulty": "1",
-    "effort": "1"
+    "difficulty": "Easy",
+    "effort": "Chill"
   },
   {
     "title": "I Was Made For Lovin' You",
@@ -13910,8 +13907,8 @@
     "year": 1979,
     "game": "Just Dance 3",
     "mode": "Solo",
-    "difficulty": "2",
-    "effort": "3"
+    "difficulty": "Medium",
+    "effort": "Intense"
   },
   {
     "title": "Tightrope",
@@ -14036,7 +14033,7 @@
     "year": 2011,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "3"
+    "difficulty": "Hard"
   },
   {
     "title": "Good Feeling",
@@ -14050,7 +14047,7 @@
     "year": 2011,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "4"
+    "difficulty": "Extreme"
   },
   {
     "title": "Rock Lobster",
@@ -14112,7 +14109,7 @@
     "year": 1980,
     "game": "Just Dance 4",
     "mode": "Hold My Hand",
-    "difficulty": "1"
+    "difficulty": "Easy"
   },
   {
     "title": "Crazy Little Thing",
@@ -14138,7 +14135,7 @@
     "year": 1993,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "1"
+    "difficulty": "Easy"
   },
   {
     "title": "On the Floor",
@@ -14176,7 +14173,7 @@
     "year": 2007,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "4"
+    "difficulty": "Extreme"
   },
   {
     "title": "Livin’ la Vida Loca",
@@ -14244,7 +14241,7 @@
     "year": 1957,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "3"
+    "difficulty": "Hard"
   },
   {
     "title": "Moves Like Jagger",
@@ -14264,7 +14261,7 @@
     "year": 1982,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "3"
+    "difficulty": "Hard"
   },
   {
     "title": "Make The Party (Don’t Stop)",
@@ -14284,7 +14281,7 @@
     "year": 1999,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "4"
+    "difficulty": "Extreme"
   },
   {
     "title": "Istanbul (Not Constantinople)",
@@ -14346,7 +14343,7 @@
     "year": 2007,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "2"
+    "difficulty": "Medium"
   },
   {
     "title": "Cercavo Amore",
@@ -14426,7 +14423,7 @@
     "year": 2011,
     "game": "Just Dance 4",
     "mode": "Solo",
-    "difficulty": "4"
+    "difficulty": "Extreme"
   },
   {
     "title": "Kiss You",
@@ -14548,7 +14545,7 @@
     "year": 2013,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "Ghostbusters",
@@ -14590,7 +14587,7 @@
     "year": 2013,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "#thatPOWER (On-Stage Mode)",
@@ -14632,7 +14629,7 @@
     "year": 2012,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "Love Boat",
@@ -14680,7 +14677,7 @@
     "year": 1978,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "Feel So Right",
@@ -14706,7 +14703,7 @@
     "year": 2013,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "Just A Gigolo",
@@ -14726,7 +14723,7 @@
     "year": 2011,
     "game": "Just Dance 2014",
     "mode": "Solo",
-    "difficulty": "Hardest"
+    "difficulty": "Extreme"
   },
   {
     "title": "Where Have You Been (On-Stage Mode)",
