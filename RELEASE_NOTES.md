@@ -1,9 +1,10 @@
-## 0.11.1 — Spin Cycle (dashboard dedupe)
+## 0.12.0 — Throwback
 
-A small polish pass on the `!wheel` command shipped in [v0.11.0](https://github.com/wl03355609/Just-Dance-Queue-Butt/releases/tag/v0.11.0).
+Getting ready for **Just Dance: Decades of Hits**, out October 13.
 
-- **No more duplicated "Wheel" on the dashboard** — a `!wheel` entry already says "Wheel Spin" in its title, so the redundant **Wheel** game label is now hidden on the streamer dashboard.
-- **No false "Done before" badge on wheel spins** — since every spin shares the "Wheel Spin" title, repeat spins were being flagged as already played. A wheel spin isn't a specific catalog song, so it's no longer matched against history.
-- **Real songs are untouched** — the fix keys off the internal wheel flag, not the title, so an actual catalog song like "Wheels on The Bus" still shows its game and its "Done before" badge as normal.
+- **Ready for Decades of Hits** — the app now recognizes Decades of Hits as its own game. When its songs are added to the songlist after launch, they'll be requestable right away through the usual songlist update, with no need to wait for another app update.
+- **No spoilers** — until those songs are added, Decades of Hits doesn't appear anywhere in the app. Once they're in, it shows up in **Filtering Games** like any other game, turned on by default, and `!random decades` picks from it.
+- **Empty games stay out of the filter list** — a game with no songs yet is hidden from the dashboard and phone filter lists, and the "active" count only counts the filters you can see.
+- **Clearer `!random` replies** — `!random` for a game with no requestable songs now says so, instead of claiming every matching song is already in the queue.
 
 The auto-updater will install this on launch as usual.
