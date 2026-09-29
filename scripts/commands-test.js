@@ -1,5 +1,6 @@
 const { createCommands } = require("../src/commands");
 const { createQueue } = require("../src/queue");
+const { gameKey } = require("../src/util");
 
 const checks = [];
 let failed = 0;
@@ -271,6 +272,29 @@ async function main() {
   {
     const { runtime } = makeRuntime();
     check("parseRandomFilter(\"youtube\") → null", runtime.queue.parseRandomFilter("youtube") === null);
+  }
+
+  // 28. gameKey maps Decades of Hits (no year in its name) to its own key
+  {
+    check("gameKey(\"Just Dance: Decades of Hits\") → decades", gameKey("Just Dance: Decades of Hits") === "decades");
+    check("gameKey(\"DoH\") → decades", gameKey("DoH") === "decades");
+    check("gameKey(\"Just Dance 2026 Edition\") still → 2026", gameKey("Just Dance 2026 Edition") === "2026");
+    check("gameKey(\"Just Dance\") still → jd1", gameKey("Just Dance") === "jd1");
+  }
+
+  // 29. parseRandomFilter accepts decades
+  {
+    const { runtime } = makeRuntime();
+    const f = runtime.queue.parseRandomFilter("decades");
+    check("parseRandomFilter(\"decades\") → decades", f && f.gameFilter === "decades" && f.yearFilter === null);
+  }
+
+  // 30. !random for a game with no songs says so instead of "already in the queue"
+  {
+    const { runtime, calls } = makeRuntime({ catalog: [{ id: "a", title: "A", game: "Just Dance 2023 Edition", search: "a" }] });
+    runtime.commands.handleCommand(msg("viewer", "!random decades"));
+    check("!random decades with no songs says no songs + no add",
+      calls.say.length === 1 && calls.say[0].includes("no songs available for that filter.") && calls.addQueueEntry.length === 0);
   }
 
   // Give microtasks a chance to flush (for !sr → addRequest promise paths)

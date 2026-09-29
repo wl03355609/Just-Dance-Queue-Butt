@@ -93,7 +93,7 @@ function renderGameFilters(state) {
 
   gameOptions = state.availableGames;
   const enabled = new Set(state.enabledGames || []);
-  filterCountElement.textContent = `${enabled.size} active`;
+  filterCountElement.textContent = `${gameOptions.filter((game) => enabled.has(game.key)).length} active`;
 
   gameFiltersElement.replaceChildren(...gameOptions.map((game) => {
     const label = document.createElement("label");

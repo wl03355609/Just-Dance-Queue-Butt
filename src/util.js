@@ -110,6 +110,7 @@ function gameKey(value) {
   const normalized = normalize(value);
   if (normalized === "plus" || normalized.includes("dance plus")) return "plus";
   if (normalized === "jdu" || normalized.includes("dance unlimited")) return "jdu";
+  if (normalized === "doh" || /\bdecades\b/.test(normalized)) return "decades";
 
   if (/^(jd1|just dance 1|just dance)$/.test(normalized)) return "jd1";
   if (/^(jd2|just dance 2)$/.test(normalized)) return "jd2";

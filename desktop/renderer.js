@@ -121,7 +121,7 @@ function formConfig() {
     port: Number.parseInt(portInput.value, 10) || 3000,
     companionAccess: companionAccessInput.checked,
     maxQueueSize: Number.parseInt(maxQueueInput.value, 10) || 50,
-    enabledGames: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"]
+    enabledGames: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "decades", "jdu", "plus"]
   };
 }
 
