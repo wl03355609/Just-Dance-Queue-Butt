@@ -67,7 +67,9 @@ The streamer/channel can add more than one request and can exceed the normal que
 
 ## Game Filters
 
-Use the dashboard **Filtering Games** panel to choose what viewers can request. Supported keys include main games from `jd1` through `jd4`, yearly games from `2014` through `2026`, `jdu`, `plus`, and optional `youtube`.
+Use the dashboard **Filtering Games** panel to choose what viewers can request. Supported keys include main games from `jd1` through `jd4`, yearly games from `2014` through `2026`, `decades` (Just Dance: Decades of Hits), `jdu`, `plus`, and optional `youtube`.
+
+A game with no songs in the songlist yet, such as a newly announced game before launch, is hidden from the filter list but stays enabled, so its songs become requestable as soon as a songlist update adds them.
 
 When the YouTube filter is enabled, unmatched requests can be added as freeform YouTube requests. When YouTube is disabled, unmatched or filtered-out requests are rejected.
 

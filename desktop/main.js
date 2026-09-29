@@ -6,7 +6,7 @@ const { startRuntime, stopRuntime } = require("../src/index");
 const { lanUrls } = require("../src/util");
 
 const DEFAULT_PORT = 3000;
-const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "jdu", "plus"];
+const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "decades", "jdu", "plus"];
 const CHAT_SCOPES = ["chat:read", "chat:edit"];
 const RELEASES_PAGE_URL = "https://github.com/wl03355609/Just-Dance-Queue-Butt/releases/latest";
 const SONGLIST_URL = "https://raw.githubusercontent.com/wl03355609/Just-Dance-Queue-Butt/main/data/songs.json";

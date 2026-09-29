@@ -103,9 +103,15 @@ async function main() {
     check("POST /api/clear ok", clear.body.ok === true);
     check("queue empty after clear", clear.body.state.queue.length === 0);
 
+    check("songless games hidden from filters", queue1.body.availableGames.every((game) => game.count !== 0));
+    check("decades enabled by default", queue1.body.enabledGames.includes("decades"));
+
     const filters = await request("POST", "/api/filters", { enabledGames: ["2023", "2024"] });
     check("POST /api/filters ok", filters.body.ok === true);
-    check("filters applied", filters.body.state.enabledGames.length === 2);
+    const visibleKeys = new Set(filters.body.state.availableGames.map((game) => game.key));
+    const enabledAfter = filters.body.state.enabledGames;
+    check("filters applied", ["2023", "2024"].every((key) => enabledAfter.includes(key)));
+    check("only hidden games kept beyond selection", enabledAfter.every((key) => ["2023", "2024"].includes(key) || !visibleKeys.has(key)), enabledAfter.join(","));
 
     const theme = await request("POST", "/api/theme", { overlayTheme: "light" });
     check("POST /api/theme ok", theme.body.ok === true);

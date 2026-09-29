@@ -59,6 +59,10 @@ function createCommands(runtime) {
         if (!filter.yearFilter) return true;
         return song.originalGame && song.originalGame.includes(filter.yearFilter);
       });
+      if (!pool.length) {
+        runtime.twitch.say(`@${requester} no songs available for that filter.`);
+        return;
+      }
     }
 
     const queuedIds = new Set(runtime.state.queue.map((entry) => entry.song.id));

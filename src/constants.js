@@ -28,7 +28,7 @@ const DEFAULT_ENABLED_GAMES = [
   "jd1", "jd2", "jd3", "jd4",
   "2014", "2015", "2016", "2017", "2018", "2019",
   "2020", "2021", "2022", "2023", "2024", "2025", "2026",
-  "jdu", "plus"
+  "decades", "jdu", "plus"
 ];
 
 const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
@@ -51,6 +51,7 @@ const GAME_LABELS = {
   "2024": "Just Dance 2024 Edition",
   "2025": "Just Dance 2025 Edition",
   "2026": "Just Dance 2026 Edition",
+  decades: "Just Dance: Decades of Hits",
   jdu: "Just Dance Unlimited",
   plus: "Just Dance+",
   youtube: "YouTube"
