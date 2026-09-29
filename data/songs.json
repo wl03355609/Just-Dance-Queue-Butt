@@ -1423,17 +1423,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Step by Step",
-    "artist": "New Kids on the Block",
-    "year": 1990,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance",
-    "releaseDate": "Available at launch",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
     "title": "That’s the Way (I Like It)",
     "artist": "KC and the Sunshine Band",
     "year": 1975,
@@ -1632,17 +1621,6 @@
     "effort": "Intense"
   },
   {
-    "title": "Just A Gigolo",
-    "artist": "Louis Prima",
-    "year": 1956,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2014",
-    "releaseDate": "Available at launch",
-    "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Just Dance",
     "artist": "Lady Gaga ft. Colby O'Donis",
     "year": 2008,
@@ -1720,17 +1698,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Tetris",
-    "artist": "Hirokazu Tanaka (Dancing Bros.)",
-    "year": 1989,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2015",
-    "releaseDate": "Available at launch",
-    "mode": "Quartet",
-    "difficulty": "Hard",
-    "effort": "Chill"
-  },
-  {
     "title": "XMas Tree",
     "artist": "Bollywood Santa",
     "year": 2014,
@@ -1804,17 +1771,6 @@
     "originalGame": "Just Dance 2016",
     "releaseDate": "Available at launch",
     "mode": "Quartet",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Junto a Ti",
-    "artist": "Martina Stoessel & Lodovica Comello (Disney’s Violetta)",
-    "year": 2012,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2016",
-    "releaseDate": "Available at launch",
-    "mode": "Trio",
     "difficulty": "Medium",
     "effort": "Moderate"
   },
@@ -1951,17 +1907,6 @@
     "effort": "Chill"
   },
   {
-    "title": "PoPiPo",
-    "artist": "Hatsune Miku",
-    "year": 2008,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2017",
-    "releaseDate": "Available at launch",
-    "mode": "Trio",
-    "difficulty": "Easy",
-    "effort": "Moderate"
-  },
-  {
     "title": "Run The Night",
     "artist": "Gigi Rowe",
     "year": 2016,
@@ -2061,17 +2006,6 @@
     "effort": "Intense"
   },
   {
-    "title": "Love Ward",
-    "artist": "Hatsune Miku",
-    "year": 2009,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2018",
-    "releaseDate": "Available at launch",
-    "mode": "Trio",
-    "difficulty": "Hard",
-    "effort": "Intense"
-  },
-  {
     "title": "Make It Jingle",
     "artist": "Big Freedia",
     "year": 2016,
@@ -2103,17 +2037,6 @@
     "mode": "Solo",
     "difficulty": "Easy",
     "effort": "Chill"
-  },
-  {
-    "title": "Cosmic Party",
-    "artist": "Equinox Stars",
-    "year": 2018,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "Available at launch",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
   },
   {
     "title": "Fire On The Floor",
@@ -2157,17 +2080,6 @@
     "releaseDate": "Available at launch",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Not Your Ordinary",
-    "artist": "Stella Mwangi",
-    "year": 2017,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "Available at launch",
-    "mode": "Quartet",
-    "difficulty": "Medium",
     "effort": "Chill"
   },
   {
@@ -2380,17 +2292,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Let’s Save Our Planet",
-    "artist": "The Sunlight Shakers",
-    "year": 2015,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "Available at launch",
-    "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Paca Dance",
     "artist": "The Just Dance Band",
     "year": 2020,
@@ -2490,17 +2391,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Lump",
-    "artist": "The Presidents of the United States of America",
-    "year": 1995,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "U Can’t Touch This",
     "artist": "MC Hammer (Groove Century)",
     "year": 1990,
@@ -2545,17 +2435,6 @@
     "effort": "Intense"
   },
   {
-    "title": "I Feel Love",
-    "artist": "Donna Summer",
-    "year": 1977,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Spectronizer",
     "artist": "Sentai Express",
     "year": 2011,
@@ -2563,17 +2442,6 @@
     "originalGame": "Just Dance 3",
     "releaseDate": "November 21, 2022",
     "mode": "Quartet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Diggin’ in the Dirt",
-    "artist": "Stefanie Heinzmann",
-    "year": 2012,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 4",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
     "difficulty": "Easy",
     "effort": "Chill"
   },
@@ -2592,17 +2460,6 @@
     "title": "I Will Survive",
     "artist": "Gloria Gaynor",
     "year": 1978,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2014",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "My Main Girl",
-    "artist": "MainStreet",
-    "year": 2013,
     "game": "Just Dance+",
     "originalGame": "Just Dance 2014",
     "releaseDate": "November 21, 2022",
@@ -2765,17 +2622,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Keep in Touch",
-    "artist": "JD McCrary",
-    "year": 2019,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2020",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
     "title": "White Noise",
     "artist": "Disclosure ft. AlunaGeorge",
     "year": 2013,
@@ -2805,17 +2651,6 @@
     "originalGame": "Just Dance 2021",
     "releaseDate": "November 21, 2022",
     "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Here Comes The Spy",
-    "artist": "The Step Brigade",
-    "year": 2019,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "November 21, 2022",
-    "mode": "Solo",
     "difficulty": "Easy",
     "effort": "Chill"
   },
@@ -2897,44 +2732,11 @@
     "effort": "Moderate"
   },
   {
-    "title": "The Master Blaster",
-    "artist": "Inspector Marceau",
-    "year": 2008,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "December 8, 2022",
-    "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Tales of the Desert",
-    "artist": "Persian Nights",
-    "year": 2008,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "December 8, 2022",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "God Is a Woman",
     "artist": "Ariana Grande",
     "year": 2018,
     "game": "Just Dance+",
     "originalGame": "Just Dance 2020",
-    "releaseDate": "December 8, 2022",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "The Color Lab",
-    "artist": "Dancing Bros.",
-    "year": 2011,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
     "releaseDate": "December 8, 2022",
     "mode": "Solo",
     "difficulty": "Easy",
@@ -2993,17 +2795,6 @@
     "releaseDate": "December 15, 2022",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "She’s Got Me Dancing",
-    "artist": "Tommy Sparks",
-    "year": 2009,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "December 20, 2022",
-    "mode": "Solo",
-    "difficulty": "Medium",
     "effort": "Chill"
   },
   {
@@ -3139,28 +2930,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "Mamasita",
-    "artist": "Daddy P, Spike T & Da Digger (Latino Sunset)",
-    "year": 2001,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "January 12, 2023",
-    "mode": "Duet",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
-    "title": "Soul Searchin’",
-    "artist": "Stephen Emil Dudas & Mark G. Hart (Groove Century)",
-    "year": 1999,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "January 12, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "All About That Bass",
     "artist": "Meghan Trainor",
     "year": 2014,
@@ -3216,17 +2985,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Sweet Little Unforgettable Thing",
-    "artist": "Bea Miller",
-    "year": 2017,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "January 19, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Believer",
     "artist": "Imagine Dragons",
     "year": 2017,
@@ -3260,17 +3018,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "Jambo Mambo",
-    "artist": "Antonio Diaz Lopez (Ole Orquestra)",
-    "year": 1997,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "January 26, 2023",
-    "mode": "Duet",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
     "title": "Born This Way",
     "artist": "Lady Gaga",
     "year": 2011,
@@ -3290,17 +3037,6 @@
     "releaseDate": "February 2, 2023",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Twist and Shake It",
-    "artist": "Ben Wheeler and Tara Chinn (The Girly Team)",
-    "year": 2009,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "February 2, 2023",
-    "mode": "Duet",
-    "difficulty": "Easy",
     "effort": "Moderate"
   },
   {
@@ -3348,17 +3084,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Joone Khodet",
-    "artist": "Black Cats",
-    "year": 2006,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "February 9, 2023",
-    "mode": "Duet",
-    "difficulty": "Hard",
-    "effort": "Moderate"
-  },
-  {
     "title": "Last Friday Night (T.G.I.F.)",
     "artist": "Katy Perry",
     "year": 2010,
@@ -3403,17 +3128,6 @@
     "effort": "Chill"
   },
   {
-    "title": "You’re The One That I Want",
-    "artist": "John Travolta and Olivia Newton-John (From The Movie Grease)",
-    "year": 1978,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2016",
-    "releaseDate": "February 16, 2023",
-    "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "A Little Party Never Killed Nobody (All We Got)",
     "artist": "Fergie ft. Q-Tip & GoonRock",
     "year": 2013,
@@ -3433,50 +3147,6 @@
     "releaseDate": "February 23, 2023",
     "mode": "Solo",
     "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Cercavo Amore",
-    "artist": "Emma",
-    "year": 2011,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 4",
-    "releaseDate": "February 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Karaoke Forever - Future Underworld Mix",
-    "artist": "Alan Tam",
-    "year": 1990,
-    "game": "Just Dance+",
-    "originalGame": "zh3",
-    "releaseDate": "February 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Leg Song",
-    "artist": "Lulu",
-    "year": 2016,
-    "game": "Just Dance+",
-    "originalGame": "zh3",
-    "releaseDate": "February 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
-    "title": "Error",
-    "artist": "Natalia Nykiel",
-    "year": 2016,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance Unlimited (2018)",
-    "releaseDate": "February 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
     "effort": "Chill"
   },
   {
@@ -3579,17 +3249,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "Panini",
-    "artist": "Lil Nas X",
-    "year": 2019,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance Unlimited (2020)",
-    "releaseDate": "March 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
     "title": "Alright",
     "artist": "Supergrass",
     "year": 1995,
@@ -3643,17 +3302,6 @@
     "mode": "Solo",
     "difficulty": "Easy",
     "effort": "Intense"
-  },
-  {
-    "title": "Dynamite",
-    "artist": "Taio Cruz",
-    "year": 2010,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "April 20, 2023",
-    "mode": "Quartet",
-    "difficulty": "Easy",
-    "effort": "Chill"
   },
   {
     "title": "Flashdance... What A Feeling",
@@ -3777,17 +3425,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "You Make Me Feel (Mighty Real)",
-    "artist": "Sylvester",
-    "year": 1978,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2022",
-    "releaseDate": "May 9, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Moderate"
-  },
-  {
     "title": "SloMo",
     "artist": "Chanel",
     "year": 2021,
@@ -3876,28 +3513,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Flash (Just Dance Version)",
-    "artist": "Bilal Hassani with Sundy Jules, Paola Locatelli & Sulivan Gwed",
-    "year": 2020,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "June 1, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Heat Seeker",
-    "artist": "DREAMERS",
-    "year": 2020,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "June 1, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Intense"
-  },
-  {
     "title": "Kissing Strangers",
     "artist": "DNCE ft. Nicki Minaj",
     "year": 2017,
@@ -3920,17 +3535,6 @@
     "effort": "Chill"
   },
   {
-    "title": "John Cena",
-    "artist": "Sho Madjozi",
-    "year": 2019,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance Unlimited (2021)",
-    "releaseDate": "June 8, 2023",
-    "mode": "Solo",
-    "difficulty": "Hard",
-    "effort": "Intense"
-  },
-  {
     "title": "Malibu",
     "artist": "Kim Petras",
     "year": 2020,
@@ -3951,17 +3555,6 @@
     "mode": "Solo",
     "difficulty": "Hard",
     "effort": "Intense"
-  },
-  {
-    "title": "Why Oh Why",
-    "artist": "Stephane Huguenin, Yves Sanna & Christian Padovan (Love Letter)",
-    "year": 2007,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2",
-    "releaseDate": "June 22, 2023",
-    "mode": "Duet",
-    "difficulty": "Medium",
-    "effort": "Chill"
   },
   {
     "title": "Trenulețul",
@@ -4005,17 +3598,6 @@
     "releaseDate": "July 20, 2023",
     "mode": "Solo",
     "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Baby Zouk",
-    "artist": "Laurent Lombard (Dr. Creole)",
-    "year": 1998,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 3",
-    "releaseDate": "July 27, 2023",
-    "mode": "Duet",
-    "difficulty": "Easy",
     "effort": "Moderate"
   },
   {
@@ -4085,17 +3667,6 @@
     "effort": "Intense"
   },
   {
-    "title": "Money, Money, Money",
-    "artist": "ABBA",
-    "year": 1976,
-    "game": "Just Dance+",
-    "originalGame": "abba",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Super Trouper",
     "artist": "ABBA",
     "year": 1980,
@@ -4118,17 +3689,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Mashed Potato Time",
-    "artist": "Dee Dee Sharp",
-    "year": 1962,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Barbie Girl",
     "artist": "Aqua (Countdown Dee’s Hit Explosion)",
     "year": 1997,
@@ -4140,28 +3700,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Down By The Riverside",
-    "artist": "The Reverend Horatio Duncan & Amos Sweets",
-    "year": 1918,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
-    "title": "Futebol Crazy",
-    "artist": "The World Cup Girls",
-    "year": 2006,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Moderate"
-  },
-  {
     "title": "Girlfriend",
     "artist": "Avril Lavigne",
     "year": 2007,
@@ -4170,17 +3708,6 @@
     "releaseDate": "October 17, 2023",
     "mode": "Duet",
     "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Professor Pumplestickle",
-    "artist": "Nick Phoenix & Thomas Bergersen",
-    "year": 2009,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2",
-    "releaseDate": "October 17, 2023",
-    "mode": "Duet",
-    "difficulty": "Hard",
     "effort": "Chill"
   },
   {
@@ -4206,17 +3733,6 @@
     "effort": "Moderate"
   },
   {
-    "title": "So Glamorous",
-    "artist": "Harlin James & Clav (The Girly Team)",
-    "year": 2012,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 4",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
     "title": "Don’t You Worry Child",
     "artist": "Swedish House Mafia",
     "year": 2012,
@@ -4236,17 +3752,6 @@
     "releaseDate": "October 17, 2023",
     "mode": "Duet",
     "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Never Can Say Goodbye",
-    "artist": "Gloria Gaynor",
-    "year": 1974,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2015",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
     "effort": "Moderate"
   },
   {
@@ -4279,28 +3784,6 @@
     "originalGame": "Just Dance 2016",
     "releaseDate": "October 17, 2023",
     "mode": "Duet",
-    "difficulty": "Medium",
-    "effort": "Moderate"
-  },
-  {
-    "title": "Ievan Polkka",
-    "artist": "Hatsune Miku",
-    "year": 2007,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2016",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Kaboom Pow",
-    "artist": "Nikki Yanofsky",
-    "year": 2014,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2016",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
     "difficulty": "Medium",
     "effort": "Moderate"
   },
@@ -4347,28 +3830,6 @@
     "mode": "Solo",
     "difficulty": "Easy",
     "effort": "Chill"
-  },
-  {
-    "title": "Carmen (Overture)",
-    "artist": "Georges Bizet (The Just Dance Orchestra)",
-    "year": 1875,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2018",
-    "releaseDate": "October 17, 2023",
-    "mode": "Duet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Risky Business",
-    "artist": "Jorge Blanco",
-    "year": 2017,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2018",
-    "releaseDate": "October 17, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Moderate"
   },
   {
     "title": "Slumber Party",
@@ -4558,28 +4019,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Magic Halloween",
-    "artist": "Halloween Thrills",
-    "year": 2013,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2018",
-    "releaseDate": "October 23, 2023",
-    "mode": "Duet",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
-    "title": "Pixie Land",
-    "artist": "The Sunlight Shakers",
-    "year": 2010,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2018",
-    "releaseDate": "October 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
     "title": "Boogiesaurus",
     "artist": "A. Caveman and the Backseats",
     "year": 2003,
@@ -4600,28 +4039,6 @@
     "mode": "Duet",
     "difficulty": "Medium",
     "effort": "Intense"
-  },
-  {
-    "title": "Hala Bel Khamis",
-    "artist": "Maan Barghouth",
-    "year": 2019,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "October 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
-    "title": "Monsters of Jazz",
-    "artist": "Groove Century",
-    "year": 2015,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2019",
-    "releaseDate": "October 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
   },
   {
     "title": "10.000 luchtballonnen",
@@ -4666,17 +4083,6 @@
     "mode": "Duet",
     "difficulty": "Easy",
     "effort": "Moderate"
-  },
-  {
-    "title": "Rock N Roll Princess",
-    "artist": "Fast Forward Highway",
-    "year": 2008,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2021",
-    "releaseDate": "October 23, 2023",
-    "mode": "Solo",
-    "difficulty": "Easy",
-    "effort": "Chill"
   },
   {
     "title": "My Way",
@@ -5438,17 +4844,6 @@
     "effort": "Chill"
   },
   {
-    "title": "Knowing Me, Knowing You",
-    "artist": "ABBA",
-    "year": 1977,
-    "game": "Just Dance+",
-    "originalGame": "abba",
-    "releaseDate": "January 21, 2025",
-    "mode": "Quartet",
-    "difficulty": "Easy",
-    "effort": "Chill"
-  },
-  {
     "title": "Le Freak",
     "artist": "Chic",
     "year": 1978,
@@ -5468,17 +4863,6 @@
     "releaseDate": "January 21, 2025",
     "mode": "Duet",
     "difficulty": "Medium",
-    "effort": "Chill"
-  },
-  {
-    "title": "Soul Bossa Nova",
-    "artist": "Quincy Jones & His Orchestra",
-    "year": 1962,
-    "game": "Just Dance+",
-    "originalGame": "Just Dance 2",
-    "releaseDate": "January 21, 2025",
-    "mode": "Duet",
-    "difficulty": "Easy",
     "effort": "Chill"
   },
   {
@@ -6583,6 +5967,28 @@
     "mode": "Solo",
     "difficulty": "Medium",
     "effort": "Chill"
+  },
+  {
+    "title": "MORE",
+    "artist": "K/DA ft. Madison Beer, (G)-IDLE, Lexie Liu, Seraphine, Jaira Burns",
+    "year": 2020,
+    "game": "Just Dance+",
+    "originalGame": "Just Dance 2023 Edition",
+    "releaseDate": "September 1, 2026",
+    "mode": "Quartet",
+    "difficulty": "Extreme",
+    "effort": "Intense"
+  },
+  {
+    "title": "Playground",
+    "artist": "Bea Miller",
+    "year": 2021,
+    "game": "Just Dance+",
+    "originalGame": "Just Dance 2023 Edition",
+    "releaseDate": "September 1, 2026",
+    "mode": "Solo",
+    "difficulty": "Easy",
+    "effort": "Moderate"
   },
   {
     "title": "Domino",
