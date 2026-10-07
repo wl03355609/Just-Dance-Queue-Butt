@@ -100,6 +100,11 @@
               <div id="auth-code" class="auth-code" hidden>
                 <span>Enter this code on Twitch</span>
                 <strong id="user-code"></strong>
+                <div class="link-buttons">
+                  <button id="open-twitch-login" type="button">Open Twitch</button>
+                  <button id="copy-twitch-login" type="button">Copy link</button>
+                </div>
+                <code id="twitch-login-url"></code>
               </div>
             </section>
           </div>
@@ -204,7 +209,15 @@
           mockConfig.running = false;
           return mockConfig;
         },
-        async startAuth() { return { userCode: "AB12CD" }; },
+        async startAuth() {
+          return {
+            userCode: "AB12CD",
+            verificationUri: "https://www.twitch.tv/activate?device-code=AB12CD",
+            browserOpened: true,
+            browserError: ""
+          };
+        },
+        async openAuthPage() { return { opened: true, error: "" }; },
         async importCredentials() { return mockConfig; },
         async clearImportedCredentials() { return mockConfig; },
         async checkSonglist() { return mockConfig.songlist; },

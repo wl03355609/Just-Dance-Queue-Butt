@@ -86,6 +86,7 @@ function parseCredentialsFile(text, filePath) {
 let mainWindow = null;
 let runtime = null;
 let authPollTimer = null;
+let authVerificationUri = "";
 let quitAfterPrompt = false;
 let quitPromptActive = false;
 let updateCheckStarted = false;
@@ -321,6 +322,12 @@ function registerIpc() {
   ipcMain.handle("companion:pairingCode", () => {
     if (!runtime) throw new Error("Start the bot first.");
     return runtime.createCompanionPairingCode();
+  });
+
+  ipcMain.handle("auth:openPage", async () => {
+    if (!authVerificationUri) return { opened: false, error: "Click Log in with Twitch first." };
+    const error = await openInBrowser(authVerificationUri);
+    return { opened: !error, error };
   });
 
   ipcMain.handle("open:url", (_event, url) => {
@@ -809,13 +816,16 @@ async function startDeviceLogin(clientId) {
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || "Could not start Twitch login.");
 
-  openTwitchVerificationUrl(data.verification_uri);
+  authVerificationUri = twitchVerificationUrl(data.verification_uri);
   pollDeviceToken(clientId, data.device_code, data.interval || 5);
+  const browserError = await openInBrowser(authVerificationUri);
 
   return {
-    verificationUri: data.verification_uri,
+    verificationUri: authVerificationUri,
     userCode: data.user_code,
-    expiresIn: data.expires_in
+    expiresIn: data.expires_in,
+    browserOpened: !browserError,
+    browserError
   };
 }
 
@@ -922,7 +932,7 @@ function openLocalAppUrl(rawUrl) {
   return shell.openExternal(url.toString());
 }
 
-function openTwitchVerificationUrl(rawUrl) {
+function twitchVerificationUrl(rawUrl) {
   let url;
   try {
     url = new URL(String(rawUrl || ""));
@@ -935,5 +945,17 @@ function openTwitchVerificationUrl(rawUrl) {
     throw new Error("Twitch returned an unexpected verification URL.");
   }
 
-  return shell.openExternal(url.toString());
+  return url.toString();
+}
+
+// Resolves to "" once the browser opens (or is still launching after a few
+// seconds), or to the reason it couldn't, so the login screen can offer a
+// fallback instead of claiming the page opened.
+function openInBrowser(url) {
+  const launched = shell.openExternal(url).then(() => "", (error) => {
+    console.error("Could not open browser:", error);
+    return error?.message || String(error);
+  });
+  const stillLaunching = new Promise((resolve) => setTimeout(resolve, 3000, ""));
+  return Promise.race([launched, stillLaunching]);
 }

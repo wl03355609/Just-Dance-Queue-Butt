@@ -4,6 +4,7 @@ contextBridge.exposeInMainWorld("jdApp", {
   getConfig: () => ipcRenderer.invoke("config:get"),
   saveConfig: (config) => ipcRenderer.invoke("config:save", config),
   startAuth: (clientId) => ipcRenderer.invoke("auth:start", clientId),
+  openAuthPage: () => ipcRenderer.invoke("auth:openPage"),
   startRuntime: (config) => ipcRenderer.invoke("runtime:start", config),
   stopRuntime: () => ipcRenderer.invoke("runtime:stop"),
   nextSong: () => ipcRenderer.invoke("runtime:next"),
