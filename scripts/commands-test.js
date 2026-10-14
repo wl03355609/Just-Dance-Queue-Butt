@@ -1,5 +1,10 @@
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+
 const { createCommands } = require("../src/commands");
 const { createQueue } = require("../src/queue");
+const { createSongs } = require("../src/songs");
 const { gameKey } = require("../src/util");
 
 const checks = [];
@@ -295,6 +300,80 @@ async function main() {
     runtime.commands.handleCommand(msg("viewer", "!random decades"));
     check("!random decades with no songs says no songs + no add",
       calls.say.length === 1 && calls.say[0].includes("no songs available for that filter.") && calls.addQueueEntry.length === 0);
+  }
+
+  // 31. "!sr <song> alt" requests a song's alt routine (real songs + queue modules)
+  {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "jdb-alt-"));
+    const songsPath = path.join(dir, "songs.json");
+    fs.writeFileSync(songsPath, JSON.stringify([
+      { title: "Hot to Go!", artist: "Chappell Roan", game: "Just Dance: Decades of Hits" },
+      { title: "Hot to Go! (Take Away Version)", artist: "Chappell Roan", game: "Just Dance: Decades of Hits" },
+      { title: "Feel Special", artist: "Twice", game: "Just Dance 2021" },
+      { title: "Feel Special (Extreme Version)", artist: "TWICE", game: "Just Dance 2021" },
+      { title: "More & More", artist: "Twice", game: "Just Dance: Decades of Hits" },
+      { title: "Blinding Lights", artist: "The Weeknd", game: "Just Dance 2021" },
+      { title: "Blinding Lights (Extreme Version)", artist: "The Weeknd", game: "Just Dance 2021" },
+      { title: "Blinding Lights (Alternate Version)", artist: "The Weeknd", game: "Just Dance+" },
+      { title: "Stronger", artist: "Britney Spears", game: "Just Dance 2022" },
+      { title: "Stronger (What Doesn't Kill You)", artist: "Kelly Clarkson", game: "Just Dance 2022" },
+      { title: "Dynamite", artist: "BTS", game: "Just Dance 2023 Edition" },
+      { title: "Dynamite (Extreme Version)", artist: "BTS", game: "Just Dance 2023 Edition" },
+      { title: "Dynamite", artist: "Taio Cruz", game: "Just Dance 3" }
+    ]));
+
+    const said = [];
+    const runtime = {
+      config: {
+        channel: "streamer",
+        modUsers: [],
+        maxQueueSize: 50,
+        enabledGames: ["decades", "2021", "2022", "2023", "jd3", "plus"],
+        songsPath,
+        queuePath: path.join(dir, "queue.json")
+      },
+      state: { queue: [], history: [], overlayTheme: "dark" },
+      catalog: [],
+      twitch: { say: (message) => said.push(message) },
+      server: { broadcast: () => {}, publicState: () => ({}) }
+    };
+    runtime.songs = createSongs(runtime);
+    runtime.queue = createQueue(runtime);
+    runtime.songs.loadSongs();
+
+    const request = (user, query) => runtime.queue.addRequest(user, query, { announce: true });
+    const queued = (result) => result.ok ? result.entry.song.title : `(not queued: ${result.message})`;
+
+    const hotToGo = await request("v1", "hot to go alt");
+    check("!sr hot to go alt → Take Away Version", queued(hotToGo) === "Hot to Go! (Take Away Version)", queued(hotToGo));
+
+    const feelSpecial = await request("v2", "feel special alt");
+    check("!sr feel special alt → Extreme Version (Twice/TWICE)", queued(feelSpecial) === "Feel Special (Extreme Version)", queued(feelSpecial));
+
+    const moreAndMore = await request("v3", "more and more");
+    check("!sr more and more → More & More", queued(moreAndMore) === "More & More", queued(moreAndMore));
+
+    const noAlt = await request("v4", "more & more alt");
+    check("!sr more & more alt → says there's no alt, queues nothing",
+      !noAlt.ok && noAlt.status === 404 && said.at(-1).includes("More & More doesn't have an alt routine"), said.at(-1));
+
+    const several = await request("v5", "blinding lights alt");
+    check("!sr blinding lights alt → lists the alt routines, queues nothing",
+      !several.ok && several.status === 409 && said.at(-1).includes("Extreme Version, Alternate Version"), said.at(-1));
+
+    const named = await request("v6", "blinding lights alternate version");
+    check("!sr blinding lights alternate version → that routine by name", queued(named) === "Blinding Lights (Alternate Version)", queued(named));
+
+    const subtitle = await request("v7", "stronger alt");
+    check("!sr stronger alt → a different song's subtitle isn't an alt", !subtitle.ok && subtitle.status === 404, subtitle.message);
+
+    const dynamite = await request("v8", "dynamite alt");
+    check("!sr dynamite alt → BTS Extreme, not Taio Cruz", queued(dynamite) === "Dynamite (Extreme Version)", queued(dynamite));
+
+    const classic = await request("v9", "hot to go");
+    check("!sr hot to go (no alt) → normal routine", queued(classic) === "Hot to Go!", queued(classic));
+
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 
   // Give microtasks a chance to flush (for !sr → addRequest promise paths)

@@ -155,7 +155,16 @@ function createQueue(runtime) {
       return addQueueEntry(requester, song, announce);
     }
 
-    const match = runtime.songs.findSong(requestedSong);
+    const altRequest = runtime.songs.findAltRequest(requestedSong);
+    if (altRequest && altRequest.alternates.length !== 1) {
+      const message = altRequestMessage(requester, altRequest);
+      if (announce) runtime.twitch.say(message);
+      return { ok: false, status: altRequest.alternates.length ? 409 : 404, message };
+    }
+
+    const match = altRequest
+      ? { song: altRequest.alternates[0], score: 1 }
+      : runtime.songs.findSong(requestedSong);
 
     let song;
     if (match) {
@@ -176,6 +185,13 @@ function createQueue(runtime) {
     }
 
     return addQueueEntry(requester, song, announce);
+  }
+
+  function altRequestMessage(requester, { song, alternates }) {
+    if (!alternates.length) return `@${requester} ${song.title} doesn't have an alt routine.`;
+    const names = alternates.map((alt) => (alt.title.match(/\(([^()]+)\)\s*$/) || [])[1] || alt.title);
+    const shown = names.length > 5 ? [...names.slice(0, 5), "…"] : names;
+    return `@${requester} ${song.title} has ${names.length} alt routines: ${shown.join(", ")}. Ask for one by name, like !sr ${song.title} ${names[0]}`;
   }
 
   function addQueueEntry(requester, song, announce, customMessage) {

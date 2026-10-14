@@ -40,6 +40,7 @@ The desktop app stores login/config locally in your user app data folder. It mus
 ## Chat Commands
 
 - `!sr <song name>`: add a song request.
+- `!sr <song name> alt`: request the song's alt routine, such as `!sr hot to go alt` for the Take Away Version or `!sr feel special alt` for the Extreme Version. If a song has several alts, the bot lists them so the viewer can ask for one by name.
 - `!random`: add a random song from the enabled catalog.
 - `!random <game>`: add a random song from a specific game, such as `!random 2021`, `!random JD+`, or `!random JDU`.
 - `!random <game> <year>`: add a random song from a year section within JD+ or JDU, such as `!random JD+ 2023`.
