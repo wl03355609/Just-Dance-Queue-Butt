@@ -38,7 +38,6 @@ const message = document.querySelector("#message");
 const runStatus = document.querySelector("#run-status");
 const authCode = document.querySelector("#auth-code");
 const userCode = document.querySelector("#user-code");
-const twitchLoginUrl = document.querySelector("#twitch-login-url");
 
 let currentConfig = null;
 let pairingExpiresAt = 0;
@@ -242,26 +241,11 @@ document.querySelector("#login-button").addEventListener("click", async () => {
     render(config);
     const auth = await window.jdApp.startAuth(clientIdInput.value.trim());
     userCode.textContent = auth.userCode;
-    twitchLoginUrl.textContent = auth.verificationUri;
     authCode.hidden = false;
-    show(auth.browserOpened
-      ? "Twitch login opened in your browser. Enter the code shown above if asked, then come back here."
-      : `Couldn't open your browser (${auth.browserError}). Click Open Twitch to try again, or copy the link into your browser.`);
+    show("Twitch login opened. Enter the code shown above, then come back here.");
   } catch (error) {
     show(error.message);
   }
-});
-
-document.querySelector("#open-twitch-login").addEventListener("click", async () => {
-  const result = await window.jdApp.openAuthPage();
-  show(result.opened
-    ? "Twitch login opened in your browser."
-    : `Couldn't open your browser (${result.error}). Copy the link below into your browser instead.`);
-});
-
-document.querySelector("#copy-twitch-login").addEventListener("click", async () => {
-  const ok = await copyText(twitchLoginUrl.textContent);
-  show(ok ? "Twitch login link copied to clipboard." : "Could not copy — select the link below manually.");
 });
 
 document.querySelector("#save-button").addEventListener("click", async () => {
