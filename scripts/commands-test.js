@@ -60,6 +60,7 @@ function makeRuntime({ catalog = [], queue = [], history = [] } = {}) {
     parseRandomFilter: realQueue.parseRandomFilter,
     checkCanRequest: realQueue.checkCanRequest,
     queueSummary: () => "summary",
+    historySummary: () => "history",
     currentSongSummary: () => "current",
     addRequest: (...args) => { calls.addRequest.push(args); return Promise.resolve({ ok: true }); },
     skipSong: (...args) => { calls.skipSong.push(args); return { ok: true }; },
@@ -374,6 +375,24 @@ async function main() {
     check("!sr hot to go (no alt) → normal routine", queued(classic) === "Hot to Go!", queued(classic));
 
     fs.rmSync(dir, { recursive: true, force: true });
+  }
+
+  // 32. !history (any viewer) says the history summary
+  {
+    const { runtime, calls } = makeRuntime();
+    runtime.commands.handleCommand(msg("viewer", "!history"));
+    check("!history triggers say(historySummary) for any viewer", calls.say.length === 1 && calls.say[0] === "history");
+  }
+
+  // 33. historySummary lists the last 5 played songs, most recent first
+  {
+    const empty = createQueue({ config: {}, state: { queue: [], history: [] } });
+    check("historySummary with no history", empty.historySummary() === "No songs have been marked as played yet.");
+
+    const history = Array.from({ length: 7 }, (_, i) => ({ user: `u${i + 1}`, song: { title: `Song ${i + 1}` } }));
+    const summary = createQueue({ config: {}, state: { queue: [], history } }).historySummary();
+    check("historySummary shows the 5 most recent",
+      summary === "Recently played: 1. Song 1 (@u1) | 2. Song 2 (@u2) | 3. Song 3 (@u3) | 4. Song 4 (@u4) | 5. Song 5 (@u5)", summary);
   }
 
   // Give microtasks a chance to flush (for !sr → addRequest promise paths)

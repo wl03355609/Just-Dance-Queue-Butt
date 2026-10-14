@@ -345,6 +345,16 @@ function createQueue(runtime) {
       .join(" | ");
   }
 
+  function historySummary() {
+    if (!runtime.state.history.length) return "No songs have been marked as played yet.";
+
+    const recent = runtime.state.history
+      .slice(0, 5)
+      .map((entry, index) => `${index + 1}. ${entry.song.title} (@${entry.user})`)
+      .join(" | ");
+    return `Recently played: ${recent}`;
+  }
+
   function currentSongSummary() {
     if (!runtime.state.history.length) return "No songs have been marked as played yet.";
     const current = runtime.state.history[0];
@@ -397,6 +407,7 @@ function createQueue(runtime) {
     removeQueueEntry,
     clearQueue,
     queueSummary,
+    historySummary,
     currentSongSummary,
     filterSummary,
     parseRandomFilter

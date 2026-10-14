@@ -19,6 +19,7 @@ function createCommands(runtime) {
       return runtime.queue.addWheelRequest(message.user, arg);
     }
     if (lower === "!queue") return runtime.twitch.say(runtime.queue.queueSummary());
+    if (lower === "!history") return runtime.twitch.say(runtime.queue.historySummary());
     if (lower === "!leave") return runtime.queue.leaveQueue(message.user);
     if (lower === "!pick" && arg.toLowerCase() === "random") {
       if (isStreamer(message)) return runtime.queue.pickRandomSong({ announce: true });

@@ -47,6 +47,7 @@ The desktop app stores login/config locally in your user app data folder. It mus
 - `!wheel`: ask the streamer to spin the in-game wheel. Adds a "spin the wheel" entry to the queue.
 - `!wheel <note>`: spin until a matching song, such as `!wheel Katy`. The note is free text and is not matched against the catalog.
 - `!queue`: show the first songs in chat.
+- `!history`: show the last 5 played songs in chat, most recent first.
 - `!leave`: remove your own request.
 - `!skip` or `!next`: mark the first request as played. Broadcaster/mod only.
 - `!pick random`: randomly mark one queued request as played. Broadcaster only.

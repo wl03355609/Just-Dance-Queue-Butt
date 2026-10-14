@@ -15,6 +15,7 @@ This file lists chat commands and local dashboard actions for permission review.
 | `!wheel` | Any viewer | Adds a "spin the in-game wheel" request to the queue for the streamer to spin by hand. |
 | `!wheel <note>` | Any viewer | Adds a wheel-spin request with a free-text target hint, such as `!wheel Katy`. The note is sanitized but never matched against the catalog. |
 | `!queue` | Any viewer | Shows the first queued songs in chat. |
+| `!history` | Any viewer | Shows the last 5 played songs in chat, most recent first, with who requested each. |
 | `!leave` | Any viewer | Removes that viewer's own queued request. |
 | `!skip` | Broadcaster or mod | Marks the first queued request as playing now and moves it to history. |
 | `!next` | Broadcaster or mod | Same as `!skip`. |
