@@ -7,6 +7,7 @@ This file lists chat commands and local dashboard actions for permission review.
 | Command | Who can use it | What it does |
 | --- | --- | --- |
 | `!sr <song name>` | Any viewer | Adds one catalog request for the viewer. If YouTube is enabled, unmatched freeform text is added as a YouTube request. |
+| `!sr <song name> alt` | Any viewer | Adds the song's alt routine (e.g. `!sr hot to go alt` → Take Away Version). An alt is another routine of a song that also has a normal one. If there are several, the bot lists them instead of picking one; if there are none, it says so. |
 | `!songrequest <song name>` | Any viewer | Same as `!sr`. |
 | `!random` | Any viewer | Adds one random catalog song for the viewer from the enabled filters. |
 | `!random <game>` | Any viewer | Adds one random catalog song from a game filter, such as `!random 2021`, `!random JD+`, or `!random JDU`. |
