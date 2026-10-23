@@ -80,7 +80,9 @@ function createServer(runtime) {
 
       fs.readFile(filePath, (error, data) => {
         if (error) return notFound(response);
-        response.writeHead(200, { "Content-Type": contentType(filePath) });
+        // no-cache so browsers and Cloudflare re-check after a deploy instead of
+        // pairing a new page with an old script.
+        response.writeHead(200, { "Content-Type": contentType(filePath), "Cache-Control": "no-cache" });
         response.end(data);
       });
     });
