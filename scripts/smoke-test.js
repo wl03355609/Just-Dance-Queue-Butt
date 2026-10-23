@@ -149,6 +149,9 @@ async function main() {
 
     const overlay = await request("GET", "/");
     check("GET / returns 200", overlay.status === 200);
+    check("overlay links the favicon", typeof overlay.body === "string" && overlay.body.includes('rel="icon" href="favicon.svg"'));
+    const icon = await request("GET", "/favicon.svg");
+    check("favicon.svg is served as SVG", icon.status === 200 && icon.headers["content-type"] === "image/svg+xml");
     check("page asset URLs carry a version", /href="themes\.css\?v=\w+"/.test(overlay.body) && /src="app\.js\?v=\w+"/.test(overlay.body) && overlay.body.includes('href="https://fonts.googleapis.com'));
     const script = await request("GET", "/dashboard.js?v=abc");
     check("static files tell caches to re-check", script.status === 200 && script.headers["cache-control"] === "no-cache");
