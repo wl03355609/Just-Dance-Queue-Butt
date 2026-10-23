@@ -38,7 +38,7 @@ function request(method, urlPath, body) {
       res.on("end", () => {
         let parsed = null;
         try { parsed = JSON.parse(chunks); } catch { parsed = chunks; }
-        resolve({ status: res.statusCode, body: parsed });
+        resolve({ status: res.statusCode, headers: res.headers, body: parsed });
       });
     });
     req.on("error", reject);
@@ -149,6 +149,9 @@ async function main() {
 
     const overlay = await request("GET", "/");
     check("GET / returns 200", overlay.status === 200);
+    check("page asset URLs carry a version", /href="themes\.css\?v=\w+"/.test(overlay.body) && /src="app\.js\?v=\w+"/.test(overlay.body) && overlay.body.includes('href="https://fonts.googleapis.com'));
+    const script = await request("GET", "/dashboard.js?v=abc");
+    check("static files tell caches to re-check", script.status === 200 && script.headers["cache-control"] === "no-cache");
   } finally {
     runtime.stopRuntime();
     try { fs.unlinkSync(queuePath); } catch {}

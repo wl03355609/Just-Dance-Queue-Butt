@@ -1,6 +1,6 @@
 {
   "name": "just-dance-requests-twitch",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "codename": "Get Ready for DOH",
   "description": "Just Dance Butt - a local Twitch chat song request queue for Just Dance streamers.",
   "main": "desktop/main.js",
