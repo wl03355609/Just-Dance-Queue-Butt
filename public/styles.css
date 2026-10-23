@@ -41,7 +41,7 @@ body {
 }
 
 [data-theme="poster"] .queue-header {
-  border-color: var(--count-bg);
+  border-color: var(--now-line);
 }
 
 .queue-title {
@@ -237,7 +237,7 @@ h1 {
   border: var(--line-w) solid var(--line);
   border-radius: 50%;
   background: var(--accent-2);
-  color: var(--text);
+  color: var(--accent-ink);
   font-size: 16px;
 }
 

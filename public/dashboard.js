@@ -112,7 +112,7 @@ function renderQueueOpenState(open) {
     queueStateElement.className = `jd-display ${open ? "open" : "closed"}`;
   }
   if (!queueToggleButton) return;
-  queueToggleButton.textContent = open ? "Close requests" : "Open requests";
+  queueToggleButton.textContent = open ? "Close Queue" : "Open Queue";
 }
 
 function renderTheme(state) {
