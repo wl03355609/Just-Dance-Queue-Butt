@@ -5,7 +5,8 @@ const nowPlayingElement = document.querySelector("#now-playing");
 const lastSongElement = document.querySelector("#last-song");
 
 function render(state) {
-  document.body.dataset.overlayTheme = state.overlayTheme || "dark";
+  document.documentElement.dataset.theme = state.overlayTheme || "poster";
+  document.documentElement.dataset.mode = state.overlayMode || "light";
   countElement.textContent = state.queue.length;
   emptyElement.hidden = state.queue.length > 0;
   queueElement.replaceChildren(...state.queue.slice(0, 10).map(renderEntry));
@@ -46,10 +47,10 @@ function renderEntry(entry, index) {
 }
 
 async function boot() {
-  const response = await fetch("/api/queue");
+  const response = await fetch("api/queue");
   render(await response.json());
 
-  const events = new EventSource("/events");
+  const events = new EventSource("events");
   events.onmessage = (event) => render(JSON.parse(event.data));
 }
 

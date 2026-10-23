@@ -44,5 +44,5 @@ Dashboard actions require the local dashboard admin token.
 | Next | Marks the first queue entry as playing now and moves it to history. |
 | Remove | Removes a queue entry without adding it to history. |
 | Clear Queue | Clears the queue without clearing history. |
-| Overlay Appearance | Switches the OBS overlay between dark and light mode. |
+| Theme | Switches the overlay and dashboard between the five looks: Dance Floor Poster (default), Arcade Neon, Clean Studio, Sticker Pop and Broadcast Console. |
 | Filtering Games | Changes which catalog filters are requestable. |

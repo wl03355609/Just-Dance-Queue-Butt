@@ -1,86 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="poster" data-mode="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JD Queue Butt Dashboard</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/dashboard.css">
+    <title>Just Dance Butt Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@500;800&family=Inter+Tight:wght@400;500;600;700&family=Manrope:wght@500;600;800&family=Fredoka:wght@500;700&family=Nunito:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="dashboard.css">
   </head>
   <body class="dashboard-page">
     <main class="dashboard-shell">
       <header class="dashboard-header">
-        <div>
-          <p class="eyebrow">Streamer Controls</p>
-          <h1>Request Dashboard</h1>
+        <div class="dashboard-title">
+          <h1 class="jd-display">Dashboard</h1>
+          <span class="pill" id="bot-status">Offline</span>
+          <span class="channel-name" id="channel">-</span>
+          <button id="reconnect-button" type="button" class="small" title="Drop the chat connection and log in to Twitch chat again">Reconnect</button>
         </div>
         <div class="dashboard-header-actions">
-          <button id="theme-toggle-button" class="theme-toggle-button" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-            <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
-            <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
-          </button>
-          <a class="overlay-link" href="/" target="_blank" rel="noreferrer">Overlay</a>
+          <div class="theme-picker">
+            <select id="theme-select" aria-label="Theme for the overlay and dashboard"></select>
+            <button id="mode-toggle-button" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+              <svg class="mode-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+              <svg class="mode-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+            </button>
+          </div>
+          <a class="button" href="./" target="_blank" rel="noreferrer">Overlay ↗</a>
         </div>
       </header>
 
       <section class="status-bar" aria-label="Status">
         <div>
-          <span>Channel</span>
-          <strong id="channel">-</strong>
+          <span class="jd-label">Queue</span>
+          <strong class="jd-display"><span id="queue-count">0</span><small>/<span id="queue-limit">0</span></small></strong>
         </div>
         <div>
-          <span>Bot</span>
-          <strong id="bot-status">Offline</strong>
+          <span class="jd-label">Requests</span>
+          <strong class="jd-display" id="queue-state">Open</strong>
         </div>
         <div>
-          <span>Queue</span>
-          <strong><span id="queue-count">0</span>/<span id="queue-limit">0</span></strong>
+          <span class="jd-label">Songs</span>
+          <strong class="jd-display" id="song-count">0</strong>
         </div>
         <div>
-          <span>Songs</span>
-          <strong id="song-count">0</strong>
+          <span class="jd-label">Games</span>
+          <strong class="jd-display" id="games-count">0</strong>
         </div>
       </section>
 
-      <section class="current-playing" id="current-playing" aria-label="Current playing">
-        <div>
-          <span>Current playing</span>
-          <strong id="current-playing-title"></strong>
+      <section class="current-playing" id="current-playing" aria-label="Now playing">
+        <div class="current-playing-text">
+          <span class="jd-label">Now playing</span>
+          <strong class="jd-display" id="current-playing-title"></strong>
           <em id="current-playing-detail"></em>
         </div>
-      </section>
-
-      <section class="control-strip" aria-label="Queue Controls">
-        <button id="queue-toggle-button" type="button" class="danger">Close Queue</button>
-        <button id="skip-button" type="button">Next</button>
-        <button id="clear-button" type="button" class="danger">Clear Queue</button>
-      </section>
-
-      <section class="filter-panel" aria-label="Filtering Games">
-        <button id="filter-toggle" type="button" class="panel-heading collapsible-heading" aria-expanded="false" aria-controls="filter-body">
-          <span class="collapsible-heading-main">
-            <span class="collapsible-chevron" aria-hidden="true">▸</span>
-            <h2>Filtering Games</h2>
-          </span>
-          <span id="filter-count">0 active</span>
-        </button>
-        <div id="filter-body" class="filter-body" hidden>
-          <div class="filter-actions">
-            <button id="select-all-filters" type="button">Select All</button>
-            <button id="deselect-all-filters" type="button">Deselect All</button>
-          </div>
-          <div id="game-filters" class="filter-grid"></div>
-          <button id="apply-filters" type="button">Apply Filters</button>
+        <div class="control-strip" aria-label="Queue controls">
+          <button id="skip-button" type="button" class="primary">Next ▶</button>
+          <button id="queue-toggle-button" type="button">Close requests</button>
+          <button id="clear-button" type="button" class="danger">Clear</button>
         </div>
       </section>
 
-      <section class="add-panel" aria-label="Add Request">
+      <section class="add-panel" aria-label="Add a request">
         <form id="request-form">
-          <label>
-            Song
-            <input id="request-song" name="song" list="song-list" autocomplete="off" placeholder="Search song or artist">
-            <datalist id="song-list"></datalist>
-          </label>
+          <label class="visually-hidden" for="request-song">Song</label>
+          <input id="request-song" name="song" list="song-list" autocomplete="off" placeholder="Add a song manually… search title or artist">
+          <datalist id="song-list"></datalist>
           <button type="submit">Add</button>
         </form>
         <p id="message" class="message" role="status"></p>
@@ -89,24 +76,51 @@
       <section class="dashboard-grid">
         <div class="tool-panel">
           <div class="panel-heading">
-            <h2 id="queue-heading">Queue</h2>
-            <span id="queue-heading-count">0 waiting</span>
+            <h2 class="jd-display" id="queue-heading">Up next</h2>
+            <span class="jd-label" id="queue-heading-count">0 waiting</span>
           </div>
           <ol id="dashboard-queue" class="dashboard-list"></ol>
-          <p class="empty compact" id="dashboard-empty">No requests yet.</p>
+          <p class="empty" id="dashboard-empty">No requests yet. Viewers type <strong>!sr</strong> and a song name in chat.</p>
         </div>
 
         <div class="tool-panel">
           <div class="panel-heading">
-            <h2>History</h2>
-            <span>Last 10</span>
+            <h2 class="jd-display" id="history-heading">History</h2>
+            <span class="jd-label" id="history-count">Last 10</span>
           </div>
-          <ol id="history" class="dashboard-list"></ol>
-          <p class="empty compact" id="history-empty">No played songs yet.</p>
+          <div class="played-tools" id="played-tools" hidden>
+            <label class="toggle"><span>Already played this stream:</span>
+              <select id="repeat-mode" aria-label="What happens when someone requests a song already played this stream">
+                <option value="skip">Warn and skip</option>
+                <option value="warn">Warn only, still queue it</option>
+                <option value="off">Allow quietly</option>
+              </select></label>
+            <button type="button" class="small" id="new-stream-button">Clear played list</button>
+          </div>
+          <ol id="history" class="dashboard-list history-list"></ol>
+          <p class="empty" id="history-empty">No played songs yet.</p>
+        </div>
+      </section>
+
+      <section class="filter-panel tool-panel" aria-label="Allowed games">
+        <button id="filter-toggle" type="button" class="panel-heading collapsible-heading" aria-expanded="false" aria-controls="filter-body">
+          <span class="collapsible-heading-main">
+            <span class="collapsible-chevron" aria-hidden="true">▸</span>
+            <h2 class="jd-display">Allowed games</h2>
+          </span>
+          <span class="jd-label" id="filter-count">0 active</span>
+        </button>
+        <div id="filter-body" class="filter-body" hidden>
+          <div class="filter-actions">
+            <button id="select-all-filters" type="button" class="small">Select all</button>
+            <button id="deselect-all-filters" type="button" class="small">Deselect all</button>
+          </div>
+          <div id="game-filters" class="filter-grid"></div>
+          <button id="apply-filters" type="button" class="primary">Apply</button>
         </div>
       </section>
     </main>
 
-    <script src="/dashboard.js"></script>
+    <script src="dashboard.js"></script>
   </body>
 </html>
