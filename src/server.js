@@ -24,6 +24,8 @@ const {
   sanitizeEnabledGames
 } = require("./config");
 
+// Changes on every start, so an update gives the page's CSS/JS new URLs that no cache has seen.
+const ASSET_VERSION = Date.now().toString(36);
 const COMPANION_PAIRING_TTL_MS = 5 * 60 * 1000;
 const COMPANION_PAIRING_MAX_ATTEMPTS = 10;
 
@@ -80,8 +82,10 @@ function createServer(runtime) {
 
       fs.readFile(filePath, (error, data) => {
         if (error) return notFound(response);
-        response.writeHead(200, { "Content-Type": contentType(filePath) });
-        response.end(data);
+        // no-cache so browsers and OBS re-check after an update instead of
+        // pairing a new page with an old script.
+        response.writeHead(200, { "Content-Type": contentType(filePath), "Cache-Control": "no-cache" });
+        response.end(filePath.endsWith(".html") ? versionAssets(data.toString("utf8")) : data);
       });
     });
 
@@ -139,6 +143,11 @@ function createServer(runtime) {
     // Require a trailing separator so only true children are allowed.
     const safe = resolved === PUBLIC_DIR || resolved.startsWith(PUBLIC_DIR + path.sep);
     return safe ? resolved : null;
+  }
+
+  // Local stylesheet and script references only; absolute URLs (Google Fonts) are left alone.
+  function versionAssets(html) {
+    return html.replace(/(href|src)="([\w./-]+\.(?:css|js))"/g, `$1="$2?v=${ASSET_VERSION}"`);
   }
 
   function streamEvents(_request, response) {
