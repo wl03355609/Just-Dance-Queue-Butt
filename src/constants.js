@@ -28,10 +28,11 @@ const DEFAULT_ENABLED_GAMES = [
   "jd1", "jd2", "jd3", "jd4",
   "2014", "2015", "2016", "2017", "2018", "2019",
   "2020", "2021", "2022", "2023", "2024", "2025", "2026",
-  "decades", "jdu", "plus"
+  "decades", "plus"
 ];
 
-const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "youtube"];
+// Just Dance Unlimited is off by default; streamers can enable it in Filtering Games.
+const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "jdu", "youtube"];
 
 const GAME_LABELS = {
   jd1: "Just Dance",

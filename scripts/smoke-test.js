@@ -105,6 +105,7 @@ async function main() {
 
     check("songless games hidden from filters", queue1.body.availableGames.every((game) => game.count !== 0));
     check("decades enabled by default", queue1.body.enabledGames.includes("decades"));
+    check("Unlimited disabled by default", !queue1.body.enabledGames.includes("jdu"));
 
     const filters = await request("POST", "/api/filters", { enabledGames: ["2023", "2024"] });
     check("POST /api/filters ok", filters.body.ok === true);
