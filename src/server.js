@@ -6,7 +6,8 @@ const path = require("node:path");
 const {
   PUBLIC_DIR,
   MUTATING_API_PATHS,
-  DEFAULT_OVERLAY_THEME
+  DEFAULT_OVERLAY_THEME,
+  OVERLAY_THEMES
 } = require("./constants");
 
 const {
@@ -67,6 +68,7 @@ function createServer(runtime) {
         if (url.pathname === "/api/clear") return apiClearQueue(response);
         if (url.pathname === "/api/filters") return apiUpdateFilters(request, response);
         if (url.pathname === "/api/theme") return apiUpdateTheme(request, response);
+        if (url.pathname === "/api/bot/reconnect") return apiReconnectBot(response);
         if (url.pathname === "/api/pick" || url.pathname === "/api/promote") return apiPickSong(request, response);
         if (url.pathname === "/api/queue/state") return apiSetQueueState(request, response);
         if (url.pathname === "/api/companion/pairing-code") return apiCreateCompanionPairingCode(response);
@@ -164,9 +166,13 @@ function createServer(runtime) {
       availableGames: runtime.availableGames,
       maxQueueSize: runtime.config.maxQueueSize,
       overlayTheme: runtime.state.overlayTheme || DEFAULT_OVERLAY_THEME,
+      overlayMode: runtime.state.overlayMode || runtime.queue.sanitizeOverlayMode(null, runtime.state.overlayTheme),
+      overlayThemes: OVERLAY_THEMES,
       queueOpen: runtime.state.queueOpen !== false,
       channel: runtime.config.channel,
-      botConnected: runtime.twitch.isConnected()
+      botConnected: runtime.twitch.isConnected(),
+      // Host-specific extras, such as the hosted site's per-stream played list.
+      ...(runtime.hooks?.extraState?.() || {})
     };
   }
 
@@ -370,15 +376,39 @@ function createServer(runtime) {
     }
   }
 
+  // Drops the chat connection and opens a new one with the saved login.
+  function apiReconnectBot(response) {
+    if (!runtime.config.oauth) return sendError(response, 409, "No Twitch login is configured, so there is nothing to reconnect.");
+    runtime.twitch.stopTwitch();
+    runtime.twitch.connectTwitch();
+    sendJson(response, { ok: true, message: "Reconnecting to Twitch chat…", state: publicState() });
+  }
+
   async function apiUpdateTheme(request, response) {
     try {
       const body = await readJsonBody(request);
-      runtime.state.overlayTheme = runtime.queue.sanitizeOverlayTheme(body.overlayTheme || body.theme);
+      const { sanitizeOverlayTheme, sanitizeOverlayMode, isOverlayMode } = runtime.queue;
+      const requestedTheme = body.overlayTheme || body.theme;
+      const requestedMode = body.overlayMode || body.mode;
+
+      if (isOverlayMode(requestedTheme) && !requestedMode) {
+        // Older dashboards and the Android companion send "dark"/"light" as the theme: that's the mode now.
+        runtime.state.overlayMode = sanitizeOverlayMode(requestedTheme);
+      } else {
+        if (requestedTheme) {
+          runtime.state.overlayTheme = sanitizeOverlayTheme(requestedTheme);
+          // Picking a new theme shows it the way it was designed unless a mode comes along.
+          runtime.state.overlayMode = sanitizeOverlayMode(requestedMode, runtime.state.overlayTheme);
+        } else if (requestedMode) {
+          runtime.state.overlayMode = sanitizeOverlayMode(requestedMode, runtime.state.overlayTheme);
+        }
+      }
       runtime.queue.saveQueue();
 
+      const theme = OVERLAY_THEMES.find((entry) => entry.key === runtime.state.overlayTheme);
       sendJson(response, {
         ok: true,
-        message: `Overlay theme set to ${runtime.state.overlayTheme}.`,
+        message: `Theme set to ${theme ? theme.label : runtime.state.overlayTheme} (${runtime.state.overlayMode}).`,
         state: publicState()
       });
     } catch (error) {

@@ -2,6 +2,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const {
+  OVERLAY_THEMES,
+  OVERLAY_MODES,
   DEFAULT_OVERLAY_THEME,
   MIN_SEARCH_LENGTH,
   FILTER_OPTIONS
@@ -47,7 +49,9 @@ function createQueue(runtime) {
     return {
       queue: Array.isArray(value.queue) ? value.queue : [],
       history: Array.isArray(value.history) ? value.history : [],
-      overlayTheme: sanitizeOverlayTheme(value.overlayTheme),
+      // Older queue files stored "dark"/"light" in overlayTheme: that channel keeps the Classic look in that mode.
+      overlayTheme: isOverlayMode(value.overlayTheme) ? "classic" : sanitizeOverlayTheme(value.overlayTheme),
+      overlayMode: sanitizeOverlayMode(value.overlayMode || value.overlayTheme, isOverlayMode(value.overlayTheme) ? "classic" : value.overlayTheme),
       queueOpen: value.queueOpen !== false
     };
   }
@@ -68,7 +72,20 @@ function createQueue(runtime) {
   }
 
   function sanitizeOverlayTheme(value) {
-    return value === "light" ? "light" : DEFAULT_OVERLAY_THEME;
+    const key = String(value || "").trim().toLowerCase();
+    return OVERLAY_THEMES.some((theme) => theme.key === key) ? key : DEFAULT_OVERLAY_THEME;
+  }
+
+  // Falls back to the theme's native mode when the value isn't "light" or "dark".
+  function sanitizeOverlayMode(value, themeKey = runtime.state.overlayTheme) {
+    const mode = String(value || "").trim().toLowerCase();
+    if (OVERLAY_MODES.includes(mode)) return mode;
+    const theme = OVERLAY_THEMES.find((entry) => entry.key === sanitizeOverlayTheme(themeKey));
+    return theme ? theme.mode : "light";
+  }
+
+  function isOverlayMode(value) {
+    return OVERLAY_MODES.includes(String(value || "").trim().toLowerCase());
   }
 
   function findDuplicateEntry(song) {
@@ -152,7 +169,12 @@ function createQueue(runtime) {
         if (announce) runtime.twitch.say(message);
         return { ok: false, status: 409, message };
       }
-      return addQueueEntry(requester, song, announce);
+      const repeat = checkRepeat(requester, song);
+      if (repeat?.block) {
+        if (announce) runtime.twitch.say(repeat.message);
+        return { ok: false, status: 409, message: repeat.message };
+      }
+      return addQueueEntry(requester, song, announce, undefined, repeat?.note);
     }
 
     const altRequest = runtime.songs.findAltRequest(requestedSong);
@@ -184,7 +206,31 @@ function createQueue(runtime) {
       return { ok: false, status: 409, message };
     }
 
-    return addQueueEntry(requester, song, announce);
+    const repeat = checkRepeat(requester, song);
+    if (repeat?.block) {
+      if (announce) runtime.twitch.say(repeat.message);
+      return { ok: false, status: 409, message: repeat.message };
+    }
+
+    return addQueueEntry(requester, song, announce, undefined, repeat?.note);
+  }
+
+  // The hosted site keeps a per-stream "played" list. Its hook answers { mode, played } when the song
+  // was already played: mode "skip" refuses the request, "warn" queues it with a note.
+  // Without the hook (offline bot) nothing changes.
+  function checkRepeat(requester, song) {
+    const result = runtime.hooks?.checkRepeat?.(song);
+    if (!result?.played) return null;
+    const { played } = result;
+    const when = new Date(played.playedAt);
+    const time = Number.isNaN(when.getTime()) ? "" : ` at ${when.toISOString().slice(11, 16)} UTC`;
+    if (result.mode === "warn") {
+      return { block: false, note: `Heads up: it was already played this stream${time}, requested by @${played.user}.` };
+    }
+    return {
+      block: true,
+      message: `@${requester} "${played.title}" was already played this stream${time} (requested by @${played.user}), so it's not going back in the queue.`
+    };
   }
 
   function altRequestMessage(requester, { song, alternates }) {
@@ -194,7 +240,7 @@ function createQueue(runtime) {
     return `@${requester} ${song.title} has ${names.length} alt routines: ${shown.join(", ")}. Ask for one by name, like !sr ${song.title} ${names[0]}`;
   }
 
-  function addQueueEntry(requester, song, announce, customMessage) {
+  function addQueueEntry(requester, song, announce, customMessage, note) {
     const entry = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       user: requester,
@@ -204,8 +250,10 @@ function createQueue(runtime) {
 
     runtime.state.queue.push(entry);
     saveQueue();
-    const message = customMessage
-      || `@${requester} added #${runtime.state.queue.length}: ${entry.song.title} - ${entry.song.artist} (${entry.song.game}).`;
+    runtime.hooks?.onQueueEntry?.(entry);
+    const message = (customMessage
+      || `@${requester} added #${runtime.state.queue.length}: ${entry.song.title} - ${entry.song.artist} (${entry.song.game}).`)
+      + (note ? ` ${note}` : "");
     if (announce) runtime.twitch.say(message);
     return { ok: true, status: 200, message, entry };
   }
@@ -292,9 +340,11 @@ function createQueue(runtime) {
       return { ok: false, status: 409, message };
     }
 
-    runtime.state.history.unshift({ ...next, playedAt: new Date().toISOString() });
+    const played = { ...next, playedAt: new Date().toISOString() };
+    runtime.state.history.unshift(played);
     runtime.state.history = runtime.state.history.slice(0, 25);
     saveQueue();
+    runtime.hooks?.onPlayed?.(played);
     const message = `Now playing: ${next.song.title} - ${next.song.artist}, requested by @${next.user}.`;
     if (announce) runtime.twitch.say(message);
     return { ok: true, status: 200, message, entry: next };
@@ -382,6 +432,8 @@ function createQueue(runtime) {
     clearHistoryState,
     normalizeQueueState,
     sanitizeOverlayTheme,
+    sanitizeOverlayMode,
+    isOverlayMode,
     setQueueOpen,
     isStreamerRequester,
     checkCanRequest,

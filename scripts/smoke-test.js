@@ -114,9 +114,20 @@ async function main() {
     check("filters applied", ["2023", "2024"].every((key) => enabledAfter.includes(key)));
     check("only hidden games kept beyond selection", enabledAfter.every((key) => ["2023", "2024"].includes(key) || !visibleKeys.has(key)), enabledAfter.join(","));
 
-    const theme = await request("POST", "/api/theme", { overlayTheme: "light" });
+    check("default theme is poster, light", queue1.body.overlayTheme === "poster" && queue1.body.overlayMode === "light");
+    check("theme list exposed", Array.isArray(queue1.body.overlayThemes) && queue1.body.overlayThemes.length === 6);
+    const theme = await request("POST", "/api/theme", { overlayTheme: "console" });
     check("POST /api/theme ok", theme.body.ok === true);
-    check("theme applied", theme.body.state.overlayTheme === "light");
+    check("theme applied in its native mode", theme.body.state.overlayTheme === "console" && theme.body.state.overlayMode === "dark");
+    const legacyTheme = await request("POST", "/api/theme", { overlayTheme: "light" });
+    check("legacy light value switches the mode only", legacyTheme.body.state.overlayTheme === "console" && legacyTheme.body.state.overlayMode === "light");
+    const modeOnly = await request("POST", "/api/theme", { overlayMode: "dark" });
+    check("mode can change on its own", modeOnly.body.state.overlayTheme === "console" && modeOnly.body.state.overlayMode === "dark");
+    const badTheme = await request("POST", "/api/theme", { overlayTheme: "<script>", overlayMode: "neon" });
+    check("unknown theme and mode fall back", badTheme.body.state.overlayTheme === "poster" && badTheme.body.state.overlayMode === "light");
+
+    const reconnect = await request("POST", "/api/bot/reconnect", {});
+    check("reconnect without a Twitch login is refused cleanly", reconnect.status === 409 && reconnect.body.ok === false);
 
     const unauth = await new Promise((resolve, reject) => {
       const data = JSON.stringify({ user: "x", song: "y" });

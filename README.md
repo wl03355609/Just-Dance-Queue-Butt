@@ -10,7 +10,7 @@ A local Twitch chat request bot for Just Dance streams. Viewers request songs wi
 
 ## Android Companion
 
-The Android companion controls the queue from a phone on the same Wi-Fi network as the bot. It can scan for the bot automatically, add requests, search songs, change filters, control next/pick/remove/clear, and switch the overlay theme.
+The Android companion controls the queue from a phone on the same Wi-Fi network as the bot. It can scan for the bot automatically, add requests, search songs, change filters, control next/pick/remove/clear, and switch the overlay between light and dark.
 
 To link it:
 
@@ -62,7 +62,7 @@ See [COMMANDS.md](COMMANDS.md) for the full command reference, including who can
 
 The dashboard is for streamer controls in a browser. Use the tokenized dashboard URL shown by the desktop app or terminal.
 
-Dashboard and phone actions that change the queue announce in Twitch chat, including add, remove, next, pick, and clear. Theme and filter changes stay local.
+Dashboard and phone actions that change the queue announce in Twitch chat, including add, remove, next, pick, and clear. Theme and filter changes stay local. The overlay and dashboard share six looks (Dance Floor Poster by default, plus Arcade Neon, Clean Studio, Sticker Pop, Broadcast Console and the original Classic), each in light and dark; pick one from the dashboard.
 
 The streamer/channel can add more than one request and can exceed the normal queue size limit. Viewer requests still respect the queue size and one-request-at-a-time limits.
 

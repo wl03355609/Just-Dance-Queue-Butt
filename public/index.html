@@ -1,31 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="poster" data-mode="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Just Dance Butt Queue</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;700&family=Unbounded:wght@500;800&family=Inter+Tight:wght@400;500;600;700&family=Manrope:wght@500;600;800&family=Fredoka:wght@500;700&family=Nunito:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main class="queue-shell">
       <header class="queue-header">
-        <div>
-          <p class="eyebrow">Just Dance Requests</p>
-          <h1>Song Queue</h1>
+        <div class="queue-title">
+          <p class="eyebrow jd-label">Song queue · !sr</p>
+          <h1 class="jd-display">Up next</h1>
         </div>
-        <div class="count" id="count">0</div>
+        <div class="count jd-display" id="count" aria-label="Songs in queue">0</div>
       </header>
 
       <section class="now-playing" id="now-playing" hidden>
-        <span>Last played</span>
+        <span class="jd-label">Now playing</span>
         <strong id="last-song"></strong>
       </section>
 
       <ol class="queue-list" id="queue"></ol>
 
-      <p class="empty" id="empty">Use <strong>!sr song name</strong> in chat to join the queue.</p>
+      <p class="empty" id="empty">Type <strong>!sr</strong> and a song name in chat to join the queue.</p>
     </main>
 
-    <script src="/app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

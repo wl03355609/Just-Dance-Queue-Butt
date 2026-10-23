@@ -13,7 +13,7 @@ const { createServer } = require("./server");
 const runtime = {
   config: null,
   catalog: [],
-  state: { queue: [], history: [], overlayTheme: DEFAULT_OVERLAY_THEME },
+  state: { queue: [], history: [], overlayTheme: DEFAULT_OVERLAY_THEME, overlayMode: "light" },
   http: { server: null, clients: new Set() },
   bot: { socket: null, buffer: Buffer.alloc(0), ready: false, reconnectTimer: null },
   companion: { pairingCode: "", pairingExpiresAt: 0, pairingAttempts: 0 },

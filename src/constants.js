@@ -12,6 +12,7 @@ const MUTATING_API_PATHS = new Set([
   "/api/clear",
   "/api/filters",
   "/api/theme",
+  "/api/bot/reconnect",
   "/api/pick",
   "/api/promote",
   "/api/queue/state",
@@ -21,7 +22,20 @@ const MUTATING_API_PATHS = new Set([
 const MAX_QUERY_LENGTH = 200;
 const MIN_SEARCH_LENGTH = 3;
 const MIN_REQUEST_MATCH_SCORE = 0.5;
-const DEFAULT_OVERLAY_THEME = "dark";
+// Overlay/dashboard looks. Keys are stored in queue.json, so keep them stable.
+// `mode` is the look each theme was designed in; every theme also has the other mode.
+const OVERLAY_THEMES = [
+  { key: "poster", label: "Dance Floor Poster", mode: "light" },
+  { key: "arcade", label: "Arcade Neon", mode: "dark" },
+  { key: "studio", label: "Clean Studio", mode: "light" },
+  { key: "pop", label: "Sticker Pop", mode: "light" },
+  { key: "console", label: "Broadcast Console", mode: "dark" },
+  // The look the bot shipped with before the themes; kept for channels that had it.
+  { key: "classic", label: "Classic", mode: "dark" }
+];
+const DEFAULT_OVERLAY_THEME = "poster";
+const OVERLAY_MODES = ["light", "dark"];
+
 const GENERIC_MATCH_TOKENS = new Set(["song", "dance", "just", "version", "remix", "edition"]);
 
 const DEFAULT_ENABLED_GAMES = [
@@ -67,6 +81,8 @@ module.exports = {
   MAX_QUERY_LENGTH,
   MIN_SEARCH_LENGTH,
   MIN_REQUEST_MATCH_SCORE,
+  OVERLAY_THEMES,
+  OVERLAY_MODES,
   DEFAULT_OVERLAY_THEME,
   GENERIC_MATCH_TOKENS,
   DEFAULT_ENABLED_GAMES,
