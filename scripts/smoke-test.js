@@ -118,7 +118,9 @@ async function main() {
     check("theme list exposed", Array.isArray(queue1.body.overlayThemes) && queue1.body.overlayThemes.length === 6);
     const theme = await request("POST", "/api/theme", { overlayTheme: "console" });
     check("POST /api/theme ok", theme.body.ok === true);
-    check("theme applied in its native mode", theme.body.state.overlayTheme === "console" && theme.body.state.overlayMode === "dark");
+    check("theme change keeps the current mode", theme.body.state.overlayTheme === "console" && theme.body.state.overlayMode === "light");
+    const themeAndMode = await request("POST", "/api/theme", { overlayTheme: "console", overlayMode: "dark" });
+    check("theme and mode can be set together", themeAndMode.body.state.overlayTheme === "console" && themeAndMode.body.state.overlayMode === "dark");
     const legacyTheme = await request("POST", "/api/theme", { overlayTheme: "light" });
     check("legacy light value switches the mode only", legacyTheme.body.state.overlayTheme === "console" && legacyTheme.body.state.overlayMode === "light");
     const modeOnly = await request("POST", "/api/theme", { overlayMode: "dark" });

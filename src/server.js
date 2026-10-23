@@ -406,8 +406,8 @@ function createServer(runtime) {
       } else {
         if (requestedTheme) {
           runtime.state.overlayTheme = sanitizeOverlayTheme(requestedTheme);
-          // Picking a new theme shows it the way it was designed unless a mode comes along.
-          runtime.state.overlayMode = sanitizeOverlayMode(requestedMode, runtime.state.overlayTheme);
+          // Picking a new theme keeps the light/dark choice; only an explicit mode changes it.
+          runtime.state.overlayMode = sanitizeOverlayMode(requestedMode || runtime.state.overlayMode, runtime.state.overlayTheme);
         } else if (requestedMode) {
           runtime.state.overlayMode = sanitizeOverlayMode(requestedMode, runtime.state.overlayTheme);
         }
