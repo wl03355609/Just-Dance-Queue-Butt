@@ -434,6 +434,9 @@ function createServer(runtime) {
     if (filePath.endsWith(".css")) return "text/css";
     if (filePath.endsWith(".js")) return "text/javascript";
     if (filePath.endsWith(".json")) return "application/json";
+    if (filePath.endsWith(".svg")) return "image/svg+xml";
+    if (filePath.endsWith(".ico")) return "image/x-icon";
+    if (filePath.endsWith(".png")) return "image/png";
     return "text/html";
   }
 
