@@ -1,12 +1,11 @@
-## 0.13.0 — New look, six themes
+## 0.13.1 — Dark mode polish
 
-The overlay and dashboard have been redesigned, and you can pick the look you like.
+Fixes for the new themes, plus an app icon.
 
-- **Six themes** — Dance Floor Poster (the new default), Arcade Neon, Clean Studio, Sticker Pop, Broadcast Console, and Classic, which is the old look. Pick one from the dropdown in the dashboard header; the overlay follows.
-- **Light and dark mode** for every theme, with the sun/moon button next to the theme picker. The `!theme` command still works for mods.
-- **Dashboard refresh** — a status strip with the queue count, open/closed state and song and game counts, Skip / Open / Close / Clear buttons right under "Now playing", and a collapsible filter panel.
-- **Reconnect button** — restarts the bot's chat connection from the dashboard without restarting the app.
-- **Default game list** — Decades of Hits is now on and Unlimited is off for new installs. Existing setups keep their own `ENABLED_GAMES`.
-- **No stale pages after an update** — the dashboard and overlay now tell browsers and OBS to re-check their files, so an update can't pair the new page with an old script.
+- **Dark mode no longer flashes light** — the overlay and dashboard now open straight in your theme and mode, so OBS and the browser don't show a white flash while loading.
+- **Dark mode sticks** — picking another theme keeps light or dark the way you set it instead of resetting it.
+- **Easier to read in dark mode** — Dance Floor Poster and Sticker Pop got darker backgrounds and clearer badges, dividers and links.
+- **Clearer labels** — the queue buttons say "Open Queue" and "Close Queue", and the status strip says "Queue status".
+- **Just Dance icon** — the dashboard and overlay tabs now show a JD icon.
 
-The auto-updater will install this on launch as usual. If a browser tab or OBS source still shows the old dashboard once, reload it.
+The auto-updater will install this on launch as usual.
