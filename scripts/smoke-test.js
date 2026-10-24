@@ -125,6 +125,9 @@ async function main() {
     check("legacy light value switches the mode only", legacyTheme.body.state.overlayTheme === "console" && legacyTheme.body.state.overlayMode === "light");
     const modeOnly = await request("POST", "/api/theme", { overlayMode: "dark" });
     check("mode can change on its own", modeOnly.body.state.overlayTheme === "console" && modeOnly.body.state.overlayMode === "dark");
+    const overlayHtml = await request("GET", "/");
+    const dashboardHtml = await request("GET", "/dashboard");
+    check("pages arrive in the saved theme (no light flash)", [overlayHtml, dashboardHtml].every((page) => String(page.body).includes('<html lang="en" data-theme="console" data-mode="dark">')));
     const badTheme = await request("POST", "/api/theme", { overlayTheme: "<script>", overlayMode: "neon" });
     check("unknown theme and mode fall back", badTheme.body.state.overlayTheme === "poster" && badTheme.body.state.overlayMode === "light");
 
