@@ -129,7 +129,13 @@ function clean(value, templates = {}) {
   let text = String(value || "");
   text = text.replace(/<ref[^>]*\/>/gi, "").replace(/<ref[^>]*>[\s\S]*?<\/ref>/gi, "");
   text = text.replace(/<br\s*\/?>/gi, " ");
-  text = text.replace(/<\/?(span|font|small|big|b|i|s|u|sup|sub|center)[^>]*>/gi, "");
+  // Any other tag goes too, repeated until none is left, and a stray < or > is
+  // dropped: song data is plain text and no title in the list uses them.
+  for (let previous = null; previous !== text;) {
+    previous = text;
+    text = text.replace(/<[^<>]*>/g, "");
+  }
+  text = text.replace(/[<>]/g, "");
   // Innermost templates first, so {{Starter|''[[A|B]]''}} works.
   for (let guard = 0; guard < 20 && /\{\{[^{}]*\}\}/.test(text); guard += 1) {
     text = text.replace(/\{\{([^{}]*)\}\}/g, (match, inner) => expandTemplate(inner, templates));

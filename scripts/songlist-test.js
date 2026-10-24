@@ -142,6 +142,7 @@ const GAME_PAGE = `{{Infobox videogame
 // Wikitext helpers
 check("clean strips links, quotes, spans and markers", clean(`{{Starter|''[[All Star|<span style="color:#FFF">All Star</span>]]''}} (C)`) === "All Star");
 check("clean expands known templates", clean("[[Toxic (Just Dance 2)|''Toxic'' ({{G2|2}})]] (C)", TEMPLATES) === "Toxic (Just Dance 2)");
+check("clean leaves no HTML behind", clean("<scr<script>ipt>alert(1)</script> Song") === "alert(1) Song", clean("<scr<script>ipt>alert(1)</script> Song"));
 check("clean turns <br> into a space", clean("Britney Spears<br>(The Girly Team)") === "Britney Spears (The Girly Team)");
 check("section stops at the next heading of the same level", !section(GAME_PAGE, "Alternate Routines").includes("Left Out"));
 check("release date reads the first date in the infobox", releaseDate(GAME_PAGE) === "2026-10-13");
