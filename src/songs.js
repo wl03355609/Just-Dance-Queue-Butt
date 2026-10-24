@@ -5,7 +5,9 @@ const {
   MIN_REQUEST_MATCH_SCORE,
   GENERIC_MATCH_TOKENS,
   FILTER_OPTIONS,
-  GAME_LABELS
+  GAME_LABELS,
+  NEW_GAMES,
+  NEW_GAME_KEY
 } = require("./constants");
 
 const {
@@ -25,6 +27,7 @@ function createSongs(runtime) {
 
   function loadSongs() {
     const raw = JSON.parse(fs.readFileSync(runtime.config.songsPath || SONGS_PATH, "utf8"));
+    enableNewGames(raw);
     const enabled = new Set(runtime.config.enabledGames.map(gameKey));
 
     runtime.catalog = raw
@@ -48,20 +51,37 @@ function createSongs(runtime) {
       if (base) altBaseById.set(song.id, base);
     }
 
-    const counts = new Map(FILTER_OPTIONS.map((key) => [key, 0]));
+    const options = filterOptions();
+    const counts = new Map(options.map((key) => [key, 0]));
     for (const song of raw) {
       const key = gameKey(song.game);
       if (counts.has(key)) counts.set(key, counts.get(key) + 1);
     }
     // Games with no songs yet (an announced game before launch) stay out of the
     // filter lists so nothing about them shows until a songlist update adds them.
-    runtime.availableGames = FILTER_OPTIONS.map((key) => ({
+    runtime.availableGames = options.map((key) => ({
       key,
-      label: GAME_LABELS[key] || key,
+      label: GAME_LABELS[key] || NEW_GAMES.get(key) || key,
       count: key === "youtube" ? null : counts.get(key) || 0
     })).filter((game) => game.count !== 0);
 
     return runtime.catalog;
+  }
+
+  // A game the songlist update added before this code knew about it is turned
+  // on once for every streamer, like a newly announced game is.
+  function enableNewGames(raw) {
+    for (const song of raw) {
+      const key = gameKey(song.game);
+      if (!FILTER_OPTIONS.includes(key) && NEW_GAME_KEY.test(key) && !NEW_GAMES.has(key)) NEW_GAMES.set(key, song.game);
+    }
+    const config = runtime.config;
+    const known = new Set(config.knownGames || []);
+    const fresh = [...NEW_GAMES.keys()].filter((key) => !known.has(key));
+    if (!fresh.length) return;
+    config.enabledGames = [...new Set([...config.enabledGames, ...fresh])];
+    config.knownGames = [...known, ...fresh];
+    runtime.hooks?.onConfigChange?.(config);
   }
 
   function findSong(query) {
@@ -144,6 +164,12 @@ function createSongs(runtime) {
 
   function hasMissingNumericToken(queryTokens, songTokens) {
     return [...queryTokens].some((token) => /^\d+$/.test(token) && !songTokens.has(token));
+  }
+
+  // FILTER_OPTIONS with any new games placed before Unlimited and YouTube.
+  function filterOptions() {
+    const tail = FILTER_OPTIONS.indexOf("jdu");
+    return [...FILTER_OPTIONS.slice(0, tail), ...NEW_GAMES.keys(), ...FILTER_OPTIONS.slice(tail)];
   }
 
   function isYoutubeEnabled() {

@@ -376,6 +376,45 @@ async function main() {
     fs.rmSync(dir, { recursive: true, force: true });
   }
 
+  // A game the songlist update added before the code knew it
+  {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "jd-newgame-"));
+    const songsPath = path.join(dir, "songs.json");
+    fs.writeFileSync(songsPath, JSON.stringify([
+      { title: "Old Song", artist: "A", game: "Just Dance 2026 Edition" },
+      { title: "Brand New", artist: "B", game: "Just Dance 2031 Edition" },
+      { title: "Plus Song", artist: "C", game: "Just Dance+" }
+    ]));
+    const saved = [];
+    const makeNewGameRuntime = (config) => {
+      const runtime = {
+        config: { channel: "streamer", modUsers: [], maxQueueSize: 50, songsPath, queuePath: path.join(dir, "queue.json"), ...config },
+        state: { queue: [], history: [], overlayTheme: "dark" },
+        catalog: [],
+        hooks: { onConfigChange: (next) => saved.push([...next.enabledGames]) },
+        twitch: { say: () => {} },
+        server: { broadcast: () => {}, publicState: () => ({}) }
+      };
+      runtime.songs = createSongs(runtime);
+      runtime.queue = createQueue(runtime);
+      runtime.songs.loadSongs();
+      return runtime;
+    };
+
+    const fresh = makeNewGameRuntime({ enabledGames: ["2026"], knownGames: [] });
+    const newGame = fresh.availableGames.find((game) => game.key === "2031");
+    check("new game shows in the filter list with its name", newGame && newGame.label === "Just Dance 2031 Edition", JSON.stringify(newGame));
+    check("new game is listed before Unlimited", fresh.availableGames.findIndex((game) => game.key === "2031") < fresh.availableGames.findIndex((game) => game.key === "jdu") || !fresh.availableGames.some((game) => game.key === "jdu"));
+    check("new game is turned on and saved", fresh.config.enabledGames.includes("2031") && saved.length === 1 && fresh.catalog.some((song) => song.title === "Brand New"));
+    const randomFilter = fresh.queue.parseRandomFilter("2031");
+    check("!random 2031 is a valid filter", randomFilter && randomFilter.gameFilter === "2031", JSON.stringify(randomFilter));
+
+    const turnedOff = makeNewGameRuntime({ enabledGames: ["2026"], knownGames: ["2031"] });
+    check("a new game the streamer turned off stays off", !turnedOff.config.enabledGames.includes("2031") && !turnedOff.catalog.some((song) => song.title === "Brand New"));
+
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+
   // Give microtasks a chance to flush (for !sr → addRequest promise paths)
   await new Promise((resolve) => setImmediate(resolve));
 

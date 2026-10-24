@@ -48,6 +48,12 @@ const DEFAULT_ENABLED_GAMES = [
 // Just Dance Unlimited is off by default; streamers can enable it in Filtering Games.
 const FILTER_OPTIONS = [...DEFAULT_ENABLED_GAMES, "jdu", "youtube"];
 
+// Games the songlist has but FILTER_OPTIONS doesn't know yet (a new edition the
+// songlist update added), as key → name. Filled in when the songlist loads.
+const NEW_GAMES = new Map();
+// What gameKey() gives for such a game: a year, or a name of two or more words.
+const NEW_GAME_KEY = /^(20\d{2}|[a-z0-9]+( [a-z0-9]+){1,7})$/;
+
 const GAME_LABELS = {
   jd1: "Just Dance",
   jd2: "Just Dance 2",
@@ -87,5 +93,7 @@ module.exports = {
   GENERIC_MATCH_TOKENS,
   DEFAULT_ENABLED_GAMES,
   FILTER_OPTIONS,
-  GAME_LABELS
+  GAME_LABELS,
+  NEW_GAMES,
+  NEW_GAME_KEY
 };

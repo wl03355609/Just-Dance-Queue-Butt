@@ -4,7 +4,8 @@ const {
   QUEUE_PATH,
   SONGS_PATH,
   DEFAULT_ENABLED_GAMES,
-  FILTER_OPTIONS
+  FILTER_OPTIONS,
+  NEW_GAME_KEY
 } = require("./constants");
 
 const {
@@ -35,6 +36,9 @@ function createConfig(overrides = {}) {
     companionAccess: booleanValue(overrides.companionAccess ?? process.env.PHONE_COMPANION_ACCESS, true),
     maxQueueSize: numberValue(overrides.maxQueueSize ?? process.env.MAX_QUEUE_SIZE, 50),
     enabledGames: sanitizeEnabledGames(enabledGames),
+    // New games (see NEW_GAMES) the streamer has already been given, so one they
+    // turned off stays off.
+    knownGames: Array.isArray(overrides.knownGames) ? sanitizeEnabledGames(overrides.knownGames) : [],
     modUsers: modUsers.map(sanitizeTwitchName).filter(Boolean),
     adminToken: cleanSecret(overrides.adminToken ?? env("ADMIN_TOKEN", "")) || crypto.randomBytes(24).toString("hex"),
     queuePath: overrides.queuePath || QUEUE_PATH,
@@ -42,10 +46,12 @@ function createConfig(overrides = {}) {
   };
 }
 
+// Keys of games newer than FILTER_OPTIONS are kept too, since a saved filter
+// can be read before the songlist that has those games loads.
 function sanitizeEnabledGames(value) {
   const allowed = new Set(FILTER_OPTIONS);
   return [...new Set(listValue(value, DEFAULT_ENABLED_GAMES).map(gameKey))]
-    .filter((key) => allowed.has(key));
+    .filter((key) => allowed.has(key) || NEW_GAME_KEY.test(key));
 }
 
 module.exports = {

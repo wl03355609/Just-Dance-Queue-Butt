@@ -6,7 +6,8 @@ const {
   OVERLAY_MODES,
   DEFAULT_OVERLAY_THEME,
   MIN_SEARCH_LENGTH,
-  FILTER_OPTIONS
+  FILTER_OPTIONS,
+  NEW_GAMES
 } = require("./constants");
 
 const {
@@ -414,11 +415,11 @@ function createQueue(runtime) {
 
     if (gameArg) {
       const key = gameKey(gameArg);
-      if (!FILTER_OPTIONS.includes(key) || key === "youtube") return null;
+      if ((!FILTER_OPTIONS.includes(key) && !NEW_GAMES.has(key)) || key === "youtube") return null;
       return { gameFilter: key, yearFilter };
     }
 
-    if (yearFilter && FILTER_OPTIONS.includes(yearFilter)) {
+    if (yearFilter && (FILTER_OPTIONS.includes(yearFilter) || NEW_GAMES.has(yearFilter))) {
       return { gameFilter: yearFilter, yearFilter: null };
     }
 

@@ -1,0 +1,102 @@
+name: Update songlist
+
+on:
+  schedule:
+    # Daily at 14:30 UTC, after the YouTube check.
+    - cron: "30 14 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Apply changes the safety limits held back (many removals, big shrink)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: songlist-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Test the songlist parser
+        run: node scripts/songlist-test.js
+
+      - name: Sync songlist with the Just Dance Wiki
+        id: sync
+        env:
+          FORCE: ${{ inputs.force && '--force' || '' }}
+        run: |
+          set -e
+          node scripts/update-songlist.js --summary summary.md $FORCE > result.json
+          cat result.json
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync("result.json", "utf8"));
+            const out = [`changed=${r.changed}`, `blocked=${r.blocked}`, `added=${r.added.length}`, `removed=${r.removed.length}`];
+            require("fs").appendFileSync(process.env.GITHUB_OUTPUT, out.join("\n") + "\n");
+          '
+
+      - name: Commit to main
+        if: steps.sync.outputs.blocked != 'true'
+        env:
+          ADDED: ${{ steps.sync.outputs.added }}
+          REMOVED: ${{ steps.sync.outputs.removed }}
+        run: |
+          set -e
+          git add data/songs.json songlist.xlsx data/songlist-sync.json
+          if git diff --cached --quiet; then echo "Songlist already up to date."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          { echo "Update songlist from the Just Dance Wiki (+$ADDED, -$REMOVED)"; echo; cat summary.md; } > message.txt
+          git commit -F message.txt
+          for attempt in 1 2 3; do
+            git push && exit 0
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          exit 1
+
+      - name: Open an issue when held back
+        id: issue
+        if: steps.sync.outputs.blocked == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          # One open issue at a time, so a held-back change doesn't notify every day.
+          if [ -n "$(gh issue list --state open --search 'in:title "Songlist update held back"' --json number --jq '.[].number')" ]; then
+            echo "new=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          TITLE="Songlist update held back ($(date -u +%Y-%m-%d))"
+          gh issue create --title "$TITLE" --body-file summary.md --label songlist-update || gh issue create --title "$TITLE" --body-file summary.md
+          echo "new=true" >> "$GITHUB_OUTPUT"
+
+      - name: Telegram
+        if: always() && (steps.sync.outputs.changed == 'true' || steps.issue.outputs.new == 'true' || failure())
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FAILED: ${{ failure() }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then echo "Telegram secrets not set; skipping."; exit 0; fi
+          if [ "$FAILED" = "true" ]; then
+            TEXT="Just Dance songlist update failed. Log: $RUN_URL"
+          else
+            TEXT="Just Dance songlist
+          $(head -c 3500 summary.md)"
+          fi
+          curl -sS -o /dev/null -w "Telegram HTTP %{http_code}\n" \
+            --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
+            --data-urlencode "text=$TEXT" \
+            --data-urlencode "disable_web_page_preview=true" \
+            "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
