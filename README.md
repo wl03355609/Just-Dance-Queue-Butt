@@ -72,11 +72,15 @@ Use the dashboard **Filtering Games** panel to choose what viewers can request. 
 
 A game with no songs in the songlist yet, such as a newly announced game before launch, is hidden from the filter list but stays enabled, so its songs become requestable as soon as a songlist update adds them.
 
+A brand-new game that the songlist update adds before the bot's code knows about it (for example the next yearly edition) shows up in the filter list under its own name and is turned on once for everyone. If you turn it off, it stays off.
+
 When the YouTube filter is enabled, unmatched requests can be added as freeform YouTube requests. When YouTube is disabled, unmatched or filtered-out requests are rejected.
 
 ## Song Data
 
 The bundled catalog includes main-series Just Dance games, Just Dance Unlimited, Just Dance+, alternate routines, Kids Mode routines, VIP routines, and newer seasonal updates.
+
+The songlist updates itself every day: the **Update songlist** GitHub workflow (`scripts/update-songlist.js`) reads the [Just Dance Wiki](https://justdance.fandom.com) and commits new songs to `data/songs.json` and `songlist.xlsx` on `main`. Just Dance+ follows the wiki both ways, so routines Ubisoft removes leave the Just Dance+ list (they stay under their original game). Boxed games are add-only, and the next game joins automatically once it's released. If a run would remove more than 20 songs or shrink the list by more than 3%, nothing is changed and an issue is opened instead; run the workflow by hand with **force** to apply it. With the `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` repository secrets set, each update (or held-back update) is also sent to Telegram. Song data from the Just Dance Wiki is available under CC BY-SA.
 
 The desktop app can update the songlist independently from the program. On startup and before starting the bot, it checks for the latest `data/songs.json`, downloads it into app data, and falls back to the bundled catalog when offline. You can also click **Update songlist** in the desktop app.
 
