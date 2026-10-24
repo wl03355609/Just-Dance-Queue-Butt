@@ -85,7 +85,7 @@ function createServer(runtime) {
         // no-cache so browsers and OBS re-check after an update instead of
         // pairing a new page with an old script.
         response.writeHead(200, { "Content-Type": contentType(filePath), "Cache-Control": "no-cache" });
-        response.end(filePath.endsWith(".html") ? versionAssets(data.toString("utf8")) : data);
+        response.end(filePath.endsWith(".html") ? prepareHtml(data.toString("utf8")) : data);
       });
     });
 
@@ -146,8 +146,13 @@ function createServer(runtime) {
   }
 
   // Local stylesheet and script references only; absolute URLs (Google Fonts) are left alone.
-  function versionAssets(html) {
-    return html.replace(/(href|src)="([\w./-]+\.(?:css|js))"/g, `$1="$2?v=${ASSET_VERSION}"`);
+  // The saved theme goes on <html> before the page paints, so a dark theme doesn't flash light first.
+  function prepareHtml(html) {
+    const theme = runtime.queue.sanitizeOverlayTheme(runtime.state.overlayTheme);
+    const mode = runtime.queue.sanitizeOverlayMode(runtime.state.overlayMode, theme);
+    return html
+      .replace(/(href|src)="([\w./-]+\.(?:css|js))"/g, `$1="$2?v=${ASSET_VERSION}"`)
+      .replace(/<html([^>]*?) data-theme="[^"]*" data-mode="[^"]*">/, `<html$1 data-theme="${theme}" data-mode="${mode}">`);
   }
 
   function streamEvents(_request, response) {
