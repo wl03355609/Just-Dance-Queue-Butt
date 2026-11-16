@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node src/index.js",
     "desktop": "electron .",
-    "check": "node --check src/index.js && node --check desktop/main.js && node --check desktop/preload.js && node --check desktop/renderer.js",
+    "check": "node --check src/index.js && node --check desktop/main.js && node --check desktop/secure-config.js && node --check desktop/preload.js && node --check desktop/renderer.js",
     "build:win": "electron-builder --win --ia32 && node scripts/copy-songlist-to-dist.js",
     "build:mac": "electron-builder --mac --arm64"
   },

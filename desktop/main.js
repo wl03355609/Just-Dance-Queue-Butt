@@ -1,9 +1,12 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { app, BrowserWindow, ipcMain, shell, dialog, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, dialog, Menu, safeStorage } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const { startRuntime, stopRuntime } = require("../src/index");
 const { lanUrls } = require("../src/util");
+const { createSecretStore } = require("./secure-config");
+
+const secretStore = createSecretStore(safeStorage);
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_GAMES = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "decades", "plus"];
@@ -125,28 +128,39 @@ function getSonglistMetaPath() {
   return path.join(app.getPath("userData"), "songlist", "songs-meta.json");
 }
 
-function readConfig() {
+function readRawConfig() {
   try {
     return JSON.parse(fs.readFileSync(getConfigPath(), "utf8"));
   } catch {
-    return {
-      clientId: "",
-      username: "",
-      channel: DEFAULT_CHANNEL,
-      accessToken: "",
-      refreshToken: "",
-      expiresAt: 0,
-      port: DEFAULT_PORT,
-      companionAccess: true,
-      enabledGames: DEFAULT_GAMES,
-      maxQueueSize: 50
-    };
+    return null;
   }
+}
+
+function readConfig() {
+  const raw = readRawConfig();
+  if (raw) return secretStore.open(raw);
+  return {
+    clientId: "",
+    username: "",
+    channel: DEFAULT_CHANNEL,
+    accessToken: "",
+    refreshToken: "",
+    expiresAt: 0,
+    port: DEFAULT_PORT,
+    companionAccess: true,
+    enabledGames: DEFAULT_GAMES,
+    maxQueueSize: 50
+  };
 }
 
 function writeConfig(config) {
   fs.mkdirSync(path.dirname(getConfigPath()), { recursive: true });
-  fs.writeFileSync(getConfigPath(), JSON.stringify(config, null, 2));
+  fs.writeFileSync(getConfigPath(), JSON.stringify(secretStore.seal(config), null, 2), { mode: 0o600 });
+}
+
+// Older versions saved the tokens in plain text: rewrite them encrypted once.
+function migrateConfigSecrets() {
+  if (secretStore.needsMigration(readRawConfig())) writeConfig(readConfig());
 }
 
 function publicConfig(config = readConfig()) {
@@ -203,6 +217,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  migrateConfigSecrets();
   registerIpc();
   setupAutoUpdater();
   setupAppMenu();
